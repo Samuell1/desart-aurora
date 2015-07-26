@@ -73,11 +73,11 @@ return new Aurora\Config([
 	],
 
 	"session" => [
-		"handler"	=> "Aurora\Session\Handler\File",
-		"name"		=> "Aurora",
-		"lifetime"	=> 86400,
-		"path"		=> '/',
-		"domain"		=> null,
-		"secure"		=> false,
+		"handler"  => "Aurora\Session\Handler\File",
+		"name"     => "Aurora",
+		"lifetime" => 86400,
+		"path"     => '/',
+		"domain"   => null,
+		"secure"   => false,
 	]
 ]);
