@@ -1,0 +1,46 @@
+{% extends "index.twig" %}
+
+{% block title %}{{ article.name }}{% endblock %}
+
+{% block subhead %}
+  <div class="container">
+    <div class="subheadtitle">
+      <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="title">{{ article.name }}</div>
+            <div class="desc">{{ article.description }}</div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="submenu">
+    <div class="container">
+      <ul class="nav nav-pills pull-left hidden-xs">
+        <li>
+          <a href="{{ url("/clanky/kategoria/" ~ article.category_slug) }}" class="link"><i class="fa fa-list-alt "></i> {{ article.category_name }}</a>
+        </li>
+        <li>
+          <a><i class="fa fa-eye"></i> {{ article.read_count }}×</a>
+        </li>
+        <li>
+          <a><i class="fa fa-heart "></i> {{ article.favorite_count }}×</a>
+        </li>
+        <li>
+          <a><time pubdate="pubdate"><i class="fa fa-calendar"></i> {{ article.published_time|date("d.m. Y") }}</time></a>
+        </li>
+      </ul>
+      <ul class="nav nav-pills pull-right">
+        <li><a href="{{ url("/@" ~ article.username) }}" class="link"><i class="fa fa-user"></i>  <strong>{{ article.username }}</strong></a></li>
+        <li><a class="link active" href="#komentare"><i class="fa fa-plus-square-o"></i>Pridať komentár</a></li>
+      </ul>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+    <article id="articleview">{{ article.content|raw }}</article>
+    <aside id="author">
+      {{ article.username }}
+      {{ article.user_bio }}
+    </aside>
+{% endblock %}

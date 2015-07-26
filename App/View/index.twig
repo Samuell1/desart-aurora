@@ -1,0 +1,272 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  	{% block head %}
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <title>{% block title %}{% endblock %} - desart.sk</title>
+
+      <meta name="author" content="Desart.sk">
+      <meta name="description" content="{{ description }}">
+      <meta name="keywords" content="{{ keywords }}">
+      <meta name="robots" content="index, follow">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <link rel="stylesheet" href="{{ asset("css/font-awesome.min.css") }}">
+      <link rel="stylesheet" href="{{ asset("css/bootstrap.min.css") }}">
+      <link rel="stylesheet" href="{{ asset("css/app.css") }}" >
+      <link rel="shortcut icon" type="image/x-icon" href="{{ asset("img/favicon.ico") }}">
+  	{% endblock %}
+  </head>
+	<body>
+  <div id="blurcontainer">
+    <div id="subheader">
+      <header>
+      	<div class="container">
+          	<nav class="navbar navbar-default">
+          	  <div class="container-fluid">
+          	    <div class="navbar-header">
+          	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-navbar">
+          	        <span class="sr-only">Toggle navigation</span>
+          	        <span class="icon-bar"></span>
+          	        <span class="icon-bar"></span>
+          	        <span class="icon-bar"></span>
+          	      </button>
+          	      <a class="navbar-brand" href="/"><img alt="Desart.sk" src="{{ asset("img/logo.png") }}" class="animated fadeIn"></a>
+          	    </div>
+
+          	    <div class="collapse navbar-collapse" id="collapse-navbar">
+          	      <ul class="nav navbar-nav navbar-left">
+          	        <li><a href="/">Úvod</a></li>
+                    <li><a href="/forum">Diskusné fórum</a></li>
+              			<li><a href="/clanky">Články</a></li>
+              			<li><a href="/serieclankov">Série článkov</a></li>
+              			<li><a href="/subory">Súbory</a></li>
+                  </ul>
+                  {% if user is null or user.auth == 1 %}
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" id="warnings" data-content="
+                        <div class='notif'>
+                          <img src='{{ avatar(user.id) }}' class='img-circle img-responsive pull-left'>
+                          <strong>Samuell</strong> pridal príspevok do vašej témy.
+                          <br> <a href='a'>PHP a MYSQL #1 základy a skrate...</a>
+                        </div>
+                        <div class='notif'>
+                          <img src='{{ avatar(user.id) }}' class='img-circle img-responsive pull-left'>
+                          <strong>Samuell</strong> pridal príspevok do vašej témy.
+                          <br> <a>Uletím na mesiac...</a>
+                        </div>
+                        <div class='notif'>
+                          <img src='{{ avatar(user.id) }}' class='img-circle img-responsive pull-left'>
+                          <strong>Samuell</strong> komentoval váš článok.
+                          <br> <a>PHP a MYSQL #1 základy</a>
+                        </div>
+                        <div class='notif'>
+                          <img src='{{ avatar(user.id) }}' class='img-circle img-responsive pull-left'>
+                          <strong>Samuell</strong> vás označil v téme.
+                          <br> <a>Grafika zadarmo pre mna a teba...</a>
+                        </div>
+                      " title="Upozornenia (3)"><i class="fa fa-envelope-o"></i></a></li>
+                    <li class="dropdown">
+          	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img src="{{ avatar(user.id) }}" class="img-circle" width="16" height="16"> {{ user.username }} <span class="caret"></span></a>
+          	          <ul class="dropdown-menu" role="menu">
+                        <li><a href="/uzivatel/profil"><i class="fa fa-wrench"></i> Nastavenia profilu</a></li>
+                        <li><a href="#chat" id="showchat"><i class="fa fa-comments-o"></i> Správy <span class="badge">0</span></a></li> <li role="presentation"><a role="menuitem" tabindex="-1" href="/manager"><i class="fa fa-gears"></i> Administrácia</a></li><li role="presentation" class="divider"></li>
+                        <li><a href="/uzivatel/pridatclanok"><i class="fa fa-font"></i> Napísať článok</a></li>
+                        <li><a href="?logout"><i class="fa fa-power-off"></i> Odhlásiť</a></li>
+          	          </ul>
+          	        </li>
+          	      </ul>
+                  {% else %}
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#login" data-toggle="modal" data-target="#loginmodal">Prihlásiť sa</a></li>
+                  </ul>
+                  {% endif %}
+          	    </div>
+          	  </div>
+          	</nav>
+        </div>
+      </header>
+      {% block subhead %}
+        <div class="subpadding">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <h4 class="pull-right">Diskusné <strong>fórum</strong></h4>
+                <div class="clearfix"></div>
+                <div id="forumlinks">
+                  <ul>
+                    <li><a href="/forum">Založiť novú tému</a></li>
+                    <li><a href="#" id="">Obľúbené témy</a></li>
+                    <li><a href="#" id="">Moje témy</a></li>
+                    <li><a href="#" id="">Posledná aktivita</a></li>
+                    <li><a href="#" id="">Moja posledná aktivita</a></li>
+                  </ul>
+                </div>
+
+                <div class="boxforum">
+                  <div class="boxforumscroll">
+                    <div class="boxpadding">
+                      <div class="boxforumchangeajax"></div>
+                      <div class="boxforumchangeajaxhide">
+                          {% for topic in topics %}
+                            <div class="forumtema">
+                              <div class="row">
+                                <div class="col-xs-6 col-sm-5 col-md-5 col-lg-6 temainfo">
+                                  <a href="/tema/{{ topic.slug }}" title="{{ topic.name }}">{{ topic.name|length > 120 ? topic.name|slice(0, 120) ~ '...' : topic.name }}</a>
+                                  <div class="cat">{{ topic.category_name }}</div>
+                                </div>
+                                <div class="col-xs-6 col-sm-5 col-md-5 col-lg-5">
+                                  <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-4">
+                                      <span class="infotema text-center"><a>{{ topic.posts_count }}</a>{{ sklonuj(topic.posts_count,"odpoveď","odpovede","odpovedí",false) }}</span>
+                                    </div>
+                                    <div class="col-md-4 hidden-xs hidden-sm">
+                                      <span class="infotema text-center">Zobrazené: <a>{{ topic.reads }}</a></span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-4">
+                                      <span class="infotema text-center">Autor: <a href="/@{{ topic.username }}">{{ topic.username }}</a></span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-2 col-md-2 col-lg-1 hidden-xs"><a href="/tema/{{ topic.slug }}" class="openbutton" title="Otvoriť tému">Zobraziť</a></div>
+                              </div>
+                            </div>
+                          {% else %}
+                          Žiadne posledné témy.
+                          {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endblock %}
+    </div>
+    <div class="container">
+      <div class="midpadding">
+        <div class="row">
+          {% set _contentblock = block('content') %}
+          {% set _sidebarblock = block('sidebar') %}
+
+          {% if _sidebarblock is not empty %}
+            <div class="col-md-8">{{ _contentblock|raw }}</div>
+            <div class="col-md-4">{{ _sidebarblock|raw }}</div>
+          {% else %}
+            <div class="col-md-12">{{ _contentblock|raw }}</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div id="subfooter">
+      <div class="container">
+          <div class="row">
+
+              <div class="col-md-4">
+                  <h4 style="color:#888;padding:8px;"><img src="{{ asset("img/logo-footer.png") }}" alt="Desart.sk" style="opacity:.7;" /> desart.sk</h4>
+
+                  <p>
+                      Web ktory robia choboti, a maju dsald sko i si sduas dus dauz sdau asdud ud zus auz sazuasd uz sdaýd ýdý sádás rwdsaihodu asdopasfkbljvfid.
+                  </p>
+
+                  <ul class="social">
+                      <li><a href="http://www.facebook.com/Desartsk"><i class="fa fa-facebook"></i></a></li>
+                      <li><a href="http://twitter.com/desartsk"><i class="fa fa-twitter"></i></a></li>
+                      <li><a href="https://github.com/"><i class="fa fa-github"></i></a></li>
+                  </ul>
+              </div>
+
+
+              <div class="col-md-2">
+                  <h5>Články</h5>
+
+                  <ul>
+                      <li><a href="/clanky/najsledovanejsie">Najsledovanejšie</a></li>
+                      <li><a href="/serie">Série</a></li>
+                      <li><a href="/">Video návody</a></li>
+                      <li><a href="/">Odporúčané čítanie</a></li>
+                      <li><a href="/clanky">Čo je nové</a></li>
+                  </ul>
+              </div>
+
+
+              <div class="col-md-2">
+                  <h5>Diskusné fórum</h5>
+
+                  <ul>
+                      <li><a href="/forum">Forum</a></li>
+                      <li><a href="/forum/kategoria/webdizajn">Webdizajn</a></li>
+                      <li><a href="/forum/kategoria/bazar">Bazár</a></li>
+                      <li><a href="/forum/kategoria/prezentacie-webstranok">Prezentácie webstránok</a></li>
+                      <li><a href="/forum/kategoria/ponuka-prace">Ponuka práce</a></li>
+                  </ul>
+              </div>
+
+
+              <div class="col-md-4">
+                  <h5>Užívateľ</h5>
+
+                  <div class="row">
+                      <div class="col-md-6">
+                          <ul>
+                            <li><a href="/statistiky">Štatistiky</a></li>
+                            <li><a href="#register" data-toggle="modal" data-target="#registermodal">Registrácia</a>
+                            <li><a href="#login" data-toggle="modal" data-target="#loginmodal">Prihlásenie</a></li>
+                          </ul>
+                      </div>
+
+                      <div class="col-md-6">
+                          <ul>
+                            <li><a href="">Google</a></li>
+                            <li><a href="">Alzafuck</a>
+                            <li><a href="">Google</a></li>
+                            <li><a href="">Alzafuck</a>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <footer>
+              <div class="row">
+                <div class="col-xs-5 col-md-5">2012 - 2015 © Desart.sk<sup>v1.0</sup></div>
+                <div class="col-md-7 text-right">
+                  <ul>
+                      <li><a href="/archiv">Archív</a></li>
+                      <li><a href="/stranky/kontakt">Kontakt & tím</a></li>
+                      <li><a href="/stranky/pravidla">Pravidlá</a></li>
+                      <li><a href="/stranky/o-nas">O nás</a></li>
+                      <li><a href="/stranky/podportenas">Podporte nás</a></li>
+                  </ul>
+                </div>
+              </div>
+          </footer>
+      </div>
+    </div>
+
+    </div>
+    {% block modals %}{% endblock %}
+    {% include 'loginmodal.twig' %}
+    {% include 'registermodal.twig' %}
+
+    <script type="text/javascript" src="{{ asset("js/jquery-1.11.2.min.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/bootstrap.min.js") }}"></script>
+
+    <link rel="stylesheet" href="{{ asset("css/animate.min.css") }}" >
+
+    <script type="text/javascript" src="{{ asset("js/highlight.min.js") }}"></script>
+    <link rel="stylesheet" href="{{ asset("css/railscasts.css") }}">
+
+    <script type="text/javascript" src="{{ asset("js/goNotification.min.js") }}"></script>
+    <link rel="stylesheet" href="{{ asset("css/goNotification.css") }}">
+
+    <script type="text/javascript" src="{{ asset("js/perfect-scrollbar.min.js") }}"></script>
+    <link rel="stylesheet" href="{{ asset("css/perfect-scrollbar.min.css") }}">
+
+    <script type="text/javascript" src="{{ asset("js/bootstrap-select.min.js") }}"></script>
+    <link rel="stylesheet" href="{{ asset("css/bootstrap-select.min.css") }}">
+
+    <script type="text/javascript" src="{{ asset("js/app.js") }}"></script>
+    {% block footer %}{% endblock %}
+  </body>
+</html>

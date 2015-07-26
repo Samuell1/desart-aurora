@@ -1,0 +1,56 @@
+{% extends "index.twig" %}
+
+{% block title %}Nová téma - {{ category.name }} - Diskúsné fórum{% endblock %}
+
+{% block subhead %}
+<div class="container">
+  <div class="subheadtitle">
+  <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="title">Vytvoriť tému do kategórie</div>
+          <div class="desc">{{ category.name }} - {{ category.description }}</div>
+      </div>
+  </div>
+  </div>
+</div>
+<div class="submenu">
+  <div class="container">
+  <ul class="nav nav-pills pull-right">
+    <li><a class="link" href="{{ url("forum/kategoria/" ~ category.slug) }}"><i class="fa fa-plus-square-o"></i>Spať do kategórie</a></li>
+  </ul>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<form id="topic" data-id="{{ category.id }}">
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Názov témy:</label>
+    <div class="col-sm-10">
+      <input type="text" name="name" class="form-control" placeholder="Názov témy">
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="simple-editor">
+    <textarea name="text" placeholder="say ninjaa"></textarea>
+    <div class="tags">
+      <div class="row">
+        <div class="col-md-8">
+          <a href=""><i class="fa fa-bold"></i></a>
+          <a href=""><i class="fa fa-italic"></i></a>
+          <a href=""><i class="fa fa-underline"></i></a>
+          <a href=""><i class="fa fa-link"></i></a>
+          <a href=""><i class="fa fa-align-left"></i></a>
+          <a href=""><i class="fa fa-align-center"></i></a>
+          <a href=""><i class="fa fa-align-right"></i></a>
+        </div>
+        <div class="col-md-4 text-right">
+          <input id="add" type="button" name="addtopic" value="Vytvoriť tému">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+{% endblock %}

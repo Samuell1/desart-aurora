@@ -1,0 +1,203 @@
+{% extends "index.twig" %}
+
+{% block title %}{{ topic.name }}{% endblock %}
+
+{% block subhead %}
+<div class="container">
+  <div class="subheadtitle">
+    <div class="row">
+        <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 visible-md visible-lg">
+          <img src="{{ avatar(topic.user_id) }}" class="img-circle img-responsive" style="max-width:60px;">
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-11">
+          <div class="title">{{ topic.name }}</div>
+          <div class="desc"><span class="label label-warning">{{ topic.username }}</span> Pridané {{ topic.create_time|timeago }}</div>
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+  <ol class="breadcrumb forumpages">
+    <li><a href="/forum">Fórum</a></li>
+    <li><a href="/forum/{{ category.slug }}">{{ category.name }}</a></li>
+    <li class="active">{{ topic.name }}</li>
+    <span class="pull-right"><li>Aktuálna strana: {{ pagination.current_page }} </li></span>
+  </ol>
+
+  <div id="topic" class="row forum post" post-id="{{ topic.id }}" post-category="">
+  	<div class="col-md-1 visible-md visible-lg">
+      <img src="{{ avatar(topic.user_id) }}" alt="avatar" class="img-responsive img-circle" style="max-width:60px;"/>
+  	</div>
+  	<div class="col-md-11">
+      <div class="body">
+    		<div class="header">
+          <a href="#p" class="idf">#{{ topic.id }}</a>
+          <strong><a href="/@{{ topic.username }}" title="{{ topic.username }}" >{{ topic.username }}</a></strong> — RANK<span class="pull-right time">{{ topic.create_time|timeago }}</span>
+        </div>
+        {{ markdown(topic.text)|raw }}
+    		<div class="footer">
+          {% if topic.edit_count != 0 %}
+            Upravil/a <a href="/@{{ topic.username }}" title="{{ topic.username }}" >{{ topic.username }}</a>  {{ topic.edit_count }}x, {{ topic.update_time|timeago }}
+          {% endif %}
+           IP: 0.0.0.0.0
+          {% if topic.locked == 0 %}
+          <span class="buttons pull-right">
+            [<a href="#" data-toggle="modal" data-target="#topic_edit">Upraviť</a>]
+          </span>
+          {% endif %}
+    		</div>
+      </div>
+  	</div>
+  </div>
+
+
+	<div class="forumpostcrosslinebox">
+    <div class="forumpostcrossline"></div>
+	  <a class="btn btn-default"><i class="fa fa-comments-o"></i> {{ sklonuj(posts_count,"odpoveď","odpovede","odpovedí") }}</a>
+    {% if pagination.count_pages > 1 %}<a href="{{ pagination.count_pages > 1 ? url("tema/" ~ topic.slug ~ "/strana/" ~ pagination.count_pages):"" }}#p{{ topic.lastpost_id }}" class="btn btn-success"><i class="fa fa-chevron-down"></i> posledný príspevok</a>{% endif %}
+    <span class="pull-right">
+      {% include 'pagination.twig' with {
+      class: "paginationforum pagination-sm",
+      currentPage: pagination.current_page,
+      paginationPath: url("tema/" ~ topic.slug ~ "/strana/"),
+      lastPage: pagination.count_pages,
+      showAlwaysFirstAndLast: false
+      } only %}
+    </span>
+
+	  <a class="btn btn-info pull-right" data-toggle="modal" data-target="#modforummodal">Moderatorské menu</a>
+  </div>
+
+  {% for post in posts %}
+    <div class="row forum post" id="p{{ post.id }}">
+    	<div class="col-md-1 visible-md visible-lg">
+    	   <img src="{{ avatar(post.user_id) }}" alt="avatar" class="img-responsive img-circle" style="max-width:60px;"/>
+    	</div>
+    	<div class="col-md-11">
+        <div class="body">
+      		<div class="header">
+            <a href="#p{{ post.id }}" class="idf">#{{ post.id }}</a>
+            <strong><a href="/@{{ post.username }}" title="{{ post.username }}" >{{ post.username }}</a></strong> — RANK<span class="pull-right time">{{ post.create_time|timeago }}</span>
+          </div>
+          {{ markdown(post.text)|raw }}
+      		<div class="footer">
+            {% if post.edit_count != 0 %}
+              Upravil/a <a href="/@{{ post.username }}" title="{{ post.username }}" >{{ post.username }}</a>  {{ post.edit_count }}x, {{ post.update_time|timeago }}
+            {% endif %}
+             IP: 0.0.0.0.0
+            {% if topic.locked == 0 %}
+            <span class="buttons pull-right">
+              [<a href="edit/{{ post.id }}">Upraviť</a>]
+              [<a href="remove/{{ post.id }}" onclick="return confirm(\'Príspevok už nebude možné vrátiť späť. Prajete ho vymazať?\');">Vymazať</a>]
+            </span>
+            {% endif %}
+      		</div>
+        </div>
+      </div>
+   </div>
+  {% endfor %}
+
+  {% if pagination.count_pages > 1 %}
+  <div class="forumpostcrosslinebox">
+    <div class="forumpostcrossline"></div>
+    <span class="pull-right">
+    {% include 'pagination.twig' with {
+    class: "paginationforum pagination-sm",
+    currentPage: pagination.current_page,
+    paginationPath: url("tema/" ~ topic.slug ~ "/strana/"),
+    lastPage: pagination.count_pages,
+    showAlwaysFirstAndLast: false
+    } only %}
+    </span>
+  </div>
+  {% endif %}
+
+  {% if topic.locked == 0 %}
+  <form id="new_post">
+    <div class="simple-editor">
+      <textarea name="text" placeholder="say ninjaa"></textarea>
+      <div class="tags">
+        <div class="row">
+          <div class="col-md-8">
+            <a href=""><i class="fa fa-bold"></i></a>
+            <a href=""><i class="fa fa-italic"></i></a>
+            <a href=""><i class="fa fa-underline"></i></a>
+            <a href=""><i class="fa fa-link"></i></a>
+            <a href=""><i class="fa fa-align-left"></i></a>
+            <a href=""><i class="fa fa-align-center"></i></a>
+            <a href=""><i class="fa fa-align-right"></i></a>
+          </div>
+          <div class="col-md-4 text-right">
+            <input type="button" name="add" class="add" value="Odpovedať">
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  {% else %}
+  <div class="alert alert-info" role="alert">Táto téma je zamknutá. Pre jej odomknutie kontaktuj moderátora. -<a href="/@{{ topic.locked_username }}">{{ topic.locked_username }}</a></div>
+  {% endif %}
+
+{% endblock %}
+
+{% block modals %}
+
+{# MODAL - MODPANEL #}
+<div class="modal fade" id="modforummodal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="modforummodal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <form action="" method="POST">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modforummodal">Moderátorské menu</h4>
+      </div>
+      <div class="modal-body">
+        <select name="modset" id="select1" class="form-control selectpicker">
+          <option value="1">Zamknúť tému</option>
+          <option value="2">Odomknúť tému</option>
+          <option value="3">Odstrániť tému</option>
+          <option value="4">Obľúbiť tému</option>
+          <option value="5">Neobľúbiť tému</option>
+          <option value="6">Presunúť tému</option>
+        </select>
+      </div>
+<div class="list-group-item list-group-item-warning" id="hide1modf" style="display:none;">
+<select name="changeforum" class="form-control selectpicker">';
+  <option value="ID">ukazka</option>
+</select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Zavrieť</button>
+        <input name="editmod" class="btn btn-success btn-sm" value="Vykonať" type="submit">
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+{# MODAL EDIT - TOPIC #}
+{% if topic.locked == 0 %}
+<div class="modal fade" id="topic_edit" tabindex="-1" role="dialog" aria-labelledby="topic_edit" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="topic_edit">Upraviť tému</h4>
+      </div>
+      <div class="modal-body">
+        {{ topic.name }}
+        <hr>
+        {{ topic.text }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Zatvoriť</button>
+        <button type="button" class="btn btn-primary">Uložiť zmeny</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

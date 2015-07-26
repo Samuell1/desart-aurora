@@ -1,0 +1,69 @@
+{% extends "index.twig" %}
+
+{% block title %}{{ category.name }} - Diskúsné fórum{% endblock %}
+
+{% block subhead %}
+<div class="container">
+  <div class="subheadtitle">
+  <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="title">{{ category.name }}</div>
+          <div class="desc">{{ category.description }}</div>
+      </div>
+  </div>
+  </div>
+</div>
+<div class="submenu">
+  <div class="container">
+  <ul class="nav nav-pills pull-left hidden-xs">
+    <li><a><i class="fa fa-comments-o"></i> {{ sklonuj(category.posts_count,"odpoveď","odpovede","odpovedí") }}</a></li>
+    <li><a><i class="fa fa-folder-o"></i> {{ sklonuj(category.topics_count,"téma","témy","tém") }}</a></li>
+  </ul>
+  {% if category.topic_create == 0 %}
+  <ul class="nav nav-pills pull-right">
+    <li><a class="link" href="{{ url("forum/novatema/" ~ category.slug) }}"><i class="fa fa-plus-square-o"></i>Vytvoriť novú tému</a></li>
+  </ul>
+  {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="list-group list-group-forum">
+
+  <div class="list-group-item list-forum-info">
+      <i class="fa fa-unlock"></i> {{ sklonuj(category.topics_open,"Otvorená","Otvorené","Otvorených") }}
+      <i class="fa fa-check"></i> {{ sklonuj(category.topics_closed,"Zatvorená","Zatvorené","Zatvorených") }}
+  </div>
+
+  {% for topic in topics %}
+      <div class="list-group-item list-forum-item">
+        <div class="row">
+          <div class="col-xs-1 col-sm-1 col-md-1" style="width:1%">
+            {% if topic.locked == 1 %}<i class="fa fa-lock text-success tttoggle" data-placement="top" title="Zamknuté"></i>{% else %}<i class="fa fa-unlock-alt text-danger tttoggle" data-placement="top" title="Otvorené"></i>{% endif %}
+          </div>
+          <div class="col-xs-9 col-sm-8 col-md-10">
+            <a href="{{ url("tema/" ~ topic.slug) }}">{{ topic.name }}</a><br>
+            <small>#{{ topic.id }} vytvorené {{ topic.create_time|timeago }} od <a href="/@{{ topic.username }}">{{ topic.username }}</a></small>
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-1 text-right opacity hidden-xs" style="width:13.333%">
+            <a href="" class="tttoggle" data-placement="top" title="Príspevky"><i class="fa fa-comments"></i> {{ topic.posts_count }}</a>
+          </div>
+        </div>
+      </div>
+  {% else %}
+    <div class="list-group-item list-forum-item text-center">
+      V tejto kategórií sa zatiaľ nenachádza žiadna téma.
+    </div>
+  {% endfor %}
+  {% include 'pagination.twig' with {
+  currentPage: pagination.current_page,
+  paginationPath: url("forum/kategoria/" ~ category.slug ~ "/strana/"),
+  lastPage: pagination.count_pages,
+  showAlwaysFirstAndLast: false,
+  center: true
+  } only %}
+</div>
+
+{% endblock %}
