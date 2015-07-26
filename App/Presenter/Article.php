@@ -14,9 +14,9 @@ class Article extends BasePresenter
 		"Article" => "\App\Model\Article",
 	];
 
-	public function view($slug = null)
+	public function view()
 	{
-		$article = null;
+		var_dump($this->Param);
 		if ($article = $this->Model->Article->selectArticleBySlug($slug)){
 			$this->Model->Article->markAsRead($article["id"]);
 		}
