@@ -1,13 +1,9 @@
 {
-   "baseUri": "/desart",
+   "baseUri": "//desart",
    "routes": {
       "/": [
          "GET",
          ["App\\Presenter\\Home", "index"]
-      ],
-      "/?{slug}": [
-         "GET",
-         ["App\\Presenter\\User", "view"]
       ],
       "/profil/{slug}": [
          "GET",

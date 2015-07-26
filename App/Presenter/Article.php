@@ -7,15 +7,17 @@ namespace App\Presenter;
  * Zobrazuje clanky a ich prehlad
  * BIG DICK
  */
-class Article extends BasePresenter {
+class Article extends BasePresenter
+{
 
 	public $Model = [
 		"Article" => "\App\Model\Article",
 	];
 
-	public function view($slug = null){
+	public function view($slug = null)
+	{
 		$article = null;
-		if($article = $this->Model->Article->selectArticleBySlug($slug)){
+		if ($article = $this->Model->Article->selectArticleBySlug($slug)){
 			$this->Model->Article->markAsRead($article["id"]);
 		}
 		$this->View->render('article/view.twig', [
