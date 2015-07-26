@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aurora-framework/aurora",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Aurora.git",
-                "reference": "e6939289fcc6a41db44e424e14dc864efab29502"
+                "reference": "739ac29559a85ea850feb0f51c0f9326d65b0aae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Aurora/zipball/e6939289fcc6a41db44e424e14dc864efab29502",
-                "reference": "e6939289fcc6a41db44e424e14dc864efab29502",
+                "url": "https://api.github.com/repos/Aurora-Framework/Aurora/zipball/739ac29559a85ea850feb0f51c0f9326d65b0aae",
+                "reference": "739ac29559a85ea850feb0f51c0f9326d65b0aae",
                 "shasum": ""
             },
             "require": {
@@ -58,7 +58,7 @@
                 }
             ],
             "description": "Simple and hackable framework",
-            "time": "2015-07-25 22:28:01"
+            "time": "2015-07-26 20:04:38"
         },
         {
             "name": "aurora-framework/config",
