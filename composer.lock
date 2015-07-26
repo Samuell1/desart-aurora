@@ -1,0 +1,519 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "0378a29150525ba134a7deb5e56c1b93",
+    "packages": [
+        {
+            "name": "aurora-framework/aurora",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Aurora-Framework/Aurora.git",
+                "reference": "e6939289fcc6a41db44e424e14dc864efab29502"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Aurora-Framework/Aurora/zipball/e6939289fcc6a41db44e424e14dc864efab29502",
+                "reference": "e6939289fcc6a41db44e424e14dc864efab29502",
+                "shasum": ""
+            },
+            "require": {
+                "aurora-framework/config": "~1.0",
+                "aurora-framework/di": "~1.0",
+                "aurora-framework/filesystem": "~1.0",
+                "aurora-framework/http": "~1.0",
+                "aurora-framework/il8n": "~1.0",
+                "aurora-framework/router": "~1.0",
+                "aurora-framework/service": "~1.0",
+                "aurora-framework/session": "~1.0",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "aurora-framework/config": "dev-master",
+                "aurora-framework/di": "dev-master",
+                "aurora-framework/http": "dev-master",
+                "aurora-framework/router": "dev-master",
+                "aurora-framework/service": "dev-master",
+                "aurora-framework/session": "dev-master",
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\": "src//"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "VeeeneX",
+                    "email": "veeenex@gmail.com",
+                    "role": "Creator / Main Developer"
+                }
+            ],
+            "description": "Simple and hackable framework",
+            "time": "2015-07-25 22:28:01"
+        },
+        {
+            "name": "aurora-framework/config",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Aurora-Framework/Config.git",
+                "reference": "29bafa148fc85970e9cbec56a210ae054501f863"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Aurora-Framework/Config/zipball/29bafa148fc85970e9cbec56a210ae054501f863",
+                "reference": "29bafa148fc85970e9cbec56a210ae054501f863",
+                "shasum": ""
+            },
+            "require": {
+                "aurora-framework/helper": "~1.0",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "aurora-framework/helper": "dev-master",
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "VeeeneX",
+                    "email": "veeenex@gmail.com"
+                }
+            ],
+            "description": "Config management",
+            "time": "2015-07-25 22:29:53"
+        },
+        {
+            "name": "aurora-framework/di",
+            "version": "V1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Aurora-Framework/DI.git",
+                "reference": "54aad76487a7c2c70aaf7eab3d18f1860ffb0a28"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Aurora-Framework/DI/zipball/54aad76487a7c2c70aaf7eab3d18f1860ffb0a28",
+                "reference": "54aad76487a7c2c70aaf7eab3d18f1860ffb0a28",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "athletic/athletic": "~0.1",
+                "aurora-framework/filesystem": "dev-master",
+                "fabpot/php-cs-fixer": "~1.9",
+                "php": ">=5.6",
+                "phpunit/phpunit": "^4.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\": "src//"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "VeeeneX",
+                    "email": "veeenex@gmai.com"
+                }
+            ],
+            "description": "Dependency resolver",
+            "time": "2015-07-25 22:31:58"
+        },
+        {
+            "name": "aurora-framework/filesystem",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Aurora-Framework/FileSystem.git",
+                "reference": "b46c221595288c7ca895aa1bf78ac97e7f348869"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Aurora-Framework/FileSystem/zipball/b46c221595288c7ca895aa1bf78ac97e7f348869",
+                "reference": "b46c221595288c7ca895aa1bf78ac97e7f348869",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\": "src//"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "VeeeneX",
+                    "email": "veeenex@gmai.com"
+                }
+            ],
+            "description": "Useful filesystem helper",
+            "time": "2015-07-24 20:22:33"
+        },
+        {
+            "name": "aurora-framework/helper",
+            "version": "v1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Aurora-Framework/Helper.git",
+                "reference": "34ff124fb09fd4ff24ce1669422f56fa95864f5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Aurora-Framework/Helper/zipball/34ff124fb09fd4ff24ce1669422f56fa95864f5f",
+                "reference": "34ff124fb09fd4ff24ce1669422f56fa95864f5f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.8"
+            },
+            "require-dev": {
+                "aurora-framework/router": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\": "src\\"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "VeeeneX",
+                    "email": "veeenex@gmail.com"
+                },
+                {
+                    "name": "KotassMan",
+                    "email": "kotas.koterba@hotmail.sk"
+                }
+            ],
+            "description": "Collection of Helpers",
+            "time": "2015-07-24 20:23:59"
+        },
+        {
+            "name": "aurora-framework/http",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Aurora-Framework/Http.git",
+                "reference": "07d8cf23f2012f0f7fed81e903262ba2ff4f00ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Aurora-Framework/Http/zipball/07d8cf23f2012f0f7fed81e903262ba2ff4f00ed",
+                "reference": "07d8cf23f2012f0f7fed81e903262ba2ff4f00ed",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "VeeeneX",
+                    "email": "veeenex@gmail.com"
+                }
+            ],
+            "description": "Simple and easy abstraction over top an HTTP response.",
+            "time": "2015-07-25 21:34:21"
+        },
+        {
+            "name": "aurora-framework/il8n",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Aurora-Framework/il8n.git",
+                "reference": "6c0911e16b64e31ef23d3643fcea5a518f7372b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Aurora-Framework/il8n/zipball/6c0911e16b64e31ef23d3643fcea5a518f7372b4",
+                "reference": "6c0911e16b64e31ef23d3643fcea5a518f7372b4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\": "src//"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "VeeeneX",
+                    "email": "veeenex@gmai.com"
+                }
+            ],
+            "description": "Internalization library",
+            "time": "2015-07-06 21:17:29"
+        },
+        {
+            "name": "aurora-framework/router",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Aurora-Framework/Router.git",
+                "reference": "2defea5896280f249a00224f7f977fe95d161e89"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Aurora-Framework/Router/zipball/2defea5896280f249a00224f7f977fe95d161e89",
+                "reference": "2defea5896280f249a00224f7f977fe95d161e89",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\": "src//"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "VeeeneX",
+                    "email": "veeenex@gmail.com"
+                },
+                {
+                    "name": "KotassMan",
+                    "email": "kotas.koterba@hotmail.sk"
+                }
+            ],
+            "description": "Minimal Router",
+            "time": "2015-07-24 21:39:19"
+        },
+        {
+            "name": "aurora-framework/service",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Aurora-Framework/Service.git",
+                "reference": "7516db8692217fee133c1cf3e6726cc66077341b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Aurora-Framework/Service/zipball/7516db8692217fee133c1cf3e6726cc66077341b",
+                "reference": "7516db8692217fee133c1cf3e6726cc66077341b",
+                "shasum": ""
+            },
+            "require": {
+                "aurora-framework/helper": "~1.0",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "aurora-framework/helper": "dev-master",
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\": "src//"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "VeeeneX",
+                    "email": "veeenex@gmail.com"
+                }
+            ],
+            "description": "Session",
+            "time": "2015-07-24 21:22:16"
+        },
+        {
+            "name": "aurora-framework/session",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Aurora-Framework/Session.git",
+                "reference": "a9e058c59368536b57a08081fb289c7e964434a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Aurora-Framework/Session/zipball/a9e058c59368536b57a08081fb289c7e964434a6",
+                "reference": "a9e058c59368536b57a08081fb289c7e964434a6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\": "src//"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "VeeeneX",
+                    "email": "veeenex@gmail.com"
+                }
+            ],
+            "description": "Session",
+            "time": "2015-07-25 22:15:37"
+        },
+        {
+            "name": "aurora-framework/twig",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Aurora-Framework/Twig.git",
+                "reference": "4094c98cd98ec9610e21d85a122d76683f7f08fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Aurora-Framework/Twig/zipball/4094c98cd98ec9610e21d85a122d76683f7f08fb",
+                "reference": "4094c98cd98ec9610e21d85a122d76683f7f08fb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aurora\\": "src//"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "VeeeneX",
+                    "email": "veeenex@gmail.com"
+                }
+            ],
+            "description": "Twig Extension for Aurora",
+            "time": "2015-07-03 21:01:39"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v1.18.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "e8e6575abf6102af53ec283f7f14b89e304fa602"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/e8e6575abf6102af53ec283f7f14b89e304fa602",
+                "reference": "e8e6575abf6102af53ec283f7f14b89e304fa602",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.18-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
+                },
+                {
+                    "name": "Twig Team",
+                    "homepage": "http://twig.sensiolabs.org/contributors",
+                    "role": "Contributors"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "http://twig.sensiolabs.org",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2015-06-06 23:31:24"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.6"
+    },
+    "platform-dev": []
+}
