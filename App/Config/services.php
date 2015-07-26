@@ -40,13 +40,7 @@ $Resolver->prepare("Aurora\\MVC\\Presenter", function($Instance) use ($Config) {
 
 /** Database **/
 $cfg = new Spot\Config();
-$cfg->addConnection('mysql', [
-	'dbname' => 'desart',
-	'user' => 'root',
-	'password' => 'toor',
-	'host' => 'localhost',
-	'driver' => 'pdo_mysql',
-]);
+$cfg->addConnection('mysql', $Config->get("database"));
 $Spot = new Spot\Locator($cfg);
 
 $Resolver->define("Aurora\\Model", [
