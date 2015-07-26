@@ -13,7 +13,7 @@ class Article extends BasePresenter
 	{
 		$Article = $this->Spot
          ->mapper('App\Entity\Article');
-
+		var_dump($Article->get(1));
 		var_dump($this->Param);
 		if ($article = $this->Model->Article->selectArticleBySlug($slug)){
 			$this->Model->Article->markAsRead($article["id"]);
