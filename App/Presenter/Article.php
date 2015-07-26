@@ -24,6 +24,7 @@ class Article extends BasePresenter
 		// if ($article = $this->Model->Article->selectArticleBySlug($slug)){
 		// 	$this->Model->Article->markAsRead($article["id"]);
 		// }
+		
 		$this->View->render('article/view.twig', [
 			//"user" => $this->User->toArray(),
 			'ArticleMeta' => $Meta,

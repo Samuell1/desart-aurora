@@ -1,26 +1,11 @@
 {
    "baseUri": "//desart",
    "routes": {
-      "/": [
-         "GET",
-         ["App\\Presenter\\Home", "index"]
-      ],
-      "/profil/{slug}": [
-         "GET",
-         ["App\\Presenter\\User", "view"]
-      ],
-      "/clanok/{slug}": [
-         "GET",
-         ["App\\Presenter\\Article", "view"]
-      ],
-      "/clanky": [
-         "GET",
-         ["App\\Presenter\\Article", "overview"]
-      ],
-      "/forum/novatema/{category}": [
-         "GET",
-         ["App\\Presenter\\Forum\\Topic", "create"]
-      ],
+      "/": ["GET", ["App\\Presenter\\Home", "index"]],
+      "/profil/{slug}": ["GET", ["App\\Presenter\\User", "view"]],
+      "/clanok/{slug}": ["GET", ["App\\Presenter\\Article", "view"]],
+      "/clanky": ["GET", ["App\\Presenter\\Article", "overview"]],
+      "/forum/novatema/{category}": ["GET", ["App\\Presenter\\Forum\\Topic", "create"]],
       "/tema/{slug}": [
          "GET",
          ["App\\Presenter\\Forum\\Topic", "view"]
