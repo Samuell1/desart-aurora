@@ -7,12 +7,10 @@ use Aurora\MVC\Presenter;
 class BasePresenter extends Presenter
 {
    protected $User;
+   public $Spot;
 
-  function before(){
-   //  $this->User = new \App\Helper\User([
-   //    "id" => 1,
-   //    "username" => "VeeeneX",
-   //    "auth" => 1
-   //  ]);
-  }
+   function before()
+   {
+     $this->Spot = $this->Model->getConnection();
+   }
 }

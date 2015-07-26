@@ -24,13 +24,6 @@ include ROOT."vendor/autoload.php";
 $Config = include APP . "Config/config.php";
 
 /**
-* Read the services
-*/
-$Resolver = include APP . "Config/services.php";
-
-$Application = new Aurora\Application($Config, $Resolver);
-
-/**
  * Routes
  */
 $JSONAdapter = new Aurora\Adapter\JSON(APP."Config/");
@@ -43,4 +36,10 @@ try {
 
 }
 
+/**
+* Read the services
+*/
+$Resolver = include APP . "Config/services.php";
+
+$Application = new Aurora\Application($Config, $Resolver);
 $Application->run($found["action"], $found["params"]);
