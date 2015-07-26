@@ -9,13 +9,11 @@ namespace App\Presenter;
  */
 class Article extends BasePresenter
 {
-
-	public $Model = [
-		"Article" => "\App\Model\Article",
-	];
-
 	public function view()
 	{
+		$Article = $this->Spot
+         ->mapper('App\Entity\Article');
+
 		var_dump($this->Param);
 		if ($article = $this->Model->Article->selectArticleBySlug($slug)){
 			$this->Model->Article->markAsRead($article["id"]);
