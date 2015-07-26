@@ -19,9 +19,11 @@ $Resolver->define("Aurora\\Helper\\Url", [
 
 /** Twig **/
 $Loader = new Twig_Loader_Filesystem(APP."View/");
-$Twig = new Twig_Environment($Loader, [
-	'cache' => APP."Storage/Cache/",
-]);
+$Twig = new Twig_Environment($Loader
+// , [
+// 	'cache' => APP."Storage/Cache/",
+// ]
+);
 $Twig->addExtension(new Aurora\Twig\Extension($Resolver));
 
 /** View **/
