@@ -6,7 +6,7 @@
          ["App\\Presenter\\Home", "index"]
       ],
       "/?{slug}": [
-         "GET"
+         "GET",
          ["App\\Presenter\\User", "view"]
       ],
       "/profil/{slug}": [
