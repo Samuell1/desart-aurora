@@ -15,7 +15,7 @@ class Home extends BasePresenter
 		"Article" => "\App\Model\Article",
 	];
 
-	public function index($page = 1)
+	public function index()
 	{
 
 		if ($topics = $this->Model->Topic->getLastTopics()) {

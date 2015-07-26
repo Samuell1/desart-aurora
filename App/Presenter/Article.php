@@ -27,7 +27,7 @@ class Article extends BasePresenter
 	}
 
 	public function overview(){
-		if($articles = $this->Model->Article->getArticles()){
+		if ($articles = $this->Model->Article->getArticles()){
 			foreach ($articles as &$article) {
 				$article["image"] = $this->Model->Article->getArticleImage($article["image_id"]);
 			}
