@@ -19,7 +19,7 @@ class Meta extends Entity
    public static function relations(\Spot\MapperInterface $mapper, \Spot\EntityInterface $entity)
    {
       return [
-         'meta' => $mapper->belongsTo($entity, 'App\Entity\Article', 'id')
+         'Article' => $mapper->belongsTo($entity, 'App\Entity\Article', 'id')
       ];
    }
 }

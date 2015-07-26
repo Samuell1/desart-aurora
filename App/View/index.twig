@@ -11,10 +11,10 @@
       <meta name="robots" content="index, follow">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <link rel="stylesheet" href="{{ URL::asset("css/semantic.min.css") }}">
-      <link rel="stylesheet" href="{{ URL::asset("/css/app.css") }}">
+      <link rel="stylesheet" href="{{ Url.asset("css/semantic.min.css") }}">
+      <link rel="stylesheet" href="{{ Url.asset("/css/app.css") }}">
 
-      <link rel="shortcut icon" type="image/x-icon" href="{{ URL::asset("img/favicon.ico") }}">
+      <link rel="shortcut icon" type="image/x-icon" href="{{ Url.asset("img/favicon.ico") }}">
 
   	{% endblock %}
   </head>
@@ -30,7 +30,7 @@
 
       		<div class="ui menu responsive">
     			<a class="togglesidebar item noneborder"><i class="sidebar icon"></i></a>
-    			<a class="item itemhide logo noneborder" href="/"><img src="{{ URL::asset("img/logo.png") }}" alt="" /></a>
+    			<a class="item itemhide logo noneborder" href="/"><img src="{{ Url.asset("img/logo.png") }}" alt="" /></a>
     			<a class="item itemhide noneborder" href="/">Úvod</a>
     			<a class="item itemhide noneborder" href="/">Články</a>
     			<a class="item itemhide noneborder" href="/">Série článkov</a>
@@ -348,8 +348,8 @@
     		<script src="assets/js/semantic.min.js"></script>
     		<script src="assets/js/app.js"></script>
 
-    		<script type="text/javascript" src="{{ URL::asset("js/perfect-scrollbar.min.js") }}"></script>
-    		<link rel="stylesheet" href="{{ URL::asset("css/perfect-scrollbar.min.css") }}">
+    		<script type="text/javascript" src="{{ Url.asset("js/perfect-scrollbar.min.js") }}"></script>
+    		<link rel="stylesheet" href="{{ Url.asset("css/perfect-scrollbar.min.css") }}">
 
   </body>
 </html>
