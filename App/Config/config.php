@@ -9,7 +9,7 @@ return new Aurora\Config([
 	'database'	=> [
 		'dbname'   => 'desart',
 		'user'     => 'root',
-		'password' => 'toor',
+		'password' => '',
 		'host'     => 'localhost',
 		'driver'   => 'pdo_mysql',
 	],
