@@ -24,7 +24,7 @@ return new Aurora\Config([
 		"encoding"				=> "UTF-8",
 		"server_gmt_offset"	=> 0,
 		"default_timezone"	=> null,
-		"baseURI"				=> "/Sample",
+		"baseURI"				=> "/desart",
 	],
 
 	"security" => [
