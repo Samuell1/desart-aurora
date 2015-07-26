@@ -7,16 +7,18 @@ namespace App\Presenter;
  *
  * Zobrazuje hlavnu stranku
  */
-class Home extends BasePresenter {
-		public $Model = [
-			"Topic" => "\App\Model\Forum\Topic",
-			"Post" => "\App\Model\Forum\Post",
-			"Article" => "\App\Model\Article",
-		];
+class Home extends BasePresenter
+{
+	public $Model = [
+		"Topic" => "\App\Model\Forum\Topic",
+		"Post" => "\App\Model\Forum\Post",
+		"Article" => "\App\Model\Article",
+	];
 
-	public function index($page = 1){
+	public function index($page = 1)
+	{
 
-		if($topics = $this->Model->Topic->getLastTopics()){
+		if ($topics = $this->Model->Topic->getLastTopics()) {
 			foreach ($topics as &$topic) {
 				$topic["posts_count"] = (int) $this->Model->Post->countPosts($topic["id"]);
 			}
@@ -27,7 +29,9 @@ class Home extends BasePresenter {
 
 
 		$this->View->render('home/index.twig', [
-			"user" => $this->User->toArray(),
+			"user" => [
+
+			],
 			'topics' => $topics,
 			'articles' => $articles,
 			'flash_news' => $flash_news,

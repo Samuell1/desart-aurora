@@ -34,7 +34,6 @@ $Application = new Aurora\Application($Config, $Resolver);
  * Routes
  */
 $JSONAdapter = new Aurora\Adapter\JSON(APP."Config/");
-var_dump($JSONAdapter->loadFile("routes"));
 $Router = (new Aurora\Router\Loader($JSONAdapter->loadFile("routes")))->load();
 try {
    $found = $Router->findRoute($Router->findRequestMethod(), $Router->findUri());
