@@ -10,7 +10,7 @@
          ["App\\Presenter\\User", "view"]
       ],
       "/profil/{slug}": [
-         "GET"
+         "GET",
          ["App\\Presenter\\User", "view"]
       ],
       "/clanok/{slug}": [
