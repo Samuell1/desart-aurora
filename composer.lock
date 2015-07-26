@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0378a29150525ba134a7deb5e56c1b93",
+    "hash": "08c05af119491bc99d5bfb0e1cbc8d3e",
     "packages": [
         {
             "name": "aurora-framework/aurora",
