@@ -1,0 +1,38 @@
+<?php
+namespace App\Presenter;
+
+/**
+ * Presenter pre Article
+ *
+ * Zobrazuje clanky a ich prehlad
+ */
+class Article extends BasePresenter {
+
+	public $Model = [
+		"Article" => "\App\Model\Article",
+	];
+
+	public function view($slug = null){
+		$article = null;
+		if($article = $this->Model->Article->selectArticleBySlug($slug)){
+			$this->Model->Article->markAsRead($article["id"]);
+		}
+		$this->View->render('article/view.twig', [
+			"user" => $this->User->toArray(),
+			'article' => $article,
+		]);
+	}
+
+	public function overview(){
+		if($articles = $this->Model->Article->getArticles()){
+			foreach ($articles as &$article) {
+				$article["image"] = $this->Model->Article->getArticleImage($article["image_id"]);
+			}
+
+			$this->View->render('article/overview.twig', [
+				"user" => $this->User->toArray(),
+				'articles' => $articles,
+			]);
+		}
+	}
+}

@@ -2,12 +2,36 @@
 
 namespace App\Presenter;
 
-use Aurora\MVC\Presenter;
+/**
+ * Presenter Domov
+ *
+ * Zobrazuje hlavnu stranku
+ */
+class Home extends BasePresenter {
+		public $Model = [
+			"Topic" => "\App\Model\Forum\Topic",
+			"Post" => "\App\Model\Forum\Post",
+			"Article" => "\App\Model\Article",
+		];
 
-class Home extends Presenter
-{
-	public function index()
-	{
+	public function index($page = 1){
 
+		if($topics = $this->Model->Topic->getLastTopics()){
+			foreach ($topics as &$topic) {
+				$topic["posts_count"] = (int) $this->Model->Post->countPosts($topic["id"]);
+			}
+		}
+
+		$articles = $this->Model->Article->getArticles($page);
+		$flash_news = $this->Model->Article->getFlashNews($page);
+
+
+		$this->View->render('home/index.twig', [
+			"user" => $this->User->toArray(),
+			'topics' => $topics,
+			'articles' => $articles,
+			'flash_news' => $flash_news,
+		]);
 	}
+
 }
