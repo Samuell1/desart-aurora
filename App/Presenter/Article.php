@@ -5,16 +5,19 @@ namespace App\Presenter;
  * Presenter pre Article
  *
  * Zobrazuje clanky a ich prehlad
+ * BIG DICK
  */
-class Article extends BasePresenter {
+class Article extends BasePresenter
+{
 
 	public $Model = [
 		"Article" => "\App\Model\Article",
 	];
 
-	public function view($slug = null){
-		$article = null;
-		if($article = $this->Model->Article->selectArticleBySlug($slug)){
+	public function view()
+	{
+		var_dump($this->Param);
+		if ($article = $this->Model->Article->selectArticleBySlug($slug)){
 			$this->Model->Article->markAsRead($article["id"]);
 		}
 		$this->View->render('article/view.twig', [
@@ -24,7 +27,7 @@ class Article extends BasePresenter {
 	}
 
 	public function overview(){
-		if($articles = $this->Model->Article->getArticles()){
+		if ($articles = $this->Model->Article->getArticles()){
 			foreach ($articles as &$article) {
 				$article["image"] = $this->Model->Article->getArticleImage($article["image_id"]);
 			}

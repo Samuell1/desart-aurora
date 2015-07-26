@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Presenter;
+
 use Aurora\MVC\Presenter;
 
 class BasePresenter extends Presenter
