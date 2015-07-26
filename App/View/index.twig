@@ -11,15 +11,10 @@
       <meta name="robots" content="index, follow">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<<<<<<< HEAD
-      <link rel="stylesheet" href="assets/css/semantic.min.css">
-      <link rel="stylesheet" href="assets/css/app.css">
-=======
-      <link rel="stylesheet" href="{{ URL::asset("css/font-awesome.min.css") }}">
-      <link rel="stylesheet" href="{{ asset("css/bootstrap.min.css") }}">
->>>>>>> origin/master
-      <link rel="stylesheet" href="{{ asset("css/app.css") }}" >
-      <link rel="shortcut icon" type="image/x-icon" href="{{ asset("img/favicon.ico") }}">
+      <link rel="stylesheet" href="{{ URL::asset("css/semantic.min.css") }}">
+      <link rel="stylesheet" href="{{ URL::asset("/css/app.css") }}">
+
+      <link rel="shortcut icon" type="image/x-icon" href="{{ URL::asset("img/favicon.ico") }}">
 
   	{% endblock %}
   </head>
@@ -35,7 +30,7 @@
 
       		<div class="ui menu responsive">
     			<a class="togglesidebar item noneborder"><i class="sidebar icon"></i></a>
-    			<a class="item itemhide logo noneborder" href="/"><img src="assets/img/logo.png" alt="" /></a>
+    			<a class="item itemhide logo noneborder" href="/"><img src="{{ URL::asset("img/logo.png") }}" alt="" /></a>
     			<a class="item itemhide noneborder" href="/">Úvod</a>
     			<a class="item itemhide noneborder" href="/">Články</a>
     			<a class="item itemhide noneborder" href="/">Série článkov</a>
@@ -350,12 +345,11 @@
     			</div>
     		</div>
 
-
     		<script src="assets/js/semantic.min.js"></script>
     		<script src="assets/js/app.js"></script>
 
-    		<script type="text/javascript" src="assets/js/perfect-scrollbar.min.js"></script>
-    		<link rel="stylesheet" href="assets/css/perfect-scrollbar.min.css">
+    		<script type="text/javascript" src="{{ URL::asset("js/perfect-scrollbar.min.js") }}"></script>
+    		<link rel="stylesheet" href="{{ URL::asset("css/perfect-scrollbar.min.css") }}">
 
   </body>
 </html>
