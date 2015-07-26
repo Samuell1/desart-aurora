@@ -11,16 +11,22 @@ class Article extends BasePresenter
 {
 	public function view()
 	{
-		$Article = $this->Spot
-         ->mapper('App\Entity\Article');
-		var_dump($Article->get(1));
-		var_dump($this->Param);
-		if ($article = $this->Model->Article->selectArticleBySlug($slug)){
-			$this->Model->Article->markAsRead($article["id"]);
-		}
+		$Meta = $this->Spot
+        ->mapper('App\Entity\Article\Meta');
+
+		$Meta = $Meta
+			->all()
+			->with('Article')
+			->first([
+				'slug' => $this->Param->slug
+			]);
+
+		// if ($article = $this->Model->Article->selectArticleBySlug($slug)){
+		// 	$this->Model->Article->markAsRead($article["id"]);
+		// }
 		$this->View->render('article/view.twig', [
-			"user" => $this->User->toArray(),
-			'article' => $article,
+			//"user" => $this->User->toArray(),
+			'ArticleMeta' => $Meta,
 		]);
 	}
 

@@ -49,7 +49,7 @@ $cfg->addConnection('mysql', [
 ]);
 $Spot = new Spot\Locator($cfg);
 
-$Resolver->define("Aurora\\Service\\Model", [
+$Resolver->define("Aurora\\Model", [
 	":Connection" => $Spot
 ]);
 
