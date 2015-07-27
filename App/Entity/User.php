@@ -12,9 +12,11 @@ class User extends Entity
     public static function fields()
     {
         return [
-            "id"       => ["type" => "smallint", "primary" => true, "autoincrement" => true],
-            "username" => ["type" => "string"],
-            "email"    => ["type" => "string"],
+            "id"                => ["type" => "smallint", "primary" => true, "autoincrement" => true],
+            "username"          => ["type" => "string"],
+            "password"          => ["type" => "string"],
+            "email"             => ["type" => "string"],
+            "account_activated" => ["type" => "boolean"],
         ];
     }
 
