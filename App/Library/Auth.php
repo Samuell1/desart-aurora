@@ -28,7 +28,7 @@ class Auth
 
 		$q = $this->User->where(["username" => $username])->orWhere(["email" => $email])->count();
 
-		if($q == 0)
+		if($q === 0)
 		{
 			$User = $this->User->build([
 				"username"          => $username,
