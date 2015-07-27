@@ -1,593 +1,807 @@
--- MySQL Workbench Forward Engineering
-
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
--- -----------------------------------------------------
--- Schema Desart
--- -----------------------------------------------------
--- Databaza Desartu
-DROP SCHEMA IF EXISTS `Desart` ;
-
--- -----------------------------------------------------
--- Schema Desart
+-- phpMyAdmin SQL Dump
+-- version 4.3.11
+-- http://www.phpmyadmin.net
 --
--- Databaza Desartu
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `Desart` DEFAULT CHARACTER SET utf8mb4 ;
-USE `Desart` ;
-
--- -----------------------------------------------------
--- Table `Desart`.`article_category`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`article_category` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`article_category` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `color` VARCHAR(45) NOT NULL,
-  `slug` VARCHAR(225) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL,
-  `description` TINYTEXT NULL DEFAULT NULL,
-  `parrent_id` SMALLINT(5) UNSIGNED NOT NULL DEFAULT 0,
-  `hidden` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `category_id_UNIQUE` (`id` ASC),
-  UNIQUE INDEX `slug_UNIQUE` (`slug` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`article`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`article` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`article` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `article_category_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL,
-  `tag_group_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL,
-  `image_id` MEDIUMINT(7) NULL DEFAULT NULL COMMENT 'Default image na article',
-  `user_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `series_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL COMMENT '0 - Hlavna kategoria, tykajuca sa webu',
-  `article_history_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL,
-  `slug` VARCHAR(225) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL,
-  `name` VARCHAR(200) NOT NULL,
-  `reads` SMALLINT(5) UNSIGNED NOT NULL DEFAULT 0,
-  `custom_tags` VARCHAR(250) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NULL COMMENT 'Custom tagy v serializovanom',
-  `status` ENUM('published','draft','private') NOT NULL DEFAULT 'published',
-  `type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Typ:\n0 - Clanok\n1 - Rychla novinka',
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `published_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `attachments` TINYTEXT NULL COMMENT 'Pridavne subory a obrazky',
-  PRIMARY KEY (`id`, `user_id`),
-  UNIQUE INDEX `article_id_UNIQUE` (`id` ASC),
-  INDEX `fk_article_article_category1_idx` (`article_category_id` ASC))
-ENGINE = InnoDB
-AUTO_INCREMENT = 0;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`user`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`user` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`user` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(32) NOT NULL,
-  `email` VARCHAR(300) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL COMMENT 'Email',
-  `active` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
-  `avatar` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1,
-  `location` VARCHAR(255) NULL,
-  `hide_email` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1,
-  `banned` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
-  `ip` INT UNSIGNED NULL,
-  `activated` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
-  `activation_code` BINARY(16) NOT NULL,
-  `permissions` TINYTEXT NULL,
-  `password` VARCHAR(150) NOT NULL,
-  `rand` TINYINT(3) UNSIGNED NOT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `locked_until` DATETIME NULL DEFAULT NULL,
-  PRIMARY KEY (`id`, `username`, `email`),
-  UNIQUE INDEX `user_email_UNIQUE` (`email` ASC),
-  UNIQUE INDEX `user_nick_UNIQUE` (`username` ASC),
-  UNIQUE INDEX `user_id_UNIQUE` (`id` ASC),
-  UNIQUE INDEX `activation_code_UNIQUE` (`activation_code` ASC))
-ENGINE = InnoDB
-AUTO_INCREMENT = 0;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`comment_history`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`comment_history` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`comment_history` (
-  `id` MEDIUMINT(7) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `change` TINYTEXT NOT NULL,
-  `change_type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1,
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`comments`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`comments` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`comments` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `article_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `user_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `reply_comment_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL,
-  `comment_history_id` MEDIUMINT(7) UNSIGNED NOT NULL,
-  `comment_type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1,
-  `text` TINYTEXT NOT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `user_id`, `comment_history_id`),
-  UNIQUE INDEX `comment_id_UNIQUE` (`id` ASC),
-  INDEX `fk_comments_user1_idx` (`user_id` ASC),
-  INDEX `fk_comments_comment_history1_idx` (`comment_history_id` ASC))
-ENGINE = MyISAM
-AUTO_INCREMENT = 0;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`favorite`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`favorite` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`favorite` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` SMALLINT(5) UNSIGNED NULL,
-  `item_id` INT(11) UNSIGNED NOT NULL,
-  `type` TINYINT(2) UNSIGNED NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`, `user_id`),
-  UNIQUE INDEX `fav_id_UNIQUE` (`id` ASC),
-  INDEX `fk_favorite_user1_idx` (`user_id` ASC))
-ENGINE = InnoDB
-AUTO_INCREMENT = 0;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`topic_category`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`topic_category` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`topic_category` (
-  `id` TINYINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(200) NOT NULL COMMENT 'Nazov fora',
-  `slug` VARCHAR(225) NOT NULL,
-  `description` TEXT(300) NOT NULL COMMENT 'Popis fora',
-  `hidden` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
-  `parent_id` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0,
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `forum_id_UNIQUE` (`id` ASC))
-ENGINE = InnoDB
-AUTO_INCREMENT = 0;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`topic`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`topic` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`topic` (
-  `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `locked_user_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL,
-  `topic_category_id` TINYINT(3) UNSIGNED NULL,
-  `user_id` SMALLINT(5) UNSIGNED NULL,
-  `slug` VARCHAR(225) NOT NULL,
-  `name` VARCHAR(200) NOT NULL,
-  `edit_count` MEDIUMINT UNSIGNED NOT NULL,
-  `reads` MEDIUMINT UNSIGNED NOT NULL DEFAULT 0,
-  `text` MEDIUMTEXT NOT NULL,
-  `locked` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `topic_category_id`, `user_id`),
-  UNIQUE INDEX `forumt_id_UNIQUE` (`id` ASC),
-  INDEX `fk_topic_topic_category1_idx` (`topic_category_id` ASC),
-  INDEX `fk_topic_user1_idx` (`user_id` ASC))
-ENGINE = MyISAM
-AUTO_INCREMENT = 0
-COMMENT = 'Databaza prispevku na fore';
-
-
--- -----------------------------------------------------
--- Table `Desart`.`topic_post`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`topic_post` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`topic_post` (
-  `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` SMALLINT(5) UNSIGNED NULL,
-  `topic_id` SMALLINT UNSIGNED NOT NULL,
-  `edit_user_id` SMALLINT(5) UNSIGNED NULL,
-  `edit_count` MEDIUMINT UNSIGNED NOT NULL,
-  `text` MEDIUMTEXT NOT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `user_id`, `topic_id`, `edit_user_id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  INDEX `fk_topic_post_topic1_idx` (`topic_id` ASC),
-  INDEX `fk_topic_post_user1_idx` (`user_id` ASC),
-  INDEX `fk_topic_post_user2_idx` (`edit_user_id` ASC))
-ENGINE = MyISAM
-AUTO_INCREMENT = 0
-COMMENT = 'Prispevok do topiku v databaze';
-
-
--- -----------------------------------------------------
--- Table `Desart`.`topic_read`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`topic_read` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`topic_read` (
-  `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `topic_id` SMALLINT UNSIGNED NULL,
-  `user_id` SMALLINT UNSIGNED NOT NULL,
-  `read` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
-  `read_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `topic_id`, `user_id`),
-  UNIQUE INDEX `forumr_id_UNIQUE` (`id` ASC),
-  INDEX `fk_topic_read_topic1_idx` (`topic_id` ASC))
-ENGINE = InnoDB
-AUTO_INCREMENT = 0
-COMMENT = 'Ci si pouzivatel precital topik';
-
-
--- -----------------------------------------------------
--- Table `Desart`.`message_group`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`message_group` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`message_group` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `group_name` VARCHAR(200) NOT NULL COMMENT 'Meno skupiny pouzivatel si moze vytvorit vlastnu skupinu mena mozu byt rovnake',
-  `group_description` TINYTEXT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `user_id`),
-  UNIQUE INDEX `group_id_UNIQUE` (`id` ASC),
-  INDEX `fk_message_group_user1_idx` (`user_id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`message`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`message` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`message` (
-  `id` SMALLINT(7) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Cislo spravy',
-  `user_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT 'Id pouzivatela// sender',
-  `message_group_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `to_subject_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT 'Skupina alebo User',
-  `subject_type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1 - User\n0 - Group',
-  `is_read` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
-  `text` MEDIUMTEXT NOT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `read_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `user_id`, `message_group_id`, `to_subject_id`),
-  UNIQUE INDEX `message_id_UNIQUE` (`id` ASC),
-  INDEX `fk_message_message_group1_idx` (`message_group_id` ASC),
-  INDEX `fk_message_user1_idx` (`to_subject_id` ASC))
-ENGINE = InnoDB
-AUTO_INCREMENT = 0;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`ban`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`ban` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`ban` (
-  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Id banu',
-  `user_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `reason` TINYTEXT CHARACTER SET 'utf8mb4' NOT NULL COMMENT 'Dovod banu',
-  `duration_at` TIMESTAMP NULL,
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `user_id`),
-  UNIQUE INDEX `ban_id_UNIQUE` (`id` ASC),
-  INDEX `fk_bans_user1_idx` (`user_id` ASC),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC))
-ENGINE = InnoDB
-AUTO_INCREMENT = 0;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`group`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`group` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`group` (
-  `id` TINYINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(200) NOT NULL,
-  `color` VARCHAR(45) NULL,
-  `description` TINYTEXT NULL,
-  `permissions` TINYTEXT NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`user_group`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`user_group` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`user_group` (
-  `user_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `group_id` TINYINT(3) UNSIGNED NOT NULL,
-  PRIMARY KEY (`user_id`, `group_id`),
-  INDEX `fk_user_group_user1_idx` (`user_id` ASC),
-  INDEX `fk_user_group_user_groups1_idx` (`group_id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`user_metadata`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`user_metadata` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`user_metadata` (
-  `user_id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `deviantart` VARCHAR(225) NOT NULL,
-  `skype` VARCHAR(32) NOT NULL,
-  `bio` TINYTEXT NULL DEFAULT NULL,
-  `web` VARCHAR(225) NULL DEFAULT NULL,
-  `birthday` TIMESTAMP NULL,
-  `update_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`user_id`),
-  UNIQUE INDEX `skype_UNIQUE` (`skype` ASC),
-  INDEX `fk_user_metadata_user1_idx` (`user_id` ASC),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`article_history`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`article_history` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`article_history` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `article_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `tag_group_article_id` SMALLINT(5) UNSIGNED NULL,
-  `article_category_id` SMALLINT(5) UNSIGNED NULL,
-  `image_id` MEDIUMINT(7) NULL,
-  `user_id` SMALLINT(5) UNSIGNED NULL,
-  `series_id` SMALLINT(5) UNSIGNED NULL,
-  `article_history_id` INT UNSIGNED NOT NULL,
-  `slug` VARCHAR(225) NOT NULL,
-  `name` VARCHAR(200) NOT NULL,
-  `reads` SMALLINT(5) UNSIGNED NOT NULL DEFAULT 0,
-  `custom_tags` VARCHAR(250) NULL COMMENT 'Custom tagy v serializovanom',
-  `status` ENUM('published','draft','private') NOT NULL DEFAULT 'published',
-  `type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Typ:\n0 - Clanok\n1 - Rychla novinka',
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `published_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  INDEX `fk_article_history_article1_idx` (`article_id` ASC),
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`tag`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`tag` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`tag` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `tag` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  UNIQUE INDEX `tag_UNIQUE` (`tag` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`tag_group`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`tag_group` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`tag_group` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `tag_id` SMALLINT(5) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`, `tag_id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  INDEX `fk_tag_group_tag1_idx` (`tag_id` ASC))
-ENGINE = InnoDB
-COMMENT = 'Skupina tagov pre nejaky Mega tag';
-
-
--- -----------------------------------------------------
--- Table `Desart`.`files`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`files` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`files` (
-  `id` MEDIUMINT(7) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` BINARY(20) NOT NULL COMMENT 'Nazov v sha1',
-  `extension` VARCHAR(3) NOT NULL DEFAULT 'png',
-  `type` ENUM('image') NULL DEFAULT 'image',
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `image_UNIQUE` (`name` ASC),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`series`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`series` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`series` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `image_id` MEDIUMINT(7) UNSIGNED NOT NULL,
-  `type` ENUM('ordered', 'unordered') NOT NULL DEFAULT 'unordered',
-  `name` VARCHAR(200) NOT NULL,
-  `slug` VARCHAR(225) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL,
-  `description` TINYTEXT NOT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `color` VARCHAR(45) NOT NULL DEFAULT '#444',
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  UNIQUE INDEX `slug_UNIQUE` (`slug` ASC),
-  UNIQUE INDEX `color_UNIQUE` (`color` ASC),
-  INDEX `fk_series_image1_idx` (`image_id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`micro_comment`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`micro_comment` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`micro_comment` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `question_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `comment_type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT 'Typ komentara, clanook, stranka',
-  `reply_comment_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL,
-  `comment_history_id` MEDIUMINT(7) UNSIGNED NOT NULL,
-  `text` VARCHAR(250) NOT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  PRIMARY KEY (`id`, `user_id`, `comment_history_id`),
-  INDEX `fk_micro_comments_user1_idx` (`user_id` ASC),
-  INDEX `fk_micro_comments_comment_history1_idx` (`comment_history_id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`comment_vote`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`comment_vote` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`comment_vote` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `comment_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `down_vote` TINYINT(1) UNSIGNED NULL,
-  `up_vote` TINYINT(1) UNSIGNED NULL,
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `comment_id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  INDEX `fk_comments_votes_comments1_idx` (`comment_id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`micro_commnet_vote`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`micro_commnet_vote` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`micro_commnet_vote` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `micro_comment_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `down_vote` TINYINT(1) UNSIGNED NOT NULL,
-  `up_vote` TINYINT(1) UNSIGNED NOT NULL,
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `micro_comment_id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  INDEX `fk_micro_commnet_vote_micro_comment1_idx` (`micro_comment_id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`message_user_group`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`message_user_group` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`message_user_group` (
-  `message_group_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `message_group_user_id` SMALLINT(5) UNSIGNED NOT NULL,
-  PRIMARY KEY (`message_group_id`, `message_group_user_id`),
-  INDEX `fk_message_user_group_message_group1_idx` (`message_group_id` ASC, `message_group_user_id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`selection`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`selection` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`selection` (
-  `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `selection` TINYTEXT NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`newsletter`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`newsletter` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`newsletter` (
-  `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(300) CHARACTER SET 'ascii' COLLATE 'ascii_bin' NOT NULL,
-  `selection_id` SMALLINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`, `selection_id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
-  INDEX `fk_newsletter_selection1_idx` (`selection_id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`ip_log`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`ip_log` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`ip_log` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `item_id` INT(9) UNSIGNED NOT NULL,
-  `ip` INT UNSIGNED NOT NULL,
-  `item_type` MEDIUMINT UNSIGNED NOT NULL,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `item_id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`notification`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`notification` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`notification` (
-  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 4 COMMENT '1 - custom\n2 - ping\n3 - ad\n4 - new',
-  `subject` SMALLINT(5) UNSIGNED NOT NULL,
-  `subject_type` TINYINT(1) UNSIGNED NOT NULL COMMENT '1 - User\n2 - Group',
-  `message` MEDIUMTEXT NULL,
-  `by` VARCHAR(32) NOT NULL,
-  `by_type` TINYINT(1) UNSIGNED NOT NULL COMMENT '1 - User_id\n2 - Vlastne meno',
-  `read` TINYINT(1) NOT NULL DEFAULT 0,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `read_at` TIMESTAMP NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `subject_type_UNIQUE` (`subject_type` ASC))
-ENGINE = InnoDB;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- Host: 127.0.0.1
+-- Generation Time: Jul 27, 2015 at 10:38 PM
+-- Server version: 5.6.24-log
+-- PHP Version: 5.6.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `desart`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_article`
+--
+
+CREATE TABLE IF NOT EXISTS `da_article` (
+  `id` smallint(5) unsigned NOT NULL,
+  `article_category_id` smallint(5) unsigned DEFAULT NULL,
+  `tag_group_id` smallint(5) unsigned DEFAULT NULL,
+  `image_id` mediumint(7) DEFAULT NULL COMMENT 'Default image na article',
+  `user_id` smallint(5) unsigned NOT NULL,
+  `series_id` smallint(5) unsigned DEFAULT NULL COMMENT '0 - Hlavna kategoria, tykajuca sa webu',
+  `article_history_id` smallint(5) unsigned DEFAULT NULL,
+  `slug` varchar(225) CHARACTER SET ascii NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `content` mediumtext NOT NULL,
+  `reads` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `custom_tags` varchar(250) CHARACTER SET ascii DEFAULT NULL COMMENT 'Custom tagy v serializovanom',
+  `status` enum('published','draft','private') NOT NULL DEFAULT 'published',
+  `type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Typ:\n0 - Clanok\n1 - Rychla novinka',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `published_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `attachments` tinytext COMMENT 'Pridavne subory a obrazky'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_article_category`
+--
+
+CREATE TABLE IF NOT EXISTS `da_article_category` (
+  `id` smallint(5) unsigned NOT NULL,
+  `color` varchar(45) NOT NULL,
+  `slug` varchar(225) CHARACTER SET ascii NOT NULL,
+  `description` tinytext,
+  `parrent_id` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `hidden` tinyint(1) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_article_history`
+--
+
+CREATE TABLE IF NOT EXISTS `da_article_history` (
+  `id` smallint(5) unsigned NOT NULL,
+  `article_id` smallint(5) unsigned NOT NULL,
+  `tag_group_article_id` smallint(5) unsigned DEFAULT NULL,
+  `article_category_id` smallint(5) unsigned DEFAULT NULL,
+  `image_id` mediumint(7) DEFAULT NULL,
+  `user_id` smallint(5) unsigned DEFAULT NULL,
+  `series_id` smallint(5) unsigned DEFAULT NULL,
+  `article_history_id` int(10) unsigned NOT NULL,
+  `slug` varchar(225) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `reads` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `custom_tags` varchar(250) DEFAULT NULL COMMENT 'Custom tagy v serializovanom',
+  `status` enum('published','draft','private') NOT NULL DEFAULT 'published',
+  `type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Typ:\n0 - Clanok\n1 - Rychla novinka',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `published_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_ban`
+--
+
+CREATE TABLE IF NOT EXISTS `da_ban` (
+  `id` int(11) unsigned NOT NULL COMMENT 'Id banu',
+  `user_id` smallint(5) unsigned NOT NULL,
+  `reason` tinytext NOT NULL COMMENT 'Dovod banu',
+  `duration_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_comment`
+--
+
+CREATE TABLE IF NOT EXISTS `da_comment` (
+  `id` smallint(5) unsigned NOT NULL,
+  `article_id` smallint(5) unsigned NOT NULL,
+  `user_id` smallint(5) unsigned NOT NULL,
+  `reply_comment_id` smallint(5) unsigned DEFAULT NULL,
+  `comment_history_id` mediumint(7) unsigned NOT NULL,
+  `comment_type` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `text` tinytext NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_comment_history`
+--
+
+CREATE TABLE IF NOT EXISTS `da_comment_history` (
+  `id` mediumint(7) unsigned NOT NULL,
+  `change` tinytext NOT NULL,
+  `change_type` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_comment_vote`
+--
+
+CREATE TABLE IF NOT EXISTS `da_comment_vote` (
+  `id` int(10) unsigned NOT NULL,
+  `comment_id` smallint(5) unsigned NOT NULL,
+  `down_vote` tinyint(1) unsigned DEFAULT NULL,
+  `up_vote` tinyint(1) unsigned DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_favorite`
+--
+
+CREATE TABLE IF NOT EXISTS `da_favorite` (
+  `id` smallint(5) unsigned NOT NULL,
+  `user_id` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `item_id` int(11) unsigned NOT NULL,
+  `type` tinyint(2) unsigned NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_files`
+--
+
+CREATE TABLE IF NOT EXISTS `da_files` (
+  `id` mediumint(7) unsigned NOT NULL,
+  `name` binary(20) NOT NULL COMMENT 'Nazov v sha1',
+  `extension` varchar(3) NOT NULL DEFAULT 'png',
+  `type` enum('image') DEFAULT 'image'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_group`
+--
+
+CREATE TABLE IF NOT EXISTS `da_group` (
+  `id` tinyint(3) unsigned NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `color` varchar(45) DEFAULT NULL,
+  `description` tinytext,
+  `permissions` tinytext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_ip_log`
+--
+
+CREATE TABLE IF NOT EXISTS `da_ip_log` (
+  `id` int(10) unsigned NOT NULL,
+  `item_id` int(9) unsigned NOT NULL,
+  `ip` int(10) unsigned NOT NULL,
+  `item_type` mediumint(8) unsigned NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_message`
+--
+
+CREATE TABLE IF NOT EXISTS `da_message` (
+  `id` smallint(7) unsigned NOT NULL COMMENT 'Cislo spravy',
+  `user_id` smallint(5) unsigned NOT NULL COMMENT 'Id pouzivatela// sender',
+  `message_group_id` smallint(5) unsigned NOT NULL,
+  `to_subject_id` smallint(5) unsigned NOT NULL COMMENT 'Skupina alebo User',
+  `subject_type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '1 - User\n0 - Group',
+  `is_read` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `text` mediumtext NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `read_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_message_group`
+--
+
+CREATE TABLE IF NOT EXISTS `da_message_group` (
+  `id` smallint(5) unsigned NOT NULL,
+  `user_id` smallint(5) unsigned NOT NULL,
+  `group_name` varchar(200) NOT NULL COMMENT 'Meno skupiny pouzivatel si moze vytvorit vlastnu skupinu mena mozu byt rovnake',
+  `group_description` tinytext,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_message_user_group`
+--
+
+CREATE TABLE IF NOT EXISTS `da_message_user_group` (
+  `message_group_id` smallint(5) unsigned NOT NULL,
+  `message_group_user_id` smallint(5) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_micro_comment`
+--
+
+CREATE TABLE IF NOT EXISTS `da_micro_comment` (
+  `id` smallint(5) unsigned NOT NULL,
+  `user_id` smallint(5) unsigned NOT NULL,
+  `question_id` smallint(5) unsigned NOT NULL,
+  `comment_type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT 'Typ komentara, clanook, stranka',
+  `reply_comment_id` smallint(5) unsigned DEFAULT NULL,
+  `comment_history_id` mediumint(7) unsigned NOT NULL,
+  `text` varchar(250) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_micro_commnet_vote`
+--
+
+CREATE TABLE IF NOT EXISTS `da_micro_commnet_vote` (
+  `id` int(10) unsigned NOT NULL,
+  `micro_comment_id` smallint(5) unsigned NOT NULL,
+  `down_vote` tinyint(1) unsigned NOT NULL,
+  `up_vote` tinyint(1) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_newsletter`
+--
+
+CREATE TABLE IF NOT EXISTS `da_newsletter` (
+  `id` smallint(5) unsigned NOT NULL,
+  `email` varchar(300) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  `selection_id` smallint(5) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_notification`
+--
+
+CREATE TABLE IF NOT EXISTS `da_notification` (
+  `id` bigint(20) unsigned NOT NULL,
+  `type` tinyint(1) unsigned NOT NULL DEFAULT '4' COMMENT '1 - custom\n2 - ping\n3 - ad\n4 - new',
+  `subject` smallint(5) unsigned NOT NULL,
+  `subject_type` tinyint(1) unsigned NOT NULL COMMENT '1 - User\n2 - Group',
+  `message` mediumtext,
+  `by_subject` varchar(32) NOT NULL,
+  `by_type` tinyint(1) unsigned NOT NULL COMMENT '1 - User_id\n2 - Vlastne meno',
+  `seen` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `seen_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_selection`
+--
+
+CREATE TABLE IF NOT EXISTS `da_selection` (
+  `id` smallint(5) unsigned NOT NULL,
+  `selection` tinytext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_serie`
+--
+
+CREATE TABLE IF NOT EXISTS `da_serie` (
+  `id` smallint(5) unsigned NOT NULL,
+  `image_id` mediumint(7) unsigned NOT NULL,
+  `type` enum('ordered','unordered') NOT NULL DEFAULT 'unordered',
+  `name` varchar(200) NOT NULL,
+  `slug` varchar(225) CHARACTER SET ascii NOT NULL,
+  `description` tinytext NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `color` varchar(45) NOT NULL DEFAULT '#444'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_tag`
+--
+
+CREATE TABLE IF NOT EXISTS `da_tag` (
+  `id` smallint(5) unsigned NOT NULL,
+  `tag` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_tag_group`
+--
+
+CREATE TABLE IF NOT EXISTS `da_tag_group` (
+  `id` smallint(5) unsigned NOT NULL,
+  `tag_id` smallint(5) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Skupina tagov pre nejaky Mega tag';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_topic`
+--
+
+CREATE TABLE IF NOT EXISTS `da_topic` (
+  `id` smallint(5) unsigned NOT NULL,
+  `locked_user_id` smallint(5) unsigned DEFAULT NULL,
+  `topic_category_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `user_id` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `slug` varchar(225) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `edit_count` mediumint(8) unsigned NOT NULL,
+  `reads` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `text` mediumtext NOT NULL,
+  `locked` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='Databaza prispevku na fore';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_topic_category`
+--
+
+CREATE TABLE IF NOT EXISTS `da_topic_category` (
+  `id` tinyint(3) unsigned NOT NULL,
+  `name` varchar(200) NOT NULL COMMENT 'Nazov fora',
+  `slug` varchar(225) NOT NULL,
+  `description` text NOT NULL COMMENT 'Popis fora',
+  `hidden` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `parent_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_topic_post`
+--
+
+CREATE TABLE IF NOT EXISTS `da_topic_post` (
+  `id` smallint(5) unsigned NOT NULL,
+  `user_id` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `topic_id` smallint(5) unsigned NOT NULL,
+  `edit_user_id` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `edit_count` mediumint(8) unsigned NOT NULL,
+  `text` mediumtext NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='Prispevok do topiku v databaze';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_topic_read`
+--
+
+CREATE TABLE IF NOT EXISTS `da_topic_read` (
+  `id` smallint(5) unsigned NOT NULL,
+  `topic_id` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `user_id` smallint(5) unsigned NOT NULL,
+  `read` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `read_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Ci si pouzivatel precital topik';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_user`
+--
+
+CREATE TABLE IF NOT EXISTS `da_user` (
+  `id` smallint(5) unsigned NOT NULL,
+  `username` varchar(32) NOT NULL,
+  `email` varchar(300) CHARACTER SET ascii NOT NULL COMMENT 'Email',
+  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `avatar` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `location` varchar(255) DEFAULT NULL,
+  `hide_email` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `banned` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ip` int(10) unsigned DEFAULT NULL,
+  `account_activated` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `activation_code` binary(16) NOT NULL,
+  `permissions` tinytext,
+  `password` varchar(150) NOT NULL,
+  `rand` tinyint(3) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `locked_until` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_user_group`
+--
+
+CREATE TABLE IF NOT EXISTS `da_user_group` (
+  `user_id` smallint(5) unsigned NOT NULL,
+  `group_id` tinyint(3) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `da_user_metadata`
+--
+
+CREATE TABLE IF NOT EXISTS `da_user_metadata` (
+  `user_id` smallint(5) unsigned NOT NULL,
+  `deviantart` varchar(225) NOT NULL,
+  `skype` varchar(32) NOT NULL,
+  `bio` tinytext,
+  `web` varchar(225) DEFAULT NULL,
+  `birthday` timestamp NULL DEFAULT NULL,
+  `update_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `da_article`
+--
+ALTER TABLE `da_article`
+  ADD PRIMARY KEY (`id`,`user_id`), ADD UNIQUE KEY `article_id_UNIQUE` (`id`), ADD KEY `fk_article_article_category1_idx` (`article_category_id`);
+
+--
+-- Indexes for table `da_article_category`
+--
+ALTER TABLE `da_article_category`
+  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `category_id_UNIQUE` (`id`), ADD UNIQUE KEY `slug_UNIQUE` (`slug`);
+
+--
+-- Indexes for table `da_article_history`
+--
+ALTER TABLE `da_article_history`
+  ADD PRIMARY KEY (`id`), ADD KEY `fk_article_history_article1_idx` (`article_id`);
+
+--
+-- Indexes for table `da_ban`
+--
+ALTER TABLE `da_ban`
+  ADD PRIMARY KEY (`id`,`user_id`), ADD UNIQUE KEY `ban_id_UNIQUE` (`id`), ADD UNIQUE KEY `user_id_UNIQUE` (`user_id`), ADD KEY `fk_bans_user1_idx` (`user_id`);
+
+--
+-- Indexes for table `da_comment`
+--
+ALTER TABLE `da_comment`
+  ADD PRIMARY KEY (`id`,`user_id`,`comment_history_id`), ADD UNIQUE KEY `comment_id_UNIQUE` (`id`), ADD KEY `fk_comments_user1_idx` (`user_id`), ADD KEY `fk_comments_comment_history1_idx` (`comment_history_id`);
+
+--
+-- Indexes for table `da_comment_history`
+--
+ALTER TABLE `da_comment_history`
+  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id_UNIQUE` (`id`);
+
+--
+-- Indexes for table `da_comment_vote`
+--
+ALTER TABLE `da_comment_vote`
+  ADD PRIMARY KEY (`id`,`comment_id`), ADD UNIQUE KEY `id_UNIQUE` (`id`), ADD KEY `fk_comments_votes_comments1_idx` (`comment_id`);
+
+--
+-- Indexes for table `da_favorite`
+--
+ALTER TABLE `da_favorite`
+  ADD PRIMARY KEY (`id`,`user_id`), ADD UNIQUE KEY `fav_id_UNIQUE` (`id`), ADD KEY `fk_favorite_user1_idx` (`user_id`);
+
+--
+-- Indexes for table `da_files`
+--
+ALTER TABLE `da_files`
+  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `image_UNIQUE` (`name`), ADD UNIQUE KEY `id_UNIQUE` (`id`);
+
+--
+-- Indexes for table `da_group`
+--
+ALTER TABLE `da_group`
+  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id_UNIQUE` (`id`);
+
+--
+-- Indexes for table `da_ip_log`
+--
+ALTER TABLE `da_ip_log`
+  ADD PRIMARY KEY (`id`,`item_id`), ADD UNIQUE KEY `id_UNIQUE` (`id`);
+
+--
+-- Indexes for table `da_message`
+--
+ALTER TABLE `da_message`
+  ADD PRIMARY KEY (`id`,`user_id`,`message_group_id`,`to_subject_id`), ADD UNIQUE KEY `message_id_UNIQUE` (`id`), ADD KEY `fk_message_message_group1_idx` (`message_group_id`), ADD KEY `fk_message_user1_idx` (`to_subject_id`);
+
+--
+-- Indexes for table `da_message_group`
+--
+ALTER TABLE `da_message_group`
+  ADD PRIMARY KEY (`id`,`user_id`), ADD UNIQUE KEY `group_id_UNIQUE` (`id`), ADD KEY `fk_message_group_user1_idx` (`user_id`);
+
+--
+-- Indexes for table `da_message_user_group`
+--
+ALTER TABLE `da_message_user_group`
+  ADD PRIMARY KEY (`message_group_id`,`message_group_user_id`), ADD KEY `fk_message_user_group_message_group1_idx` (`message_group_id`,`message_group_user_id`);
+
+--
+-- Indexes for table `da_micro_comment`
+--
+ALTER TABLE `da_micro_comment`
+  ADD PRIMARY KEY (`id`,`user_id`,`comment_history_id`), ADD UNIQUE KEY `id_UNIQUE` (`id`), ADD KEY `fk_micro_comments_user1_idx` (`user_id`), ADD KEY `fk_micro_comments_comment_history1_idx` (`comment_history_id`);
+
+--
+-- Indexes for table `da_micro_commnet_vote`
+--
+ALTER TABLE `da_micro_commnet_vote`
+  ADD PRIMARY KEY (`id`,`micro_comment_id`), ADD UNIQUE KEY `id_UNIQUE` (`id`), ADD KEY `fk_micro_commnet_vote_micro_comment1_idx` (`micro_comment_id`);
+
+--
+-- Indexes for table `da_newsletter`
+--
+ALTER TABLE `da_newsletter`
+  ADD PRIMARY KEY (`id`,`selection_id`), ADD UNIQUE KEY `id_UNIQUE` (`id`), ADD UNIQUE KEY `email_UNIQUE` (`email`), ADD KEY `fk_newsletter_selection1_idx` (`selection_id`);
+
+--
+-- Indexes for table `da_notification`
+--
+ALTER TABLE `da_notification`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `da_selection`
+--
+ALTER TABLE `da_selection`
+  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id_UNIQUE` (`id`);
+
+--
+-- Indexes for table `da_serie`
+--
+ALTER TABLE `da_serie`
+  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id_UNIQUE` (`id`), ADD UNIQUE KEY `slug_UNIQUE` (`slug`), ADD UNIQUE KEY `color_UNIQUE` (`color`), ADD KEY `fk_series_image1_idx` (`image_id`);
+
+--
+-- Indexes for table `da_tag`
+--
+ALTER TABLE `da_tag`
+  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id_UNIQUE` (`id`), ADD UNIQUE KEY `tag_UNIQUE` (`tag`);
+
+--
+-- Indexes for table `da_tag_group`
+--
+ALTER TABLE `da_tag_group`
+  ADD PRIMARY KEY (`id`,`tag_id`), ADD UNIQUE KEY `id_UNIQUE` (`id`), ADD KEY `fk_tag_group_tag1_idx` (`tag_id`);
+
+--
+-- Indexes for table `da_topic`
+--
+ALTER TABLE `da_topic`
+  ADD PRIMARY KEY (`id`,`topic_category_id`,`user_id`), ADD UNIQUE KEY `forumt_id_UNIQUE` (`id`), ADD KEY `fk_topic_topic_category1_idx` (`topic_category_id`), ADD KEY `fk_topic_user1_idx` (`user_id`);
+
+--
+-- Indexes for table `da_topic_category`
+--
+ALTER TABLE `da_topic_category`
+  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `forum_id_UNIQUE` (`id`);
+
+--
+-- Indexes for table `da_topic_post`
+--
+ALTER TABLE `da_topic_post`
+  ADD PRIMARY KEY (`id`,`user_id`,`topic_id`,`edit_user_id`), ADD UNIQUE KEY `id_UNIQUE` (`id`), ADD KEY `fk_topic_post_topic1_idx` (`topic_id`), ADD KEY `fk_topic_post_user1_idx` (`user_id`), ADD KEY `fk_topic_post_user2_idx` (`edit_user_id`);
+
+--
+-- Indexes for table `da_topic_read`
+--
+ALTER TABLE `da_topic_read`
+  ADD PRIMARY KEY (`id`,`topic_id`,`user_id`), ADD UNIQUE KEY `forumr_id_UNIQUE` (`id`), ADD KEY `fk_topic_read_topic1_idx` (`topic_id`);
+
+--
+-- Indexes for table `da_user`
+--
+ALTER TABLE `da_user`
+  ADD PRIMARY KEY (`id`,`username`,`email`), ADD UNIQUE KEY `user_email_UNIQUE` (`email`), ADD UNIQUE KEY `user_nick_UNIQUE` (`username`), ADD UNIQUE KEY `user_id_UNIQUE` (`id`), ADD UNIQUE KEY `activation_code_UNIQUE` (`activation_code`);
+
+--
+-- Indexes for table `da_user_group`
+--
+ALTER TABLE `da_user_group`
+  ADD PRIMARY KEY (`user_id`,`group_id`), ADD KEY `fk_user_group_user1_idx` (`user_id`), ADD KEY `fk_user_group_user_groups1_idx` (`group_id`);
+
+--
+-- Indexes for table `da_user_metadata`
+--
+ALTER TABLE `da_user_metadata`
+  ADD PRIMARY KEY (`user_id`), ADD UNIQUE KEY `skype_UNIQUE` (`skype`), ADD UNIQUE KEY `user_id_UNIQUE` (`user_id`), ADD KEY `fk_user_metadata_user1_idx` (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `da_article`
+--
+ALTER TABLE `da_article`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_article_category`
+--
+ALTER TABLE `da_article_category`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_article_history`
+--
+ALTER TABLE `da_article_history`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_ban`
+--
+ALTER TABLE `da_ban`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id banu';
+--
+-- AUTO_INCREMENT for table `da_comment`
+--
+ALTER TABLE `da_comment`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_comment_history`
+--
+ALTER TABLE `da_comment_history`
+  MODIFY `id` mediumint(7) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_comment_vote`
+--
+ALTER TABLE `da_comment_vote`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_favorite`
+--
+ALTER TABLE `da_favorite`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_files`
+--
+ALTER TABLE `da_files`
+  MODIFY `id` mediumint(7) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_group`
+--
+ALTER TABLE `da_group`
+  MODIFY `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_ip_log`
+--
+ALTER TABLE `da_ip_log`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_message`
+--
+ALTER TABLE `da_message`
+  MODIFY `id` smallint(7) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Cislo spravy';
+--
+-- AUTO_INCREMENT for table `da_message_group`
+--
+ALTER TABLE `da_message_group`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_micro_comment`
+--
+ALTER TABLE `da_micro_comment`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_micro_commnet_vote`
+--
+ALTER TABLE `da_micro_commnet_vote`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_newsletter`
+--
+ALTER TABLE `da_newsletter`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_notification`
+--
+ALTER TABLE `da_notification`
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_selection`
+--
+ALTER TABLE `da_selection`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_serie`
+--
+ALTER TABLE `da_serie`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_tag`
+--
+ALTER TABLE `da_tag`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_tag_group`
+--
+ALTER TABLE `da_tag_group`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_topic`
+--
+ALTER TABLE `da_topic`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_topic_category`
+--
+ALTER TABLE `da_topic_category`
+  MODIFY `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_topic_post`
+--
+ALTER TABLE `da_topic_post`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_topic_read`
+--
+ALTER TABLE `da_topic_read`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_user`
+--
+ALTER TABLE `da_user`
+  MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `da_user_metadata`
+--
+ALTER TABLE `da_user_metadata`
+  MODIFY `user_id` smallint(5) unsigned NOT NULL AUTO_INCREMENT;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

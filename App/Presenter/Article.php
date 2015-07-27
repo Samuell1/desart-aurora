@@ -21,7 +21,10 @@ class Article extends BasePresenter
 				'slug' => $this->Param->slug,
 				'status' => "published"
 			]);
-		var_dump($Article->User->Meta);
+
+		foreach ($Article->User->Groups as $Group) {
+			var_dump($Group);
+		}
 		// if ($article = $this->Model->Article->selectArticleBySlug($slug)){
 		// 	$this->Model->Article->markAsRead($article["id"]);
 		// }

@@ -7,7 +7,7 @@ use Spot\Entity;
 
 class Meta extends Entity
 {
-    protected static $table = "user_metadata";
+    protected static $table = "da_user_metadata";
 
     public static function fields()
     {

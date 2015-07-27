@@ -7,7 +7,7 @@ use Spot\Entity;
 
 class Notification extends Entity
 {
-    protected static $table = "notification";
+    protected static $table = "da_notification";
 
     public static function fields()
     {

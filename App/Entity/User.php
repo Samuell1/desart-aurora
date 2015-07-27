@@ -7,14 +7,14 @@ use Spot\Entity;
 
 class User extends Entity
 {
-    protected static $table = "user";
+    protected static $table = "da_user";
 
     public static function fields()
     {
         return [
             "id"       => ["type" => "smallint", "primary" => true, "autoincrement" => true],
-            "username" => ["type" => "string", "primary" => true],
-            "email"    => ["type" => "string", "primary" => true],
+            "username" => ["type" => "string"],
+            "email"    => ["type" => "string"],
         ];
     }
 
@@ -22,7 +22,7 @@ class User extends Entity
     {
         return [
             "Meta" => $mapper->hasOne($entity, "App\Entity\User\Meta", "user_id"),
-            "Groups" => $mapper->hasManyThrough($entity, "App\Entity\Group", "App\Entity\User\Tag", "group_id", "user_id"),
+            "Groups" => $mapper->hasManyThrough($entity, "App\Entity\Group", "App\Entity\User\Group", "group_id", "user_id"),
         ];
     }
 
