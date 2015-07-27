@@ -62,5 +62,7 @@ article .info a{font-size:11px}
   }
 }
 
-.footer {border-top:1px solid #eee!important;margin-top:14px!important;background:#fff!important}
+.footer {border-top:1px solid #eee!important;margin-top:14px!important;background:#fff!important;}
 .footer.segment {padding: 5em 0}
+.footer .ui.header{font-size:17px;font-weight:normal}
+.footer .ui.link.list .item{padding:4px 0px;font-size:13px}
