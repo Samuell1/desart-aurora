@@ -30,7 +30,6 @@ class Auth
 
 		if($q === 0)
 		{
-			if
 			$User = $this->User->build([
 				"username"          => $username,
 				"password"          => $this->Hash->hash($password),
