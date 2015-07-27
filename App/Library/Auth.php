@@ -16,10 +16,12 @@ class Auth
 
 	public function __construct(Session $Session, Locator $DB, Mapper $Mapper)
 	{
+
 		$this->Session = $Session;
 		$this->DB      = $DB;
 		$this->User    = $Mapper;
 		$this->Hash    = new Hash;
+		
 	}
 
 
@@ -89,7 +91,7 @@ class Auth
 			$this->Session->remove("auth");
 		else
 			return false;
-		
+
 	}
 
 }
