@@ -65,63 +65,27 @@
   		<div class="ui flowing usernotifications popup transition">
   			<div class="ui feed">
 
-  				<div class="event">
-  					<div class="label">
-  						<img src="http://data.desart.sk/avatars/1.png">
-  					</div>
-  					<div class="content">
-  						<div class="date">
-  							pred 3 dňami
-  							<a href="#"><i class="delete icon right aligned"></i></a>
-  						</div>
-  						<div class="summary">
-  							Nový príspevok od <a>Jenny Hess</a> v <a>diskusii</a>.
-  						</div>
-  					</div>
-  				</div>
 
-  				<div class="event">
-  					<div class="label">
-  						<img src="http://data.desart.sk/avatars/7.png">
-  					</div>
-  					<div class="content">
-  						<div class="date">
-  							pred 3 dňami
-  							<a href="#"><i class="delete icon right aligned"></i></a>
-  						</div>
-  						<div class="summary">
-  							Boli ste označený v komentári <a>Ufóni idu na mesiac</a>.
-  						</div>
-  					</div>
-  				</div>
-  				<div class="event">
-  					<div class="label">
-  						<img src="http://data.desart.sk/avatars/6.png">
-  					</div>
-  					<div class="content">
-  						<div class="date">
-  							pred 3 dňami
-  							<a href="#"><i class="delete icon right aligned"></i></a>
-  						</div>
-  						<div class="summary">
-  							Nový príspevok od <a>Jenny Hess</a> v <a>Predám webdesign za 10...</a>.
-  						</div>
-  					</div>
-  				</div>
-  				<div class="event">
-  					<div class="label">
-  						<img src="http://data.desart.sk/avatars/6.png">
-  					</div>
-  					<div class="content">
-  						<div class="date">
-  							pred 3 dňami
-  							<a href="#"><i class="delete icon right aligned"></i></a>
-  						</div>
-  						<div class="summary">
-  							Nový príspevok od <a>Jenny Hess</a> v <a>Kúpim web gaming portál</a>.
-  						</div>
-  					</div>
-  				</div>
+          {% for Notification in Notifications %}
+            <div class="event">
+              <div class="label">
+                <img src="http://data.desart.sk/avatars/1.png">
+              </div>
+              <div class="content">
+                <div class="date">
+                  {{ Notification.created_at }}
+                  <a href="#"><i class="delete icon right aligned"></i></a>
+                </div>
+                <div class="summary">
+                  {% if Notification.type == 1 %}
+                      {{ Notification.message|raw }}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% else %}
+              žiadne piče
+          {% endfor %}
 
   			</div>
   		</div> <!-- ./user notifications -->
