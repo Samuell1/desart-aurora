@@ -26,10 +26,9 @@ class Auth
 	public function createUser($username, $password, $email, $activated = false)
 	{
 
-		$q = $this->User->where(["username" => $username])->count();
-		$q2 = $this->User->where(["email" => $email])->count();
+		$q = $this->User->where(["username" => $username])->orWhere(["email" => $email])->count();
 
-		if($q === 0 && $q2 === 2)
+		if($q == 0)
 		{
 			$User = $this->User->build([
 				"username"          => $username,
