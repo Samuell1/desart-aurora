@@ -16,11 +16,12 @@ class Article extends BasePresenter
 
 		$Article = $Article
 			->all()
+			->with("User")
 			->first([
 				'slug' => $this->Param->slug,
 				'status' => "published"
 			]);
-
+		var_dump($Article->User->Meta);
 		// if ($article = $this->Model->Article->selectArticleBySlug($slug)){
 		// 	$this->Model->Article->markAsRead($article["id"]);
 		// }
