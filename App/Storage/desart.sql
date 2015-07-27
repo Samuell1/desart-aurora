@@ -37,47 +37,33 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Desart`.`files`
+-- Table `Desart`.`article`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`files` ;
+DROP TABLE IF EXISTS `Desart`.`article` ;
 
-CREATE TABLE IF NOT EXISTS `Desart`.`files` (
-  `id` MEDIUMINT(7) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` BINARY(20) NOT NULL COMMENT 'Nazov v sha1',
-  `extension` VARCHAR(3) NOT NULL DEFAULT 'png',
-  `type` ENUM('image') NULL DEFAULT 'image',
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `image_UNIQUE` (`name` ASC),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`series`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`series` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`series` (
+CREATE TABLE IF NOT EXISTS `Desart`.`article` (
   `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `image_id` MEDIUMINT(7) UNSIGNED NULL,
-  `type` ENUM('ordered', 'unordered') NOT NULL DEFAULT 'unordered',
-  `name` VARCHAR(200) NOT NULL,
+  `article_category_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL,
+  `tag_group_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL,
+  `image_id` MEDIUMINT(7) NULL DEFAULT NULL COMMENT 'Default image na article',
+  `user_id` SMALLINT(5) UNSIGNED NOT NULL,
+  `series_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL COMMENT '0 - Hlavna kategoria, tykajuca sa webu',
+  `article_history_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL,
   `slug` VARCHAR(225) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL,
-  `description` TINYTEXT NOT NULL,
+  `name` VARCHAR(200) NOT NULL,
+  `reads` SMALLINT(5) UNSIGNED NOT NULL DEFAULT 0,
+  `custom_tags` VARCHAR(250) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NULL COMMENT 'Custom tagy v serializovanom',
+  `status` ENUM('published','draft','private') NOT NULL DEFAULT 'published',
+  `type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Typ:\n0 - Clanok\n1 - Rychla novinka',
   `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `color` VARCHAR(45) NOT NULL DEFAULT '#444',
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  UNIQUE INDEX `slug_UNIQUE` (`slug` ASC),
-  UNIQUE INDEX `color_UNIQUE` (`color` ASC),
-  INDEX `fk_series_image1_idx` (`image_id` ASC),
-  CONSTRAINT `fk_series_image1`
-    FOREIGN KEY (`image_id`)
-    REFERENCES `Desart`.`files` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  `published_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `attachments` TINYTEXT NULL COMMENT 'Pridavne subory a obrazky',
+  PRIMARY KEY (`id`, `user_id`),
+  UNIQUE INDEX `article_id_UNIQUE` (`id` ASC),
+  INDEX `fk_article_article_category1_idx` (`article_category_id` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 0;
 
 
 -- -----------------------------------------------------
@@ -110,54 +96,6 @@ CREATE TABLE IF NOT EXISTS `Desart`.`user` (
   UNIQUE INDEX `activation_code_UNIQUE` (`activation_code` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 0;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`tag`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`tag` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`tag` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `tag` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  UNIQUE INDEX `tag_UNIQUE` (`tag` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`tag_group`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`tag_group` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`tag_group` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `tag_id` SMALLINT(5) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`, `tag_id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  INDEX `fk_tag_group_tag1_idx` (`tag_id` ASC),
-  CONSTRAINT `fk_tag_group_tag1`
-    FOREIGN KEY (`tag_id`)
-    REFERENCES `Desart`.`tag` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'Skupina tagov pre nejaky Mega tag';
-
-
--- -----------------------------------------------------
--- Table `Desart`.`article`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`article` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`article` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
-ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
@@ -211,12 +149,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`favorite` (
   `type` TINYINT(2) UNSIGNED NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`, `user_id`),
   UNIQUE INDEX `fav_id_UNIQUE` (`id` ASC),
-  INDEX `fk_favorite_user1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_favorite_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `Desart`.`user` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+  INDEX `fk_favorite_user1_idx` (`user_id` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 0;
 
@@ -305,12 +238,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`topic_read` (
   `read_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`, `topic_id`, `user_id`),
   UNIQUE INDEX `forumr_id_UNIQUE` (`id` ASC),
-  INDEX `fk_topic_read_topic1_idx` (`topic_id` ASC),
-  CONSTRAINT `fk_topic_read_topic1`
-    FOREIGN KEY (`topic_id`)
-    REFERENCES `Desart`.`topic` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
+  INDEX `fk_topic_read_topic1_idx` (`topic_id` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 0
 COMMENT = 'Ci si pouzivatel precital topik';
@@ -330,12 +258,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`message_group` (
   `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`, `user_id`),
   UNIQUE INDEX `group_id_UNIQUE` (`id` ASC),
-  INDEX `fk_message_group_user1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_message_group_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `Desart`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  INDEX `fk_message_group_user1_idx` (`user_id` ASC))
 ENGINE = InnoDB;
 
 
@@ -358,7 +281,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`message` (
   UNIQUE INDEX `message_id_UNIQUE` (`id` ASC),
   INDEX `fk_message_message_group1_idx` (`message_group_id` ASC),
   INDEX `fk_message_user1_idx` (`to_subject_id` ASC))
-ENGINE = MyISAM
+ENGINE = InnoDB
 AUTO_INCREMENT = 0;
 
 
@@ -370,19 +293,14 @@ DROP TABLE IF EXISTS `Desart`.`ban` ;
 CREATE TABLE IF NOT EXISTS `Desart`.`ban` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Id banu',
   `user_id` SMALLINT(5) UNSIGNED NOT NULL,
-  `reason` TINYTEXT CHARACTER SET 'utf8' COLLATE 'utf8_czech_ci' NOT NULL COMMENT 'Dovod banu',
+  `reason` TINYTEXT CHARACTER SET 'utf8mb4' NOT NULL COMMENT 'Dovod banu',
   `duration_at` TIMESTAMP NULL,
   `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`, `user_id`),
   UNIQUE INDEX `ban_id_UNIQUE` (`id` ASC),
   INDEX `fk_bans_user1_idx` (`user_id` ASC),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
-  CONSTRAINT `fk_bans_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `Desart`.`user` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 0;
 
@@ -413,17 +331,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`user_group` (
   `group_id` TINYINT(3) UNSIGNED NOT NULL,
   PRIMARY KEY (`user_id`, `group_id`),
   INDEX `fk_user_group_user1_idx` (`user_id` ASC),
-  INDEX `fk_user_group_user_groups1_idx` (`group_id` ASC),
-  CONSTRAINT `fk_user_group_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `Desart`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_group_user_groups1`
-    FOREIGN KEY (`group_id`)
-    REFERENCES `Desart`.`group` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  INDEX `fk_user_group_user_groups1_idx` (`group_id` ASC))
 ENGINE = InnoDB;
 
 
@@ -443,27 +351,8 @@ CREATE TABLE IF NOT EXISTS `Desart`.`user_metadata` (
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX `skype_UNIQUE` (`skype` ASC),
   INDEX `fk_user_metadata_user1_idx` (`user_id` ASC),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
-  CONSTRAINT `fk_user_metadata_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `Desart`.`user` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC))
 ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`article`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`article` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`article` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
-ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
@@ -490,11 +379,75 @@ CREATE TABLE IF NOT EXISTS `Desart`.`article_history` (
   `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `published_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   INDEX `fk_article_history_article1_idx` (`article_id` ASC),
-  CONSTRAINT `fk_article_history_article1`
-    FOREIGN KEY (`article_id`)
-    REFERENCES `Desart`.`article` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Desart`.`tag`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Desart`.`tag` ;
+
+CREATE TABLE IF NOT EXISTS `Desart`.`tag` (
+  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `tag` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  UNIQUE INDEX `tag_UNIQUE` (`tag` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Desart`.`tag_group`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Desart`.`tag_group` ;
+
+CREATE TABLE IF NOT EXISTS `Desart`.`tag_group` (
+  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `tag_id` SMALLINT(5) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`, `tag_id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  INDEX `fk_tag_group_tag1_idx` (`tag_id` ASC))
+ENGINE = InnoDB
+COMMENT = 'Skupina tagov pre nejaky Mega tag';
+
+
+-- -----------------------------------------------------
+-- Table `Desart`.`files`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Desart`.`files` ;
+
+CREATE TABLE IF NOT EXISTS `Desart`.`files` (
+  `id` MEDIUMINT(7) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` BINARY(20) NOT NULL COMMENT 'Nazov v sha1',
+  `extension` VARCHAR(3) NOT NULL DEFAULT 'png',
+  `type` ENUM('image') NULL DEFAULT 'image',
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `image_UNIQUE` (`name` ASC),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Desart`.`series`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Desart`.`series` ;
+
+CREATE TABLE IF NOT EXISTS `Desart`.`series` (
+  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `image_id` MEDIUMINT(7) UNSIGNED NOT NULL,
+  `type` ENUM('ordered', 'unordered') NOT NULL DEFAULT 'unordered',
+  `name` VARCHAR(200) NOT NULL,
+  `slug` VARCHAR(225) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL,
+  `description` TINYTEXT NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `color` VARCHAR(45) NOT NULL DEFAULT '#444',
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  UNIQUE INDEX `slug_UNIQUE` (`slug` ASC),
+  UNIQUE INDEX `color_UNIQUE` (`color` ASC),
+  INDEX `fk_series_image1_idx` (`image_id` ASC))
 ENGINE = InnoDB;
 
 
@@ -516,17 +469,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`micro_comment` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   PRIMARY KEY (`id`, `user_id`, `comment_history_id`),
   INDEX `fk_micro_comments_user1_idx` (`user_id` ASC),
-  INDEX `fk_micro_comments_comment_history1_idx` (`comment_history_id` ASC),
-  CONSTRAINT `fk_micro_comments_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `Desart`.`user` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_micro_comments_comment_history1`
-    FOREIGN KEY (`comment_history_id`)
-    REFERENCES `Desart`.`comment_history` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+  INDEX `fk_micro_comments_comment_history1_idx` (`comment_history_id` ASC))
 ENGINE = InnoDB;
 
 
@@ -544,12 +487,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`comment_vote` (
   `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`, `comment_id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  INDEX `fk_comments_votes_comments1_idx` (`comment_id` ASC),
-  CONSTRAINT `fk_comments_votes_comments1`
-    FOREIGN KEY (`comment_id`)
-    REFERENCES `Desart`.`comments` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+  INDEX `fk_comments_votes_comments1_idx` (`comment_id` ASC))
 ENGINE = InnoDB;
 
 
@@ -567,12 +505,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`micro_commnet_vote` (
   `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`, `micro_comment_id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  INDEX `fk_micro_commnet_vote_micro_comment1_idx` (`micro_comment_id` ASC),
-  CONSTRAINT `fk_micro_commnet_vote_micro_comment1`
-    FOREIGN KEY (`micro_comment_id`)
-    REFERENCES `Desart`.`micro_comment` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+  INDEX `fk_micro_commnet_vote_micro_comment1_idx` (`micro_comment_id` ASC))
 ENGINE = InnoDB;
 
 
@@ -585,12 +518,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`message_user_group` (
   `message_group_id` SMALLINT(5) UNSIGNED NOT NULL,
   `message_group_user_id` SMALLINT(5) UNSIGNED NOT NULL,
   PRIMARY KEY (`message_group_id`, `message_group_user_id`),
-  INDEX `fk_message_user_group_message_group1_idx` (`message_group_id` ASC, `message_group_user_id` ASC),
-  CONSTRAINT `fk_message_user_group_message_group1`
-    FOREIGN KEY (`message_group_id` , `message_group_user_id`)
-    REFERENCES `Desart`.`message_group` (`id` , `user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  INDEX `fk_message_user_group_message_group1_idx` (`message_group_id` ASC, `message_group_user_id` ASC))
 ENGINE = InnoDB;
 
 
@@ -619,12 +547,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`newsletter` (
   PRIMARY KEY (`id`, `selection_id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
-  INDEX `fk_newsletter_selection1_idx` (`selection_id` ASC),
-  CONSTRAINT `fk_newsletter_selection1`
-    FOREIGN KEY (`selection_id`)
-    REFERENCES `Desart`.`selection` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  INDEX `fk_newsletter_selection1_idx` (`selection_id` ASC))
 ENGINE = InnoDB;
 
 
@@ -658,8 +581,8 @@ CREATE TABLE IF NOT EXISTS `Desart`.`notification` (
   `by` VARCHAR(32) NOT NULL,
   `by_type` TINYINT(1) UNSIGNED NOT NULL COMMENT '1 - User_id\n2 - Vlastne meno',
   `read` TINYINT(1) NOT NULL DEFAULT 0,
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `read_at` TIMESTAMP NOT NULL DEFAULT 0,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `read_at` TIMESTAMP NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `subject_type_UNIQUE` (`subject_type` ASC))
 ENGINE = InnoDB;
