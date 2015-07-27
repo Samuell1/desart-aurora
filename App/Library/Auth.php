@@ -50,8 +50,8 @@ class Auth
 	{
 		$q = $this->User->where(["email" => $email])->orWhere(["password" => $password])->count();
 
-		if($q === 0) 				 	return false; # If user is not found
-		if($this->Session->has("auth")) return false; # IF session is not set
+		if($q === 0) 				 	return false; # If user is not found return false
+		if($this->Session->has("auth")) return false; # IF session is set return false
 
 
 		$this->Sesssion->set("auth", $email);
