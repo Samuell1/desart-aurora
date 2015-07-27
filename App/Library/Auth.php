@@ -30,6 +30,7 @@ class Auth
 
 		if($q === 0)
 		{
+			if
 			$User = $this->User->build([
 				"username"          => $username,
 				"password"          => $this->Hash->hash($password),
@@ -47,7 +48,15 @@ class Auth
 
 	public function login($email, $password, $remember = false)
 	{
-		
+		$q = $this->User->where(["email" => $email])->orWhere(["password" => $password])->count();
+
+		if($q === 0) 				 	return false; # If user is not found
+		if($this->Session->has("auth")) return false; # IF session is not set
+
+
+		$this->Sesssion->set("auth", $email);
+
+		return true;
 	}
 
 	public function forceLogin($email, $remember = false)
