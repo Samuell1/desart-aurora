@@ -8,10 +8,10 @@
 --------------------*/
 
 a{color:#16a085}a:hover{color:#16a085}
-body{font-family: "Open Sans"; background:#fff;}
+body.pushable{background:#f8f8f8 !important;}
+body{font-family: "Open Sans";background:#f8f8f8 !important;}
 
 .clearfix{clear:both}
-
 
 .container {max-width: 1000px; margin: 0 auto;padding:0 12px}
 .ui.menu{box-shadow:none;border-radius:0;border:0;border-bottom:1px solid #eee;}
@@ -24,7 +24,6 @@ body{font-family: "Open Sans"; background:#fff;}
 .ui.button{font-family:Ubuntu;font-weight:normal}
 
 .nopadding{padding-left:0px!important;padding-right:0px!important;}
-
 
 /* user ui */
 .usernotifications .ui.feed{overflow-y:scroll;max-height:220px;width: 280px;margin:-11.5px -14px;font-size:12px;position: relative;z-index:100;border-radius: 0.285714rem;}
@@ -62,5 +61,5 @@ article .info a{font-size:11px}
   }
 }
 
-.footer {border-top:1px solid #eee!important;margin-top:14px!important}
+.footer {border-top:1px solid #eee!important;margin-top:14px!important;background:#fff}
 .footer.segment {padding: 5em 0}

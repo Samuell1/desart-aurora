@@ -21,13 +21,7 @@
   </head>
 	<body>
 
-  	<div class="ui vertical inverted sidebar menu">
-  		<a href="/" class="item"><i class="home icon"></i> Úvod</a>
-  		<a href="/" class="item"><i class="file text outline icon"></i> Články</a>
-  		<a href="/" class="item">Série článkov</a>
-  		<a href="/" class="item"><i class="block layout icon"></i> Diskusné fórum</a>
-  		<a href="/" class="item"><i class="user icon"></i> Registrácia / Prihlásanie</a>
-  	</div> <!-- ./mobile menu -->
+    <div class="pusher">
 
   	<div class="ui menu responsive">
   		<a class="togglesidebar item noneborder"><i class="sidebar icon"></i></a>
@@ -313,9 +307,19 @@
 				</div>
 			</div>
 		</div>
+    
+    </div> <!-- ./pusher -->
+
+    <div class="ui vertical inverted sidebar menu">
+      <a href="/" class="item"><i class="home icon"></i> Úvod</a>
+      <a href="/" class="item"><i class="file text outline icon"></i> Články</a>
+      <a href="/" class="item">Série článkov</a>
+      <a href="/" class="item"><i class="block layout icon"></i> Diskusné fórum</a>
+      <a href="/" class="item"><i class="user icon"></i> Registrácia / Prihlásanie</a>
+    </div> <!-- ./mobile menu -->
 
     <!-- Javascript -->
-    		<script type="text/javascript" src="{{ Url.asset("js/semantic.min.js") }}"></script>
+    <script type="text/javascript" src="{{ Url.asset("js/semantic.min.js") }}"></script>
 		<script type="text/javascript" src="{{ Url.asset("js/perfect-scrollbar.min.js") }}"></script>
     <script type="text/javascript" src="{{ Url.asset("js/app.js") }}"></script>
 
