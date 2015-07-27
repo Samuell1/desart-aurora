@@ -61,17 +61,28 @@ class Auth
 
 	public function forceLogin($email, $remember = false)
 	{
-		# ...
+		if($this->Session->has("auth")) return false; # IF session is set return false
+
+
+		$this->Sesssion->set("auth", $email);
+
+		return true;
 	}
 
 	public function isLoggedIn()
 	{
-		# ...
+		if($this->Session->has("auth"))
+			return true;
+		else
+			return false;
 	}
 
 	public function logout()
 	{
-		# ...
+		if($this->Session->has("auth"))
+			$this->Session->remove("auth");
+		else
+			return false;
 	}
 
 }
