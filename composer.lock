@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e27f189a4a998b5b2f8ff02833d3002c",
+    "hash": "74b5527d2fcf2d43c748cd6df2bf82ea",
     "packages": [
         {
             "name": "aurora-framework/aurora",
@@ -1024,6 +1024,48 @@
                 "templating"
             ],
             "time": "2015-06-06 23:31:24"
+        },
+        {
+            "name": "veeenex/perzeus",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VeeeneX/Perzeus.git",
+                "reference": "ca7df0a9cee93d4d418c798ea2faeb40b9cfbd1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VeeeneX/Perzeus/zipball/ca7df0a9cee93d4d418c798ea2faeb40b9cfbd1e",
+                "reference": "ca7df0a9cee93d4d418c798ea2faeb40b9cfbd1e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "athletic/athletic": "~0.1",
+                "fabpot/php-cs-fixer": "~1.9",
+                "php": ">=5.6",
+                "phpunit/phpunit": "^4.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "VeeeneX\\": "src//"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "VeeeneX",
+                    "email": "veeenex@gmai.com"
+                }
+            ],
+            "description": "Hashing library",
+            "time": "2015-07-27 22:29:27"
         },
         {
             "name": "vlucas/spot2",

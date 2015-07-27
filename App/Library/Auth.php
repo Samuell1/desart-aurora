@@ -20,8 +20,8 @@ class Auth
 		$this->Session = $Session;
 		$this->DB      = $DB;
 		$this->User    = $Mapper;
-		$this->Hash    = new Hash;
-		
+		$this->Hash    = new \VeeneX\Perzeus("ZjZ4a6gNnE", "8gcQEJJp82", "Zc0TdeSCrX", 48, 89, 107);
+
 	}
 
 
@@ -32,9 +32,12 @@ class Auth
 
 		if($q === 0)
 		{
+			$Hash = $this->Hash->createHash($password);
+
 			$User = $this->User->build([
 				"username"          => $username,
-				"password"          => $this->Hash->hash($password),
+				"password"          => $Hash->hash,
+				"rand"              => $Hash->rand,
 				"email"             => $email,
 				"account_activated" => (int) $activated
 			]);
