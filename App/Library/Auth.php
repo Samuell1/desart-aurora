@@ -47,6 +47,7 @@ class Auth
 
 	public function login($email, $password, $remember = false)
 	{
+
 		$q = $this->User->where(["email" => $email])->orWhere(["password" => $password])->count();
 
 		if($q === 0) 				 	return false; # If user is not found return false
@@ -56,32 +57,39 @@ class Auth
 		$this->Sesssion->set("auth", $email);
 
 		return true;
+
 	}
 
 	public function forceLogin($email, $remember = false)
 	{
+
 		if($this->Session->has("auth")) return false; # IF session is set return false
 
 
 		$this->Sesssion->set("auth", $email);
 
 		return true;
+
 	}
 
 	public function isLoggedIn()
 	{
+
 		if($this->Session->has("auth"))
 			return true;
 		else
 			return false;
+
 	}
 
 	public function logout()
 	{
+
 		if($this->Session->has("auth"))
 			$this->Session->remove("auth");
 		else
 			return false;
+		
 	}
 
 }
