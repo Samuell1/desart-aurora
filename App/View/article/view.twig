@@ -1,14 +1,14 @@
 {% extends "index.twig" %}
 
-{% block title %}{{ ArticleMeta.name }}{% endblock %}
+{% block title %}{{ Article.name }}{% endblock %}
 
 {% block subhead %}
   <div class="container">
     <div class="subheadtitle">
       <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="title">{{ ArticleMeta.name }}</div>
-            <div class="desc">{{ ArticleMeta.description }}</div>
+            <div class="title">{{ Article.name }}</div>
+            <div class="desc">{{ Article.description }}</div>
           </div>
       </div>
     </div>
@@ -17,20 +17,20 @@
     <div class="container">
       <ul class="nav nav-pills pull-left hidden-xs">
         <li>
-          <a href="{{ Url.base("/clanky/kategoria/" ~ ArticleMeta.category_slug) }}" class="link"><i class="fa fa-list-alt "></i> {{ ArticleMeta.category_name }}</a>
+          <a href="{{ Url.base("/clanky/kategoria/" ~ Article.category_slug) }}" class="link"><i class="fa fa-list-alt "></i> {{ Article.category_name }}</a>
         </li>
         <li>
-          <a><i class="fa fa-eye"></i> {{ ArticleMeta.read_count }}×</a>
+          <a><i class="fa fa-eye"></i> {{ Article.read_count }}×</a>
         </li>
         <li>
-          <a><i class="fa fa-heart "></i> {{ ArticleMeta.favorite_count }}×</a>
+          <a><i class="fa fa-heart "></i> {{ Article.favorite_count }}×</a>
         </li>
         <li>
-          <a><time pubdate="pubdate"><i class="fa fa-calendar"></i> {{ ArticleMeta.published_time|date("d.m. Y") }}</time></a>
+          <a><time pubdate="pubdate"><i class="fa fa-calendar"></i> {{ Article.published_time|date("d.m. Y") }}</time></a>
         </li>
       </ul>
       <ul class="nav nav-pills pull-right">
-        <li><a href="{{ Url.base("/@" ~ ArticleMeta.username) }}" class="link"><i class="fa fa-user"></i>  <strong>{{ ArticleMeta.username }}</strong></a></li>
+        <li><a href="{{ Url.base("/@" ~ Article.username) }}" class="link"><i class="fa fa-user"></i>  <strong>{{ Article.username }}</strong></a></li>
         <li><a class="link active" href="#komentare"><i class="fa fa-plus-square-o"></i>Pridať komentár</a></li>
       </ul>
     </div>
@@ -38,9 +38,9 @@
 {% endblock %}
 
 {% block content %}
-    <article id="articleview">{{ ArticleMeta.Article.content|raw }}</article>
+    <article id="articleview">{{ Article.content|raw }}</article>
     <aside id="author">
-      {{ ArticleMeta.username }}
-      {{ ArticleMeta.user_bio }}
+      {{ Article.User.username }}
+      {{ Article.User.Meta.bio }}{{ Article.User.Meta.skype }}
     </aside>
 {% endblock %}

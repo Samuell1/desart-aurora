@@ -5,9 +5,9 @@ namespace App\Entity;
 use Spot\Mapper;
 use Spot\Entity;
 
-class Article extends Entity
+class User extends Entity
 {
-   protected static $table = 'article';
+   protected static $table = 'user';
 
    public static function fields()
    {
@@ -18,9 +18,9 @@ class Article extends Entity
 
    public static function relations(\Spot\MapperInterface $mapper, \Spot\EntityInterface $entity)
    {
-       return [
-           'User' => $mapper->belongsTo($entity, 'App\Entity\User', 'user_id')
-       ];
+      return [
+          'Meta' => $mapper->hasOne($entity, 'App\Entity\User\Meta', 'user_id')
+      ];
    }
 
 }

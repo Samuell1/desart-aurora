@@ -11,14 +11,14 @@ class Article extends BasePresenter
 {
 	public function view()
 	{
-		$Meta = $this->Spot
-        ->mapper('App\Entity\Article\Meta');
+		$Article = $this->Spot
+        ->mapper('App\Entity\Article');
 
-		$Meta = $Meta
+		$Article = $Article
 			->all()
-			->with('Article')
 			->first([
-				'slug' => $this->Param->slug
+				'slug' => $this->Param->slug,
+				'status' => "published"
 			]);
 
 		// if ($article = $this->Model->Article->selectArticleBySlug($slug)){
@@ -27,7 +27,7 @@ class Article extends BasePresenter
 
 		return $this->View->render('article/view.twig', [
 			//"user" => $this->User->toArray(),
-			'ArticleMeta' => $Meta,
+			'Article' => $Article,
 		]);
 	}
 
