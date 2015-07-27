@@ -3,6 +3,8 @@ $(function () {
 $('.usernotifications .feed').perfectScrollbar();
 $('.ui.sidebar').sidebar('attach events', '.togglesidebar');
 
+$('.show-login').modal('show');
+
 $('.show-userprofile')
   .popup({
     on: 'click',

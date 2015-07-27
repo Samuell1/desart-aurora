@@ -9,8 +9,6 @@
 
 a{color:#16a085}a:hover{color:#16a085}
 body{font-family: "Open Sans";background:#f9f9f9 !important;}
-body.pushable{background:#f9f9f9 !important;}
-body.pushable > .pusher {background:#f9f9f9 !important;}
 
 .clearfix{clear:both}
 
