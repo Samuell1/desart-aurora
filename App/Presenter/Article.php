@@ -5,7 +5,7 @@ namespace App\Presenter;
  * Presenter pre Article
  *
  * Zobrazuje clanky a ich prehlad
- * BIG DICK
+ * BIG DICK docky :D
  */
 class Article extends BasePresenter
 {
