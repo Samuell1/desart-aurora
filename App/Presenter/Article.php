@@ -13,14 +13,13 @@ class Article extends BasePresenter
 	{
 		$Article = $this->Spot
             ->mapper('App\Entity\Article');
-
 		$Article = $Article
 			->all()
 			->with("User")
-			->first([
+			->where([
 				'slug' => $this->Param->slug,
 				'status' => "published"
-			]);
+			])->first();
 
 		// foreach ($Article->User->Groups as $Group) {
 		// 	var_dump($Group);
