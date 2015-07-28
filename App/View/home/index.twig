@@ -4,8 +4,10 @@
 
 {% block content %}
 <div class="row">
+    Clanky:
     {% for Article in Articles %}
         {{ Article.name }}
+        {{ Url.get("clanok", {"slug": Article.name}) }}
     {% endfor %}
 </div>
 {% endblock %}
