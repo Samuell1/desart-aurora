@@ -7,17 +7,13 @@ use Respect\Validation\Validator as v;
 
 class Auth extends BaseController
 {
-
-	protected $Mapper;
 	protected $User;
 
 	private $return;
 	private $userValidator;
 
-
 	public function onConstruct()
 	{
-
 		$this->userValidator = v::create();
 		$this->User          = $this->Spot->mapper("App\Entity\User");
 	}
@@ -26,7 +22,6 @@ class Auth extends BaseController
 	public function register()
 	{
 
-		# ...
 
 	}
 
