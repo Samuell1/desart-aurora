@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Library;
 
@@ -68,8 +68,9 @@ class Auth
 	public function forceLogin($email, $remember = false)
 	{
 
-		if($this->Session->has("auth")) return false; # IF session is set return false
-
+		if ($this->Session->has("auth")) {
+			return false; # IF session is set return false
+		}
 
 		$this->Sesssion->set("auth", $email);
 
@@ -79,18 +80,13 @@ class Auth
 
 	public function isLoggedIn()
 	{
-
-		if($this->Session->has("auth"))
-			return true;
-		else
-			return false;
-
+		return $this->Session->has("auth");
 	}
 
 	public function logout()
 	{
 
-		if($this->Session->has("auth"))
+		if ($this->Session->has("auth"))
 			$this->Session->remove("auth");
 		else
 			return false;
