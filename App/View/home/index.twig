@@ -5,10 +5,14 @@
 {% block content %}
 <div class="row">
     Clanky:
-    {% for Article in Articles %}
-        {{ Article.slug }}
-        <a href="{{ Url.get("clanok", {"slug": Article.slug}) }}">{{ Article.name }}</a>
-    {% endfor %}
+    {% if Article %}
+        {% for Article in Articles %}
+            {{ Article.slug }}
+            <a href="{{ Url.get("clanok", {"slug": Article.slug}) }}">{{ Article.name }}</a>
+        {% endfor %} 
+    {% else %}
+        Žiadny článok
+    {% endif %}
 </div>
 {% endblock %}
 
