@@ -65,16 +65,40 @@ if($(".show-usernotifications .label").length > 0)
 
 (function() {
 
+    $.ajaxSetup({
+        cache       : false,
+        dataType    : 'json',
+        accept      : {
+            json    : 'application/json',
+        },
+        timeout     : 300,
+        crossDomain : false,
+        global      : false,
+        statusCode  : {
+            404: function()
+            {
+                alert("404 Not found");
+            }
+        }
+    });
+
     $("#ajax-login").on("submit", function(e) {
 
         e.preventDefault();
 
         $.ajax({
-            cache   : false,
             url     : "kotasovtest",
             type    : "POST",
             data    : $("#ajax-login").serialize(),
             success : function(r)
+            {
+
+                // if(!r.success)
+                //     $("#error-login").html(r.error);
+                console.log(r);
+
+            },
+            error  : function(r)
             {
                 console.log(r);
             }

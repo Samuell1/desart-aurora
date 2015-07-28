@@ -10,13 +10,12 @@ class Auth extends \Aurora\MVC\Controller
 
 	private $return;
 	private $userValidator;
-	
-	protected $Request;
 
-	public function __construct(\Aurora\Http\Request $Request)
+	protected $Hash;
+	
+	public function onConstruct()
 	{
 		
-		$this->Request = $Request;
 		$this->userValidator = v::create();
 
 	}
@@ -41,20 +40,27 @@ class Auth extends \Aurora\MVC\Controller
 		
 		try
 		{
+
 			$this->userValidator->assert($data);
 
-			$this->return = ["success" => true];
+
+			if(!$this->Session->has("auth"))
+			{
+				$this->Session->set("auth", $this->Request->post("email"));
+				$this->return = ["success" => true, "mail" => $this->Request->post("email")];
+			}
+			else
+				$this->return = ["success" => false];
+			
 		}
 		catch(NestedValidationExceptionInterface $e)
 		{
 
+			$this->return = [
+				"success" => false,
+				"error"   => "Zadaný email alebo nie je správne."
+			];
 
-			$this->return = ["success" => false];
-			$this->return["data"]["errors"] = array_values([
-				"email.notEmpty" => "Nevyplneny email",
-				"password.notEmpty" => "Nevyplnene heslo",
-				"password.length" => "Kratke heslo"
-			]);
 		}
 	}
 
@@ -68,7 +74,7 @@ class Auth extends \Aurora\MVC\Controller
 	public function after()
 	{
 
-		echo json_encode($this->return);
+		return json_encode($this->return);
 
 	}
 
