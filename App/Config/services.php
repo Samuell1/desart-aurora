@@ -40,7 +40,7 @@ $setSessionAndCookie = function($Instance) use ($Config) {
 	$Instance->Session->start();
 };
 $Resolver->prepare("Aurora\\MVC\\Presenter", $setSessionAndCookie);
-$Resolver->prepare("Aurora\\MVC\\Presenter", $setSessionAndCookie);
+$Resolver->prepare("Aurora\\MVC\\Controller", $setSessionAndCookie);
 
 /** Database **/
 $cfg = new Spot\Config();
