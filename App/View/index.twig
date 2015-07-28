@@ -89,7 +89,15 @@
               </div>
             </div>
           {% else %}
-              žiadne piče
+
+          <div class="event">
+            <div class="content">
+              <div class="summary">
+                Žiadne notifikácie.
+              </div>
+            </div>
+          </div>
+
           {% endfor %}
 
   			</div>
@@ -331,10 +339,10 @@
 
 
 
-    <div class="ui small basic modal login"> <!-- LOGIN -->
+    <div class="ui small modal login" style="max-width:320px;margin: 0px 0px 0px -160px"> <!-- LOGIN -->
       <i class="close icon"></i>
 
-      <div class="ui one column center aligned very relaxed grid">
+      <div class="ui one column center aligned very relaxed grid" style="padding:20px">
 
         <div class="center aligned column">
           <div class="header">
@@ -345,35 +353,35 @@
           </div>
         </div>
 
-        <div class="center aligned column">
-          <div class="ui fluid ui inverted green button">
-            Ešte nemáte účet? Vytvorte si ho.
-          </div>
-        </div>
-
-        <div class="ui horizontal divider">alebo</div>
-
         <div class="column">
 
           <form id="ajax-login" action="" method="post">
           <div class="ui form">
             <div class="field">
               <div class="ui small inverted left icon input">
-                <input placeholder="E-mail" type="email">
+                <input placeholder="E-mail" name="email" type="email">
                 <i class="user icon"></i>
               </div>
             </div>
             <div class="field">
               <div class="ui small inverted left icon input">
-                <input placeholder="Heslo" type="password">
+                <input placeholder="Heslo" name="password" type="password">
                 <i class="lock icon"></i>
               </div>
             </div>
-            <button class="ui tiny orange basic button">Zabudnuté heslo?</button>
-            <button class="ui tiny grey submit button right floated"><i class="icon sign in"></i> Prihlásiť sa</button>
+            <button class="ui tiny basic button left floated">Zabudnuté heslo?</button>
+            <button class="ui tiny grey submit button right floated" type="submit"><i class="icon sign in"></i> Prihlásiť sa</button>
           </div>
           </form>
 
+        </div>
+
+        <div class="ui horizontal divider">alebo</div>
+
+        <div class="center aligned column">
+          <div class="ui fluid ui green button">
+            Ešte nemáte účet? Vytvorte si ho.
+          </div>
         </div>
 
       </div>

@@ -56,32 +56,6 @@ class User extends BaseController {
   public function auth(){
     $userData = (object) $this->Request->getParameters();
 
-    $verifi = $this->Connection->has("user",[
-      "[>]user_password" => ["id" => "user_id"],
-    ],
-    [
-      "AND" => [
-        "email" => $userData->user_email,
-        "user_password.password" => $this->Perzeus->createHash($userData->user_password),
-        "user_password.rand" => $userData->user_rand,
-    ]
-    ]);
-
-
-    if ($verifi) {
-      $this->return["data"] = [
-        "messages" => [
-          "success" =>"Úspešne prihlásený. Načítavam...",
-        ],
-      ];
-    } else {
-      $this->return["data"] = [
-        "messages" => [
-          "success" =>"Chyba.",
-        ],
-      ];
-    }
-
 
   }
 
