@@ -34,6 +34,7 @@ body{font-family: "Open Sans";background:#f9f9f9 !important;}
 .usernotifications .ui.feed .event:hover{background:#f8f8f8;}
 .usernotifications .ui.feed .event .content .summary{font-weight:100 !important}
 .usernotifications .ui.feed .event .date a{display:none;}
+.usernotifications .ui.feed .event .label{padding:7px 0px}
 .usernotifications .ui.feed .event:hover .date a{display:block;color:#eee;float:right;}
 .usernotifications .ui.feed .event .date a:hover{color:#bbb}
 

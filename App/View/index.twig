@@ -32,6 +32,7 @@
   		<a class="item itemhide noneborder" href="/">Diskusné fórum</a>
 
   		<div class="right menu">
+
   			<div class="item itemhide noneborder lowpadding">
   				<div class="ui search">
   					<div class="ui icon input">
@@ -44,7 +45,7 @@
 
 
   			<div class="item noneborder lowpadding show-usernotifications">
-  				<i class="alarm outline large circular icon link"><span class="ui red circular label">{{ Notifications|length }}</span></i>
+          <i class="alarm outline large circular icon link">{% if Notifications|length %}<span class="ui red circular label">{{ Notifications|length }}</span>{% endif %}</i>
   			</div>
 
   			<a class="item noneborder lesspadd show-userprofile">
@@ -63,11 +64,11 @@
           {% for Notification in Notifications %}
             <div class="event">
               <div class="label">
-                <img src="http://data.desart.sk/avatars/{{ Notification.by }}.png">
+                <img src="http://data.desart.sk/avatars/{{ Notification.by_subject }}.png">
               </div>
               <div class="content">
                 <div class="date">
-                  {{ Notification.created_at }}
+                  {{ Notification.created_at|date("d. m. Y H:m") }}
                   <a href="#"><i class="delete icon right aligned"></i></a>
                 </div>
                 <div class="summary">
