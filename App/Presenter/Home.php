@@ -12,7 +12,15 @@ class Home extends BasePresenter
 
 	public function index()
 	{
-		echo "Beeem";
+		$Article = $this->Spot
+			->mapper('App\Entity\Article');
+
+		$Articles = $Article
+			->all()
+			->with("User")
+			->where([
+				'status' => "published"
+			]);
 		// $Topic = $this->Spot
 		// 		->mapper('App\Entity\Topic');
 		//
@@ -34,9 +42,9 @@ class Home extends BasePresenter
 		// $flash_news = $this->Model->Article->getFlashNews($page);
 
 
-		$this->View->render('home/index.twig', [
+		return $this->View->render('home/index.twig', [
 			//'topics' => $topics,
-			//'articles' => $articles,
+			'Articles' => $Articles,
 			//'flash_news' => $flash_news,
 		]);
 	}

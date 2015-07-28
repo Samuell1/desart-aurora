@@ -414,20 +414,20 @@
         },
         {
             "name": "aurora-framework/twig",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Twig.git",
-                "reference": "4094c98cd98ec9610e21d85a122d76683f7f08fb"
+                "reference": "40a04ce2c609077ee32cd37dace69863cf42b7e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Twig/zipball/4094c98cd98ec9610e21d85a122d76683f7f08fb",
-                "reference": "4094c98cd98ec9610e21d85a122d76683f7f08fb",
+                "url": "https://api.github.com/repos/Aurora-Framework/Twig/zipball/40a04ce2c609077ee32cd37dace69863cf42b7e2",
+                "reference": "40a04ce2c609077ee32cd37dace69863cf42b7e2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.8"
+                "php": ">=5.6"
             },
             "type": "library",
             "autoload": {
@@ -446,7 +446,7 @@
                 }
             ],
             "description": "Twig Extension for Aurora",
-            "time": "2015-07-03 21:01:39"
+            "time": "2015-07-28 12:25:09"
         },
         {
             "name": "doctrine/annotations",

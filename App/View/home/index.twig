@@ -4,28 +4,9 @@
 
 {% block content %}
 <div class="row">
-<<<<<<< HEAD
     Clanky:
     {% for Article in Articles %}
-        {{ Article.name }}
-        {{ Url.get("clanok", {"slug": Article.name}) }}
-=======
-    {% for article in articles %}
-      <article class="col-sm-6 col-md-4 article-box">
-          <div class="image" style="background: -webkit-linear-gradient(top, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(http://data.desart.sk/articles/{{ article.image }}.{{ article.extension }}); background: -moz-linear-gradient(top, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(http://data.desart.sk/articles/{{ article.image }}.{{ article.extension }}); background: linear-gradient(top, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(http://data.desart.sk/articles/{{ article.image }}.{{ article.extension }});">
-
-            <div class="title">
-              <small>{{ article.category_name }}</small>
-              <a href="{{ url("clanok/" ~ article.slug) }}">{{ article.name }}</a>
-            </div>
-
-          </div>
-          <div class="info">
-            <div class="date">{{ article.published_time|date("d") }}. {{ article.published_time|date("m")|month }}, {{ article.published_time|date("y") }}</div>
-            {{ article.description }}
-          </div>
-      </article>
->>>>>>> origin/master
+        <a href="{{ Url.get("clanok", {"slug": Article.name}) }}">{{ Article.name }}</a>
     {% endfor %}
 </div>
 {% endblock %}
