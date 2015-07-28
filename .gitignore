@@ -43,4 +43,8 @@ Temporary Items
 .apdisk
 vendor/
 App/Config/config.php
+<<<<<<< HEAD
 App/Config/config.php
+=======
+/nbproject/private/
+>>>>>>> origin/master

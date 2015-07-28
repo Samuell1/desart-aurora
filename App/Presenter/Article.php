@@ -12,7 +12,7 @@ class Article extends BasePresenter
 	public function view()
 	{
 		$Article = $this->Spot
-        ->mapper('App\Entity\Article');
+            ->mapper('App\Entity\Article');
 
 		$Article = $Article
 			->all()
