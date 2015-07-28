@@ -13,6 +13,7 @@ class Article extends BasePresenter
 	{
 		$Article = $this->Spot
             ->mapper('App\Entity\Article');
+
 		$Article = $Article
 			->all()
 			->with("User")
