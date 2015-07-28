@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "74b5527d2fcf2d43c748cd6df2bf82ea",
+    "hash": "b659e7c66a2945e05d8b2da27c9c5557",
     "packages": [
         {
             "name": "aurora-framework/aurora",
@@ -297,16 +297,16 @@
         },
         {
             "name": "aurora-framework/router",
-            "version": "v1.3.0",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Router.git",
-                "reference": "0f3bad486a61d982e3748b64431e2e70eb6fa7f8"
+                "reference": "46cc553c2b259d90218ddb96bc4e29852a24196b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Router/zipball/0f3bad486a61d982e3748b64431e2e70eb6fa7f8",
-                "reference": "0f3bad486a61d982e3748b64431e2e70eb6fa7f8",
+                "url": "https://api.github.com/repos/Aurora-Framework/Router/zipball/46cc553c2b259d90218ddb96bc4e29852a24196b",
+                "reference": "46cc553c2b259d90218ddb96bc4e29852a24196b",
                 "shasum": ""
             },
             "require": {
@@ -333,7 +333,7 @@
                 }
             ],
             "description": "Minimal Router",
-            "time": "2015-07-28 12:09:25"
+            "time": "2015-07-28 12:31:33"
         },
         {
             "name": "aurora-framework/service",
@@ -918,6 +918,108 @@
             "time": "2014-09-09 13:34:57"
         },
         {
+            "name": "erusev/parsedown",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/erusev/parsedown.git",
+                "reference": "a9dfc97ddc06ca4739630d029bb3d2e16f3efc12"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/a9dfc97ddc06ca4739630d029bb3d2e16f3efc12",
+                "reference": "a9dfc97ddc06ca4739630d029bb3d2e16f3efc12",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Parsedown": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "http://erusev.com"
+                }
+            ],
+            "description": "Parser for Markdown.",
+            "homepage": "http://parsedown.org",
+            "keywords": [
+                "markdown",
+                "parser"
+            ],
+            "time": "2015-07-16 13:57:13"
+        },
+        {
+            "name": "respect/validation",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Respect/Validation.git",
+                "reference": "7d9d19009aabb23d759c652fbfed9829b1f40a30"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Respect/Validation/zipball/7d9d19009aabb23d759c652fbfed9829b1f40a30",
+                "reference": "7d9d19009aabb23d759c652fbfed9829b1f40a30",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.6"
+            },
+            "require-dev": {
+                "egulias/email-validator": "~1.2",
+                "malkusch/bav": "~1.0",
+                "mikey179/vfsstream": "^1.5",
+                "phpunit/phpunit": "~4.0",
+                "symfony/validator": "~2.6.9",
+                "zendframework/zend-validator": "~2.3"
+            },
+            "suggest": {
+                "egulias/email-validator": "Strict (RFC compliant) email validation",
+                "ext-bcmath": "Arbitrary Precision Mathematics",
+                "ext-mbstring": "Multibyte String Functions",
+                "malkusch/bav": "German bank account validation",
+                "symfony/validator": "Use Symfony validator through Respect\\Validation",
+                "zendframework/zend-validator": "Use Zend Framework validator through Respect\\Validation"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Respect\\Validation\\": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD Style"
+            ],
+            "authors": [
+                {
+                    "name": "Respect/Validation Contributors",
+                    "homepage": "https://github.com/Respect/Validation/graphs/contributors"
+                }
+            ],
+            "description": "The most awesome validation engine ever created for PHP",
+            "homepage": "http://respect.li",
+            "keywords": [
+                "respect",
+                "validation",
+                "validator"
+            ],
+            "time": "2015-07-21 15:35:44"
+        },
+        {
             "name": "sabre/event",
             "version": "2.0.2",
             "source": {
@@ -1172,7 +1274,10 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "erusev/parsedown": 20,
+        "respect/validation": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

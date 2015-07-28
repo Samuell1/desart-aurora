@@ -61,3 +61,25 @@ if($(".show-usernotifications .label").length > 0)
 
 
 });
+
+
+(function() {
+
+    $("#ajax-login").on("submit", function(e) {
+
+        e.preventDefault();
+
+        $.ajax({
+            cache   : false,
+            url     : "kotasovtest",
+            type    : "POST",
+            data    : $("#ajax-login").serialize(),
+            success : function(r)
+            {
+                console.log(r);
+            }
+        });
+
+    });
+
+})();
