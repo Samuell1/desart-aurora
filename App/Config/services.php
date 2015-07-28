@@ -32,13 +32,15 @@ $Resolver->define("Aurora\\MVC\\View", [
 ]);
 
 /** Session and Cookies **/
-$Resolver->prepare("Aurora\\MVC\\Presenter", function($Instance) use ($Config) {
+$setSessionAndCookie = function($Instance) use ($Config) {
 	$Instance->Cookie = new Aurora\Http\Cookie();
 	$Instance->Cookie->raw = true;
 
 	$Instance->Session = new Aurora\Session(null, $Config->get("session"));
 	$Instance->Session->start();
-});
+};
+$Resolver->prepare("Aurora\\MVC\\Presenter", $setSessionAndCookie);
+$Resolver->prepare("Aurora\\MVC\\Presenter", $setSessionAndCookie);
 
 /** Database **/
 $cfg = new Spot\Config();
