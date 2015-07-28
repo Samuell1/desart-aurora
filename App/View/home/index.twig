@@ -6,7 +6,7 @@
 <div class="row">
     Clanky:
     {% for Article in Articles %}
-        <a href="{{ Url.get("clanok", {"slug": Article.name}) }}">{{ Article.name }}</a>
+        <a href="{{ Url.get("clanok", {"slug": Article.slug}) }}">{{ Article.name }}</a>
     {% endfor %}
 </div>
 {% endblock %}
