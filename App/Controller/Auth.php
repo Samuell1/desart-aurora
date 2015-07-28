@@ -4,20 +4,23 @@ namespace App\Controller;
 
 use Respect\Validation\Exceptions\NestedValidationExceptionInterface;
 use Respect\Validation\Validator as v;
+use Spot\Mapper;
 
 class Auth extends \Aurora\MVC\Controller
 {
 
+	protected $Mapper;
+	protected $User;
+
 	private $return;
 	private $userValidator;
 
-	protected $Hash;
 	
-	public function onConstruct()
+	public function onConstruct(Mapper $Mapper)
 	{
 		
 		$this->userValidator = v::create();
-
+		$this->User          = $Mapper;
 	}
 
 
@@ -47,7 +50,7 @@ class Auth extends \Aurora\MVC\Controller
 			if(!$this->Session->has("auth"))
 			{
 				$this->Session->set("auth", $this->Request->post("email"));
-				$this->return = ["success" => true, "mail" => $this->Request->post("email")];
+				$this->return = ["success" => true];
 			}
 			else
 				$this->return = ["success" => false];
