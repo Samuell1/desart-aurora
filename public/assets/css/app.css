@@ -35,7 +35,7 @@ body{font-family: "Open Sans";background:#f9f9f9 !important;}
 .usernotifications .ui.feed .event .content .summary{font-weight:100 !important}
 .usernotifications .ui.feed .event .date a{display:none;}
 .usernotifications .ui.feed .event .label{padding:7px 0px}
-.usernotifications .ui.feed .event:hover .date a{display:block;color:#eee;float:right;}
+.usernotifications .ui.feed .event:hover .date a{display:block;color:#eee;float:right;margin:-6px -4px}
 .usernotifications .ui.feed .event .date a:hover{color:#bbb}
 
 .show-usernotifications .label{float:right;top:10px;right:10px;position:absolute;font-family:Ubuntu;font-weight:100;font-size:10px;}

@@ -63,9 +63,15 @@
 
           {% for Notification in Notifications %}
             <div class="event">
+
               <div class="label">
-                <img src="http://data.desart.sk/avatars/{{ Notification.by_subject }}.png">
+                {% if Notification.type != 1 %}
+                  <img src="http://data.desart.sk/avatars/{{ Notification.by_subject }}.png">
+                {% else %}
+
+                {% endif %}
               </div>
+
               <div class="content">
                 <div class="date">
                   {{ Notification.created_at|date("d. m. Y H:m") }}
@@ -78,16 +84,16 @@
 
                   {% elseif Notification.type == 2 %}
 
-                    Užívateľ {% if Notification.by_type == 2 %}{{ Notification.by }}{% endif %} vás označil v komentáry/príspevku XXX.
+                    Užívateľ {{ Notification.by_subject }} vás označil v komentáry / príspevku XXX.
 
                   {% elseif Notification.type == 3 %}
 
-                    Užívateľ <a>{% if Notification.by_type == 2 %}{{ Notification.by }}{% else %}{{ Notification.by }}{% endif %}</a> odpovedal vo vašej diskusii.
+                    Užívateľ <a>{{ Notification.by_subject }}</a> odpovedal vo vašej diskusii.
 
                   {% endif %}
-
                 </div>
               </div>
+
             </div>
           {% else %}
 
