@@ -22,9 +22,6 @@ class Article extends BasePresenter
 				'status' => "published"
 			])->first();
 
-		if (!$Article) {
-			$this->Response->redirect("https://www.youtube.com/watch?v=395daH-7XKI", 200, true);
-		}
 		// foreach ($Article->User->Groups as $Group) {
 		// 	var_dump($Group);
 		// }
