@@ -1,12 +1,11 @@
-<?php 
+<?php
 
 namespace App\Controller;
 
 use Respect\Validation\Exceptions\NestedValidationExceptionInterface;
 use Respect\Validation\Validator as v;
-use Spot\Mapper;
 
-class Auth extends \Aurora\MVC\Controller
+class Auth extends BaseController
 {
 
 	protected $Mapper;
@@ -15,12 +14,12 @@ class Auth extends \Aurora\MVC\Controller
 	private $return;
 	private $userValidator;
 
-	
-	public function onConstruct(Mapper $Mapper)
+
+	public function onConstruct()
 	{
-		
+
 		$this->userValidator = v::create();
-		$this->User          = $Mapper;
+		$this->User          = $this->Spot->mapper("App\Entity\User");
 	}
 
 
@@ -40,7 +39,7 @@ class Auth extends \Aurora\MVC\Controller
 
 
 		$data = $this->Request->getParameters();
-		
+
 		try
 		{
 
@@ -54,7 +53,7 @@ class Auth extends \Aurora\MVC\Controller
 			}
 			else
 				$this->return = ["success" => false];
-			
+
 		}
 		catch(NestedValidationExceptionInterface $e)
 		{

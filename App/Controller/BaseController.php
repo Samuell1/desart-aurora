@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
-class BaseController extends \Aurora\MVC\Controller {
-  protected $User;
-  function before(){
-    $this->User = new \App\Helper\User([
-      "id" => 1,
-      "username" => "VeeeneX",
-      "auth" => 1
-    ]);
-  }
+use Aurora\MVC\Controller;
+
+class BaseController extends \Aurora\MVC\Controller
+{
+    protected $Spot;
+    public function before()
+    {
+        $this->Spot = $this->Model->getConnection();
+    }
 }
