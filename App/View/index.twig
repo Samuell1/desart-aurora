@@ -64,13 +64,11 @@
           {% for Notification in Notifications %}
             <div class="event">
 
+              {% if Notification.type != 1 %}
               <div class="label">
-                {% if Notification.type != 1 %}
                   <img src="http://data.desart.sk/avatars/{{ Notification.by_subject }}.png">
-                {% else %}
-
-                {% endif %}
               </div>
+              {% endif %}
 
               <div class="content">
                 <div class="date">
@@ -358,6 +356,9 @@
           <div class="description">
             <p>Po prihlásení alebo registrácií budete môct prispievať, komentovať, recenzovať.</p>
           </div>
+        </div>
+
+        <div class="center aligned column" id="error-message">
         </div>
 
         <div class="column">
