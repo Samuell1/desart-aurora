@@ -295,7 +295,7 @@
 						<div class="ui link list">
 							<a href="#" class="item">Štatistiky</a>
 							<a href="#" class="item">Registrácia</a>
-							<a href="#" class="item">Prihlásenie</a>
+							<a href="#" class="item show-login">Prihlásenie</a>
 						</div>
 					</div>
 
@@ -331,13 +331,31 @@
 
 
 
-    <div class="ui small basic modal show-login"> <!-- LOGIN -->
+    <div class="ui small basic modal login"> <!-- LOGIN -->
       <i class="close icon"></i>
-      <div class="header">
-        Prihlásiť sa
-      </div>
-      <div class="ui two column middle aligned very relaxed stackable grid">
+
+      <div class="ui one column center aligned very relaxed grid">
+
+        <div class="center aligned column">
+          <div class="header">
+            Prihlásiť sa
+          </div>
+          <div class="description">
+            <p>Po prihlásení alebo registrácií budete môct prispievať, komentovať, recenzovať.</p>
+          </div>
+        </div>
+
+        <div class="center aligned column">
+          <div class="ui fluid ui inverted green button">
+            Ešte nemáte účet? Vytvorte si ho.
+          </div>
+        </div>
+
+        <div class="ui horizontal divider">alebo</div>
+
         <div class="column">
+
+          <form id="ajax-login" action="" method="post">
           <div class="ui form">
             <div class="field">
               <div class="ui small inverted left icon input">
@@ -351,16 +369,13 @@
                 <i class="lock icon"></i>
               </div>
             </div>
-            <div class="ui green submit button">Login</div>
+            <button class="ui tiny orange basic button">Zabudnuté heslo?</button>
+            <button class="ui tiny grey submit button right floated"><i class="icon sign in"></i> Prihlásiť sa</button>
           </div>
+          </form>
+
         </div>
-        <div class="ui vertical divider">alebo</div>
-        <div class="center aligned column">
-          <div class="ui big green labeled icon button">
-            <i class="signup icon"></i>
-            Sign Up
-          </div>
-        </div>
+
       </div>
 
     </div>
