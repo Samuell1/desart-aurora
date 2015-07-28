@@ -297,16 +297,16 @@
         },
         {
             "name": "aurora-framework/router",
-            "version": "v1.2.1",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Router.git",
-                "reference": "7ac0d7a7467a4495eba0d72447d328307881b1e6"
+                "reference": "5c404aef44e2c2d3325f3ae057aa7b2f16302d55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Router/zipball/7ac0d7a7467a4495eba0d72447d328307881b1e6",
-                "reference": "7ac0d7a7467a4495eba0d72447d328307881b1e6",
+                "url": "https://api.github.com/repos/Aurora-Framework/Router/zipball/5c404aef44e2c2d3325f3ae057aa7b2f16302d55",
+                "reference": "5c404aef44e2c2d3325f3ae057aa7b2f16302d55",
                 "shasum": ""
             },
             "require": {
@@ -333,7 +333,7 @@
                 }
             ],
             "description": "Minimal Router",
-            "time": "2015-07-26 19:54:54"
+            "time": "2015-07-27 19:24:10"
         },
         {
             "name": "aurora-framework/service",
@@ -378,16 +378,16 @@
         },
         {
             "name": "aurora-framework/session",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Session.git",
-                "reference": "a9e058c59368536b57a08081fb289c7e964434a6"
+                "reference": "de5fa4104401fbf936dae57f5fcf3f49394c3796"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Session/zipball/a9e058c59368536b57a08081fb289c7e964434a6",
-                "reference": "a9e058c59368536b57a08081fb289c7e964434a6",
+                "url": "https://api.github.com/repos/Aurora-Framework/Session/zipball/de5fa4104401fbf936dae57f5fcf3f49394c3796",
+                "reference": "de5fa4104401fbf936dae57f5fcf3f49394c3796",
                 "shasum": ""
             },
             "require": {
@@ -410,7 +410,7 @@
                 }
             ],
             "description": "Session",
-            "time": "2015-07-25 22:15:37"
+            "time": "2015-07-27 20:03:49"
         },
         {
             "name": "aurora-framework/twig",

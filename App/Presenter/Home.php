@@ -12,7 +12,6 @@ class Home extends BasePresenter
 
 	public function index()
 	{
-		echo "Beeem";
 		// $Topic = $this->Spot
 		// 		->mapper('App\Entity\Topic');
 		//
