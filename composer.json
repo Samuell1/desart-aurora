@@ -10,7 +10,7 @@
       "vlucas/spot2": "~2.0",
       "veeenex/perzeus": "^1.0",
       "erusev/parsedown": "dev-master",
-      "respect/validation": "dev-master",,
+      "respect/validation": "dev-master"
    },
    "autoload": {
       "psr-4": {
