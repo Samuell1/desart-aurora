@@ -92,11 +92,9 @@ if($(".show-usernotifications .label").length > 0)
             data    : $("#ajax-login").serialize(),
             success : function(r)
             {
-
                 // if(!r.success)
                 //     $("#error-login").html(r.error);
                 console.log(r);
-
             }
         });
 
