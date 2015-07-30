@@ -7,15 +7,20 @@ use Respect\Validation\Validator as v;
 
 class Auth extends BaseController
 {
+
 	protected $User;
+	protected $Spot;
 
 	private $return;
 	private $userValidator;
 
 	public function onConstruct()
 	{
+		
 		$this->userValidator = v::create();
+		$this->Spot          = $this->Model->getConnection();
 		$this->User          = $this->Spot->mapper("App\Entity\User");
+
 	}
 
 
@@ -23,23 +28,30 @@ class Auth extends BaseController
 	{
 
 
+
 	}
 
 	public function login()
 	{
 
+		$Data = $this->Request->getParameters();
+		
+
 		$this->userValidator->key("email", v::email()->notEmpty()->setName("email"))
 							->key("password", v::string()->notEmpty()->length(6, null)->setName("password"))
 							->setName("Login validation");
-
-
-		$data = $this->Request->getParameters();
-
+							
 		try
 		{
+			$this->userValidator->assert($Data);
 
-			$this->userValidator->assert($data);
 
+			$q = $this->User
+				 ->where([
+					"email"    => $this->Request->post("email"),
+					"password" => null
+				 ])
+				 ->count();
 
 			if(!$this->Session->has("auth"))
 			{
@@ -48,16 +60,13 @@ class Auth extends BaseController
 			}
 			else
 				$this->return = ["success" => false];
-
 		}
 		catch(NestedValidationExceptionInterface $e)
 		{
-
 			$this->return = [
 				"success" => false,
 				"error"   => "Zadaný email alebo nie je správne."
 			];
-
 		}
 	}
 
