@@ -3,7 +3,7 @@ $(function () {
 $('.usernotifications .feed').perfectScrollbar();
 $('.ui.sidebar').sidebar('attach events', '.togglesidebar');
 
-$('.login').modal('attach events', '.show-login', 'show');
+$('.login').modal({blurring: true}).modal('attach events', '.show-login', 'show');
 
 $('.show-userprofile')
   .popup({
@@ -97,10 +97,6 @@ if($(".show-usernotifications .label").length > 0)
                 //     $("#error-login").html(r.error);
                 console.log(r);
 
-            },
-            error  : function(r)
-            {
-                console.log(r);
             }
         });
 
