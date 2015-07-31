@@ -25,12 +25,13 @@ class Auth extends BaseController
 
 	public function register()
 	{
+
 	}
 
 	public function login()
 	{
-		$this->return["test"] = "hello";
 		$Data = $this->Request->getParameters();
+
 
 		$this->userValidator->key("email", v::email()->notEmpty()->setName("email"))
 							->key("password", v::string()->notEmpty()->length(6, null)->setName("password"))
@@ -62,6 +63,16 @@ class Auth extends BaseController
 
 	public function logout()
 	{
+		if($this->Auth->isLoggedIn())
+		{
+			$this->Auth->logout();
+
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	public function after()
