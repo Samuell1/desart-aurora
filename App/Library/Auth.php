@@ -47,34 +47,23 @@ class Auth
 		}
 
 		return false;
-
 	}
 
-	public function login($email, $password, $remember = false)
+	public function login($uid, $password, $remember = false)
 	{
+		$User = $this->getUser($uid);
 
-		$User = $this->User->where(["email" => $email])->first();
-
-		if(!$User) {
-			return false;
-		}
-
-		$hash = $User->password;
-
-
-		if(!$this->Hash->validatePassword($password, $hash, $User->rand))
-		{
+		if (!$this->Hash->validatePassword($User->password, $hash, $User->rand)) {
 			return false; # If password doesnt match return false
 		}
+
 		if ($this->Session->has("auth")) {
 			return false; # IF session is set return false
 		}
 
-
 		$this->Session->set("auth", $email);
 
 		return true;
-
 	}
 
 	public function forceLogin($email, $remember = false)
@@ -99,7 +88,7 @@ class Auth
 	{
 
 		if ($this->Session->has("auth")) {
-			if($this->Session->remove("auth")) {
+			if ($this->Session->remove("auth")) {
 				return true;
 			}
 		}
@@ -109,10 +98,15 @@ class Auth
 	public function getUser($uid)
 	{
 		$User = $this->Spot->mapper("App\Entity\User");
-		$User = $User->where(["email" => $uid])->orWhere(["username" => $uid])->first();
+		$User = $User
+			->where(["email" => $uid])
+			->orWhere(["username" => $uid])
+			->first();
+
 		if (!$User) {
 			throw new \Exception("User not found");
 		}
+
 		return $User;
 	}
 }
