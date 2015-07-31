@@ -31,6 +31,10 @@
               "POST",
               ["App\\Controller\\Auth", "login"]
             ],
+            "/register": [
+              "POST",
+              ["App\\Controller\\Auth", "register"]
+            ],
             "/topic/add/{num}": [
                 "GET",
                 ["App\\Controller\\Forum\\Topic", "add"]
