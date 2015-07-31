@@ -92,7 +92,9 @@ if($(".show-usernotifications .label").length > 0)
             data    : $("#ajax-login").serialize(),
             success : function(r) {
                 if(r.success)
-                  window.location.href = "http://localhost/desart";
+                {
+                  window.location.href = document.URL;
+                }
             }
         });
 
