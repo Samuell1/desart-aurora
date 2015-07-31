@@ -51,7 +51,7 @@ class Auth
 
 	public function login($uid, $password, $remember = false)
 	{
-		$User = $this->getUser($uid);
+		$User = $this->getUser($uid, true);
 
 		if (!$this->Hash->validatePassword($password, $User->hash, $User->rand)) {
 			return false; # If password doesnt match return false
@@ -95,7 +95,7 @@ class Auth
 		return false;
 	}
 
-	public function getUser($uid)
+	public function getUser($uid, $force = true)
 	{
 		$User = $this->User
 			->where(["email" => $uid])
