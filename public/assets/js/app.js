@@ -87,13 +87,12 @@ if($(".show-usernotifications .label").length > 0)
         e.preventDefault();
 
         $.ajax({
-            url     : "api/login",
+            url     : "ajax/login",
             type    : "POST",
             data    : $("#ajax-login").serialize(),
             success : function(r) {
-                // if(!r.success)
-                //     $("#error-login").html(r.error);
-                console.log(r);
+                if(r.success)
+                  window.location.href = "http://localhost/desart";
             }
         });
 
@@ -104,7 +103,7 @@ if($(".show-usernotifications .label").length > 0)
         e.preventDefault();
 
         $.ajax({
-            url     : "api/register",
+            url     : "ajax/register",
             type    : "POST",
             data    : $("#ajax-register").serialize(),
             success : function(r) {

@@ -58,7 +58,6 @@ class Auth extends BaseController
 				"error"   => "Zadaný email alebo heslo nie je správne."
 			];
 		}
-
 	}
 
 	public function logout()
