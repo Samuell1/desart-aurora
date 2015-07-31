@@ -24,6 +24,7 @@ class BasePresenter extends Presenter
             $Notifications = $Notifications
             ->all()
             ->where([
+                "subject_type" => 1,
                 'subject' => $User->id,
             ]);
         }
