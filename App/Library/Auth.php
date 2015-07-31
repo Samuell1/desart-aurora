@@ -97,8 +97,7 @@ class Auth
 
 	public function getUser($uid)
 	{
-		$User = $this->Spot->mapper("App\Entity\User");
-		$User = $User
+		$User = $this->User
 			->where(["email" => $uid])
 			->orWhere(["username" => $uid])
 			->first();

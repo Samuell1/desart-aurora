@@ -27,7 +27,7 @@ class BasePresenter extends Presenter
         $User = null;
         if ($this->Auth->isLoggedIn()) {
             $email = $this->Session->get("auth");
-            $User = $this->getUser($email);
+            $User = $this->Auth->getUser($email);
         }
         $this->View->User = $User;
    }
