@@ -35,7 +35,7 @@ class Auth
 
 			$User = $this->User->build([
 				"username"          => $username,
-				"password"          => $Hash->hash,
+				"hash"          => $Hash->hash,
 				"rand"              => $Hash->rand,
 				"email"             => $email,
 				"ip"                => sprintf("%u", ip2long($ip)),
@@ -53,7 +53,7 @@ class Auth
 	{
 		$User = $this->getUser($uid);
 
-		if (!$this->Hash->validatePassword($User->password, $hash, $User->rand)) {
+		if (!$this->Hash->validatePassword($User->hash, $hash, $User->rand)) {
 			return false; # If password doesnt match return false
 		}
 
