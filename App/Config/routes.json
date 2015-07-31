@@ -30,7 +30,7 @@
             "/login": [
               "POST",
               ["App\\Controller\\Auth", "login"]
-            ]
+            ],
             "/topic/add/{num}": [
                 "GET",
                 ["App\\Controller\\Forum\\Topic", "add"]

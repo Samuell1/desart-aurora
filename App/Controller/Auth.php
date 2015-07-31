@@ -29,7 +29,6 @@ class Auth extends BaseController
 	public function login()
 	{
 		$this->return["test"] = "hello";
-		echo "string";
 		$Data = $this->Request->getParameters();
 
 		$this->userValidator->key("email", v::email()->notEmpty()->setName("email"))

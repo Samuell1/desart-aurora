@@ -20,7 +20,7 @@ class Auth
 
 		$this->Session = $Session;
 		$this->User    = $Mapper;
-		$this->Hash    = new Perzeus("ZjZ4a6gNnE", "8gcQEJJp82", "Zc0TdeSCrX", 48, 89, 107);
+		$this->Hash    = new Perzeus("ZjZ4a6gNnE", "3zrz9yr5Z08gcQEJJp82Z08", "Zc0TdeSCrX", 48, 89, 107);
 
 	}
 

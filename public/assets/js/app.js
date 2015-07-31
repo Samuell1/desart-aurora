@@ -71,8 +71,7 @@ if($(".show-usernotifications .label").length > 0)
         accept      : {
             json    : 'application/json',
         },
-        timeout     : 300,
-        crossDomain : false,
+        crossDomain : true,
         global      : false,
         statusCode  : {
             404: function()
@@ -87,11 +86,10 @@ if($(".show-usernotifications .label").length > 0)
         e.preventDefault();
 
         $.ajax({
-            url     : "kotasovtest",
+            url     : "api/login",
             type    : "POST",
             data    : $("#ajax-login").serialize(),
-            success : function(r)
-            {
+            success : function(r) {
                 // if(!r.success)
                 //     $("#error-login").html(r.error);
                 console.log(r);
