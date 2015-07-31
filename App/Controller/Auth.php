@@ -15,6 +15,7 @@ class Auth extends BaseController
 	private $return;
 	private $userValidator;
 
+
 	public function onConstruct()
 	{
 		$this->userValidator = v::create();
@@ -46,14 +47,14 @@ class Auth extends BaseController
 			{
 				$this->return = [
 					"success" => false,
-					"error"   => "Login error"
+					"error"   => "Zadaný email alebo heslo nie je správne."
 				];
 			}
 		}
 		catch(NestedValidationExceptionInterface $e) {
 			$this->return = [
 				"success" => false,
-				"error"   => "Zadaný email alebo nie je správne."
+				"error"   => "Zadaný email alebo heslo nie je správne."
 			];
 		}
 
