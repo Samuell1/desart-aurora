@@ -16,8 +16,8 @@ class User extends Entity
             "username"          => ["type" => "string"],
             "password"          => ["type" => "string"],
             "email"             => ["type" => "string"],
-            "rand"              => ["type" => "integer"],
-            "account_activated" => ["type" => "smallint"]
+            "rand"              => ["type" => "smallint"],
+            "account_activated" => ["type" => "boolean"]
         ];
     }
 
