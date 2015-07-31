@@ -26,11 +26,11 @@
             "GET",
             ["App\\Presenter\\Forum\\Topic", "overview"]
         ],
-        "/kotasovtest": [
-            "POST",
-            ["App\\Controller\\Auth", "login"]
-        ],
         "/api": {
+            "/login": [
+              "POST",
+              ["App\\Controller\\Auth", "login"]
+            ]
             "/topic/add/{num}": [
                 "GET",
                 ["App\\Controller\\Forum\\Topic", "add"]
