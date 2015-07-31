@@ -93,7 +93,7 @@ if($(".show-usernotifications .label").length > 0)
             success : function(r) {
                 if(r.success)
                 {
-                  window.location.href = document.URL;
+                  window.location.href = "/";
                 }
             }
         });

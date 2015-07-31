@@ -52,6 +52,12 @@ class Auth
 	{
 
 		$User = $this->User->where(["email" => $email])->first();
+
+		if(!$User)
+		{
+			return false;
+		}
+
 		$hash = $User->password;
 
 
