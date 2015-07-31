@@ -43,7 +43,7 @@
   				</div> <!-- ./ui.search-->
   			</div>
 
-            {% if not User %}
+            {% if User %}
             <div class="item noneborder lowpadding show-usernotifications">
                 <i class="alarm outline large circular icon link">
                     {% if Notifications|length %}
@@ -61,7 +61,7 @@
   			</a>
             {% endif %}
   		</div> <!-- ./right menu -->
-
+        {% if User %}
   		<div class="ui flowing usernotifications popup transition">
   			<div class="ui feed">
                 {% for Notification in Notifications %}
@@ -155,7 +155,8 @@
   				<a class="ui button tiny fluid"><i class="sign out icon"></i> Odhlásiť sa</a>
   			</div>
   		</div> <!-- ./user profile -->
-
+        
+        {% endif %}
 
   	</div> <!-- ./menu -->
 
