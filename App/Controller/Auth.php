@@ -37,6 +37,7 @@ class Auth extends BaseController
 
 			if($this->Auth->createUser($this->Request->post("email"), $this->Request->post("password"), $this->Request->post("email"), $this->Request->getIpAddress()))
 			{
+				$this->Auth->forceLogin($this->Request->post("email"));
 				$this->return["success"] = true;
 			}
 			else
