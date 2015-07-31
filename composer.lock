@@ -1129,16 +1129,16 @@
         },
         {
             "name": "veeenex/perzeus",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VeeeneX/Perzeus.git",
-                "reference": "ca7df0a9cee93d4d418c798ea2faeb40b9cfbd1e"
+                "reference": "20d8c04822841fa553437a7c9177e76002f3485b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VeeeneX/Perzeus/zipball/ca7df0a9cee93d4d418c798ea2faeb40b9cfbd1e",
-                "reference": "ca7df0a9cee93d4d418c798ea2faeb40b9cfbd1e",
+                "url": "https://api.github.com/repos/VeeeneX/Perzeus/zipball/20d8c04822841fa553437a7c9177e76002f3485b",
+                "reference": "20d8c04822841fa553437a7c9177e76002f3485b",
                 "shasum": ""
             },
             "require": {
@@ -1167,7 +1167,7 @@
                 }
             ],
             "description": "Hashing library",
-            "time": "2015-07-27 22:29:27"
+            "time": "2015-07-31 12:58:21"
         },
         {
             "name": "vlucas/spot2",
