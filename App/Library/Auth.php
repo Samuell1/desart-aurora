@@ -61,7 +61,7 @@ class Auth
 			return false; # IF session is set return false
 		}
 
-		$this->Session->set("auth", $email);
+		$this->Session->set("auth", $uid);
 
 		return true;
 	}
