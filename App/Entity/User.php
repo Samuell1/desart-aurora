@@ -14,7 +14,7 @@ class User extends Entity
         return [
             "id"                => ["type" => "smallint", "primary" => true, "autoincrement" => true],
             "username"          => ["type" => "string"],
-            "password"          => ["type" => "string"],
+            "hash"              => ["type" => "string"],
             "email"             => ["type" => "string"],
             "rand"              => ["type" => "smallint"],
             "account_activated" => ["type" => "boolean"],
