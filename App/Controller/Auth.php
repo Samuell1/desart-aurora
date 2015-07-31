@@ -35,7 +35,7 @@ class Auth extends BaseController
 		try {
 			$this->userValidator->assert($Data);
 
-			if($this->Auth->createUser($this->Request->post("email"), $this->Request->post("password"), $this->Request->post("email")))
+			if($this->Auth->createUser($this->Request->post("email"), $this->Request->post("password"), $this->Request->post("email"), $this->Request->getIpAddress()))
 			{
 				$this->return["success"] = true;
 			}

@@ -923,12 +923,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "a589bcac79f81e90cc92fb8bf4a706d35cfdc3da"
+                "reference": "6b24125f06d62ba9c719dca34256bad7ecb04db1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/a589bcac79f81e90cc92fb8bf4a706d35cfdc3da",
-                "reference": "a589bcac79f81e90cc92fb8bf4a706d35cfdc3da",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/6b24125f06d62ba9c719dca34256bad7ecb04db1",
+                "reference": "6b24125f06d62ba9c719dca34256bad7ecb04db1",
                 "shasum": ""
             },
             "type": "library",
@@ -954,7 +954,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2015-07-30 22:33:21"
+            "time": "2015-07-31 14:01:14"
         },
         {
             "name": "respect/validation",
@@ -1072,16 +1072,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.18.2",
+            "version": "v1.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "e8e6575abf6102af53ec283f7f14b89e304fa602"
+                "reference": "edbeaf43b0a606cdaadc32a11d2673614a377b90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/e8e6575abf6102af53ec283f7f14b89e304fa602",
-                "reference": "e8e6575abf6102af53ec283f7f14b89e304fa602",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/edbeaf43b0a606cdaadc32a11d2673614a377b90",
+                "reference": "edbeaf43b0a606cdaadc32a11d2673614a377b90",
                 "shasum": ""
             },
             "require": {
@@ -1090,7 +1090,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.18-dev"
+                    "dev-master": "1.19-dev"
                 }
             },
             "autoload": {
@@ -1125,7 +1125,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-06-06 23:31:24"
+            "time": "2015-07-31 13:45:26"
         },
         {
             "name": "veeenex/perzeus",

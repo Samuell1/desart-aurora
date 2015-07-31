@@ -22,7 +22,7 @@ class Auth
 		$this->Hash    = new Perzeus("ZjZ4a6gNnE", "3zrz9yr5Z08gcQEJJp82Z08", "Zc0TdeSCrX", 48, 89, 107);
 	}
 
-	public function createUser($username, $password, $email, $activated = false)
+	public function createUser($username, $password, $email, $ip, $activated = false)
 	{
 
 		$q = $this->User
@@ -38,9 +38,9 @@ class Auth
 				"password"          => $Hash->hash,
 				"rand"              => $Hash->rand,
 				"email"             => $email,
+				"ip"                => sprintf("%u", ip2long($ip)),
 				"account_activated" => (int) $activated,
-				"ip"                => $this->Request->getIpAddress(),
-				"activation_code"   => sha1(microtime(), true)
+				"activation_code"   => sha1(microtime(), true),
 			]);
 
 			return $this->User->save($User);
