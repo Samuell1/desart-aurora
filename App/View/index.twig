@@ -43,9 +43,13 @@
   				</div> <!-- ./ui.search-->
   			</div>
 
-
-  			<div class="item noneborder lowpadding show-usernotifications">
-          <i class="alarm outline large circular icon link">{% if Notifications|length %}<span class="ui red circular label">{{ Notifications|length }}</span>{% endif %}</i>
+            {% if not User %}
+            <div class="item noneborder lowpadding show-usernotifications">
+                <i class="alarm outline large circular icon link">
+                    {% if Notifications|length %}
+                        <span class="ui red circular label">{{ Notifications|length }}</span>
+                    {% endif %}
+                </i>
   			</div>
 
   			<a class="item noneborder lesspadd show-userprofile">
@@ -55,59 +59,54 @@
   					</div>
   				</div>
   			</a>
+            {% endif %}
   		</div> <!-- ./right menu -->
 
   		<div class="ui flowing usernotifications popup transition">
   			<div class="ui feed">
+                {% for Notification in Notifications %}
+                    <div class="event">
+                        {% if Notification.type != 1 %}
+                            <div class="label">
+                                <img src="http://data.desart.sk/avatars/{{ Notification.by_subject }}.png">
+                            </div>
+                        {% endif %}
 
+                        <div class="content">
+                            <div class="date">
+                                {{ Notification.created_at|date("d. m. Y H:m") }}
+                                <a href="#"><i class="delete icon right aligned"></i></a>
+                            </div>
+                            <div class="summary">
+                                {% if Notification.type == 1 %}
 
-          {% for Notification in Notifications %}
-            <div class="event">
+                                    {{ Notification.message|raw }}
 
-              {% if Notification.type != 1 %}
-              <div class="label">
-                  <img src="http://data.desart.sk/avatars/{{ Notification.by_subject }}.png">
-              </div>
-              {% endif %}
+                                {% elseif Notification.type == 2 %}
 
-              <div class="content">
-                <div class="date">
-                  {{ Notification.created_at|date("d. m. Y H:m") }}
-                  <a href="#"><i class="delete icon right aligned"></i></a>
-                </div>
-                <div class="summary">
-                  {% if Notification.type == 1 %}
+                                    Užívateľ {{ Notification.by_subject }} vás označil v komentáry / príspevku XXX.
 
-                    {{ Notification.message|raw }}
+                                {% elseif Notification.type == 3 %}
 
-                  {% elseif Notification.type == 2 %}
+                                    Užívateľ <a>{{ Notification.by_subject }}</a> odpovedal vo vašej diskusii.
 
-                    Užívateľ {{ Notification.by_subject }} vás označil v komentáry / príspevku XXX.
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
 
-                  {% elseif Notification.type == 3 %}
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                Žiadne notifikácie.
+                            </div>
+                        </div>
+                    </div>
 
-                    Užívateľ <a>{{ Notification.by_subject }}</a> odpovedal vo vašej diskusii.
-
-                  {% endif %}
-                </div>
-              </div>
-
+                {% endfor %}
             </div>
-          {% else %}
-
-          <div class="event">
-            <div class="content">
-              <div class="summary">
-                Žiadne notifikácie.
-              </div>
-            </div>
-          </div>
-
-          {% endfor %}
-
-  			</div>
   		</div> <!-- ./user notifications -->
-
 
   		<div class="ui flowing userprofile popup transition">
   			<div class="ui grid" style="max-width:440px">

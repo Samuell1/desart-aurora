@@ -53,7 +53,7 @@ class Auth
 	{
 		$User = $this->getUser($uid);
 
-		if (!$this->Hash->validatePassword($User->hash, $hash, $User->rand)) {
+		if (!$this->Hash->validatePassword($User->hash, $password, $User->rand)) {
 			return false; # If password doesnt match return false
 		}
 

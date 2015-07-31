@@ -13,22 +13,25 @@ class BasePresenter extends Presenter
    {
        $this->Spot = $this->Model->getConnection();
 
-       $Notifications = $this->Spot
-       ->mapper('App\Entity\Notification');
+       $User = null;
+       $Notifications = [];
 
-       $Notifications = $Notifications
-       ->all()
-       ->where([
-           'subject' => 1,
-        ]);
+       if ($this->Auth->isLoggedIn()) {
+           $email = $this->Session->get("auth");
+           $User = $this->Auth->getUser($email);
 
+           $Notifications = $this->Spot
+           ->mapper('App\Entity\Notification');
+
+           $Notifications = $Notifications
+           ->all()
+           ->where([
+               'subject' => $User->id,
+            ]);
+       }
+
+        $this->View->User = $User;
         $this->View->Notifications = $Notifications;
 
-        $User = null;
-        if ($this->Auth->isLoggedIn()) {
-            $email = $this->Session->get("auth");
-            $User = $this->Auth->getUser($email);
-        }
-        $this->View->User = $User;
    }
 }
