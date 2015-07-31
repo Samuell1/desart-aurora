@@ -26,6 +26,10 @@
             "GET",
             ["App\\Presenter\\Forum\\Topic", "overview"]
         ],
+        "/logout": [
+          "GET",
+          ["App\\Controller\\Auth", "logout"]
+        ],
         "/ajax": {
             "/login": [
               "POST",

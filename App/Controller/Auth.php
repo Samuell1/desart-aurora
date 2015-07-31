@@ -25,7 +25,7 @@ class Auth extends BaseController
 
 	public function register()
 	{
-
+		
 	}
 
 	public function login()
@@ -62,16 +62,9 @@ class Auth extends BaseController
 
 	public function logout()
 	{
-		if($this->Auth->isLoggedIn())
-		{
-			$this->Auth->logout();
+		$this->Auth->logout();
 
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		$this->Response->redirect("/desart");
 	}
 
 	public function after()

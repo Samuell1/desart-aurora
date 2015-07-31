@@ -92,8 +92,14 @@ class Auth
 	{
 
 		if ($this->Session->has("auth")) {
-			$this->Session->remove("auth");
-			return true;
+			if($this->Session->remove("auth"))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		return false;
 	}
