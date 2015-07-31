@@ -9,19 +9,27 @@ class BasePresenter extends Presenter
    protected $User;
    public $Spot;
 
-   function before()
+   public function before()
    {
-     $this->Spot = $this->Model->getConnection();
+       $this->Spot = $this->Model->getConnection();
 
-     $Notifications = $this->Spot
-          ->mapper('App\Entity\Notification');
+       $Notifications = $this->Spot
+       ->mapper('App\Entity\Notification');
 
-     $Notifications = $Notifications
+       $Notifications = $Notifications
        ->all()
        ->where([
-         'subject' => 1,
-       ]);
+           'subject' => 1,
+        ]);
 
-     $this->View->Notifications = $Notifications;
+        $this->View->Notifications = $Notifications;
+
+        $User = null;
+        if ($this->Auth->isLoggedIn()) {
+            $email = $this->Session->get("auth");
+            $User = $this->Spot->mapper("App\Entity\User");
+            $User = $User->where->where(["email" => $email])->first();
+        }
+        $this->View->User = $User;
    }
 }
