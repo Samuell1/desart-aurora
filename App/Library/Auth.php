@@ -38,7 +38,9 @@ class Auth
 				"password"          => $Hash->hash,
 				"rand"              => $Hash->rand,
 				"email"             => $email,
-				"account_activated" => (int) $activated
+				"account_activated" => (int) $activated,
+				"ip"                => $this->Request->getIpAddress(),
+				"activation_code"   => sha1(microtime(), true)
 			]);
 
 			return $this->User->save($User);
