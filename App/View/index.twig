@@ -118,14 +118,16 @@
   					<h4 class="ui header">{{ User.username }}</h4>
 
   					<div class="ui list">
-  						<a class="item">
-  							<i class="help icon red"></i>
+                        {% if not User.account_activated %}
+                            <a class="item">
+      							<i class="help icon red"></i>
 
-  							<div class="content">
-  								<div class="header">Emailová adresa</div>
-  								<div class="description">Prosím overte si svoju emailovú adresu!</div>
-  							</div>
-  						</a>
+      							<div class="content">
+      								<div class="header">Emailová adresa</div>
+      								<div class="description">Prosím overte si svoju emailovú adresu!</div>
+      							</div>
+      						</a>
+                        {% endif %}
   						<a class="item">
   							<i class="right triangle icon"></i>
 
@@ -152,7 +154,7 @@
 
   			<div class="ui two bottom attached buttons" style="margin:0 -14px -11px -14px;">
   				<a class="ui button tiny blue fluid"><i class="setting icon"></i> Nastavenia</a>
-  				<a class="ui button tiny fluid"><i class="sign out icon"></i> Odhlásiť sa</a>
+  				<a class="ui button tiny fluid" href="{{ Url.base("logout") }}"><i class="sign out icon"></i> Odhlásiť sa</a>
   			</div>
   		</div> <!-- ./user profile -->
 

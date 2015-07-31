@@ -28,7 +28,8 @@
         ],
         "/logout": [
           "GET",
-          ["App\\Controller\\Auth", "logout"]
+          ["App\\Controller\\Auth", "logout"],
+          "logout"
         ],
         "/ajax": {
             "/login": [
