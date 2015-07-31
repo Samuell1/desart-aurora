@@ -35,7 +35,7 @@ class Auth
 
 			$User = $this->User->build([
 				"username"          => $username,
-				"hash"          => $Hash->hash,
+				"hash"              => $Hash->hash,
 				"rand"              => $Hash->rand,
 				"email"             => $email,
 				"ip"                => sprintf("%u", ip2long($ip)),
