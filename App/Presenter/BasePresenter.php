@@ -28,7 +28,7 @@ class BasePresenter extends Presenter
         if ($this->Auth->isLoggedIn()) {
             $email = $this->Session->get("auth");
             $User = $this->Spot->mapper("App\Entity\User");
-            $User = $User->where->where(["email" => $email])->first();
+            $User = $User->where(["email" => $email])->first();
         }
         $this->View->User = $User;
    }
