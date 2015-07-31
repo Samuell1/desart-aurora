@@ -17,13 +17,12 @@ class Auth
 
 	public function __construct(Session $Session, Mapper $Mapper)
 	{
-		
+
 		$this->Session = $Session;
 		$this->User    = $Mapper;
 		$this->Hash    = new Perzeus("ZjZ4a6gNnE", "8gcQEJJp82", "Zc0TdeSCrX", 48, 89, 107);
 
 	}
-
 
 	public function createUser($username, $password, $email, $activated = false)
 	{
