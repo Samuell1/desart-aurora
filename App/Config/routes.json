@@ -26,7 +26,7 @@
             "GET",
             ["App\\Presenter\\Forum\\Topic", "overview"]
         ],
-        "/api": {
+        "/ajax": {
             "/login": [
               "POST",
               ["App\\Controller\\Auth", "login"]
