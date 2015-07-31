@@ -44,9 +44,9 @@ class Auth
 			]);
 
 			return $this->User->save($User);
-		} else {
-			return false;
 		}
+
+		return false;
 
 	}
 
@@ -55,8 +55,7 @@ class Auth
 
 		$User = $this->User->where(["email" => $email])->first();
 
-		if(!$User)
-		{
+		if(!$User) {
 			return false;
 		}
 
@@ -107,4 +106,13 @@ class Auth
 		return false;
 	}
 
+	public function getUser($uid)
+	{
+		$User = $this->Spot->mapper("App\Entity\User");
+		$User = $User->where(["email" => $uid])->orWhere(["username" => $uid])->first();
+		if (!$User) {
+			throw new \Exception("User not found");
+		}
+		return $User;
+	}
 }
