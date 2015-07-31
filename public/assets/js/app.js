@@ -93,7 +93,7 @@ if($(".show-usernotifications .label").length > 0)
             success : function(r) {
                 if(r.success)
                 {
-                  window.location.href = "/";
+                  window.location.href = "http://localhost/desart";
                 }
             }
         });
@@ -109,9 +109,10 @@ if($(".show-usernotifications .label").length > 0)
             type    : "POST",
             data    : $("#ajax-register").serialize(),
             success : function(r) {
-                // if(!r.success)
-                //     $("#error-login").html(r.error);
-                console.log(r);
+                if(r.success)
+                {
+                  window.location.href = "http://localhost/desart";
+                }
             }
         });
 
