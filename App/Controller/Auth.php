@@ -8,7 +8,8 @@ use Respect\Validation\Validator as v;
 class Auth extends BaseController
 {
 
-	protected $Auth;
+	public $Auth;
+
 	protected $Spot;
 
 	private $return;
@@ -55,7 +56,6 @@ class Auth extends BaseController
 					"error"   => "Login error"
 				];
 			}
-
 		}
 		catch(NestedValidationExceptionInterface $e)
 		{
@@ -64,6 +64,7 @@ class Auth extends BaseController
 				"error"   => "Zadaný email alebo nie je správne."
 			];
 		}
+
 	}
 
 	public function logout()
