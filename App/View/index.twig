@@ -307,7 +307,7 @@
 						<h4 class="ui header">Uživateľ</h4>
 						<div class="ui link list">
 							<a href="#" class="item">Štatistiky</a>
-							<a href="#" class="item">Registrácia</a>
+							<a href="#" class="item show-register">Registrácia</a>
 							<a href="#" class="item show-login">Prihlásenie</a>
 						</div>
 					</div>
@@ -344,66 +344,103 @@
 
 
 
-    <div class="ui small modal login" style="max-width:320px;margin: 0px 0px 0px -160px"> <!-- LOGIN -->
-      <i class="close icon"></i>
+        <div class="ui small modal login" style="max-width:320px;margin: 0px 0px 0px -160px"> <!-- LOGIN -->
+          <i class="close icon"></i>
 
-      <div class="ui one column center aligned very relaxed grid" style="padding:20px">
+          <div class="ui one column center aligned very relaxed grid" style="padding:20px">
 
-        <div class="center aligned column">
-          <div class="header">
-            Prihlásiť sa
-          </div>
-          <div class="description">
-            <p>Po prihlásení alebo registrácií budete môct prispievať, komentovať, recenzovať.</p>
-          </div>
-        </div>
-
-        <div class="center aligned column" id="error-login">
-        </div>
-
-        <div class="column">
-
-          <form id="ajax-login" action="" method="post">
-          <div class="ui form">
-            <div class="field">
-              <div class="ui small inverted left icon input">
-                <input placeholder="E-mail" name="email" type="email">
-                <i class="user icon"></i>
+            <div class="center aligned column">
+              <div class="header">
+                Prihlásiť sa
+              </div>
+              <div class="description">
+                <p>Po prihlásení alebo registrácií budete môct prispievať, komentovať, recenzovať.</p>
               </div>
             </div>
-            <div class="field">
-              <div class="ui small inverted left icon input">
-                <input placeholder="Heslo" name="password" type="password">
-                <i class="lock icon"></i>
+
+            <div class="center aligned column" id="error-login"></div>
+
+            <div class="column">
+
+              <form id="ajax-login" action="" method="post">
+              <div class="ui form">
+                <div class="field">
+                  <div class="ui small inverted left icon input">
+                    <input placeholder="E-mail" name="email" type="email">
+                    <i class="user icon"></i>
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="ui small inverted left icon input">
+                    <input placeholder="Heslo" name="password" type="password">
+                    <i class="lock icon"></i>
+                  </div>
+                </div>
+                <button class="ui tiny basic button left floated">Zabudnuté heslo?</button>
+                <button class="ui tiny grey submit button right floated" type="submit"><i class="icon sign in"></i> Prihlásiť sa</button>
+              </div>
+              </form>
+
+            </div>
+
+            <div class="ui horizontal divider">alebo</div>
+
+            <div class="center aligned column">
+              <div class="ui fluid ui green button">
+                Ešte nemáte účet? Vytvorte si ho.
               </div>
             </div>
-            <button class="ui tiny basic button left floated">Zabudnuté heslo?</button>
-            <button class="ui tiny grey submit button right floated" type="submit"><i class="icon sign in"></i> Prihlásiť sa</button>
+
           </div>
-          </form>
 
         </div>
 
-        <div class="ui horizontal divider">alebo</div>
+        <div class="ui small modal register" style="max-width:320px;margin: 0px 0px 0px -160px"> <!-- LOGIN -->
+          <i class="close icon"></i>
 
-        <div class="center aligned column">
-          <div class="ui fluid ui green button">
-            Ešte nemáte účet? Vytvorte si ho.
+          <div class="ui one column center aligned very relaxed grid" style="padding:20px">
+
+            <div class="center aligned column">
+              <div class="header">
+                Registrovať
+              </div>
+              <div class="description">
+                <p>Po registrácií budete môct prispievať, komentovať, recenzovať.</p>
+              </div>
+            </div>
+
+            <div class="center aligned column" id="error-register"></div>
+
+            <div class="column">
+              <form id="ajax-register" action="" method="post">
+                  <div class="ui form">
+                    <div class="field">
+                      <div class="ui small inverted left icon input">
+                        <input placeholder="E-mail" name="email" type="email">
+                        <i class="user icon"></i>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <div class="ui small inverted left icon input">
+                        <input placeholder="Heslo" name="password" type="password">
+                        <i class="lock icon"></i>
+                      </div>
+                    </div>
+                    <button class="ui tiny basic button left floated">Zabudnuté heslo?</button>
+                    <button class="ui tiny grey submit button right floated" type="submit"><i class="icon sign in"></i> Registrovať sa</button>
+                  </div>
+              </form>
+            </div>
           </div>
+
         </div>
 
-      </div>
+        <!-- Javascript -->
+        <script type="text/javascript" src="{{ Url.asset("js/semantic.min.js") }}"></script>
+    	<script type="text/javascript" src="{{ Url.asset("js/perfect-scrollbar.min.js") }}"></script>
+        <script type="text/javascript" src="{{ Url.asset("js/app.js") }}"></script>
 
-    </div>
+    	<link rel="stylesheet" href="{{ Url.asset("css/perfect-scrollbar.min.css") }}">
 
-
-
-    <!-- Javascript -->
-    <script type="text/javascript" src="{{ Url.asset("js/semantic.min.js") }}"></script>
-		<script type="text/javascript" src="{{ Url.asset("js/perfect-scrollbar.min.js") }}"></script>
-    <script type="text/javascript" src="{{ Url.asset("js/app.js") }}"></script>
-
-		<link rel="stylesheet" href="{{ Url.asset("css/perfect-scrollbar.min.css") }}">
-
-  </body>
+    </body>
 </html>

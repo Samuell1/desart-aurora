@@ -3,7 +3,8 @@ $(function () {
 $('.usernotifications .feed').perfectScrollbar();
 $('.ui.sidebar').sidebar('attach events', '.togglesidebar');
 
-$('.login').modal({blurring: true}).modal('attach events', '.show-login', 'show');
+$('.modal.login').modal({blurring: true}).modal('attach events', '.show-login', 'show');
+$('.modal.register').modal({blurring: true}).modal('attach events', '.show-register', 'show');
 
 $('.show-userprofile')
   .popup({
@@ -98,4 +99,20 @@ if($(".show-usernotifications .label").length > 0)
 
     });
 
+    $("#ajax-register").on("submit", function(e) {
+
+        e.preventDefault();
+
+        $.ajax({
+            url     : "api/register",
+            type    : "POST",
+            data    : $("#ajax-register").serialize(),
+            success : function(r) {
+                // if(!r.success)
+                //     $("#error-login").html(r.error);
+                console.log(r);
+            }
+        });
+
+    });
 })();
