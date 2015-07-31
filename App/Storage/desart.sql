@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_user` (
   `banned` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
   `ip` INT UNSIGNED NULL DEFAULT NULL COMMENT '',
   `account_activated` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
-  `activation_code` BINARY(16) NOT NULL COMMENT 'Aktivacny kod v sha1',
+  `activation_code` BINARY(20) NOT NULL COMMENT 'Aktivacny kod v sha1',
   `permissions` TINYTEXT CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NULL COMMENT '',
   `hash` VARCHAR(200) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL COMMENT '',
   `rand` TINYINT(3) UNSIGNED NOT NULL COMMENT '',
