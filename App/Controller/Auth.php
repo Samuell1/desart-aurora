@@ -8,7 +8,7 @@ use Respect\Validation\Validator as v;
 class Auth extends BaseController
 {
 
-	protected $User;
+	protected $Auth;
 	protected $Spot;
 
 	private $return;
@@ -19,7 +19,6 @@ class Auth extends BaseController
 		
 		$this->userValidator = v::create();
 		$this->Spot          = $this->Model->getConnection();
-		$this->User          = $this->Spot->mapper("App\Entity\User");
 
 	}
 
@@ -45,21 +44,18 @@ class Auth extends BaseController
 		{
 			$this->userValidator->assert($Data);
 
-
-			$q = $this->User
-				 ->where([
-					"email"    => $this->Request->post("email"),
-					"password" => null
-				 ])
-				 ->count();
-
-			if(!$this->Session->has("auth"))
+			if($this->Auth->login($this->Request->post("email"), $this->Request->post("password")))
 			{
-				$this->Session->set("auth", $this->Request->post("email"));
-				$this->return = ["success" => true];
+				$this->return["success"] = true; 
 			}
 			else
-				$this->return = ["success" => false];
+			{
+				$this->return = [
+					"success" => false,
+					"error"   => "Login error"
+				];
+			}
+
 		}
 		catch(NestedValidationExceptionInterface $e)
 		{

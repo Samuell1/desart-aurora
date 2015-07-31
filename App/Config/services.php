@@ -31,17 +31,6 @@ $Resolver->define("Aurora\\MVC\\View", [
 	":Engine" => $Twig
 ]);
 
-/** Session and Cookies **/
-$setSessionAndCookie = function($Instance) use ($Config) {
-	$Instance->Cookie = new Aurora\Http\Cookie();
-	$Instance->Cookie->raw = true;
-
-	$Instance->Session = new Aurora\Session(null, $Config->get("session"));
-	$Instance->Session->start();
-};
-$Resolver->prepare("Aurora\\MVC\\Presenter", $setSessionAndCookie);
-$Resolver->prepare("Aurora\\MVC\\Controller", $setSessionAndCookie);
-
 /** Database **/
 $cfg = new Spot\Config();
 $cfg->addConnection('mysql', $Config->get("database"));
@@ -50,5 +39,20 @@ $Spot = new Spot\Locator($cfg);
 $Resolver->define("Aurora\\Model", [
 	":Connection" => $Spot
 ]);
+
+/** Session and Cookies **/
+$setSessionAndCookie = function($Instance) use ($Config, $Spot) {
+	$Instance->Cookie = new Aurora\Http\Cookie();
+	$Instance->Cookie->raw = true;
+
+	$Instance->Session = new Aurora\Session(null, $Config->get("session"));
+	$Instance->Session->start();
+
+
+	$Instance->Auth = new App\Library\Auth($Instance->Session, $Spot->mapper("App\Entity\User"));
+};
+$Resolver->prepare("Aurora\\MVC\\Presenter", $setSessionAndCookie);
+$Resolver->prepare("Aurora\\MVC\\Controller", $setSessionAndCookie);
+
 
 return $Resolver;

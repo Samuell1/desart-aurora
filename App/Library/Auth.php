@@ -5,7 +5,7 @@ namespace App\Library;
 use Aurora\Session;
 use Spot\Locator;
 use Spot\Mapper;
-use VeeneX\Perzeus;
+use VeeeneX\Perzeus;
 
 class Auth
 {
@@ -17,6 +17,7 @@ class Auth
 
 	public function __construct(Session $Session, Mapper $Mapper)
 	{
+		
 		$this->Session = $Session;
 		$this->User    = $Mapper;
 		$this->Hash    = new Perzeus("ZjZ4a6gNnE", "8gcQEJJp82", "Zc0TdeSCrX", 48, 89, 107);
@@ -52,9 +53,15 @@ class Auth
 
 	public function login($email, $password, $remember = false)
 	{
+
+		$Hash = $this->Hash->createHash($password);
+
 		$q = $this->User
-			->where(["email" => $email])
-			->orWhere(["password" => $password])
+			->where([
+				"email"    => $email,
+				"password" => $Hash->hash,
+				"rand"     => $Hash->rand
+			])
 			->count();
 
 		if ($q === 0) {

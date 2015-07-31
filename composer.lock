@@ -923,12 +923,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "a9dfc97ddc06ca4739630d029bb3d2e16f3efc12"
+                "reference": "a589bcac79f81e90cc92fb8bf4a706d35cfdc3da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/a9dfc97ddc06ca4739630d029bb3d2e16f3efc12",
-                "reference": "a9dfc97ddc06ca4739630d029bb3d2e16f3efc12",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/a589bcac79f81e90cc92fb8bf4a706d35cfdc3da",
+                "reference": "a589bcac79f81e90cc92fb8bf4a706d35cfdc3da",
                 "shasum": ""
             },
             "type": "library",
@@ -954,7 +954,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2015-07-16 13:57:13"
+            "time": "2015-07-30 22:33:21"
         },
         {
             "name": "respect/validation",
@@ -962,12 +962,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Respect/Validation.git",
-                "reference": "7d9d19009aabb23d759c652fbfed9829b1f40a30"
+                "reference": "743fafb31b44668f5db9a6e53ea925dc0b47a5c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Respect/Validation/zipball/7d9d19009aabb23d759c652fbfed9829b1f40a30",
-                "reference": "7d9d19009aabb23d759c652fbfed9829b1f40a30",
+                "url": "https://api.github.com/repos/Respect/Validation/zipball/743fafb31b44668f5db9a6e53ea925dc0b47a5c3",
+                "reference": "743fafb31b44668f5db9a6e53ea925dc0b47a5c3",
                 "shasum": ""
             },
             "require": {
@@ -1017,7 +1017,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2015-07-21 15:35:44"
+            "time": "2015-07-29 20:08:06"
         },
         {
             "name": "sabre/event",
