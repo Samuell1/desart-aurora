@@ -14,21 +14,22 @@ class Comment extends Entity
     public static function fields()
     {
         return [
-            "id"           => ["type" => "smallint", "primary" => true, "autoincrement" => true],
-            "subject_type" => ["type" => "smallint"],
-            "subject_id"   => ["type" => "smallint"],
-            "reply"        => ["type" => "smallint"],
-            "user_id"      => ["type" => "smallint"],
-            "hidden"       => ["type" => "boolean"],
-            "created_at"   => ["type" => "datetime"],
-            "updated_at"   => ["type" => "datetime"],
+            "id"               => ["type" => "smallint", "primary" => true, "autoincrement" => true],
+            "subject_type"     => ["type" => "smallint"],
+            "subject_id"       => ["type" => "smallint"],
+            "reply_comment_id" => ["type" => "smallint"],
+            "user_id"          => ["type" => "smallint"],
+            "hidden"           => ["type" => "boolean"],
+            "created_at"       => ["type" => "datetime"],
+            "updated_at"       => ["type" => "datetime"],
         ];
     }
 
     public static function relations(MapperInterface $Mapper, EntityInterface $Entity)
     {
         return [
-            'User' => $Mapper->belongsTo($Entity, 'App\Entity\User', 'user_id')->select(["id", "username"]),
+            'User'          => $Mapper->belongsTo($Entity, 'App\Entity\User', 'user_id')->select(["id", "username"]),
+            "ParentComment" => $Mapper->hasMany($Entity, 'App\Entity\Comment', 'reply_comment_id'),
         ];
     }
 

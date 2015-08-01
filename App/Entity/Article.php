@@ -15,7 +15,7 @@ class Article extends Entity
     {
         return [
             "id"                  => ["type" => "smallint", "primary" => true, "autoincrement" => true],
-            "category_id" => ["type" => "smallint"],
+            "category_id"       => ["type" => "smallint"],
             "tag_group_id"        => ["type" => "smallint"],
             "image_id"            => ["type" => "smallint"],
             "user_id"             => ["type" => "smallint"],
@@ -40,7 +40,9 @@ class Article extends Entity
             "Series"   => $Mapper->belongsTo($Entity, "App\Entity\Article\Series", "series_id"),
             "Image"    => $Mapper->belongsTo($Entity, "App\Entity\File", "image_id"),
             "Category" => $Mapper->belongsTo($Entity, "App\Entity\Article\Category", "category_id"),
-            "Comments" => $Mapper->hasMany($Entity, "App\Entity\Comment", "id")->where(["type" => 0, "subject_type" => 1, "hidden" => 0]),
+
+            "Comments" => $Mapper->hasMany($Entity, "App\Entity\Comment", "subject_id")->where(["type" => 0, "subject_type" => 1, "hidden" => 0]),
+            
             "TagGroup" => $Mapper->hasManyThrough($Entity, "App\Entity\Tag\Group", "App\Entity\Article\Tag", "tag_group_id", "article_id"),
         ];
     }
