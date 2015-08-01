@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_user` (
   `banned` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
   `ip` INT UNSIGNED NULL DEFAULT NULL COMMENT '',
   `account_activated` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
-  `activation_code` BINARY(20) NOT NULL COMMENT 'Aktivacny kod v sha1',
+  `activation_code` BINARY(20) NULL COMMENT 'Aktivacny kod v sha1',
   `permissions` TINYTEXT CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NULL COMMENT '',
   `hash` VARCHAR(200) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL COMMENT '',
   `rand` TINYINT(3) UNSIGNED NOT NULL COMMENT '',
@@ -319,7 +319,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_group` (
   `name` VARCHAR(200) NOT NULL COMMENT '',
   `color` VARCHAR(45) NOT NULL DEFAULT '#444' COMMENT '',
   `description` TINYTEXT NULL COMMENT '',
-  `permissions` TINYTEXT NOT NULL COMMENT '',
+  `permissions` TINYTEXT NULL DEFAULT NULL COMMENT '',
   `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
   `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
   PRIMARY KEY (`id`)  COMMENT '',
@@ -348,10 +348,10 @@ DROP TABLE IF EXISTS `Desart`.`da_user_metadata` ;
 
 CREATE TABLE IF NOT EXISTS `Desart`.`da_user_metadata` (
   `user_id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `firstname` VARCHAR(45) NOT NULL DEFAULT '' COMMENT '',
-  `lastname` VARCHAR(45) NOT NULL DEFAULT '' COMMENT '',
-  `deviantart` VARCHAR(225) NOT NULL COMMENT '',
-  `skype` VARCHAR(32) NOT NULL COMMENT '',
+  `firstname` VARCHAR(45) NULL DEFAULT NULL COMMENT '',
+  `lastname` VARCHAR(45) NULL DEFAULT NULL COMMENT '',
+  `deviantart` VARCHAR(225) NULL DEFAULT NULL COMMENT '',
+  `skype` VARCHAR(32) NULL DEFAULT NULL COMMENT '',
   `bio` TINYTEXT NULL DEFAULT NULL COMMENT '',
   `web` VARCHAR(225) NULL DEFAULT NULL COMMENT '',
   `birthday` TIMESTAMP NULL COMMENT '',
@@ -615,9 +615,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `Desart`;
-INSERT INTO `Desart`.`da_user` (`id`, `username`, `email`, `active`, `avatar`, `hide_email`, `banned`, `ip`, `account_activated`, `activation_code`, `permissions`, `hash`, `rand`, `created_at`, `updated_at`, `locked_until`) VALUES (1, 'Samuell', 'samuell.patro@gmail.com', 1, 1, 1, 0, NULL, 0, ..., NULL, 'DDyzb*9HMuxR7iTAi2a0322KlSU4gzNw2AQ0Rk9Vj64xg7d0B_BE6zNF8ACJVGP)bG0ezUSb0M9Jqv*v)MqobAM2Obd69fa90f26ac81d700b45e083f3ca9b$2y$11$3zrz9yr5Z08gcQEJJp82Zum80PablFtGYKeUmulErDdl78s9WiSbW', 89, NULL, NULL, NULL);
-INSERT INTO `Desart`.`da_user` (`id`, `username`, `email`, `active`, `avatar`, `hide_email`, `banned`, `ip`, `account_activated`, `activation_code`, `permissions`, `hash`, `rand`, `created_at`, `updated_at`, `locked_until`) VALUES (2, 'VeeeneX', 'veeenex@gmail.com', 1, 1, 0, 0, NULL, 1, ..., NULL, 'DDyzb*9HMuxR7iTAi2a0322KlSU4gzNw2AQ0Rk9Vj64xg7d0B_BE6zNF8ACJVGP)bG0ezUSb0M9Jqv*v)MqobAM2Obd69fa90f26ac81d700b45e083f3ca9b$2y$11$3zrz9yr5Z08gcQEJJp82Zum80PablFtGYKeUmulErDdl78s9WiSbW', 89, NULL, NULL, NULL);
-INSERT INTO `Desart`.`da_user` (`id`, `username`, `email`, `active`, `avatar`, `hide_email`, `banned`, `ip`, `account_activated`, `activation_code`, `permissions`, `hash`, `rand`, `created_at`, `updated_at`, `locked_until`) VALUES (3, 'KotassMan', 'matus.koterba@gmail.com', 1, 1, 1, 0, NULL, 1, ..., NULL, 'DDyzb*9HMuxR7iTAi2a0322KlSU4gzNw2AQ0Rk9Vj64xg7d0B_BE6zNF8ACJVGP)bG0ezUSb0M9Jqv*v)MqobAM2Obd69fa90f26ac81d700b45e083f3ca9b$2y$11$3zrz9yr5Z08gcQEJJp82Zum80PablFtGYKeUmulErDdl78s9WiSbW', 89, NULL, NULL, NULL);
+INSERT INTO `Desart`.`da_user` (`id`, `username`, `email`, `active`, `avatar`, `hide_email`, `banned`, `ip`, `account_activated`, `activation_code`, `permissions`, `hash`, `rand`, `created_at`, `updated_at`, `locked_until`) VALUES (1, 'Samuell', 'samuell.patro@gmail.com', 1, 1, 1, 0, 0, 0, NULL, NULL, 'DDyzb*9HMuxR7iTAi2a0322KlSU4gzNw2AQ0Rk9Vj64xg7d0B_BE6zNF8ACJVGP)bG0ezUSb0M9Jqv*v)MqobAM2Obd69fa90f26ac81d700b45e083f3ca9b$2y$11$3zrz9yr5Z08gcQEJJp82Zum80PablFtGYKeUmulErDdl78s9WiSbW', 89, NULL, NULL, NULL);
+INSERT INTO `Desart`.`da_user` (`id`, `username`, `email`, `active`, `avatar`, `hide_email`, `banned`, `ip`, `account_activated`, `activation_code`, `permissions`, `hash`, `rand`, `created_at`, `updated_at`, `locked_until`) VALUES (2, 'VeeeneX', 'veeenex@gmail.com', 1, 1, 0, 0, 0, 1, NULL, NULL, 'DDyzb*9HMuxR7iTAi2a0322KlSU4gzNw2AQ0Rk9Vj64xg7d0B_BE6zNF8ACJVGP)bG0ezUSb0M9Jqv*v)MqobAM2Obd69fa90f26ac81d700b45e083f3ca9b$2y$11$3zrz9yr5Z08gcQEJJp82Zum80PablFtGYKeUmulErDdl78s9WiSbW', 89, NULL, NULL, NULL);
+INSERT INTO `Desart`.`da_user` (`id`, `username`, `email`, `active`, `avatar`, `hide_email`, `banned`, `ip`, `account_activated`, `activation_code`, `permissions`, `hash`, `rand`, `created_at`, `updated_at`, `locked_until`) VALUES (3, 'KotassMan', 'matus.koterba@gmail.com', 1, 1, 1, 0, 0, 1, NULL, NULL, 'DDyzb*9HMuxR7iTAi2a0322KlSU4gzNw2AQ0Rk9Vj64xg7d0B_BE6zNF8ACJVGP)bG0ezUSb0M9Jqv*v)MqobAM2Obd69fa90f26ac81d700b45e083f3ca9b$2y$11$3zrz9yr5Z08gcQEJJp82Zum80PablFtGYKeUmulErDdl78s9WiSbW', 89, NULL, NULL, NULL);
 
 COMMIT;
 
@@ -627,7 +627,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `Desart`;
-INSERT INTO `Desart`.`da_group` (`id`, `name`, `color`, `description`, `permissions`, `created_at`, `updated_at`) VALUES (1, 'Team', '#444', 'Team of This big penis', DEFAULT, NULL, NULL);
+INSERT INTO `Desart`.`da_group` (`id`, `name`, `color`, `description`, `permissions`, `created_at`, `updated_at`) VALUES (1, 'Team', '#444', 'Team of This big penis', NULL, NULL, NULL);
 
 COMMIT;
 
@@ -649,9 +649,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `Desart`;
-INSERT INTO `Desart`.`da_user_metadata` (`user_id`, `firstname`, `lastname`, `deviantart`, `skype`, `bio`, `web`, `birthday`, `updated_at`) VALUES (1, 'Samuel', 'Patro', DEFAULT, 'samuell.patro', 'Som samko mam rad uhorky a kakac, som bomba :D Rad DEBUGUJEM', NULL, NULL, NULL);
-INSERT INTO `Desart`.`da_user_metadata` (`user_id`, `firstname`, `lastname`, `deviantart`, `skype`, `bio`, `web`, `birthday`, `updated_at`) VALUES (2, 'VeeeneX', DEFAULT, DEFAULT, 'veeenex', 'To som ja :D', NULL, NULL, NULL);
-INSERT INTO `Desart`.`da_user_metadata` (`user_id`, `firstname`, `lastname`, `deviantart`, `skype`, `bio`, `web`, `birthday`, `updated_at`) VALUES (3, 'KotassMan', DEFAULT, DEFAULT, 'kotassman', 'I like dogs', NULL, NULL, NULL);
+INSERT INTO `Desart`.`da_user_metadata` (`user_id`, `firstname`, `lastname`, `deviantart`, `skype`, `bio`, `web`, `birthday`, `updated_at`) VALUES (1, 'Samuel', 'Patro', NULL, 'samuell.patro', 'Som samko mam rad uhorky a kakac, som bomba :D Rad DEBUGUJEM', NULL, NULL, NULL);
+INSERT INTO `Desart`.`da_user_metadata` (`user_id`, `firstname`, `lastname`, `deviantart`, `skype`, `bio`, `web`, `birthday`, `updated_at`) VALUES (2, 'VeeeneX', NULL, NULL, 'veeenex', 'To som ja :D', NULL, NULL, NULL);
+INSERT INTO `Desart`.`da_user_metadata` (`user_id`, `firstname`, `lastname`, `deviantart`, `skype`, `bio`, `web`, `birthday`, `updated_at`) VALUES (3, 'KotassMan', NULL, NULL, 'kotassman', 'I like dogs', NULL, NULL, NULL);
 
 COMMIT;
 
