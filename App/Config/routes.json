@@ -5,6 +5,7 @@
         "/user/{uid}": ["GET", ["App\\Presenter\\User", "view"]],
         "/clanok/{slug}": ["GET", ["App\\Presenter\\Article", "view"], "clanok"],
         "/clanky": ["GET", ["App\\Presenter\\Article", "overview"]],
+        "/serie": ["GET", ["App\\Presenter\\Series", "overview"]],
         "/forum/novatema/{category}": ["GET", ["App\\Presenter\\Forum\\Topic", "create"]],
         "/tema/{slug}": [
             "GET",
