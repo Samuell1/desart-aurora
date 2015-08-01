@@ -12,14 +12,21 @@ class User extends Entity
     public static function fields()
     {
         return [
-            "id"                => ["type" => "smallint", "primary" => true, "autoincrement" => true],
-            "username"          => ["type" => "string"],
+            "id"                => ["type" => "smallint", "primary" => true, "autoincrement" => true, "unique" => true],
+            "username"          => ["type" => "string", "unique" => true],
+            "email"             => ["type" => "string", "unique" => true],
+            "active"            => ["type" => "boolean"],
+            "hide_email"        => ["type" => "boolean"],
+            "banned"            => ["type" => "boolean"]
             "hash"              => ["type" => "string"],
-            "email"             => ["type" => "string"],
             "rand"              => ["type" => "smallint"],
             "account_activated" => ["type" => "boolean"],
             "ip"                => ["type" => "integer"],
             "activation_code"   => ["type" => "binary"],
+            "permissions"       => ["type" => "array"],
+            "created_at"        => ["type" => "datetime"],
+            "updated_at"        => ["type" => "datetime"],
+            "locked_until"      => ["type" => "datetime"]
         ];
     }
 

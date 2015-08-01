@@ -6,10 +6,10 @@ use Aurora\Session;
 use Spot\Locator;
 use Spot\Mapper;
 use VeeeneX\Perzeus;
+use App\Library\Auth\Exception\UserNotFoundException;
 
 class Auth
 {
-
 	protected $Session;
 	protected $DB;
 	protected $User;
@@ -103,7 +103,7 @@ class Auth
 			->first();
 
 		if (!$User) {
-			throw new \Exception("User not found");
+			throw new UserNotFoundException("User not found");
 		}
 
 		return $User;

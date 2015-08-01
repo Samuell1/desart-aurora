@@ -7,7 +7,7 @@ use Spot\Entity;
 
 class Group extends Entity
 {
-    protected static $table = "da_user_group";
+    protected static $table = "da_user_group_map";
 
     public static function fields()
     {
