@@ -26,10 +26,6 @@ class Article extends BasePresenter
 				'status' => "published"
 			])->first();
 
-		// foreach ($Article->User->Groups as $Group) {
-		// 	var_dump($Group);
-		// }
-
 		// if ($article = $this->Model->Article->selectArticleBySlug($slug)){
 		// 	$this->Model->Article->markAsRead($article["id"]);
 		// }

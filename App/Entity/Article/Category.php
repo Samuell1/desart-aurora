@@ -16,6 +16,7 @@ class Category extends Entity
         return [
             "id"          => ["type" => "smallint", "primary" => true, "autoincrement" => true],
             "color"       => ["type" => "string"],
+            "name"         => ["type" => "string"],
             "slug"        => ["type" => "string", "unique" => true],
             "description" => ["type" => "text"],
             "parent_id"   => ["type" => "smallint"],
