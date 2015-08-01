@@ -1,6 +1,10 @@
 <div class="ui small modal login" style="max-width:320px;margin: 0px 0px 0px -160px">
   <i class="close icon"></i>
 
+  <div class="ui inverted dimmer">
+    <div class="ui indeterminate text loader"></div>
+  </div>
+
   <div class="ui one column center aligned very relaxed grid" style="padding:20px">
 
     <div class="center aligned column">
@@ -12,20 +16,20 @@
       </div>
     </div>
 
-    <div class="center aligned column" id="error-login"></div>
+    <div class="center aligned" id="error-login"></div>
 
     <div class="column">
 
       <form id="ajax-login" action="" method="post">
       <div class="ui form">
         <div class="field">
-          <div class="ui small inverted left icon input">
+          <div class="ui left icon input">
             <input placeholder="E-mail" name="email" type="email">
-            <i class="user icon"></i>
+            <i class="mail icon"></i>
           </div>
         </div>
         <div class="field">
-          <div class="ui small inverted left icon input">
+          <div class="ui left icon input">
             <input placeholder="Heslo" name="password" type="password">
             <i class="lock icon"></i>
           </div>

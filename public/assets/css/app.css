@@ -25,8 +25,8 @@ body{font-family: "Open Sans";background:#f9f9f9 !important;}
 .nopadding{padding-left:0px!important;padding-right:0px!important;}
 
 /* login */
-.ui.modal.login,.ui.modal.register .header{padding:10px 0;font-size:17px}
-.ui.modal.login,.ui.modal.register .description{padding:5px 0;font-size:12px;color:#888}
+.modal.register .header,.modal.login .header{padding:10px 0;font-size:17px}
+.modal.register .description,.modal.login .description{padding:5px 0;font-size:12px;color:#888}
 /* user ui */
 .usernotifications .ui.feed{overflow-y:scroll;max-height:220px;width: 280px;margin:-11.5px -14px;font-size:12px;position: relative;z-index:100;border-radius: 0.285714rem;}
 .usernotifications .ui.feed .event{border-bottom:1px solid #f5f5f5;padding:10px !important;font-family:Ubuntu}

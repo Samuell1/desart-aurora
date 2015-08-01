@@ -91,9 +91,24 @@ if($(".show-usernotifications .label").length > 0)
             type    : "POST",
             data    : $("#ajax-login").serialize(),
             success : function(r) {
+
                 if(r.success)
                 {
-                  window.location.href = "http://localhost/desart";
+                  $(".login .dimmer .text").text("Prihlasovanie...");
+                  $(".login .dimmer").addClass("active");
+                  setTimeout(function(){
+                    window.location.href = "/desart";
+                  }, 2000);
+
+                }else{
+
+                  $(".login .dimmer .text").text("Overovanie...");
+                  $(".login .dimmer").addClass("active");
+                  setTimeout(function(){
+                    $(".login .dimmer").removeClass("active");
+                    $("#error-login").hide().fadeIn("slow").html('<div class="ui small negative message transition"><p>'+r.error+'</p></div>');
+                  },500);
+
                 }
             }
         });
@@ -111,7 +126,7 @@ if($(".show-usernotifications .label").length > 0)
             success : function(r) {
                 if(r.success)
                 {
-                  window.location.href = "http://localhost/desart";
+                window.location.href = "/desart";
                 }
             }
         });
