@@ -5,48 +5,52 @@
     <div class="ui indeterminate text loader"></div>
   </div>
 
-  <div class="ui one column center aligned very relaxed grid" style="padding:20px">
+  <div class="content">
 
-    <div class="center aligned column">
-      <div class="header">
-        Prihlásiť sa
-      </div>
-      <div class="description">
-        <p>Po prihlásení alebo registrácií budete môct prispievať, komentovať, recenzovať.</p>
-      </div>
-    </div>
+    <div class="ui one column center aligned very relaxed grid">
 
-    <div class="center aligned" id="error-login"></div>
-
-    <div class="column">
-
-      <form id="ajax-login" action="" method="post">
-      <div class="ui form">
-        <div class="field">
-          <div class="ui left icon input">
-            <input placeholder="E-mail" name="email" type="email">
-            <i class="mail icon"></i>
-          </div>
+      <div class="center aligned column">
+        <div class="header">
+          Prihlásiť sa
         </div>
-        <div class="field">
-          <div class="ui left icon input">
-            <input placeholder="Heslo" name="password" type="password">
-            <i class="lock icon"></i>
-          </div>
+        <div class="description">
+          <p>Po prihlásení alebo registrácií budete môct prispievať, komentovať, recenzovať.</p>
         </div>
-        <button class="ui tiny basic button left floated">Zabudnuté heslo?</button>
-        <button class="ui tiny grey submit button right floated" type="submit"><i class="icon sign in"></i> Prihlásiť sa</button>
       </div>
-      </form>
 
-    </div>
+      <div class="center aligned" id="error-login"></div>
 
-    <div class="ui horizontal divider">alebo</div>
+      <div class="column">
 
-    <div class="center aligned column">
-      <div class="ui fluid ui green button">
-        Ešte nemáte účet? Vytvorte si ho.
+        <form id="ajax-login" action="" method="post">
+        <div class="ui form">
+          <div class="field">
+            <div class="ui left icon input">
+              <input placeholder="E-mail" name="email" type="email">
+              <i class="mail icon"></i>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <input placeholder="Heslo" name="password" type="password">
+              <i class="lock icon"></i>
+            </div>
+          </div>
+          <button class="ui tiny basic button left floated">Zabudnuté heslo?</button>
+          <button class="ui tiny grey submit button right floated" type="submit"><i class="icon sign in"></i> Prihlásiť sa</button>
+        </div>
+        </form>
+
       </div>
+
+      <div class="ui horizontal divider">alebo</div>
+
+      <div class="center aligned column">
+        <div class="ui fluid ui green button show-register">
+          Ešte nemáte účet? Vytvorte si ho.
+        </div>
+      </div>
+
     </div>
 
   </div>
