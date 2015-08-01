@@ -9,7 +9,7 @@ class BasePresenter extends Presenter
     protected $User;
     public $Spot;
 
-    public function before()
+    public function onConstruct()
     {
         $this->Spot = $this->Model->getConnection();
 

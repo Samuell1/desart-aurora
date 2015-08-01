@@ -19,8 +19,8 @@ class Group extends Entity
             "color"       => ["type" => "string"],
             "description" => ["type" => "text"],
             "permissions" => ["type" => "array"],
-            "created_at" => ["type" => "datetime"],
-            "updated_at" => ["type" => "datetime"],
+            "created_at"  => ["type" => "datetime"],
+            "updated_at"  => ["type" => "datetime"],
         ];
     }
 }

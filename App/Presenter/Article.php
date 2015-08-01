@@ -9,14 +9,18 @@ namespace App\Presenter;
  */
 class Article extends BasePresenter
 {
+	protected $Article;
+
+	public function before()
+	{
+		$this->Article = $this->Spot->mapper('App\Entity\Article');
+	}
+
 	public function view()
 	{
-		$Article = $this->Spot
-            ->mapper('App\Entity\Article');
-
-		$Article = $Article
+		$Article = $this->Article
 			->all()
-			->with("User")
+			->with(["User", "Category"])
 			->where([
 				'slug' => $this->Param->slug,
 				'status' => "published"
@@ -31,21 +35,21 @@ class Article extends BasePresenter
 		// }
 
 		return $this->View->render('article/view.twig', [
-			//"user" => $this->User->toArray(),
 			'Article' => $Article,
 		]);
 	}
 
-	public function overview(){
-		if ($articles = $this->Model->Article->getArticles()){
-			foreach ($articles as &$article) {
-				$article["image"] = $this->Model->Article->getArticleImage($article["image_id"]);
-			}
+	public function overview()
+	{
+		$Articles = $this->Article
+		->all()
+		->with(["User", "Category"])
+		->where([
+			'status' => "published"
+		]);
 
-			$this->View->render('article/overview.twig', [
-				"user" => $this->User->toArray(),
-				'articles' => $articles,
-			]);
-		}
+		return $this->View->render('article/overview.twig', [
+			'Articles' => $Articles,
+		]);
 	}
 }

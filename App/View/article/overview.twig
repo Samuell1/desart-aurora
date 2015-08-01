@@ -2,57 +2,8 @@
 
 {% block title %}Články{% endblock %}
 
-{% block subhead %}
-<div class="container">
-  <div class="subheadtitle">
-  <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12">
-          <div class="title">Články</div>
-          <div class="desc">čítaj a prečítaj kokotinu :D</div>
-      </div>
-  </div>
-  </div>
-</div>
-<div class="submenu">
-  <div class="container">
-  <ul class="nav nav-pills pull-left hidden-xs">
-    <li><a><i class="fa fa-comments-o"></i> netušim</a></li>
-  </ul>
-  <ul class="nav nav-pills pull-right">
-  <li role="presentation" class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-      Zoradiť podľa <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu" role="menu">
-      <li><a href="">Najkomentovanejšie</a></li>
-      <li><a href="">Najnovšie</a></li>
-      <li><a href="">Najsledovanejšie</a></li>
-    </ul>
-  </li>
-  </ul>
-  </div>
-</div>
-{% endblock %}
-
 {% block content %}
-  {% for article in articles %}
-    <div class="col-sm-6 col-md-4">
-          <div class="articleview-box">
-              <div class="img-responsive">
-                  <img src="http://data.desart.sk/articles/{{ article.image|lower }}" alt="{{ article.name }}">
-                  <div class="date">{{ article.published_time|date("d") }}<small>{{ article.published_time|date("m")|month }}, {{ article.published_time|date("y") }}</small></div>
-              </div>
-              <div class="info">
-                  <small><a href="/clanky/kategoria/4/php" style="color:#2980b9" title="PHP">PHP</a></small>
-                  <h4><a href="{{ url("clanok/" ~ article.slug) }}">{{ article.name }}</a></h4>
-                  {{ article.description }}
-                  <div class="infin">
-                      <span><i class="fa fa-user"></i> Autor: <a class="profillink" data-target="779">VeeeneX</a></span>
-                      <span><i class="fa fa-comments"></i> Komentáre: <a>0</a></span>
-                  </div>
-
-              </div>
-          </div>
-      </div>
+  {% for Article in Articles %}
+    {{ Article.name }}
   {% endfor %}
 {% endblock %}
