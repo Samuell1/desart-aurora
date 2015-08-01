@@ -41,7 +41,7 @@ class Article extends Entity
             "Image"    => $Mapper->belongsTo($Entity, "App\Entity\File", "image_id"),
             "Category" => $Mapper->belongsTo($Entity, "App\Entity\Article\Category", "article_category_id"),
             "Comments" => $Mapper->hasMany($Entity, "App\Entity\Comment", "id")->where(["type" => 0, "subject_type" => 1, "hidden" => 0]),
-            "TagGroup" => $Mapper->hasManyThrough($Entity, "App\Entity\Tag\Group", "App\Entity\Article\Tag", "tag_group_id", "id"),
+            "TagGroup" => $Mapper->hasManyThrough($Entity, "App\Entity\Tag\Group", "App\Entity\Article\Tag", "tag_group_id", "article_id"),
         ];
     }
 
