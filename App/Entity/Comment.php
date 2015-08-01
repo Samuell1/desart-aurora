@@ -28,7 +28,7 @@ class Comment extends Entity
     public static function relations(MapperInterface $Mapper, EntityInterface $Entity)
     {
         return [
-            'User' => $Mapper->belongsTo($Entity, 'App\Entity\User', 'user_id')
+            'User' => $Mapper->belongsTo($Entity, 'App\Entity\User', 'user_id')->select(["id", "username"]),
         ];
     }
 
