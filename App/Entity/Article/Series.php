@@ -17,7 +17,7 @@ class Series extends Entity
             "id"          => ["type" => "smallint", "primary" => true, "autoincrement" => true],
             "image_id"    => ["type" => "smallint"],
             "type"        => ["type" => "string"],
-            "name"        => ["type" => "string"]
+            "name"        => ["type" => "string"],
             "color"       => ["type" => "string"],
             "slug"        => ["type" => "string", "unique" => true],
             "description" => ["type" => "text"],
