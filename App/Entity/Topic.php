@@ -12,7 +12,7 @@ class Topic extends Entity
 
 	protected static $table = "da_topic";
 
-	public function fields()
+	public static function fields()
 	{
 		return [
 			"id"                => ["type" => "smallint", "primary" => true, "autoincrement" => true, "unique" => true],
@@ -30,4 +30,10 @@ class Topic extends Entity
 		];
 	}
 
+	public static function relations(MapperInterface $Mapper, EntityInterface $Entity)
+	{
+		return [
+			"User"     => $Mapper->belongsTo($Entity, "App\Entity\User", "user_id"),
+		];
+	}
 }
