@@ -25,12 +25,14 @@ DROP TABLE IF EXISTS `Desart`.`da_article_category` ;
 
 CREATE TABLE IF NOT EXISTS `Desart`.`da_article_category` (
   `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `color` VARCHAR(45) NOT NULL COMMENT '',
+  `color` VARCHAR(45) NOT NULL DEFAULT '#444' COMMENT '',
   `slug` VARCHAR(225) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL COMMENT '',
   `description` TINYTEXT NULL DEFAULT NULL COMMENT '',
   `parrent_id` SMALLINT(5) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
   `hidden` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
-  PRIMARY KEY (`id`)  COMMENT '',
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
+  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
+  PRIMARY KEY (`id`, `slug`)  COMMENT '',
   UNIQUE INDEX `category_id_UNIQUE` (`id` ASC)  COMMENT '',
   UNIQUE INDEX `slug_UNIQUE` (`slug` ASC)  COMMENT '')
 ENGINE = InnoDB;
@@ -43,12 +45,12 @@ DROP TABLE IF EXISTS `Desart`.`da_article` ;
 
 CREATE TABLE IF NOT EXISTS `Desart`.`da_article` (
   `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `article_category_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL COMMENT '',
+  `category_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL COMMENT '',
   `tag_group_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL COMMENT '',
   `image_id` MEDIUMINT(7) NULL DEFAULT NULL COMMENT 'Default image na article',
-  `author` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
+  `user_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
   `series_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL COMMENT '0 - Hlavna kategoria, tykajuca sa webu',
-  `article_history_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL COMMENT '',
+  `history_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL COMMENT '',
   `slug` VARCHAR(225) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL COMMENT '',
   `name` VARCHAR(200) NOT NULL COMMENT '',
   `content` MEDIUMTEXT NOT NULL COMMENT '',
@@ -56,13 +58,13 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_article` (
   `custom_tags` VARCHAR(250) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NULL COMMENT 'Custom tagy v serializovanom',
   `status` ENUM('published','draft','private') NOT NULL DEFAULT 'published' COMMENT '',
   `type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Typ:\n0 - Clanok\n1 - Rychla novinka',
+  `attachments` TINYTEXT NULL COMMENT 'Pridavne subory a obrazky',
   `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
   `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
   `published_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
-  `attachments` TINYTEXT NULL COMMENT 'Pridavne subory a obrazky',
-  PRIMARY KEY (`id`, `author`)  COMMENT '',
+  PRIMARY KEY (`id`, `user_id`)  COMMENT '',
   UNIQUE INDEX `article_id_UNIQUE` (`id` ASC)  COMMENT '',
-  INDEX `fk_article_article_category1_idx` (`article_category_id` ASC)  COMMENT '')
+  INDEX `fk_article_article_category1_idx` (`category_id` ASC)  COMMENT '')
 ENGINE = InnoDB
 AUTO_INCREMENT = 0;
 
@@ -77,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_user` (
   `username` VARCHAR(32) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL COMMENT '',
   `email` VARCHAR(300) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL COMMENT 'Email',
   `active` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
-  `avatar` TINYINT(1) UNSIGNED NOT NULL DEFAULT 2 COMMENT 'Id v files',
+  `avatar` MEDIUMINT(7) UNSIGNED NOT NULL DEFAULT 2 COMMENT 'Id v files 2 - Default user img',
   `hide_email` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '',
   `banned` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
   `ip` INT UNSIGNED NULL DEFAULT NULL COMMENT '',
@@ -121,18 +123,20 @@ DROP TABLE IF EXISTS `Desart`.`da_comment` ;
 
 CREATE TABLE IF NOT EXISTS `Desart`.`da_comment` (
   `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `article_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
+  `subject_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
+  `subject_type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1 - Article\n2 - Topic\n3 - Question',
   `user_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
   `reply_comment_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL COMMENT '',
-  `comment_history_id` MEDIUMINT(7) UNSIGNED NOT NULL COMMENT '',
-  `comment_type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '',
+  `history_id` MEDIUMINT(7) UNSIGNED NOT NULL COMMENT '',
+  `type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '0 - Velky Komment\n1 - Micro',
   `text` TINYTEXT NOT NULL COMMENT '',
+  `hidden` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
   `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
   `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
-  PRIMARY KEY (`id`, `user_id`, `comment_history_id`)  COMMENT '',
+  PRIMARY KEY (`id`, `subject_id`, `user_id`, `history_id`)  COMMENT '',
   UNIQUE INDEX `comment_id_UNIQUE` (`id` ASC)  COMMENT '',
   INDEX `fk_comments_user1_idx` (`user_id` ASC)  COMMENT '',
-  INDEX `fk_comments_comment_history1_idx` (`comment_history_id` ASC)  COMMENT '')
+  INDEX `fk_comments_comment_history1_idx` (`history_id` ASC)  COMMENT '')
 ENGINE = MyISAM
 AUTO_INCREMENT = 0;
 
@@ -313,20 +317,22 @@ DROP TABLE IF EXISTS `Desart`.`da_group` ;
 CREATE TABLE IF NOT EXISTS `Desart`.`da_group` (
   `id` TINYINT(3) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
   `name` VARCHAR(200) NOT NULL COMMENT '',
-  `color` VARCHAR(45) NULL COMMENT '',
+  `color` VARCHAR(45) NOT NULL DEFAULT '#444' COMMENT '',
   `description` TINYTEXT NULL COMMENT '',
   `permissions` TINYTEXT NOT NULL COMMENT '',
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
+  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
   PRIMARY KEY (`id`)  COMMENT '',
   UNIQUE INDEX `id_UNIQUE` (`id` ASC)  COMMENT '')
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Desart`.`da_user_group`
+-- Table `Desart`.`da_user_group_map`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`da_user_group` ;
+DROP TABLE IF EXISTS `Desart`.`da_user_group_map` ;
 
-CREATE TABLE IF NOT EXISTS `Desart`.`da_user_group` (
+CREATE TABLE IF NOT EXISTS `Desart`.`da_user_group_map` (
   `user_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
   `group_id` TINYINT(3) UNSIGNED NOT NULL COMMENT '',
   PRIMARY KEY (`user_id`, `group_id`)  COMMENT '',
@@ -349,13 +355,11 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_user_metadata` (
   `bio` TINYTEXT NULL DEFAULT NULL COMMENT '',
   `web` VARCHAR(225) NULL DEFAULT NULL COMMENT '',
   `birthday` TIMESTAMP NULL COMMENT '',
-  `update_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
+  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
   PRIMARY KEY (`user_id`)  COMMENT '',
   UNIQUE INDEX `skype_UNIQUE` (`skype` ASC)  COMMENT '',
   INDEX `fk_user_metadata_user1_idx` (`user_id` ASC)  COMMENT '',
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC)  COMMENT '',
-  UNIQUE INDEX `firstname_UNIQUE` (`firstname` ASC)  COMMENT '',
-  UNIQUE INDEX `lastname_UNIQUE` (`lastname` ASC)  COMMENT '')
+  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC)  COMMENT '')
 ENGINE = InnoDB;
 
 
@@ -395,6 +399,9 @@ DROP TABLE IF EXISTS `Desart`.`da_tag` ;
 CREATE TABLE IF NOT EXISTS `Desart`.`da_tag` (
   `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
   `tag` VARCHAR(20) NOT NULL COMMENT '',
+  `hidden` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
+  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
   PRIMARY KEY (`id`)  COMMENT '',
   UNIQUE INDEX `id_UNIQUE` (`id` ASC)  COMMENT '',
   UNIQUE INDEX `tag_UNIQUE` (`tag` ASC)  COMMENT '')
@@ -407,11 +414,28 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Desart`.`da_tag_group` ;
 
 CREATE TABLE IF NOT EXISTS `Desart`.`da_tag_group` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `tag_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
-  PRIMARY KEY (`id`, `tag_id`)  COMMENT '',
+  `id` MEDIUMINT(5) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
+  `name` VARCHAR(45) NOT NULL COMMENT '',
+  `slug` VARCHAR(45) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL COMMENT 'Slug pre tag',
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
+  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
   UNIQUE INDEX `id_UNIQUE` (`id` ASC)  COMMENT '',
-  INDEX `fk_tag_group_tag1_idx` (`tag_id` ASC)  COMMENT '')
+  UNIQUE INDEX `slug_UNIQUE` (`slug` ASC)  COMMENT '')
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Desart`.`da_tag_group_map`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Desart`.`da_tag_group_map` ;
+
+CREATE TABLE IF NOT EXISTS `Desart`.`da_tag_group_map` (
+  `tag_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
+  `tag_group_id` MEDIUMINT(5) UNSIGNED NOT NULL COMMENT '',
+  PRIMARY KEY (`tag_id`, `tag_group_id`)  COMMENT '',
+  INDEX `fk_tag_group_tag1_idx` (`tag_id` ASC)  COMMENT '',
+  INDEX `fk_da_tag_group_map_da_tag_group1_idx` (`tag_group_id` ASC)  COMMENT '')
 ENGINE = InnoDB
 COMMENT = 'Skupina tagov pre nejaky Mega tag';
 
@@ -425,7 +449,9 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_file` (
   `id` MEDIUMINT(7) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
   `name` BINARY(20) NOT NULL COMMENT 'Nazov v sha1',
   `extension` VARCHAR(3) NOT NULL DEFAULT 'png' COMMENT '',
-  `type` ENUM('image') NULL DEFAULT 'image' COMMENT '',
+  `type` ENUM('image', 'zip') NULL DEFAULT 'image' COMMENT '',
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
+  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
   PRIMARY KEY (`id`)  COMMENT '',
   UNIQUE INDEX `image_UNIQUE` (`name` ASC)  COMMENT '',
   UNIQUE INDEX `id_UNIQUE` (`id` ASC)  COMMENT '')
@@ -441,39 +467,18 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_series` (
   `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
   `image_id` MEDIUMINT(7) UNSIGNED NOT NULL COMMENT '',
   `type` ENUM('ordered', 'unordered') NOT NULL DEFAULT 'unordered' COMMENT '',
+  `color` VARCHAR(45) NOT NULL DEFAULT '#444' COMMENT '',
   `name` VARCHAR(200) NOT NULL COMMENT '',
   `slug` VARCHAR(225) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NOT NULL COMMENT '',
   `description` TINYTEXT NOT NULL COMMENT '',
+  `hidden` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
   `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
   `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
-  `color` VARCHAR(45) NOT NULL DEFAULT '#444' COMMENT '',
   PRIMARY KEY (`id`)  COMMENT '',
   UNIQUE INDEX `id_UNIQUE` (`id` ASC)  COMMENT '',
   UNIQUE INDEX `slug_UNIQUE` (`slug` ASC)  COMMENT '',
   UNIQUE INDEX `color_UNIQUE` (`color` ASC)  COMMENT '',
   INDEX `fk_series_image1_idx` (`image_id` ASC)  COMMENT '')
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`da_micro_comment`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`da_micro_comment` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`da_micro_comment` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `user_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
-  `question_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
-  `comment_type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT 'Typ komentara, clanook, stranka',
-  `reply_comment_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL COMMENT '',
-  `comment_history_id` MEDIUMINT(7) UNSIGNED NOT NULL COMMENT '',
-  `text` VARCHAR(250) NOT NULL COMMENT '',
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC)  COMMENT '',
-  PRIMARY KEY (`id`, `user_id`, `comment_history_id`)  COMMENT '',
-  INDEX `fk_micro_comments_user1_idx` (`user_id` ASC)  COMMENT '',
-  INDEX `fk_micro_comments_comment_history1_idx` (`comment_history_id` ASC)  COMMENT '')
 ENGINE = InnoDB;
 
 
@@ -484,6 +489,7 @@ DROP TABLE IF EXISTS `Desart`.`da_comment_vote` ;
 
 CREATE TABLE IF NOT EXISTS `Desart`.`da_comment_vote` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
+  `user_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
   `comment_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
   `down_vote` TINYINT(1) UNSIGNED NULL COMMENT '',
   `up_vote` TINYINT(1) UNSIGNED NULL COMMENT '',
@@ -491,25 +497,8 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_comment_vote` (
   `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
   PRIMARY KEY (`id`, `comment_id`)  COMMENT '',
   UNIQUE INDEX `id_UNIQUE` (`id` ASC)  COMMENT '',
-  INDEX `fk_comments_votes_comments1_idx` (`comment_id` ASC)  COMMENT '')
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Desart`.`da_micro_commnet_vote`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`da_micro_commnet_vote` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`da_micro_commnet_vote` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `micro_comment_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
-  `down_vote` TINYINT(1) UNSIGNED NOT NULL COMMENT '',
-  `up_vote` TINYINT(1) UNSIGNED NOT NULL COMMENT '',
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
-  PRIMARY KEY (`id`, `micro_comment_id`)  COMMENT '',
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC)  COMMENT '',
-  INDEX `fk_micro_commnet_vote_micro_comment1_idx` (`micro_comment_id` ASC)  COMMENT '')
+  INDEX `fk_comments_votes_comments1_idx` (`comment_id` ASC)  COMMENT '',
+  INDEX `fk_da_comment_vote_da_user1_idx` (`user_id` ASC)  COMMENT '')
 ENGINE = InnoDB;
 
 
@@ -593,6 +582,76 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_notification` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `Desart`.`article_tag_map`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Desart`.`article_tag_map` ;
+
+CREATE TABLE IF NOT EXISTS `Desart`.`article_tag_map` (
+  `article_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
+  `tag_group_id` MEDIUMINT(5) UNSIGNED NOT NULL COMMENT '',
+  PRIMARY KEY (`article_id`, `tag_group_id`)  COMMENT '',
+  INDEX `fk_article_tag_map_da_article1_idx` (`article_id` ASC)  COMMENT '',
+  INDEX `fk_article_tag_map_da_tag_group1_idx` (`tag_group_id` ASC)  COMMENT '')
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `Desart`.`da_article`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `Desart`;
+INSERT INTO `Desart`.`da_article` (`id`, `category_id`, `tag_group_id`, `image_id`, `user_id`, `series_id`, `history_id`, `slug`, `name`, `content`, `reads`, `custom_tags`, `status`, `type`, `attachments`, `created_at`, `updated_at`, `published_at`) VALUES (1, NULL, NULL, NULL, 1, NULL, NULL, 'banan', 'Banan je tooop', 'Najlepsi je v cokolade', 500, NULL, 'published', 0, NULL, NULL, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Desart`.`da_user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `Desart`;
+INSERT INTO `Desart`.`da_user` (`id`, `username`, `email`, `active`, `avatar`, `hide_email`, `banned`, `ip`, `account_activated`, `activation_code`, `permissions`, `hash`, `rand`, `created_at`, `updated_at`, `locked_until`) VALUES (1, 'Samuell', 'samuell.patro@gmail.com', 1, 1, 1, 0, NULL, 0, ..., NULL, 'DDyzb*9HMuxR7iTAi2a0322KlSU4gzNw2AQ0Rk9Vj64xg7d0B_BE6zNF8ACJVGP)bG0ezUSb0M9Jqv*v)MqobAM2Obd69fa90f26ac81d700b45e083f3ca9b$2y$11$3zrz9yr5Z08gcQEJJp82Zum80PablFtGYKeUmulErDdl78s9WiSbW', 89, NULL, NULL, NULL);
+INSERT INTO `Desart`.`da_user` (`id`, `username`, `email`, `active`, `avatar`, `hide_email`, `banned`, `ip`, `account_activated`, `activation_code`, `permissions`, `hash`, `rand`, `created_at`, `updated_at`, `locked_until`) VALUES (2, 'VeeeneX', 'veeenex@gmail.com', 1, 1, 0, 0, NULL, 1, ..., NULL, 'DDyzb*9HMuxR7iTAi2a0322KlSU4gzNw2AQ0Rk9Vj64xg7d0B_BE6zNF8ACJVGP)bG0ezUSb0M9Jqv*v)MqobAM2Obd69fa90f26ac81d700b45e083f3ca9b$2y$11$3zrz9yr5Z08gcQEJJp82Zum80PablFtGYKeUmulErDdl78s9WiSbW', 89, NULL, NULL, NULL);
+INSERT INTO `Desart`.`da_user` (`id`, `username`, `email`, `active`, `avatar`, `hide_email`, `banned`, `ip`, `account_activated`, `activation_code`, `permissions`, `hash`, `rand`, `created_at`, `updated_at`, `locked_until`) VALUES (3, 'KotassMan', 'matus.koterba@gmail.com', 1, 1, 1, 0, NULL, 1, ..., NULL, 'DDyzb*9HMuxR7iTAi2a0322KlSU4gzNw2AQ0Rk9Vj64xg7d0B_BE6zNF8ACJVGP)bG0ezUSb0M9Jqv*v)MqobAM2Obd69fa90f26ac81d700b45e083f3ca9b$2y$11$3zrz9yr5Z08gcQEJJp82Zum80PablFtGYKeUmulErDdl78s9WiSbW', 89, NULL, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Desart`.`da_group`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `Desart`;
+INSERT INTO `Desart`.`da_group` (`id`, `name`, `color`, `description`, `permissions`, `created_at`, `updated_at`) VALUES (1, 'Team', '#444', 'Team of This big penis', DEFAULT, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Desart`.`da_user_group_map`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `Desart`;
+INSERT INTO `Desart`.`da_user_group_map` (`user_id`, `group_id`) VALUES (1, 1);
+INSERT INTO `Desart`.`da_user_group_map` (`user_id`, `group_id`) VALUES (2, 1);
+INSERT INTO `Desart`.`da_user_group_map` (`user_id`, `group_id`) VALUES (3, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Desart`.`da_user_metadata`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `Desart`;
+INSERT INTO `Desart`.`da_user_metadata` (`user_id`, `firstname`, `lastname`, `deviantart`, `skype`, `bio`, `web`, `birthday`, `updated_at`) VALUES (1, 'Samuel', 'Patro', DEFAULT, 'samuell.patro', 'Som samko mam rad uhorky a kakac, som bomba :D Rad DEBUGUJEM', NULL, NULL, NULL);
+INSERT INTO `Desart`.`da_user_metadata` (`user_id`, `firstname`, `lastname`, `deviantart`, `skype`, `bio`, `web`, `birthday`, `updated_at`) VALUES (2, 'VeeeneX', DEFAULT, DEFAULT, 'veeenex', 'To som ja :D', NULL, NULL, NULL);
+INSERT INTO `Desart`.`da_user_metadata` (`user_id`, `firstname`, `lastname`, `deviantart`, `skype`, `bio`, `web`, `birthday`, `updated_at`) VALUES (3, 'KotassMan', DEFAULT, DEFAULT, 'kotassman', 'I like dogs', NULL, NULL, NULL);
+
+COMMIT;
+

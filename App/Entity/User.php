@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Spot\Mapper;
 use Spot\Entity;
+use Spot\MapperInterface;
+use Spot\EntityInterface;
 
 class User extends Entity
 {
@@ -30,7 +32,7 @@ class User extends Entity
         ];
     }
 
-    public static function relations(\Spot\MapperInterface $mapper, \Spot\EntityInterface $entity)
+    public static function relations(MapperInterface $mapper, EntityInterface $entity)
     {
         return [
             "Meta" => $mapper->hasOne($entity, "App\Entity\User\Meta", "user_id"),

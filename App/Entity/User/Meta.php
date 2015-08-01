@@ -24,9 +24,4 @@ class Meta extends Entity
             "updated_at" => ["type" => "datetime"]
         ];
     }
-
-    // public static function events(EventEmitter $EventEmitter)
-    // {
-    //     $EventEmitter->on('beforeUpdate', function (Entity $Entity, Mapper $Mapper) {});
-    // }
 }

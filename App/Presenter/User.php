@@ -1,17 +1,21 @@
 <?php
+
 namespace App\Presenter;
 
-class User extends BasePresenter{
-  public $Model = [
-		"User" => "\App\Model\User",
-	];
+use App\Library\Auth\Exception\UserNotFoundException;
 
-  public function view($slug){
+class User extends BasePresenter
+{
+    public function view()
+    {
+        try {
+            $User = $this->Auth->getUser($this->Param->uid);
+            return $this->View->render('user/profile.twig', [
+                'User' => $User,
+            ]);
+        } catch (UserNotFoundException $Exception) {
+            echo "Pouzivatel neexistuje";
+        }
 
-      $user = $this->Model->User->getUser($slug);
-
-  		$this->View->render('user/profile.twig', [
-  			'user' => $user,
-  		]);
-  }
+    }
 }
