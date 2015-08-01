@@ -297,16 +297,16 @@
         },
         {
             "name": "aurora-framework/router",
-            "version": "v1.3.1",
+            "version": "v1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Router.git",
-                "reference": "46cc553c2b259d90218ddb96bc4e29852a24196b"
+                "reference": "6cbce4bc862b2eaae4579960c4372ddf2aaa3998"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Router/zipball/46cc553c2b259d90218ddb96bc4e29852a24196b",
-                "reference": "46cc553c2b259d90218ddb96bc4e29852a24196b",
+                "url": "https://api.github.com/repos/Aurora-Framework/Router/zipball/6cbce4bc862b2eaae4579960c4372ddf2aaa3998",
+                "reference": "6cbce4bc862b2eaae4579960c4372ddf2aaa3998",
                 "shasum": ""
             },
             "require": {
@@ -333,7 +333,7 @@
                 }
             ],
             "description": "Minimal Router",
-            "time": "2015-07-28 12:31:33"
+            "time": "2015-08-01 22:16:00"
         },
         {
             "name": "aurora-framework/service",
