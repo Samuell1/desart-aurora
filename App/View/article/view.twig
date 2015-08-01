@@ -44,4 +44,7 @@
         {{ Article.User.username }}
         {{ Article.User.Meta.bio }}
     </aside>
+    {% for Comment in Article.Comments %}
+        {{ Comment.text }} - {{ Comment.User.username }}
+    {% endfor %}
 {% endblock %}

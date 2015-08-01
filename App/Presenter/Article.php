@@ -16,6 +16,7 @@ class Article extends BasePresenter
 		$this->Article = $this->Spot->mapper('App\Entity\Article');
 	}
 
+
 	public function view()
 	{
 		$Article = $this->Article
@@ -25,10 +26,6 @@ class Article extends BasePresenter
 				'slug' => $this->Param->slug,
 				'status' => "published"
 			])->first();
-
-		// if ($article = $this->Model->Article->selectArticleBySlug($slug)){
-		// 	$this->Model->Article->markAsRead($article["id"]);
-		// }
 
 		return $this->View->render('article/view.twig', [
 			'Article' => $Article,
