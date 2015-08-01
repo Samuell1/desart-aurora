@@ -40,7 +40,8 @@
 {% block content %}
     <article id="articleview">{{ Article.content|raw }}</article>
     <aside id="author">
+        {{ Article.Category.slug }}
       {{ Article.User.username }}
-      {{ Article.User.Meta.bio }}{{ Article.User.Meta.skype }}
+      {{ Article.User.Meta.bio }}
     </aside>
 {% endblock %}
