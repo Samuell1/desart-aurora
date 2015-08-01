@@ -39,7 +39,7 @@
 
 {% block content %}
     <article id="articleview">{{ Article.content|raw }}</article>
-    {{ Article.Category.name }}
+    <font color="{{ Article.Category.color }}">{{ Article.Category.name }}</font>
     <aside id="author">
         {{ Article.User.username }}
         {{ Article.User.Meta.bio }}
