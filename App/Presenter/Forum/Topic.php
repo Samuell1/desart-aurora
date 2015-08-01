@@ -15,4 +15,14 @@ class Topic
 
     }
 
+    public function view()
+    {
+
+        $Topic = $this->Topic
+            ->all();
+
+        return $this->View->render("forum/topic.twig", ["Topic" => $Topic]);
+
+    }
+
 }
