@@ -26,15 +26,8 @@ $Config = include APP . "Config/config.php";
 /**
  * Routes
  */
-$JSONAdapter = new Aurora\Adapter\JSON(APP."Config/");
-$Router = (new Aurora\Router\Loader($JSONAdapter->loadFile("routes")))->load();
-try {
-   $found = $Router->findRoute($Router->findRequestMethod(), $Router->findUri());
-} catch (RouteNotFoundException $Exception) {
+$found = include APP . "Config/routes.php";
 
-} catch (MethodNotAllowedException $Exception) {
-
-}
 
 /**
 * Read the services
