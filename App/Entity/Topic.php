@@ -14,7 +14,6 @@ class Topic extends Entity
 
 	public function fields()
 	{
-
 		return [
 			"id"                => ["type" => "smallint", "primary" => true, "autoincrement" => true, "unique" => true],
 			"locked_user_id"    => ["type" => "smallint"],
@@ -31,4 +30,4 @@ class Topic extends Entity
 		];
 	}
 
-}	
+}
