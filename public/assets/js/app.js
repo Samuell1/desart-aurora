@@ -1,3 +1,9 @@
+
+    var path = {
+      "base" : "/desart",
+    };
+    path.ajax = path.base + "/ajax/";
+
 $(function () {
 
 $('.usernotifications .feed').perfectScrollbar();
@@ -87,7 +93,7 @@ if($(".show-usernotifications .label").length > 0)
         e.preventDefault();
 
         $.ajax({
-            url     : "ajax/login",
+            url     : path.ajax+"login",
             type    : "POST",
             data    : $("#ajax-login").serialize(),
             success : function(r) {
@@ -120,7 +126,7 @@ if($(".show-usernotifications .label").length > 0)
         e.preventDefault();
 
         $.ajax({
-            url     : "ajax/register",
+            url     : path.ajax+"register",
             type    : "POST",
             data    : $("#ajax-register").serialize(),
             success : function(r) {
