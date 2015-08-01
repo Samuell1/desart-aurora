@@ -49,3 +49,5 @@ App/Config/config.php
 /nbproject/private/
 >>>>>>> origin/master
 composer.lock
+nbproject/project.properties
+nbproject/project.xml
