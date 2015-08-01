@@ -17,7 +17,7 @@ class User extends Entity
             "email"             => ["type" => "string", "unique" => true],
             "active"            => ["type" => "boolean"],
             "hide_email"        => ["type" => "boolean"],
-            "banned"            => ["type" => "boolean"]
+            "banned"            => ["type" => "boolean"],
             "hash"              => ["type" => "string"],
             "rand"              => ["type" => "smallint"],
             "account_activated" => ["type" => "boolean"],
