@@ -17,17 +17,17 @@ class Topic extends Entity
 
 		return [
 			"id"                => ["type" => "smallint", "primary" => true, "autoincrement" => true, "unique" => true],
-			"locked_user_id"    => [""],
-			"topic_category_id" => [""],
-			"user_id"           => [""],
-			"slug"              => [""],
-			"name"              => [""],
-			"edit_count"        => [""],
-			"reads"             => [""],
-			"text"              => [""],
-			"locked"            => [""],
-			"created_at"        => [""],
-			"updated_at"        => [""],
+			"locked_user_id"    => ["type" => "smallint"],
+			"topic_category_id" => ["type" => "smallint"],
+			"user_id"           => ["type" => "smallint"],
+			"slug"              => ["type" => "string"],
+			"name"              => ["type" => "string"],
+			"edit_count"        => ["type" => "bigint"],
+			"reads"             => ["type" => "bigint"],
+			"text"              => ["type" => "text"],
+			"locked"            => ["type" => "boolean"],
+			"created_at"        => ["type" => "datetime"],
+			"updated_at"        => ["type" => "datetime"],
 		];
 	}
 
