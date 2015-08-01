@@ -1,6 +1,40 @@
 {
     "baseUri": "/desart",
     "routes": {
+<<<<<<< HEAD
+=======
+        "/": ["GET", ["App\\Presenter\\Home", "index"]],
+        "/user/{uid}": ["GET", ["App\\Presenter\\User", "view"]],
+        "/clanok/{slug}": ["GET", ["App\\Presenter\\Article", "view"], "clanok"],
+        "/clanky": ["GET", ["App\\Presenter\\Article", "overview"]],
+        "/serie": ["GET", ["App\\Presenter\\Series", "overview"]],
+        "/forum/novatema/{category}": ["GET", ["App\\Presenter\\Forum\\Topic", "create"]],
+        "/tema/{slug}": [
+            "GET",
+            ["App\\Presenter\\Forum\\Topic", "view"]
+        ],
+        "/tema/?{slug}/strana/?{page}": [
+            "GET",
+            ["App\\Presenter\\Forum\\Topic", "view"]
+        ],
+        "/forum/kategoria/?{slug}/strana/?{page}": [
+            "GET",
+            ["App\\Presenter\\Forum\\Topic", "overviewCategory"]
+        ],
+        "/forum/kategoria/?{category}": [
+            "GET",
+            ["App\\Presenter\\Forum\\Topic", "overviewCategory"]
+        ],
+        "/forum": [
+            "GET",
+            ["App\\Presenter\\Forum\\Topic", "overview"]
+        ],
+        "/logout": [
+          "GET",
+          ["App\\Controller\\Auth", "logout"],
+          "logout"
+        ],
+>>>>>>> origin/master
         "/ajax": {
             "/login": [
               "POST",

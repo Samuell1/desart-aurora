@@ -51,3 +51,4 @@ App/Config/config.php
 composer.lock
 nbproject/project.properties
 nbproject/project.xml
+App/Config/routes.json
