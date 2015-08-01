@@ -14,7 +14,14 @@ class Comment extends Entity
     public static function fields()
     {
         return [
-            "id" => ["type" => "smallint", "primary" => true, "autoincrement" => true],
+            "id"           => ["type" => "smallint", "primary" => true, "autoincrement" => true],
+            "subject_type" => ["type" => "smallint"],
+            "subject_id"   => ["type" => "smallint"],
+            "reply"        => ["type" => "smallint"],
+            "user_id"      => ["type" => "smallint"],
+            "hidden"       => ["type" => "boolean"],
+            "created_at"   => ["type" => "datetime"],
+            "updated_at"   => ["type" => "datetime"],
         ];
     }
 
