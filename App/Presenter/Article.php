@@ -16,7 +16,6 @@ class Article extends BasePresenter
 		$this->Article = $this->Spot->mapper('App\Entity\Article');
 	}
 
-
 	public function view()
 	{
 		$Article = $this->Article

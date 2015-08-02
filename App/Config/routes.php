@@ -20,6 +20,7 @@ $Router->get("/logout",  ["App\\Controller\\Auth", "logout"], "logout");
 
 $Router->mount("/ajax", function() use ($Router) {
     $Router->post("/login", ["App\\Controller\\Auth", "login"]);
+    $Router->post("/search", ["App\\Controller\\Search", "search"]);
     $Router->post("/register", ["App\\Controller\\Auth", "register"]);
     $Router->post("/topic/add/{num}", ["App\\Controller\\Forum\\Topic", "add"]);
     $Router->post("/post/add/{num}", ["App\\Controller\\Forum\\Post", "add"]);
