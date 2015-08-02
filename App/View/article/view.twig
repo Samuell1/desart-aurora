@@ -2,41 +2,6 @@
 
 {% block title %}{{ Article.name }}{% endblock %}
 
-{% block subhead %}
-  <div class="container">
-    <div class="subheadtitle">
-      <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="title">{{ Article.name }}</div>
-            <div class="desc">{{ Article.description }}</div>
-          </div>
-      </div>
-    </div>
-  </div>
-  <div class="submenu">
-    <div class="container">
-      <ul class="nav nav-pills pull-left hidden-xs">
-        <li>
-          <a href="{{ Url.base("/clanky/kategoria/" ~ Article.category_slug) }}" class="link"><i class="fa fa-list-alt "></i> {{ Article.category_name }}</a>
-        </li>
-        <li>
-          <a><i class="fa fa-eye"></i> {{ Article.read_count }}×</a>
-        </li>
-        <li>
-          <a><i class="fa fa-heart "></i> {{ Article.favorite_count }}×</a>
-        </li>
-        <li>
-          <a><time pubdate="pubdate"><i class="fa fa-calendar"></i> {{ Article.published_time|date("d.m. Y") }}</time></a>
-        </li>
-      </ul>
-      <ul class="nav nav-pills pull-right">
-        <li><a href="{{ Url.base("/@" ~ Article.username) }}" class="link"><i class="fa fa-user"></i>  <strong>{{ Article.username }}</strong></a></li>
-        <li><a class="link active" href="#komentare"><i class="fa fa-plus-square-o"></i>Pridať komentár</a></li>
-      </ul>
-    </div>
-  </div>
-{% endblock %}
-
 {% block content %}
     <article id="articleview">{{ Article.content|raw }}</article>
     <font color="{{ Article.Category.color }}">{{ Article.Category.name }}</font>
@@ -44,6 +9,64 @@
         {{ Article.User.username }}
         {{ Article.User.Meta.bio }}
     </aside>
+    <div class="ui comments">
+        <h3 class="ui dividing header">Comments</h3>
+        {% for Comment in Article.Comments %}
+
+            <div class="comment">
+                <a class="avatar">
+                    <img src="http://lorempixel.com/g/35/35/" alt="avatar">
+                </a>
+
+                <div class="content">
+                    <a class="author">{{ Comment.User.username }}</a>
+
+                    <div class="metadata">
+                        <span class="date">{{ Comment.created_at.date|timeago }}</span>
+                    </div>
+
+
+                    <div class="text">
+                        {{ Comment.text }}
+                    </div>
+
+                    <div class="actions">
+                        <a class="reply">Reply</a>
+                    </div>
+                </div> <!-- ./content -->
+
+                {% for Comment in Comment.ParentComment %}
+
+                    <div class="comments">
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="http://lorempixel.com/35/35/" alt="avatar">
+                            </a>
+
+                            <div class="content">
+                                <a class="author">{{ Comment.User.username }}</a>
+
+                                <div class="metadata">
+                                    <span class="date">{{ Comment.created_at.date|timeago }}</span>
+                                </div>
+
+
+                                <div class="text">
+                                    {{ Comment.text }}
+                                </div>
+
+                                <div class="actions">
+                                    <a class="reply">Reply</a>
+                                </div>
+                            </div> <!-- ./content -->
+                        </div> <!-- ./comment -->
+                    </div> <!-- ./comments -->
+
+                {% endfor %}
+            </div> <!-- ./comment -->
+
+        {% endfor %}
+    </div>
     <div class="ui comments">
         <h3 class="ui dividing header">Comments</h3>
         {% for Comment in Article.Comments %}

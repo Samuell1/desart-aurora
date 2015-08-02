@@ -11,7 +11,7 @@ class User extends BasePresenter
         try {
             $User = $this->Auth->getUser($this->Param->uid);
             return $this->View->render('user/profile.twig', [
-                'User' => $User,
+                'Profile' => $User,
             ]);
         } catch (UserNotFoundException $Exception) {
             echo "Pouzivatel neexistuje";
