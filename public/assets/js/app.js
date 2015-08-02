@@ -47,18 +47,23 @@ var content = [
   { title: 'kotas je ešte väčší' },
 ];
 
+
+var data;
+
 $('.ui.search input').keypress(function() {
   if(!$('.ui.search').hasClass("loading")) {
     $('.ui.search').addClass("loading");
   }
+
+  data = $(".ui.search input").val();
 });
 
 $('.ui.search')
 .search({
-  source: content,
-  onResultsOpen: function() {
-    
+  apiSettings: {
+    url: path.ajax + "search/?query={query}",
   },
+  type: 'category',
   searchDelay: 1000,
 });
 
