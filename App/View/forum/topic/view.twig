@@ -32,7 +32,7 @@
 							<a class="author">{{ Comment.User.username }}</a>
 
 							<div class="metadata">
-								<span class="date">Today at 5:42PM</span>
+								<span class="date">{{ Comment.created_at|timeago }}</span>
 							</div>
 
 
@@ -57,7 +57,7 @@
 										<a class="author">{{ Comment.User.username }}</a>
 
 										<div class="metadata">
-											<span class="date">Today at 5:42PM</span>
+											<span class="date">{{ Comment.created_at|date("Y-m-d")|timeago }}</span>
 										</div>
 
 
