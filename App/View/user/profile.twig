@@ -1,5 +1,12 @@
-{{ User.username }}
-{{ User.Meta.bio }}
-{% for Group in User.Groups %}
-    <span text-color="{{ Group.color}}">{{ Group.name }}</span>
-{% endfor %}
+{% extends "index.twig" %}
+
+
+{% block title %}{{ Profile.username }}{% endblock %}
+
+{% block content %}
+	<h2>{{ Profile.username }}</h2>
+    <div>{{ Profile.Meta.bio }}</div>
+	{% for Group in Profile.Groups %}
+	    <div><span text-color="{{ Group.color}}">{{ Group.name }}</span></div>
+	{% endfor %}
+{% endblock %}
