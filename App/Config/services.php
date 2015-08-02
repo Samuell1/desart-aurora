@@ -25,6 +25,24 @@ $Twig = new Twig_Environment($Loader
 // ]
 );
 $Twig->addExtension(new Aurora\Twig\Extension($Resolver));
+$Twig->addFilter(new \Twig_SimpleFilter('timeago', function ($datetime) {
+	$time = time() - strtotime($datetime);
+	$units = array (
+	31536000 => ['rokom', 'rokmi', 'rokmi'],
+	2592000 => ['mesiacom', 'mesiacmi', 'mesiacmi'],
+	604800 => ['týždŘom', 'týždŘami', 'týždŘami'],
+	86400 => ['dŘom', 'dŘami', 'dŘami'],
+	3600 => ['hodinou', 'hodinami', 'hodinami'],
+	60 => ['minútou', 'minútami', 'minútami'],
+	1 => ['sekundou', 'sekundami', 'sekundami']
+	);
+
+	foreach ($units as $unit => $val) {
+		if ($time < $unit) continue;
+		$numberOfUnits = floor($time / $unit);
+		return ($val == 'second') ? 'pred pár sekundami' : "pred ".$numberOfUnits." ".sklonuj($numberOfUnits, $val[0], $val[1], $val[2]);
+	}
+}));
 
 /** View **/
 $Resolver->define("Aurora\\MVC\\View", [
