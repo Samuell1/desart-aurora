@@ -12,17 +12,18 @@
 
 
 {% block content %}
-	
+
 	<div class="ui container">
 		{% if Topic %}
 			<h1>{{ Topic.name }}</h1>
+            {{ Topic.created_at.date|timeago }}
 			<small><strong>Autor</strong> : {{ Topic.User.username }}</small>
 			<p class="ui segment">{{ Topic.text }}</p>
 
 			<div class="ui comments">
 				<h3 class="ui dividing header">Comments</h3>
 				{% for Comment in Topic.Comments %}
-					
+
 					<div class="comment">
 						<a class="avatar">
 							<img src="http://lorempixel.com/g/35/35/" alt="avatar">
@@ -32,7 +33,7 @@
 							<a class="author">{{ Comment.User.username }}</a>
 
 							<div class="metadata">
-								<span class="date">Today at 5:42PM</span>
+								<span class="date">{{ Comment.created_at.date|timeago }}</span>
 							</div>
 
 
@@ -57,7 +58,7 @@
 										<a class="author">{{ Comment.User.username }}</a>
 
 										<div class="metadata">
-											<span class="date">Today at 5:42PM</span>
+											<span class="date">{{ Comment.created_at.date|timeago }}</span>
 										</div>
 
 

@@ -25,13 +25,26 @@ $Twig = new Twig_Environment($Loader
 // ]
 );
 $Twig->addExtension(new Aurora\Twig\Extension($Resolver));
+
+function inflect($intCount, $w1, $w2, $w3) {
+	switch($intCount) {
+	    case 1:
+	      return $w1;
+	    case 2:
+	    case 3:
+	    case 4:
+	      return $w2;
+	    default:
+	      return $w3;
+	  }
+}
 $Twig->addFilter(new \Twig_SimpleFilter('timeago', function ($datetime) {
 	$time = time() - strtotime($datetime);
 	$units = [
 		31536000 => ['rokom', 'rokmi', 'rokmi'],
 		2592000  => ['mesiacom', 'mesiacmi', 'mesiacmi'],
-		604800   => ['týžďom', 'týždŘami', 'týždŘami'],
-		86400    => ['dŘom', 'dŘami', 'dŘami'],
+		604800   => ['týždňom', 'týždňami', 'týždňami'],
+		86400    => ['dňom', 'dňami', 'dňami'],
 		3600     => ['hodinou', 'hodinami', 'hodinami'],
 		60       => ['minútou', 'minútami', 'minútami'],
 		1        => ['sekundou', 'sekundami', 'sekundami']
@@ -40,8 +53,12 @@ $Twig->addFilter(new \Twig_SimpleFilter('timeago', function ($datetime) {
 	foreach ($units as $unit => $val) {
 		if ($time < $unit) continue;
 		$numberOfUnits = floor($time / $unit);
-		return ($val == 'second') ? 'pred pár sekundami' : "pred ".$numberOfUnits." ".sklonuj($numberOfUnits, $val[0], $val[1], $val[2]);
+		return ($val == 'second') ? 'pred pár sekundami' : "pred ".$numberOfUnits." ".inflect($numberOfUnits, $val[0], $val[1], $val[2]);
 	}
+}));
+
+$Twig->addFunction(new \Twig_SimpleFunction('sklonuj', function ($intCount, $w1, $w2, $w3,$showcount = true) {
+  return ($showcount ? $intCount : "")." ".inflect($intCount, $w1, $w2, $w3);
 }));
 
 /** View **/
