@@ -3,7 +3,15 @@
 {% block title %}{{ Article.name }}{% endblock %}
 
 {% block content %}
-    <article id="articleview">{{ Article.content|raw }}</article>
+
+    <div class="article-header center aligned" style="background:url(/desart/assets/img/bg.jpg) center center;height:600px;margin-top:-15px">
+
+      <h3>{{ Article.name }}</h3>
+
+    </div>
+
+
+    <article id="articleview" style="max-width: 700px;margin:auto;padding:20px 15px">{{ Article.content|raw }}</article>
     <font color="{{ Article.Category.color }}">{{ Article.Category.name }}</font>
     <aside id="author">
         {{ Article.User.username }}
@@ -66,34 +74,13 @@
             </div> <!-- ./comment -->
 
         {% endfor %}
-    </div>
-    <div class="ui comments">
-        <h3 class="ui dividing header">Comments</h3>
-        {% for Comment in Article.Comments %}
-            <div class="comment">
-                <a class="avatar">
-                    <img src="/images/avatar/small/matt.jpg">
-                </a>
-                <div class="content">
-                    <a class="author">{{ Comment.User.username }}</a>
-                    <div class="metadata">
-                        <span class="date">{{ Comment.created_at|date('Y-m-d') }}</span>
-                    </div>
-                    <div class="text">
-                        {{ Comment.text }}
-                    </div>
-                    <div class="actions">
-                        <a class="reply">Reply</a>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-        <form class="ui reply form">
+
+        <form class="ui small reply form">
             <div class="field">
                 <textarea></textarea>
             </div>
-            <div class="ui blue labeled submit icon button">
-                <i class="icon edit"></i> Add Reply
+            <div class="ui small blue labeled submit icon button">
+                <i class="icon edit"></i> Komentovať
             </div>
         </form>
     </div>

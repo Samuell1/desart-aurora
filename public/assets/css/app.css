@@ -13,11 +13,13 @@ body{font-family: "Open Sans";background:#f9f9f9 !important;}
 
 .clearfix{clear:both}
 
+
 .container {max-width: 1000px; margin: 0 auto;padding:0 12px}
 .ui.menu{box-shadow:none;border-radius:0;border:0;border-bottom:1px solid #eee;}
 .ui.menu .item.noneborder::before{width:0px}
 .ui.menu .item.lowpadding{padding-left:5px;padding-right:5px}
 .ui.menu .item.lesspadd{padding-left:0px;}
+.ui.menu a.item{color:#8A8E9A;font-family: Ubuntu;text-transform: uppercase;font-weight:100}
 .ui.menu a.item:hover,.ui.menu a.item:focus,.ui.menu a.item:active{background:transparent}
 .ui.menu .logo{padding:30px}
 
@@ -28,6 +30,8 @@ body{font-family: "Open Sans";background:#f9f9f9 !important;}
 /* login */
 .modal.register .header,.modal.login .header{padding:10px 0;font-size:17px}
 .modal.register .description,.modal.login .description{padding:5px 0;font-size:12px;color:#888}
+.modal.login .content{border-radius:0.285714rem;}
+
 /* user ui */
 .usernotifications .ui.feed{overflow-y:scroll;max-height:220px;width: 280px;margin:-11.5px -14px;font-size:12px;position: relative;z-index:100;border-radius: 0.285714rem;}
 .usernotifications .ui.feed .event{border-bottom:1px solid #f5f5f5;padding:10px !important;font-family:Ubuntu}
