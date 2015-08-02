@@ -23,14 +23,13 @@ class Search extends BaseController
             ],
             "results" => []
         ];
-
+        var_dump($User
+            ->select(["username", "id", "email"])
+            ->whereFieldSql("username", "?%", [1 => $query])
+            ->limit(3));
         $return["results"]["users"] = [
             "name" => "Používatelia",
-            "results" =>  $User
-                ->select(["username", "id", "email"])
-                ->orWhere(['username' => $query])
-                ->order(['email' => $query])
-                ->limit(3),
+            "results" =>  []
         ];
 
         return json_encode($return);
