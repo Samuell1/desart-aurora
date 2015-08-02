@@ -44,6 +44,7 @@ $('.show-usernotifications')
 var content = [
   { title: 'Veenex je pán' },
   { title: 'banan' },
+  { title: 'kotas je ešte väčší' },
 ];
 
 $('.ui.search')
