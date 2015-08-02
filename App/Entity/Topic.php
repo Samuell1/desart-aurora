@@ -33,7 +33,14 @@ class Topic extends Entity
 	public static function relations(MapperInterface $Mapper, EntityInterface $Entity)
 	{
 		return [
-			"User"     => $Mapper->belongsTo($Entity, "App\Entity\User", "user_id"),
+			"User" => $Mapper->belongsTo($Entity, "App\Entity\User", "user_id"),
+			"Comments" => $Mapper->hasMany($Entity, "App\Entity\Comment", "subject_id")
+							->where([
+								"type"             => 0,
+								"subject_type"     => 2,
+								"hidden"           => 0,
+								"reply_comment_id" => 0
+							]),
 		];
 	}
 }

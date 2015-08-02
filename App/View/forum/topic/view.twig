@@ -1,2 +1,86 @@
-{{ Topic.name }}
-{{ Topic.text }}
+{% extends "index.twig" %}
+
+{% block title %}
+
+	{% if Topic %}
+		{{ Topic.name }}
+	{% else %}
+		404
+	{% endif %} | Téma
+
+{% endblock %}
+
+
+{% block content %}
+	
+	<div class="ui container">
+		{% if Topic %}
+			<h1>{{ Topic.name }}</h1>
+			<small><strong>Autor</strong> : {{ Topic.User.username }}</small>
+			<p class="ui segment">{{ Topic.text }}</p>
+
+			<div class="ui comments">
+				<h3 class="ui dividing header">Comments</h3>
+				{% for Comment in Topic.Comments %}
+					
+					<div class="comment">
+						<a class="avatar">
+							<img src="http://lorempixel.com/g/35/35/" alt="avatar">
+						</a>
+
+						<div class="content">
+							<a class="author">{{ Comment.User.username }}</a>
+
+							<div class="metadata">
+								<span class="date">Today at 5:42PM</span>
+							</div>
+
+
+							<div class="text">
+								{{ Comment.text }}
+							</div>
+
+							<div class="actions">
+								<a class="reply">Reply</a>
+							</div>
+						</div> <!-- ./content -->
+
+						{% for Comment in Comment.ParentComment %}
+
+							<div class="comments">
+								<div class="comment">
+									<a class="avatar">
+										<img src="http://lorempixel.com/35/35/" alt="avatar">
+									</a>
+
+									<div class="content">
+										<a class="author">{{ Comment.User.username }}</a>
+
+										<div class="metadata">
+											<span class="date">Today at 5:42PM</span>
+										</div>
+
+
+										<div class="text">
+											{{ Comment.text }}
+										</div>
+
+										<div class="actions">
+											<a class="reply">Reply</a>
+										</div>
+									</div> <!-- ./content -->
+								</div> <!-- ./comment -->
+							</div> <!-- ./comments -->
+
+						{% endfor %}
+					</div> <!-- ./comment -->
+
+				{% endfor %}
+			</div>
+
+		{% else %}
+			Topic s takýmto názvom sa nenašiel.
+		{% endif %}
+	</div>
+
+{% endblock %}

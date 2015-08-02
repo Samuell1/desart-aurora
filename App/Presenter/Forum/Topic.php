@@ -17,8 +17,14 @@ class Topic extends BasePresenter
     {
         $Topic = $this->Topic
         ->all()
-        ->with("User")
-        ->where(['locked' => 0, "slug" => $this->Param->slug])
+        ->with([
+            "User",
+            "Comments"
+        ])
+        ->where([
+            "locked" => 0,
+            "slug"   => $this->Param->slug
+        ])
         ->first();
 
         return $this->View->render("forum/topic/view.twig", [
