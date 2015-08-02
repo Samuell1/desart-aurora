@@ -41,21 +41,10 @@ $('.show-usernotifications')
     }
 });
 
-var content = [
-  { title: 'Veenex je pán' },
-  { title: 'banan' },
-  { title: 'kotas je ešte väčší' },
-];
-
-
-var data;
-
 $('.ui.search input').keypress(function() {
   if(!$('.ui.search').hasClass("loading")) {
     $('.ui.search').addClass("loading");
   }
-
-  data = $(".ui.search input").val();
 });
 
 $('.ui.search')
