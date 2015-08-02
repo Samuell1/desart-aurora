@@ -207,30 +207,6 @@ COMMENT = 'Databaza prispevku na fore';
 
 
 -- -----------------------------------------------------
--- Table `Desart`.`da_topic_post`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`da_topic_post` ;
-
-CREATE TABLE IF NOT EXISTS `Desart`.`da_topic_post` (
-  `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `user_id` SMALLINT(5) UNSIGNED NULL COMMENT '',
-  `topic_id` SMALLINT UNSIGNED NOT NULL COMMENT '',
-  `edit_user_id` SMALLINT(5) UNSIGNED NULL COMMENT '',
-  `edit_count` MEDIUMINT UNSIGNED NOT NULL COMMENT '',
-  `text` MEDIUMTEXT NOT NULL COMMENT '',
-  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
-  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
-  PRIMARY KEY (`id`, `user_id`, `topic_id`, `edit_user_id`)  COMMENT '',
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC)  COMMENT '',
-  INDEX `fk_topic_post_topic1_idx` (`topic_id` ASC)  COMMENT '',
-  INDEX `fk_topic_post_user1_idx` (`user_id` ASC)  COMMENT '',
-  INDEX `fk_topic_post_user2_idx` (`edit_user_id` ASC)  COMMENT '')
-ENGINE = MyISAM
-AUTO_INCREMENT = 0
-COMMENT = 'Prispevok do topiku v databaze';
-
-
--- -----------------------------------------------------
 -- Table `Desart`.`da_topic_read`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `Desart`.`da_topic_read` ;
@@ -659,16 +635,6 @@ COMMIT;
 START TRANSACTION;
 USE `Desart`;
 INSERT INTO `Desart`.`da_topic` (`id`, `locked_user_id`, `topic_category_id`, `user_id`, `slug`, `name`, `edit_count`, `reads`, `text`, `locked`, `created_at`, `updated_at`) VALUES (1, NULL, 1, 2, 'co-je-to-php', 'Čo je to PHP?', 1, 1, 'Ja neviem vobec ako sa robia stranky, a čo je to vôbec php?', 0, NULL, NULL);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `Desart`.`da_topic_post`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `Desart`;
-INSERT INTO `Desart`.`da_topic_post` (`id`, `user_id`, `topic_id`, `edit_user_id`, `edit_count`, `text`, `created_at`, `updated_at`) VALUES (1, 2, 1, 2, 1, 'Mno to je scriptovací jazyk pre Server.', NULL, NULL);
 
 COMMIT;
 
