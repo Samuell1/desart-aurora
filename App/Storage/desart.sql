@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_topic` (
   `user_id` SMALLINT(5) UNSIGNED NULL COMMENT '',
   `slug` VARCHAR(225) NOT NULL COMMENT '',
   `name` VARCHAR(200) NOT NULL COMMENT '',
-  `edit_count` MEDIUMINT UNSIGNED NOT NULL COMMENT '',
+  `edit_count` MEDIUMINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '',
   `reads` MEDIUMINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
   `text` MEDIUMTEXT NOT NULL COMMENT '',
   `locked` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
@@ -639,6 +639,36 @@ START TRANSACTION;
 USE `Desart`;
 INSERT INTO `Desart`.`da_comment` (`id`, `subject_id`, `subject_type`, `user_id`, `reply_comment_id`, `history_id`, `type`, `text`, `hidden`, `created_at`, `updated_at`) VALUES (1, 1, 1, 1, 0, 0, 0, 'Toto je komentár', 0, NULL, NULL);
 INSERT INTO `Desart`.`da_comment` (`id`, `subject_id`, `subject_type`, `user_id`, `reply_comment_id`, `history_id`, `type`, `text`, `hidden`, `created_at`, `updated_at`) VALUES (2, 1, 1, 2, 1, 0, 0, 'Hej ten sa mi nepáči', 0, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Desart`.`da_topic_category`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `Desart`;
+INSERT INTO `Desart`.`da_topic_category` (`id`, `name`, `slug`, `description`, `hidden`, `parent_id`, `created_at`, `updated_at`) VALUES (1, 'PHP', 'php', 'Svet php.', 0, 0, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Desart`.`da_topic`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `Desart`;
+INSERT INTO `Desart`.`da_topic` (`id`, `locked_user_id`, `topic_category_id`, `user_id`, `slug`, `name`, `edit_count`, `reads`, `text`, `locked`, `created_at`, `updated_at`) VALUES (1, NULL, 1, 2, 'co-je-to-php', 'Čo je to PHP?', 1, 1, 'Ja neviem vobec ako sa robia stranky, a čo je to vôbec php?', 0, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Desart`.`da_topic_post`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `Desart`;
+INSERT INTO `Desart`.`da_topic_post` (`id`, `user_id`, `topic_id`, `edit_user_id`, `edit_count`, `text`, `created_at`, `updated_at`) VALUES (1, 2, 1, 2, 1, 'Mno to je scriptovací jazyk pre Server.', NULL, NULL);
 
 COMMIT;
 

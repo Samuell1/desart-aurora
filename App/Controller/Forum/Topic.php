@@ -21,7 +21,6 @@ class Topic extends BaseController {
     $this->topicValidator = v::create()
       ->attribute('name', v::string()->notEmpty()->length(5, 80)->charset('UTF-8')->setName('name'))
       ->attribute('text', v::string()->notEmpty()->length(5, 20000)->setName('text'));
-
 	}
 
   /**
