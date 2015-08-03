@@ -8,7 +8,7 @@
     {% if Articles|length >= 1 %}
         {% for Article in Articles %}
             {{ Article.slug }}
-            <a href="{{ Url.get("clanok", {"slug": Article.slug}) }}">{{ Article.name }}</a>
+            <a href="{{ Url.get("article", {"slug": Article.slug}) }}">{{ Article.name }}</a>
         {% endfor %}
     {% else %}
         Žiadny článok

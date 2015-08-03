@@ -7,7 +7,7 @@ $Router->setBaseUri("/desart");
 $Router->get("/", ["App\\Presenter\\Home", "index"]);
 $Router->get("/user/{uid}", ["App\\Presenter\\User", "view"], "profile");
 
-$Router->get("/clanok/{slug}", ["App\\Presenter\\Article", "view"], "clanok");
+$Router->get("/clanok/{slug}", ["App\\Presenter\\Article", "view"], "article");
 $Router->get("/clanky", ["App\\Presenter\\Article", "overview"]);
 
 $Router->get("/forum/novatema/{category}", ["App\\Presenter\\Forum\\Topic", "create"]);

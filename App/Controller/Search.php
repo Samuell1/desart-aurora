@@ -31,12 +31,19 @@ class Search extends BaseController
             ],
             "results" => []
         ];
-        $return["results"]["users"] = [
-            "name" => "Používatelia",
-            "results" => $this->getUserResults($query, $User)
+        $response["results"] = [
+            "users" => [
+                "name" => "Používatelia",
+                "results" => $this->getUserResults($query, $User)
+            ],
+            "articles" => [
+                "name" => "články",
+                "results" => $this->getArticleResults($query, $Article)
+                ]
+
         ];
 
-        return json_encode($return);
+        return json_encode($response);
     }
 
     public function getUserResults($query, $User)
@@ -46,14 +53,32 @@ class Search extends BaseController
             ->where(["username :like" => "%${query}%"])
             ->orWhere(["email :like" => "%${query}%"]);
 
-        $userResults = [];
+        $results = [];
 
         foreach ($Users as $User) {
-            $userResults[] = [
+            $results[] = [
                 "title" => $User->username,
                 "url" => $this->Url->get("profile", ["uid" => $User->username])
             ];
         }
-        return $userResults;
+        return $results;
+    }
+
+    public function getArticleResults($query, $Article)
+    {
+        $Articles = $Article
+            ->select(["name", "slug", "id", "status"])
+            ->where(["name :like" => "%${query}%", "status" => "published"])
+            ->orWhere(["slug :like" => "%${query}%"]);
+
+        $results = [];
+
+        foreach ($Articles as $Article) {
+            $results[] = [
+                "title" => $Article->name,
+                "url" => $this->Url->get("article", ["slug" => $Article->slug])
+            ];
+        }
+        return $results;
     }
 }
