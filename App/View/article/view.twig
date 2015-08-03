@@ -10,18 +10,43 @@
 
     <div class="article-title">
       <h1>{{ Article.name }}</h3>
-      <small>HTTP/1.1 sa dočkalo zmeny. Čo pre nás táto zmena znamená? </small>
+      <small>HTTP/1.1 sa dočkalo zmeny. Čo pre nás táto zmena znamená?</small>
     </div>
 
     <div class="article-info">
 
-      <a class="ui inverted button" style="color:{{ Article.Category.color }}">
-        {{ Article.Category.name }}
-      </a>
+      <div class="ui small inverted horizontal animated relaxed list">
+        <div class="item">
+          <img class="ui avatar image" src="http://data.desart.sk/avatars/{{ Article.User.id }}.png">
+          <div class="content">
+            <a href="#" class="header">{{ Article.User.username }}</a>
+          </div>
+        </div>
 
-      <a class="ui inverted basic button right floated">
-        {{ Article.User.username }}
-      </a>
+        <div class="item">
+          <div class="content">
+            <div class="header">publikované 1. Apríla 2015</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui mini inverted statistic right floated">
+        <div class="value">
+          5 550
+        </div>
+        <div class="label">
+          Prečítané
+        </div>
+      </div>
+
+      <div class="ui mini inverted statistic right floated">
+        <div class="value">
+          28
+        </div>
+        <div class="label">
+          obľúbené
+        </div>
+      </div>
 
     </div>
 
