@@ -2,8 +2,16 @@
 
 namespace App\Controller;
 
+use Aurora\Helper\Url;
+
 class Search extends BaseController
 {
+    protected $Url;
+
+    public function before(Url $Url)
+    {
+        $this->Url = $Url;
+    }
 
     public function search()
     {
@@ -14,7 +22,7 @@ class Search extends BaseController
         $Topic = $this->Spot->mapper('App\Entity\Topic');
         $User = $this->Spot->mapper('App\Entity\User');
 
-        $query = $this->Request->post("query");
+        $query = $this->Request->get("query");
 
         $response = [
             "action" => [
@@ -23,16 +31,29 @@ class Search extends BaseController
             ],
             "results" => []
         ];
-        var_dump($User
-            ->select(["username", "id", "email"])
-            ->whereFieldSql("username", "?%", [1 => $query])
-            ->limit(3));
         $return["results"]["users"] = [
             "name" => "Používatelia",
-            "results" =>  []
+            "results" => $this->getUserResults($query, $User)
         ];
 
         return json_encode($return);
     }
 
+    public function getUserResults($query, $User)
+    {
+        $Users = $User
+            ->select(["username", "email", "id"])
+            ->where(["username :like" => "%${query}%"])
+            ->orWhere(["email :like" => "%${query}%"]);
+
+        $userResults = [];
+
+        foreach ($Users as $User) {
+            $userResults[] = [
+                "title" => $User->username,
+                "url" => $this->Url->get("profile", ["uid" => $User->username])
+            ];
+        }
+        return $userResults;
+    }
 }
