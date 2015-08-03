@@ -4,26 +4,46 @@
 
 {% block content %}
 
-    <div class="article-header center aligned" style="background:url(/desart/assets/img/bg.jpg) center center;height:600px;margin-top:-15px">
+  <div class="article-header" style="background:url(http://data.icrazy.eu/i/JQqyNvxF.jpg) center center;background-size:cover">
 
-      <h3>{{ Article.name }}</h3>
+    <div class="article-shadow"></div>
+
+    <div class="article-title">
+      <h1>{{ Article.name }}</h3>
+      <small>HTTP/1.1 sa dočkalo zmeny. Čo pre nás táto zmena znamená? </small>
+    </div>
+
+    <div class="article-info">
+
+      <a class="ui inverted button" style="color:{{ Article.Category.color }}">
+        {{ Article.Category.name }}
+      </a>
+
+      <a class="ui inverted basic button right floated">
+        {{ Article.User.username }}
+      </a>
 
     </div>
 
+  </div>
 
-    <article id="articleview" style="max-width: 700px;margin:auto;padding:20px 15px">{{ Article.content|raw }}</article>
-    <font color="{{ Article.Category.color }}">{{ Article.Category.name }}</font>
-    <aside id="author">
-        {{ Article.User.username }}
-        {{ Article.User.Meta.bio }}
-    </aside>
+
+  <div class="container-article">
+
+    <article id="article-view">{{ Article.content|raw }}</article>
+
+    <div class="ui piled segment">
+      <h4 class="ui header">{{ Article.User.username }}</h4>
+      <p>{{ Article.User.Meta.bio }}</p>
+    </div>
+
     <div class="ui comments">
-        <h3 class="ui dividing header">Comments</h3>
+        <h3 class="ui dividing header">Komentáre k článku </h3>
         {% for Comment in Article.Comments %}
 
             <div class="comment">
                 <a class="avatar">
-                    <img src="http://lorempixel.com/g/35/35/" alt="avatar">
+                    <img src="http://data.desart.sk/avatars/{{ Comment.User.id }}.png" alt="avatar">
                 </a>
 
                 <div class="content">
@@ -48,7 +68,7 @@
                     <div class="comments">
                         <div class="comment">
                             <a class="avatar">
-                                <img src="http://lorempixel.com/35/35/" alt="avatar">
+                                <img src="http://data.desart.sk/avatars/{{ Comment.User.id }}.png" alt="avatar">
                             </a>
 
                             <div class="content">
@@ -75,7 +95,7 @@
 
         {% endfor %}
 
-        <form class="ui small reply form">
+        <form id="ajax-comment" class="ui small reply form">
             <div class="field">
                 <textarea></textarea>
             </div>
@@ -84,4 +104,8 @@
             </div>
         </form>
     </div>
+
+
+
+  </div>
 {% endblock %}
