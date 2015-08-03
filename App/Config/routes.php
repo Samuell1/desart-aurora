@@ -11,7 +11,7 @@ $Router->get("/clanok/{slug}", ["App\\Presenter\\Article", "view"], "article");
 $Router->get("/clanky", ["App\\Presenter\\Article", "overview"]);
 
 $Router->get("/forum/novatema/{category}", ["App\\Presenter\\Forum\\Topic", "create"]);
-$Router->get("/tema/{slug}", ["App\\Presenter\\Forum\\Topic", "view"]);
+$Router->get("/tema/{slug}", ["App\\Presenter\\Forum\\Topic", "view"], "topic");
 $Router->get("/tema/?{slug}/strana/?{page}", ["App\\Presenter\\Forum\\Topic", "view"]);
 $Router->get("/forum/kategoria/?{slug}/strana/?{page}", ["App\\Presenter\\Forum\\Topic", "overviewCategory"]);
 $Router->get("/forum/kategoria/?{category}", ["App\\Presenter\\Forum\\Topic", "overviewCategory"]);

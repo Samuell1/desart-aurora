@@ -39,7 +39,11 @@ class Search extends BaseController
             "articles" => [
                 "name" => "články",
                 "results" => $this->getArticleResults($query, $Article)
-                ]
+            ],
+            "topics" => [
+                "name" => "Témy",
+                "results" => $this->getTopicResults($query, $Topic)
+            ]
 
         ];
 
@@ -51,7 +55,8 @@ class Search extends BaseController
         $Users = $User
             ->select(["username", "email", "id"])
             ->where(["username :like" => "%${query}%"])
-            ->orWhere(["email :like" => "%${query}%"]);
+            ->orWhere(["email :like" => "%${query}%"])
+            ->limit(3);
 
         $results = [];
 
@@ -69,7 +74,8 @@ class Search extends BaseController
         $Articles = $Article
             ->select(["name", "slug", "id", "status"])
             ->where(["name :like" => "%${query}%", "status" => "published"])
-            ->orWhere(["slug :like" => "%${query}%"]);
+            ->orWhere(["slug :like" => "%${query}%"])
+            ->limit(3);
 
         $results = [];
 
@@ -77,6 +83,25 @@ class Search extends BaseController
             $results[] = [
                 "title" => $Article->name,
                 "url" => $this->Url->get("article", ["slug" => $Article->slug])
+            ];
+        }
+        return $results;
+    }
+
+    public function getTopicResults($query, $Topic)
+    {
+        $Topics = $Topic
+            ->select(["name", "slug", "id"])
+            ->where(["name :like" => "%${query}%"])
+            ->orWhere(["slug :like" => "%${query}%"])
+            ->limit(3);
+
+        $results = [];
+
+        foreach ($Topics as $Topic) {
+            $results[] = [
+                "title" => $Topic->name,
+                "url" => $this->Url->get("topic", ["slug" => $Topic->slug])
             ];
         }
         return $results;
