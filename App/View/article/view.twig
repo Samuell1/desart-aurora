@@ -57,9 +57,25 @@
 
     <article id="article-view">{{ Article.content|raw }}</article>
 
-    <div class="ui piled segment">
-      <h4 class="ui header">{{ Article.User.username }}</h4>
-      <p>{{ Article.User.Meta.bio }}</p>
+    <div class="ui card fluid">
+      <div class="content">
+        <img class="right floated mini ui image" src="http://data.desart.sk/avatars/{{ Article.User.id }}.png">
+        <div class="header">
+          {{ Article.User.username }}
+        </div>
+        <div class="meta">
+          Užívateľ
+        </div>
+        <div class="description">
+          {{ Article.User.Meta.bio }}
+        </div>
+      </div>
+      <div class="extra content">
+        <div class="ui two buttons">
+          <div class="ui basic mini green button">Odoberať užívateľa</div>
+          <div class="ui basic mini red button">Decline</div>
+        </div>
+      </div>
     </div>
 
     <div class="ui comments">
