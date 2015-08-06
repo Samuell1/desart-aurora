@@ -3,17 +3,67 @@
 {% block title %}Tvorba webstránok, programovanie, grafika, it novinky, recenzie{% endblock %}
 
 {% block content %}
-<div class="row">
-    Clanky:
-    {% if Articles|length >= 1 %}
-        {% for Article in Articles %}
-            {{ Article.slug }}
-            <a href="{{ Url.get("article", {"slug": Article.slug}) }}">{{ Article.name }}</a>
-        {% endfor %}
-    {% else %}
-        Žiadny článok
-    {% endif %}
+
+<div style="position:relative;height:500px;margin-top:-14px;background:url(assets/img/bg.jpg) top center;background-size:cover;">
+
+  <div class="position:absolute;right:0px;background:#000;width:260px;height:300px;">
+    xcsfff
+  </div>
+
+
 </div>
+
+<div class="container">
+
+  <div class="ui two column stackable grid padded">
+      <div class="row">
+
+        {% if Articles|length >= 1 %}
+            {% for Article in Articles %}
+
+            <div class="column">
+
+              <article>
+                <div class="info">
+                  <span class="userinfo">
+                    <img class="ui avatar image" src="http://data.desart.sk/avatars/5.png">
+                    <a href="#">Samuell</a>
+                  </span>
+
+                  <a href="#" class="ui tiny basic green button right floated">
+                    Webdesign
+                  </a>
+
+                  <div class="clearfix"></div>
+                </div>
+
+                <div class="content">
+                  <div class="ui fluid image">
+                    <div class="ui green ribbon label">
+                      1. Apríl 2015
+                    </div>
+                    <img src="http://lorempixel.com/800/240/">
+                  </div>
+
+                  <h2 style="font-family:Ubuntu;"><a href="{{ Url.get("article", {"slug": Article.slug}) }}">{{ Article.name }}</a></h2>
+                  <p style="font-family:Ubuntu;color:#999;font-weight:100">{{ Article.content|slice(0, 500)|striptags|raw }}</p>
+                </div>
+              </article>
+
+            </div> <!-- ./article -->
+
+
+            {% endfor %}
+        {% else %}
+            Žiadny článok
+        {% endif %}
+
+      </div> <!-- ./row -->
+    </div> <!-- ./grid -->
+
+</div>
+
+
 {% endblock %}
 
 {#

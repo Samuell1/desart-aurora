@@ -6,7 +6,8 @@
 
 $(function () {
 
-$('.popup').popup();
+$('.popup-active').popup();
+
 $('.usernotifications .feed').perfectScrollbar();
 $('.ui.sidebar').sidebar('attach events', '.togglesidebar');
 

@@ -55,7 +55,7 @@
   			<a class="item noneborder lesspadd show-userprofile">
   				<div class="ui horizontal list">
   					<div class="item">
-  						<img class="ui mini circular image" src="http://avatars.io/email/{{ User.email }}">
+  						<img class="ui mini circular image" src="http://data.desart.sk/avatars/{{ User.id }}.png">
   					</div>
   				</div>
   			</a>
@@ -109,172 +109,40 @@
   		</div> <!-- ./user notifications -->
 
   		<div class="ui flowing userprofile popup transition">
-  			<div class="ui grid" style="max-width:440px">
-  				<div class="four wide column center aligned">
-  					<img class="ui tiny rounded image" src="http://avatars.io/email/{{ User.email }}">
-  					<a class="ui mini basic button" style="margin-top:5px">Manager</a>
+  			<div class="ui grid" style="width:320px">
+  				<div class="five wide column center aligned">
+  					<img class="ui small rounded image" src="http://data.desart.sk/avatars/{{ User.id }}.png">
   				</div>
-  				<div class="twelve wide column">
-  					<h4 class="ui header">{{ User.username }}</h4>
-
-  					<div class="ui list">
-                        {% if not User.account_activated %}
-                            <a class="item">
-      							<i class="help icon red"></i>
-
-      							<div class="content">
-      								<div class="header">Emailová adresa</div>
-      								<div class="description">Prosím overte si svoju emailovú adresu!</div>
-      							</div>
-      						</a>
-                        {% endif %}
-  						<a class="item">
-  							<i class="right triangle icon"></i>
-
-  							<div class="content">
-  								<div class="header">Icon Alignment</div>
-  								<div class="description">Floated icons are by default top aligned. To have an icon top aligned try this example.</div>
-  							</div>
-  						</a>
-  					</div>
+  				<div class="eleven wide column">
+  					<h4 class="ui header" style="margin:0">{{ User.Meta.firstname }} {{ User.username }} {{ User.Meta.lastname }}</h4>
+            <small>{{ User.email }}</small><br>
+            <a class="ui mini basic button" style="margin-top:7px">Prejsť do manageru</a>
 
   				</div>
   			</div>
 
   			<div class="progressbox">
-  				<div data-percent="20" class="ui tiny progress success">
-  					<div style="transition-duration: 300ms; width: 20%;" class="bar"></div>
-  					<div class="label left aligned">
+  				<div data-percent="20" class="ui tiny progress teal">
+            <div class="label">
   						Level: Začiatočník
-  						<span class="label" style="text-align:right;float:right">10 / 20</span>
+  						<span class="label" style="text-align:right;float:right">20 / 20</span>
   					</div>
-
+  					<div style="transition-duration: 300ms; width: 20%;" class="bar"></div>
   				</div>
   			</div>
 
-  			<div class="ui two bottom attached buttons" style="margin:0 -14px -11px -14px;">
-  				<a class="ui button tiny blue fluid"><i class="setting icon"></i> Nastavenia</a>
-  				<a class="ui button tiny fluid" href="{{ Url.base("logout") }}"><i class="sign out icon"></i> Odhlásiť sa</a>
+  			<div class="ui two tiny bottom attached buttons" style="margin:0 -14px -12px -14px;">
+  				<a class="ui teal button fluid"><i class="setting icon"></i> Nastavenia</a>
+  				<a class="ui button fluid" href="{{ Url.base("logout") }}"><i class="sign out icon"></i> Odhlásiť sa</a>
   			</div>
+
+
   		</div> <!-- ./user profile -->
         {% endif %}
+
   	</div> <!-- ./menu -->
-    {% block content %}
-    <div style="position:relative;height:500px;margin-top:-14px;background:url(bg.jpg) top center;background-size:cover;">
-
-      <div class="position:absolute;right:0px;background:#000;width:260px;height:300px;">
-        xcsfff
-      </div>
-
-
-    </div>
-
-		<div class="container">
-
-			<div class="ui two column stackable grid padded">
-					<div class="row">
-
-						<div class="column">
-
-							<article>
-								<div class="info">
-									<span class="userinfo">
-										<img class="ui avatar image" src="http://data.desart.sk/avatars/5.png">
-										<a href="#">Samuell</a>
-									</span>
-
-									<a href="#" class="ui tiny basic green button right floated">
-									  Webdesign
-									</a>
-
-									<div class="clearfix"></div>
-								</div>
-
-								<div class="content">
-									<div class="ui fluid image">
-										<div class="ui green ribbon label">
-											1. Apríl 2015
-										</div>
-										<img src="http://lorempixel.com/800/240/">
-									</div>
-
-									<h2 style="font-family:Ubuntu;"><a href="#">Ako vytvoriť Tilt-Shift efekt</a></h2>
-									<p style="font-family:Ubuntu;color:#999;font-weight:100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem maiores quam doloremque, temporibus est labore, rerum sed quaerat impedit doloribus reprehenderit ullam porro. Esse quas nesciunt sapiente aperiam, sit laborum ipsum cum reiciendis ab consequuntur nobis dolorem, quia pariatur vitae!</p>
-								</div>
-							</article>
-
-						</div> <!-- ./article -->
-
-
-						<div class="column">
-
-							<article>
-								<div class="info">
-									<span class="userinfo">
-										<img class="ui avatar image" src="http://data.desart.sk/avatars/5.png">
-										<a href="#">Samuell</a>
-									</span>
-
-									<a href="#" class="ui tiny basic green button right floated">
-									  Webdesign
-									</a>
-
-									<div class="clearfix"></div>
-								</div>
-
-								<div class="content">
-									<div class="ui fluid image">
-										<div class="ui green ribbon label">
-											1. Apríl 2015
-										</div>
-										<img src="http://lorempixel.com/800/240/">
-									</div>
-
-									<h2 style="font-family:Ubuntu;"><a href="#">Ako vytvoriť Tilt-Shift efekt</a></h2>
-									<p style="font-family:Ubuntu;color:#999;font-weight:100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem maiores quam doloremque, temporibus est labore, rerum sed quaerat impedit doloribus reprehenderit ullam porro. Esse quas nesciunt sapiente aperiam, sit laborum ipsum cum reiciendis ab consequuntur nobis dolorem, quia pariatur vitae!</p>
-								</div>
-							</article>
-
-						</div> <!-- ./article -->
-
-						<div class="column">
-
-							<article>
-								<div class="info">
-									<span class="userinfo">
-										<img class="ui avatar image" src="http://data.desart.sk/avatars/5.png">
-										<a href="#">Samuell</a>
-									</span>
-
-									<a href="#" class="ui tiny basic green button right floated">
-									  Webdesign
-									</a>
-
-									<div class="clearfix"></div>
-								</div>
-
-								<div class="content">
-									<div class="ui fluid image">
-										<div class="ui green ribbon label">
-											1. Apríl 2015
-										</div>
-										<img src="http://lorempixel.com/800/240/">
-									</div>
-
-									<h2 style="font-family:Ubuntu;"><a href="#">Ako vytvoriť Tilt-Shift efekt</a></h2>
-									<p style="font-family:Ubuntu;color:#999;font-weight:100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem maiores quam doloremque, temporibus est labore, rerum sed quaerat impedit doloribus reprehenderit ullam porro. Esse quas nesciunt sapiente aperiam, sit laborum ipsum cum reiciendis ab consequuntur nobis dolorem, quia pariatur vitae!</p>
-								</div>
-							</article>
-
-						</div> <!-- ./article -->
-
-
-
-					</div> <!-- ./row -->
-				</div> <!-- ./grid -->
-
-		</div>
-    {% endblock %}
+    
+    {% block content %}{% endblock %}
 
 		<div class="ui vertical footer segment">
 			<div class="ui container">
@@ -340,7 +208,12 @@
       <a href="/" class="item"><i class="user icon"></i> Registrácia / Prihlásanie</a>
     </div> <!-- ./mobile menu -->
 
-    <!-- Javascript -->
+    <!-- notication email not activated -->
+    {% if not User.account_activated %}
+
+    {% endif %}
+
+    <!-- Modals -->
     {% include 'modal/login.twig' %}
     {% include 'modal/register.twig' %}
 
