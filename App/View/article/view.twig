@@ -4,7 +4,7 @@
 
 {% block content %}
 
-  <div class="article-header" style="background:url(http://data.icrazy.eu/i/JQqyNvxF.jpg) center center;background-size:cover">
+  <div class="article-header" style="background:url(https://unsplash.it/800/400) center center;background-size:cover">
 
     <div class="article-shadow"></div>
 
@@ -15,36 +15,41 @@
 
     <div class="article-info">
 
-      <div class="ui small inverted horizontal animated relaxed list">
-        <div class="item">
-          <img class="ui avatar image" src="http://data.desart.sk/avatars/{{ Article.User.id }}.png">
-          <div class="content">
-            <a href="#" class="header">{{ Article.User.username }}</a>
+      <div class="ui two column stackable grid">
+        <div class="column">
+
+          <div class="ui small inverted horizontal list">
+            <div class="item">
+              <i class="user icon"></i>
+              <a href="/@{{ Article.User.username }}" class="content">
+                {{ Article.User.username }}
+              </a>
+            </div>
+            <div class="item">
+              <i class="calendar icon"></i>
+              <div class="content popup" data-content="Naposledy upravené 2. Apríla 2016" data-variation="mini inverted" data-position="top center">publikované 1. Apríla 2015
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="item">
-          <div class="content">
-            <a class="header popup" data-content="Naposledy upravené 2. Apríla 2016" data-variation="mini inverted" data-position="top center">publikované 1. Apríla 2015</a>
+        </div>
+        <div class="column large screen only right aligned">
+
+          <div class="ui small inverted horizontal list">
+            <div class="item">
+              <i class="outline heart icon"></i>
+              <div class="content">
+                17x obľúbené
+              </div>
+            </div>
+            <div class="item">
+              <i class="marker icon"></i>
+              <div class="content">
+                5 550x prečítané
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div class="ui mini inverted statistic right floated">
-        <div class="value">
-          5 550
-        </div>
-        <div class="label">
-          Prečítané
-        </div>
-      </div>
-
-      <div class="ui mini inverted statistic right floated">
-        <div class="value">
-          28
-        </div>
-        <div class="label">
-          obľúbené
         </div>
       </div>
 
@@ -71,10 +76,9 @@
         </div>
       </div>
       <div class="extra content">
-        <div class="ui two buttons">
-          <div class="ui basic mini green button">Odoberať užívateľa</div>
-          <div class="ui basic mini red button">Decline</div>
-        </div>
+          <a class="ui basic mini green button">Odoberať články od užívateľa</a>
+          <a href="" class="ui basic mini green button right floated">desart.sk</a>
+          <a href="" class="ui basic mini green button right floated">Github</a>
       </div>
     </div>
 
