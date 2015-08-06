@@ -27,7 +27,7 @@ class Search extends BaseController
         $response = [
             "action" => [
                 "url" => "/search/results",
-                "text" => ""
+                "text" => "Zobraziť dalšie výsledky..."
             ],
             "results" => []
         ];
@@ -37,7 +37,7 @@ class Search extends BaseController
                 "results" => $this->getUserResults($query, $User)
             ],
             "articles" => [
-                "name" => "články",
+                "name" => "Články",
                 "results" => $this->getArticleResults($query, $Article)
             ],
             "topics" => [
@@ -82,7 +82,7 @@ class Search extends BaseController
         foreach ($Articles as $Article) {
             $results[] = [
                 "title" => $Article->name,
-                "url" => $this->Url->get("article", ["slug" => $Article->slug])
+                "url" => $this->Url->get("article", ["slug" => $Article->slug]),
             ];
         }
         return $results;

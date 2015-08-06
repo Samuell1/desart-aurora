@@ -55,7 +55,10 @@ $('.ui.search')
     url: path.ajax + "search/?query={query}",
   },
   type: 'category',
-  searchDelay: 1000,
+  searchDelay: 500,
+  error : {
+    noResults   : 'Žiadne výsledky.'
+  },
 });
 
 if($(".show-usernotifications .label").length > 0)
