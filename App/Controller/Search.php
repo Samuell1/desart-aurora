@@ -24,28 +24,32 @@ class Search extends BaseController
 
         $query = $this->Request->get("query");
 
-        $response = [
-            "action" => [
-                "url" => "/search/results",
-                "text" => "Zobraziť dalšie výsledky..."
-            ],
-            "results" => []
-        ];
-        $response["results"] = [
-            "users" => [
-                "name" => "Používatelia",
-                "results" => $this->getUserResults($query, $User)
-            ],
-            "articles" => [
-                "name" => "Články",
-                "results" => $this->getArticleResults($query, $Article)
-            ],
-            "topics" => [
-                "name" => "Témy",
-                "results" => $this->getTopicResults($query, $Topic)
-            ]
+        $response = ["success" => true];
 
-        ];
+
+          $response = [
+              "action" => [
+                  "url" => "/search/results",
+                  "text" => "Zobraziť dalšie výsledky..."
+              ],
+              "results" => []
+          ];
+
+          $response["results"] = [
+              "users" => [
+                  "name" => "Používatelia",
+                  "results" => $this->getUserResults($query, $User)
+              ],
+              "articles" => [
+                  "name" => "Články",
+                  "results" => $this->getArticleResults($query, $Article)
+              ],
+              "topics" => [
+                  "name" => "Témy",
+                  "results" => $this->getTopicResults($query, $Topic)
+              ]
+
+          ];
 
         return json_encode($response);
     }
@@ -67,6 +71,7 @@ class Search extends BaseController
             ];
         }
         return $results;
+
     }
 
     public function getArticleResults($query, $Article)
