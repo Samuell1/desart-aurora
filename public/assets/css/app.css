@@ -39,7 +39,7 @@ body.pushable > .pusher {background:#f9f9f9 !important;}
 .ui.menu .item.noneborder::before{width:0px}
 .ui.menu .item.lowpadding{padding-left:5px;padding-right:5px}
 .ui.menu .item.lesspadd{padding-left:0px;}
-.ui.menu a.item{color:#8A8E9A;font-family: Ubuntu;text-transform: uppercase;font-weight:100}
+.ui.menu a.item{color:#8A8E9A;font-family: Ubuntu;text-transform: uppercase;font-weight:100;font-size: 13px}
 .ui.menu a.item:hover,.ui.menu a.item:focus,.ui.menu a.item:active{background:transparent}
 .ui.menu .logo{padding:30px}
 
