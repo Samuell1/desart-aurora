@@ -44,8 +44,8 @@ body.pushable > .pusher {background:#f9f9f9 !important;}
 .ui.menu .logo{padding:30px}
 
 /* login */
-.modal.register .header,.modal.login .header{padding:10px 0;font-size:17px}
-.modal.register .description,.modal.login .description{padding:5px 0;font-size:12px;color:#888}
+.modal.register .header,.modal.login .header,.modal.resetpass .header{padding:10px 0;font-size:17px}
+.modal.register .description,.modal.login .description,.modal.resetpass .description{padding:5px 0;font-size:12px;color:#888}
 .modal.login .content{border-radius:0.285714rem;}
 
 /* user ui */

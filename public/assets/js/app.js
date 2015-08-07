@@ -16,6 +16,7 @@ $('.ui.sidebar').sidebar('attach events', '.togglesidebar');
 
 $('.modal.login').modal({blurring: true}).modal('attach events', '.show-login', 'show');
 $('.modal.register').modal({blurring: true}).modal('attach events', '.show-register', 'show');
+$('.modal.resetpass').modal({blurring: true}).modal('attach events', '.show-resetpass', 'show');
 
 $('.show-userprofile')
   .popup({
