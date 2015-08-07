@@ -58,7 +58,7 @@
   </div>
 
 
-  <div class="container-article">
+  <div class="ui container">
 
     <article id="article-view">{{ Article.content|raw }}</article>
 
@@ -76,13 +76,13 @@
         </div>
       </div>
       <div class="extra content">
-          <a class="ui basic mini green button">Odoberať články od užívateľa</a>
+          <a class="ui mini green button">Odoberať články od užívateľa</a> <!-- Hlavné tlačítko, malo by byť viacej zvýraznené. -->
           <a href="" class="ui basic mini green button right floated">desart.sk</a>
           <a href="" class="ui basic mini green button right floated">Github</a>
       </div>
     </div>
 
-    <div class="ui comments">
+    <div class="ui container comments">
         <h3 class="ui dividing header">Komentáre k článku </h3>
         {% for Comment in Article.Comments %}
 
