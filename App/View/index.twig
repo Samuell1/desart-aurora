@@ -174,9 +174,14 @@
 					<div class="three wide column">
 						<h4 class="ui header">Uživateľ</h4>
 						<div class="ui link list">
-							<a href="#" class="item">Štatistiky</a>
-							<a href="#" class="item show-register">Registrácia</a>
-							<a href="#" class="item show-login">Prihlásenie</a>
+              {% if not User %}
+							<a href="{{ Url.base("statistics") }}" class="item">Štatistiky</a>
+							<a class="item show-register">Registrácia</a>
+							<a class="item show-login">Prihlásenie</a>
+              {% else %}
+							<a href="{{ Url.base("settings") }}" class="item">Nastavenia</a>
+							<a href="{{ Url.base("logouty") }}" class="item">Odhlásiť</a>
+              {% endif %}
 						</div>
 					</div>
 
@@ -204,10 +209,10 @@
 
     <div class="ui vertical inverted sidebar menu">
       <a href="/" class="item"><i class="home icon"></i> Úvod</a>
-      <a href="/" class="item"><i class="file text outline icon"></i> Články</a>
-      <a href="/" class="item">Série článkov</a>
-      <a href="/" class="item"><i class="block layout icon"></i> Diskusné fórum</a>
-      <a href="/" class="item"><i class="user icon"></i> Registrácia / Prihlásanie</a>
+      <a href="{{ Url.base("clanky") }}" class="item"><i class="file text outline icon"></i> Články</a>
+      <a href="{{ Url.base("serie") }}" class="item">Série článkov</a>
+      <a href="{{ Url.base("forum") }}" class="item"><i class="block layout icon"></i> Diskusné fórum</a>
+      <a class="item show-login"><i class="user icon"></i> Registrácia / Prihlásanie</a>
     </div> <!-- ./mobile menu -->
 
     {# notication email not activated #}
@@ -216,7 +221,7 @@
     {% endif %}
 
     {# Modals #}
-    {% if User %}
+    {% if not User %}
       {% include 'modal/login.twig' %}
       {% include 'modal/register.twig' %}
       {% include 'modal/resetpass.twig' %}
