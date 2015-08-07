@@ -25,7 +25,7 @@ body.pushable > .pusher {background:#f9f9f9 !important;}
 #article-view h3,#article-view h2,#article-view h4,#article-view h5,#article-view h6{color:#111}
 
 .article-header{max-height:600px;margin-top:-14px;padding-bottom:50px;position:relative}
-.article-header .article-title{color:#fff;max-width: 500px;margin:0 auto;padding:11vw 25px;position:relative;font-family:Roboto;}
+.article-header .article-title{display:none;color:#fff;max-width: 500px;margin:0 auto;padding:11vw 25px;position:relative;font-family:Roboto;}
 .article-header .article-title h1{font-size:35px;font-weight:600}
 .article-header .article-title small{color:#ddd;font-size:12px;font-weight:100;font-style:italic}
 .article-header .article-info{position:absolute;bottom:0px;left:0px;padding:15px 20px;width:100%;display:block;font-size:11px;opacity:.6;}
