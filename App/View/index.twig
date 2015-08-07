@@ -7,7 +7,7 @@
 
       <meta name="application-name" content="Desart.sk">
       <meta name="description" content="">
-      <meta name="keywords" content="">
+      <meta name="keywords" content="desart,grafika,webdesign,programovanie,tvorba,webu,php,html,css">
       <meta name="robots" content="index, follow">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -60,7 +60,9 @@
   				</div>
   			</a>
             {% endif %}
+
   		</div> <!-- ./right menu -->
+
         {% if User %}
   		<div class="ui flowing usernotifications popup transition">
   			<div class="ui feed">
@@ -208,20 +210,22 @@
       <a href="/" class="item"><i class="user icon"></i> Registrácia / Prihlásanie</a>
     </div> <!-- ./mobile menu -->
 
-    <!-- notication email not activated -->
+    {# notication email not activated #}
     {% if not User.account_activated %}
 
     {% endif %}
 
-    <!-- Modals -->
-    {% include 'modal/login.twig' %}
-    {% include 'modal/register.twig' %}
+    {# Modals #}
+    {% if User %}
+      {% include 'modal/login.twig' %}
+      {% include 'modal/register.twig' %}
+      {% include 'modal/resetpass.twig' %}
+    {% endif %}
 
-    <!-- Javascript -->
+    {# Javascript +CSS #}
     <script type="text/javascript" src="{{ Url.asset("js/semantic.min.js") }}"></script>
   	<script type="text/javascript" src="{{ Url.asset("js/perfect-scrollbar.min.js") }}"></script>
     <script type="text/javascript" src="{{ Url.asset("js/app.js") }}"></script>
-
   	<link rel="stylesheet" href="{{ Url.asset("css/perfect-scrollbar.min.css") }}">
 
     </body>

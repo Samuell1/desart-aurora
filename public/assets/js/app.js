@@ -7,7 +7,7 @@
 $(function () {
 
 
-$('.article-title').transition({animation : 'fly left',duration   : '2s',});
+$('#article-title').transition({animation : 'fly left',duration   : '2s',});
 
 $('.popup-active').popup();
 

@@ -14,26 +14,26 @@ body.pushable > .pusher {background:#f9f9f9 !important;}
 * {outline: none!important;}
 
 .clearfix{clear:both}
-
 .segment{box-shadow:none!important}
+.ui.button{font-family:Ubuntu;font-weight:normal}
+.nopadding{padding-left:0px!important;padding-right:0px!important;}
 
 .container {max-width:1000px; margin:0 auto;padding:0 12px}
 .container-article {max-width:700px;margin:0 auto;}
 
-#article-view{color:#333;padding:30px 0}
+#article-view{color:#555;padding:30px 0}
 #article-view img{max-width:100%}
 #article-view h3,#article-view h2,#article-view h4,#article-view h5,#article-view h6{color:#111}
 
-.article-header{max-height:600px;margin-top:-14px;padding-bottom:50px;position:relative}
-.article-header .article-title{display:none;color:#fff;max-width: 500px;margin:0 auto;padding:11vw 25px;position:relative;font-family:Roboto;}
-.article-header .article-title h1{font-size:35px;font-weight:600}
-.article-header .article-title small{color:#ddd;font-size:12px;font-weight:100;font-style:italic}
-.article-header .article-info{position:absolute;bottom:0px;left:0px;padding:15px 20px;width:100%;display:block;font-size:11px;opacity:.6;}
-.article-header .article-info .list .item a:hover:not(.ui){color:#7be4cf!important}
-.article-header .article-info .list{color:#eee}
-
-.article-header .article-shadow{background:rgba(0, 0, 0, 0.7);position:absolute;width:100%;height:100%;}
-@media only screen and (max-width: 800px) {.article-header .article-title h1{font-size:25px}}
+#article-header{max-height:600px;margin-top:-14px;padding-bottom:50px;position:relative}
+#article-header #article-title{display:none;color:#fff;max-width: 500px;margin:0 auto;padding:11vw 25px;position:relative;font-family:Roboto;}
+#article-header #article-title h1{font-size:35px;font-weight:600}
+#article-header #article-title small{color:#ddd;font-size:12px;font-weight:100;font-style:italic}
+#article-header #article-info{position:absolute;bottom:0px;left:0px;padding:15px 20px;width:100%;display:block;font-size:11px;opacity:.6;}
+#article-header #article-info .list .item a:hover:not(.ui){color:#7be4cf!important}
+#article-header #article-info .list{color:#eee}
+#article-header #article-shadow{background:rgba(0, 0, 0, 0.7);position:absolute;width:100%;height:100%;}
+@media only screen and (max-width: 800px) {#article-header #article-title h1{font-size:25px}}
 
 .ui.menu{box-shadow:none;border-radius:0;border:0;border-bottom:1px solid #eee;}
 .ui.menu .item.noneborder::before{width:0px}
@@ -42,10 +42,6 @@ body.pushable > .pusher {background:#f9f9f9 !important;}
 .ui.menu a.item{color:#8A8E9A;font-family: Ubuntu;text-transform: uppercase;font-weight:100}
 .ui.menu a.item:hover,.ui.menu a.item:focus,.ui.menu a.item:active{background:transparent}
 .ui.menu .logo{padding:30px}
-
-.ui.button{font-family:Ubuntu;font-weight:normal}
-
-.nopadding{padding-left:0px!important;padding-right:0px!important;}
 
 /* login */
 .modal.register .header,.modal.login .header{padding:10px 0;font-size:17px}
@@ -76,6 +72,12 @@ article .ribbon{font-weight:100!important}
 article .info .userinfo{padding: 1px 0;display:inline-block}
 article .info a{font-size:11px}
 
+.footer {border-top:1px solid #eee!important;margin-top:14px!important;background:#fff!important;}
+.footer.segment {padding: 5em 0}
+.footer .ui.header{font-size:17px; font-weight: normal;}
+.footer .ui.link.list .item{padding:4px 0px;font-size:13px}
+
+/* responsive menu toggler */
 .ui.menu.responsive .togglesidebar {display: none;}
 @media only screen and (max-width: 800px) {
   .ui.menu.responsive .itemhide {
@@ -88,8 +90,3 @@ article .info a{font-size:11px}
     padding:15px;
   }
 }
-
-.footer {border-top:1px solid #eee!important;margin-top:14px!important;background:#fff!important;}
-.footer.segment {padding: 5em 0}
-.footer .ui.header{font-size:17px; font-weight: normal;}
-.footer .ui.link.list .item{padding:4px 0px;font-size:13px}
