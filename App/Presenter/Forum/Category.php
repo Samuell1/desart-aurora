@@ -19,7 +19,7 @@ class Category extends BasePresenter
         ->all();
 
         return $this->View->render("forum/index.twig", [
-            "Categories" => $Topic
+            "Topic" => $Topic
         ]);
     }
 

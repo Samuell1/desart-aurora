@@ -33,7 +33,7 @@
 
   		<div class="right menu">
 
-  			<div class="item itemhide noneborder {% if User %}lowpadding{% endif %}">
+  			<div class="item itemhide noneborder">
   				<div class="ui right aligned search">
   					<div class="ui icon input">
   						<input class="prompt" placeholder="Vyhľadávanie..." type="text">
@@ -44,21 +44,33 @@
   			</div>
 
             {% if User %}
-            <div class="item noneborder lowpadding show-usernotifications">
+
+              <div class="item noneborder lowpadding show-usernotifications">
                 <i class="alarm outline large circular icon link">
                     {% if Notifications|length %}
                         <span class="ui red circular label">{{ Notifications|length }}</span>
                     {% endif %}
                 </i>
-  			</div>
+        			</div>
 
-  			<a class="item noneborder lesspadd show-userprofile">
-  				<div class="ui horizontal list">
-  					<div class="item">
-  						<img class="ui mini circular image" src="http://data.desart.sk/avatars/{{ User.id }}.png">
-  					</div>
-  				</div>
-  			</a>
+        			<a class="item noneborder lesspadd show-userprofile">
+        				<div class="ui horizontal list">
+        					<div class="item">
+        						<img class="ui mini circular image" src="http://data.desart.sk/avatars/{{ User.id }}.png">
+        					</div>
+        				</div>
+        			</a>
+
+            {% else %}
+
+              <a class="item noneborder lesspadd">
+        				<div class="ui horizontal list">
+        					<div class="item">
+                    <button class="circular ui teal basic button show-login" style="padding-top:12px;padding-bottom:12px">Prihlásiť sa</button>
+        					</div>
+        				</div>
+        			</a>
+
             {% endif %}
 
   		</div> <!-- ./right menu -->

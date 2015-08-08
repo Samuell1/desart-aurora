@@ -19,7 +19,7 @@ class Search extends BaseController
         $ArticleSeries = $this->Spot->mapper('App\Entity\Article\Series');
         $ArticleCategory = $this->Spot->mapper('App\Entity\Article\Category');
 
-        $Topic = $this->Spot->mapper('App\Entity\Topic');
+        $Topic = $this->Spot->mapper('App\Entity\Forum\Topic');
         $User = $this->Spot->mapper('App\Entity\User');
 
         $query = $this->Request->get("query");
