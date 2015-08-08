@@ -128,7 +128,7 @@
   					<img class="ui small rounded image" src="http://data.desart.sk/avatars/{{ User.id }}.png">
   				</div>
   				<div class="eleven wide column">
-  					<h4 class="ui header" style="margin:0">{{ User.Meta.firstname }} {{ User.username }} {{ User.Meta.lastname }}</h4>
+  					<h4 class="ui header" style="margin:0;">{{ User.Meta.firstname }} {{ User.username }} {{ User.Meta.lastname }}</h4>
             <small>{{ User.email }}</small><br>
             <a class="ui mini basic button" style="margin-top:7px">Prejsť do manageru</a>
 
@@ -136,11 +136,14 @@
   			</div>
 
   			<div class="progressbox">
-  				<div data-percent="20" class="ui tiny progress teal">
-            <div class="label">
-  						Level: Začiatočník
-  						<span class="label" style="text-align:right;float:right">20 / 20</span>
-  					</div>
+
+          <div class="info">
+            Reputácia: 10
+
+            <span>15 / 20</span>
+          </div>
+
+  				<div data-percent="20" class="ui tiny active progress teal">
   					<div style="transition-duration: 300ms; width: 20%;" class="bar"></div>
   				</div>
   			</div>
