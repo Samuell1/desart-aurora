@@ -123,14 +123,15 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Desart`.`da_comment` ;
 
 CREATE TABLE IF NOT EXISTS `Desart`.`da_comment` (
-  `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
+  `id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
   `subject_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
   `subject_type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1 - Article\n2 - Topic\n3 - Question',
   `user_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
   `reply_comment_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL COMMENT '',
   `history_id` MEDIUMINT(7) UNSIGNED NOT NULL COMMENT '',
-  `type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '0 - Velky Komment\n1 - Micro',
+  `type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1 - Velky Komment\n2 - Micro',
   `text` MEDIUMTEXT NOT NULL COMMENT '',
+  `choosen` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
   `hidden` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
   `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
   `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
@@ -138,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_comment` (
   UNIQUE INDEX `comment_id_UNIQUE` (`id` ASC)  COMMENT '',
   INDEX `fk_comments_user1_idx` (`user_id` ASC)  COMMENT '',
   INDEX `fk_comments_comment_history1_idx` (`history_id` ASC)  COMMENT '')
-ENGINE = MyISAM
+ENGINE = InnoDB
 AUTO_INCREMENT = 0;
 
 
@@ -149,10 +150,10 @@ DROP TABLE IF EXISTS `Desart`.`da_favorite` ;
 
 CREATE TABLE IF NOT EXISTS `Desart`.`da_favorite` (
   `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `user_id` SMALLINT(5) UNSIGNED NULL COMMENT '',
+  `user_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
   `item_id` INT(11) UNSIGNED NOT NULL COMMENT '',
-  `type` TINYINT(2) UNSIGNED NOT NULL DEFAULT 1 COMMENT '',
-  PRIMARY KEY (`id`, `user_id`)  COMMENT '',
+  `type` TINYINT(2) UNSIGNED NOT NULL DEFAULT 1 COMMENT 'Article - 1\nTopic - 2 \nQuestion - 3',
+  PRIMARY KEY (`id`, `user_id`, `item_id`)  COMMENT '',
   UNIQUE INDEX `fav_id_UNIQUE` (`id` ASC)  COMMENT '',
   INDEX `fk_favorite_user1_idx` (`user_id` ASC)  COMMENT '')
 ENGINE = InnoDB
@@ -201,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_topic` (
   UNIQUE INDEX `forumt_id_UNIQUE` (`id` ASC)  COMMENT '',
   INDEX `fk_topic_topic_category1_idx` (`topic_category_id` ASC)  COMMENT '',
   INDEX `fk_topic_user1_idx` (`user_id` ASC)  COMMENT '')
-ENGINE = MyISAM
+ENGINE = InnoDB
 AUTO_INCREMENT = 0
 COMMENT = 'Databaza prispevku na fore';
 
@@ -559,11 +560,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Desart`.`article_tag_map`
+-- Table `Desart`.`da_article_tag_map`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`article_tag_map` ;
+DROP TABLE IF EXISTS `Desart`.`da_article_tag_map` ;
 
-CREATE TABLE IF NOT EXISTS `Desart`.`article_tag_map` (
+CREATE TABLE IF NOT EXISTS `Desart`.`da_article_tag_map` (
   `article_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
   `tag_group_id` MEDIUMINT(5) UNSIGNED NOT NULL COMMENT '',
   PRIMARY KEY (`article_id`, `tag_group_id`)  COMMENT '',
@@ -613,8 +614,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `Desart`;
-INSERT INTO `Desart`.`da_comment` (`id`, `subject_id`, `subject_type`, `user_id`, `reply_comment_id`, `history_id`, `type`, `text`, `hidden`, `created_at`, `updated_at`) VALUES (1, 1, 1, 1, 0, 0, 0, 'Toto je komentár', 0, NULL, NULL);
-INSERT INTO `Desart`.`da_comment` (`id`, `subject_id`, `subject_type`, `user_id`, `reply_comment_id`, `history_id`, `type`, `text`, `hidden`, `created_at`, `updated_at`) VALUES (2, 1, 1, 2, 1, 0, 0, 'Hej ten sa mi nepáči', 0, NULL, NULL);
+INSERT INTO `Desart`.`da_comment` (`id`, `subject_id`, `subject_type`, `user_id`, `reply_comment_id`, `history_id`, `type`, `text`, `choosen`, `hidden`, `created_at`, `updated_at`) VALUES (1, 1, 1, 1, 0, 0, 1, 'Toto je komentár', DEFAULT, 0, NULL, NULL);
+INSERT INTO `Desart`.`da_comment` (`id`, `subject_id`, `subject_type`, `user_id`, `reply_comment_id`, `history_id`, `type`, `text`, `choosen`, `hidden`, `created_at`, `updated_at`) VALUES (2, 1, 1, 2, 1, 0, 1, 'Hej ten sa mi nepáči', DEFAULT, 0, NULL, NULL);
 
 COMMIT;
 
