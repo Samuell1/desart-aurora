@@ -32,22 +32,4 @@ class Topic extends BasePresenter
         ]);
     }
 
-    public function overview()
-    {
-        $Topic = $this->Topic
-        ->all()
-        ->with([
-            "User",
-            "Comments"
-        ])
-        ->where([
-            "hidden" => 0,
-        ])
-        ->first();
-
-        return $this->View->render("forum/topic/overview.twig", [
-            "Topic" => $Topic
-        ]);
-    }
-
 }

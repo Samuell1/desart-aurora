@@ -2,36 +2,27 @@
 
 {% block title %}Diskúsné fórum{% endblock %}
 
-{% block subhead %}
-<div class="container">
-  <div class="subheadtitle">
-  <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12">
-          <div class="title">Diskusné fórum</div>
-          <div class="desc">Komunikujte, diskutujte, odpovedajte</div>
-      </div>
-  </div>
-  </div>
-</div>
-{% endblock %}
-
 {% block content %}
 
-  {% for category in categories %}
+<div class="container">
+
+  {% for Category in Categories %}
 
     <div class="bigtitlecenter">
       <div class="bigtitle">
-          <h5>{{ category.name }}</h5>
-          {{ category.description|raw }}
+          <h5>{{ Category.name }}</h5>
+          {{ Category.description|raw }}
       </div>
     </div>
 
     <div class="list-group">
-      {% for category in category["sub_categories"] %}
-        <a href="/forum/kategoria/{{ category.slug }}" class="list-group-item">{{ category.name }} <small>({{ category.description }})</small><span class="badge">{{  category.count }}</span></a>
+      {% for Category in Category["sub_categories"] %}
+        <a href="/forum/kategoria/{{ category.slug }}" class="list-group-item">{{ Category.name }} <small>({{ Category.description }})</small><span class="badge">{{  Category.count }}</span></a>
       {% endfor  %}
     </div>
 
   {% endfor  %}
+
+</div>
 
 {% endblock %}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Forum;
 
 use Spot\Mapper;
 use Spot\Entity;
@@ -21,10 +21,10 @@ class Category extends Entity
 			"user_id"           => ["type" => "smallint"],
 			"slug"              => ["type" => "string"],
 			"name"              => ["type" => "string"],
-			"edit_count"        => ["type" => "bigint"],
-			"reads"             => ["type" => "bigint"],
-			"text"              => ["type" => "text"],
-			"locked"            => ["type" => "boolean"],
+			"description"        => ["type" => "string"],
+			"hidden"             => ["type" => "boolean"],
+			"create_topic"              => ["type" => "boolean"],
+			"parent_id"            => ["type" => "boolean"],
 			"created_at"        => ["type" => "datetime"],
 			"updated_at"        => ["type" => "datetime"],
 		];

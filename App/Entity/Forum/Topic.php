@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Forum;
 
 use Spot\Mapper;
 use Spot\Entity;
