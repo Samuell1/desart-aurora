@@ -54,7 +54,12 @@ class Auth
 
 	public function login($uid, $password, $remember = false)
 	{
-		$User = $this->getUser($uid, true);
+		try {
+			$User = $this->getUser($uid, true);
+		} catch(UserNotFoundException $e) {
+			return false;
+		}
+
 
 		if (!$this->Hash->validatePassword($password, $User->hash, $User->rand)) {
 			return false; # If password doesnt match return false
