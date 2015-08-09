@@ -153,15 +153,16 @@
 
         {% endfor %}
 
-
         {% if User %}
         <form id="ajax-comment" class="ui small reply form">
             <div class="field">
-                <textarea></textarea>
+                <!-- TODO: Fluid pre textareu -->
+                <textarea name="text"></textarea>
             </div>
-            <div class="ui small blue labeled submit icon button">
+
+            <button type="submit" class="ui small blue labeled submit icon button">
                 <i class="icon edit"></i> Komentovať
-            </div>
+            </button>
         </form>
         {% endif %}
     </div>

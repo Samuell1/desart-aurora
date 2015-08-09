@@ -149,4 +149,20 @@ if($(".show-usernotifications .label").length > 0)
         });
 
     });
+
+    $("#ajax-comment").on("submit", function(e) {
+
+        e.preventDefault();
+
+        $.ajax({
+            url     : path.ajax+"comment",
+            type    : "POST",
+            data    : $(this).serialize(),
+            success : function(r) {
+                // todo....
+                console.log(r);
+            }
+        });
+
+    });
 })();
