@@ -27,7 +27,7 @@
             </div>
             <div class="item">
               <i class="calendar icon"></i>
-              <div class="content popup-active" data-content="Naposledy upravené 2. Apríla 2016" data-variation="mini inverted" data-position="top center">publikované 1. Apríla 2015
+              <div class="content popup-active" {% if Article.updated_at|date('U') > Article.published_at|date('U') %}data-content="Naposledy upravené {{ Article.updated_at|date }}" data-variation="mini inverted" data-position="top center"{% endif %}>publikované {{ Article.published_at|date }}
               </div>
             </div>
           </div>
@@ -45,7 +45,7 @@
             <div class="item">
               <i class="marker icon"></i>
               <div class="content">
-                5 550x prečítané
+                {{ Article.reads }}x prečítané
               </div>
             </div>
           </div>
@@ -82,13 +82,19 @@
       </div>
     </div>
 
-    <div class="ui comments">
-        <h3 class="ui dividing header">Komentáre k článku </h3>
+    <a href="search/salama" class="ui tiny basic button">salama</a>
+
+
+    <h4 class="ui horizontal divider header">
+      <i class="comments outline icon"></i>
+      Komentáre k článku
+    </h4>
+    <div class="ui fluid comments">
         {% for Comment in Article.Comments %}
 
             <div class="comment">
                 <a class="avatar">
-                    <img src="http://data.desart.sk/avatars/{{ Comment.User.id }}.png" alt="avatar">
+                    <img src="http://data.desart.sk/avatars/{{ Comment.user_id }}.png" alt="avatar">
                 </a>
 
                 <div class="content">
@@ -104,7 +110,8 @@
                     </div>
 
                     <div class="actions">
-                        <a class="reply">Reply</a>
+                        <a class="reply">Odpovedať</a>
+                        <a class="reply">Zobraziť skryté</a>
                     </div>
                 </div> <!-- ./content -->
 
@@ -113,7 +120,7 @@
                     <div class="comments">
                         <div class="comment">
                             <a class="avatar">
-                                <img src="http://data.desart.sk/avatars/{{ Comment.User.id }}.png" alt="avatar">
+                                <img src="http://data.desart.sk/avatars/{{ Comment.user_id }}.png" alt="avatar">
                             </a>
 
                             <div class="content">
@@ -138,8 +145,16 @@
                 {% endfor %}
             </div> <!-- ./comment -->
 
+        {% else %}
+
+        <div style="margin:20px 0;color:#888">
+          Žiadny komentár ešte nebol pridaný. Buďte prvý kto pridá komentár.
+        </div>
+
         {% endfor %}
 
+
+        {% if User %}
         <form id="ajax-comment" class="ui small reply form">
             <div class="field">
                 <textarea></textarea>
@@ -148,6 +163,7 @@
                 <i class="icon edit"></i> Komentovať
             </div>
         </form>
+        {% endif %}
     </div>
 
 

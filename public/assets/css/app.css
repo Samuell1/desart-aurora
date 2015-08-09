@@ -19,7 +19,7 @@ body.pushable > .pusher {background:#f9f9f9 !important;}
 .nopadding{padding-left:0px!important;padding-right:0px!important;}
 
 .container {max-width:1000px; margin:0 auto;padding:0 12px}
-.container-article {max-width:700px;margin:0 auto;}
+.container-article {max-width:700px;margin:0 auto}
 
 #article-view{color:#555;padding:30px 0}
 #article-view img{max-width:100%}
@@ -74,7 +74,7 @@ article .ribbon{font-weight:100!important}
 article .info .userinfo{padding: 1px 0;display:inline-block}
 article .info a{font-size:11px}
 
-.footer {border-top:1px solid #eee!important;margin-top:14px!important;background:#fff!important;}
+.footer {border-top:1px solid #eee!important;margin-top:60px!important;background:#fff!important;}
 .footer.segment {padding: 5em 0}
 .footer .ui.header{font-size:17px; font-weight: normal;}
 .footer .ui.link.list .item{padding:4px 0px;font-size:13px}

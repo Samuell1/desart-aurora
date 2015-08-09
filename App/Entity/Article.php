@@ -15,12 +15,12 @@ class Article extends Entity
     {
         return [
             "id"                  => ["type" => "smallint", "primary" => true, "autoincrement" => true],
-            "category_id"       => ["type" => "smallint"],
+            "category_id"         => ["type" => "smallint"],
             "tag_group_id"        => ["type" => "smallint"],
             "image_id"            => ["type" => "smallint"],
             "user_id"             => ["type" => "smallint"],
             "series_id"           => ["type" => "smallint"],
-            "article_history_id"  => ["type" => "smallint"],
+            "history_id"          => ["type" => "smallint"],
             "slug"                => ["type" => "string"],
             "name"                => ["type" => "string"],
             "content"             => ["type" => "text"],
@@ -42,7 +42,7 @@ class Article extends Entity
             "Category" => $Mapper->belongsTo($Entity, "App\Entity\Article\Category", "category_id"),
 
             "Comments" => $Mapper->hasMany($Entity, "App\Entity\Comment", "subject_id")->where(["type" => 0, "subject_type" => 1, "hidden" => 0]),
-            
+
             "TagGroup" => $Mapper->hasManyThrough($Entity, "App\Entity\Tag\Group", "App\Entity\Article\Tag", "tag_group_id", "article_id"),
         ];
     }
