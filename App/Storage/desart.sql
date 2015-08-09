@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_article` (
   `name` VARCHAR(200) NOT NULL COMMENT '',
   `content` MEDIUMTEXT NOT NULL COMMENT '',
   `description` TINYTEXT NOT NULL COMMENT '',
-  `reads` SMALLINT(5) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
+  `read_count` SMALLINT(5) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
   `custom_tags` VARCHAR(250) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NULL COMMENT 'Custom tagy v serializovanom',
   `status` ENUM('published','draft','private') NOT NULL DEFAULT 'published' COMMENT '',
   `type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Typ:\n0 - Clanok\n1 - Rychla novinka',
@@ -195,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_topic` (
   `slug` VARCHAR(225) NOT NULL COMMENT '',
   `name` VARCHAR(200) NOT NULL COMMENT '',
   `edit_count` MEDIUMINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '',
-  `reads` MEDIUMINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
+  `read_count` MEDIUMINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
   `text` MEDIUMTEXT NOT NULL COMMENT '',
   `type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT 'Topic - 1\nQuestion -2',
   `locked` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
@@ -595,7 +595,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `Desart`;
-INSERT INTO `Desart`.`da_article` (`id`, `category_id`, `tag_group_id`, `image_id`, `user_id`, `series_id`, `history_id`, `slug`, `name`, `content`, `description`, `reads`, `custom_tags`, `status`, `type`, `attachments`, `created_at`, `updated_at`, `published_at`) VALUES (1, 1, NULL, NULL, 1, NULL, NULL, 'banan', 'Banan je tooop', 'Najlepsi je v cokolade', 'HTTP/1.1 sa dočkalo zmeny. Čo pre nás táto zmena znamená?', 500, NULL, 'published', 0, NULL, NULL, NULL, NULL);
+INSERT INTO `Desart`.`da_article` (`id`, `category_id`, `tag_group_id`, `image_id`, `user_id`, `series_id`, `history_id`, `slug`, `name`, `content`, `description`, `read_count`, `custom_tags`, `status`, `type`, `attachments`, `created_at`, `updated_at`, `published_at`) VALUES (1, 1, NULL, NULL, 1, NULL, NULL, 'banan', 'Banan je tooop', 'Najlepsi je v cokolade', 'HTTP/1.1 sa dočkalo zmeny. Čo pre nás táto zmena znamená?', 500, NULL, 'published', 0, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
@@ -638,7 +638,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `Desart`;
-INSERT INTO `Desart`.`da_topic` (`id`, `locked_user_id`, `topic_category_id`, `user_id`, `slug`, `name`, `edit_count`, `reads`, `text`, `type`, `locked`, `created_at`, `updated_at`) VALUES (1, NULL, 1, 2, 'co-je-to-php', 'Čo je to PHP?', 1, 1, 'Ja neviem vobec ako sa robia stranky, a čo je to vôbec php?', DEFAULT, 0, NULL, NULL);
+INSERT INTO `Desart`.`da_topic` (`id`, `locked_user_id`, `topic_category_id`, `user_id`, `slug`, `name`, `edit_count`, `read_count`, `text`, `type`, `locked`, `created_at`, `updated_at`) VALUES (1, NULL, 1, 2, 'co-je-to-php', 'Čo je to PHP?', 1, 1, 'Ja neviem vobec ako sa robia stranky, a čo je to vôbec php?', DEFAULT, 0, NULL, NULL);
 
 COMMIT;
 
