@@ -25,6 +25,7 @@ $Router->mount("/ajax", function() use ($Router) {
     $Router->post("/register", ["App\\Controller\\Auth", "register"]);
     $Router->post("/topic/add/{num}", ["App\\Controller\\Forum\\Topic", "add"]);
     $Router->post("/post/add/{num}", ["App\\Controller\\Forum\\Post", "add"]);
+    $Router->post("/comment/add", ["App\\Controller\\Article", "addComment"]);
 });
 
 try {

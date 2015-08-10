@@ -155,6 +155,8 @@
 
         {% if User %}
         <form id="ajax-comment" class="ui small reply form">
+            <input name="data" type="hidden" value="{{ Article.id }}:{{ Article.type }}">
+
             <div class="field">
                 <!-- TODO: Fluid pre textareu -->
                 <textarea name="text"></textarea>

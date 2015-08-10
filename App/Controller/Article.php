@@ -4,26 +4,29 @@ namespace App\Controller;
 use Respect\Validation\Validator as v;
 use Respect\Validation\Exceptions\NestedValidationExceptionInterface;
 
-class Article extends BaseController {
+class Article extends BaseController
+{
 
-	private $ArticleModel;
+	protected $Spot;
 
-	public function before(){
-		$this->ArticleModel = $this->ModelFactory->create("\App\Model\Article");
+	private $return;
+	private $userValidator;
+
+
+	public function onConstruct()
+	{
+		$this->userValidator = v::create();
+		$this->Spot          = $this->Model->getConnection();
 	}
 
-	public function add(){
-
-			$usernameValidator = v::alnum()->noWhitespace()->length(1,32);
-
-			try {
-			    $usernameValidator->assert('really messed up screen#name');
-			} catch(NestedValidationExceptionInterface $exception) {
-				$errors = $exception->findMessages(array(
-					'alnum'        => '{{name}} must contain only letters and digits',
-					'length'       => '{{name}} must not have more than 15 chars',
-					'noWhitespace' => '{{name}} cannot contain spaces'
-				));
-			}
+	public function addComment()
+	{
+		// todo
 	}
+
+	public function after()
+	{
+		return json_encode($this->return);
+	}
+
 }
