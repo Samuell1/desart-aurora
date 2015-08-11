@@ -10,10 +10,12 @@ namespace App\Presenter;
 class Article extends BasePresenter
 {
 	protected $Article;
+	protected $Encryption;
 
 	public function before()
 	{
 		$this->Article = $this->Spot->mapper('App\Entity\Article');
+		$this->Encryption = new \Aurora\Helper\Encryption("bVxPzeSMWd0AAJgyYDhoZG3Ui1ueEjWd0AAJgyYDho");
 	}
 
 	public function view()
@@ -27,7 +29,8 @@ class Article extends BasePresenter
 			])->first();
 
 		return $this->View->render('article/view.twig', [
-			'Article' => $Article,
+			'Article'     => $Article,
+			'encryptedId' => $this->Encryption->encrypt($Article->id)
 		]);
 	}
 
