@@ -20,18 +20,14 @@ class Article extends BasePresenter
 
 	public function view()
 	{
-		$Article = $this->Article
+		$this->View->Article = $this->Article
 			->all()
 			->with(["User", "Category"])
 			->where([
 				'slug' => $this->Param->slug,
 				'status' => "published"
 			])->first();
-
-		return $this->View->render('article/view.twig', [
-			'Article'     => $Article,
-			'encryptedId' => $this->Encryption->encrypt($Article->id)
-		]);
+		$this->View->encryptedId = $this->Encryption->encrypt($this->View->Article->id);
 	}
 
 	public function overview()
@@ -46,5 +42,10 @@ class Article extends BasePresenter
 		return $this->View->render('article/overview.twig', [
 			'Articles' => $Articles,
 		]);
+	}
+
+	public function render()
+	{
+		return $this->View->render('article/view.twig');
 	}
 }

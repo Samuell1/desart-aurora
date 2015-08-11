@@ -15,7 +15,7 @@ class Home extends BasePresenter
 		$Article = $this->Spot
 			->mapper('App\Entity\Article');
 
-		$Articles = $Article
+		$this->View->Articles = $Article
 			->all()
 			->with("User")
 			->where([
@@ -40,13 +40,11 @@ class Home extends BasePresenter
 		//
 		// $articles = $this->Model->Article->getArticles($page);
 		// $flash_news = $this->Model->Article->getFlashNews($page);
+	}
 
-
-		return $this->View->render('home/index.twig', [
-			//'topics' => $topics,
-			'Articles' => $Articles,
-			//'flash_news' => $flash_news,
-		]);
+	public function render()
+	{
+		return $this->View->render('home/index.twig');
 	}
 
 }

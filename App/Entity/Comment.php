@@ -19,6 +19,7 @@ class Comment extends Entity
                 "subject_id"       => ["type" => "smallint"],
                 "reply_comment_id" => ["type" => "smallint"],
                 "user_id"          => ["type" => "smallint"],
+                "type"             => ["type" => "smallint"],
                 "history_id"       => ["type" => "smallint"],
                 "text"             => ["type" => "text"],
                 "hidden"           => ["type" => "boolean"],

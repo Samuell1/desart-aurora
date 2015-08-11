@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aurora-framework/aurora",
-            "version": "v1.1.1",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Aurora.git",
-                "reference": "739ac29559a85ea850feb0f51c0f9326d65b0aae"
+                "reference": "f361c6b0bca769a79271d4f122b4922c16d0efa7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Aurora/zipball/739ac29559a85ea850feb0f51c0f9326d65b0aae",
-                "reference": "739ac29559a85ea850feb0f51c0f9326d65b0aae",
+                "url": "https://api.github.com/repos/Aurora-Framework/Aurora/zipball/f361c6b0bca769a79271d4f122b4922c16d0efa7",
+                "reference": "f361c6b0bca769a79271d4f122b4922c16d0efa7",
                 "shasum": ""
             },
             "require": {
@@ -58,20 +58,20 @@
                 }
             ],
             "description": "Simple and hackable framework",
-            "time": "2015-07-26 20:04:38"
+            "time": "2015-08-11 09:36:54"
         },
         {
             "name": "aurora-framework/config",
-            "version": "v1.2.0",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Config.git",
-                "reference": "29bafa148fc85970e9cbec56a210ae054501f863"
+                "reference": "2ccf2d7af00e72ddaf06b5ec84a50a54a9f15a46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Config/zipball/29bafa148fc85970e9cbec56a210ae054501f863",
-                "reference": "29bafa148fc85970e9cbec56a210ae054501f863",
+                "url": "https://api.github.com/repos/Aurora-Framework/Config/zipball/2ccf2d7af00e72ddaf06b5ec84a50a54a9f15a46",
+                "reference": "2ccf2d7af00e72ddaf06b5ec84a50a54a9f15a46",
                 "shasum": ""
             },
             "require": {
@@ -99,7 +99,7 @@
                 }
             ],
             "description": "Config management",
-            "time": "2015-07-25 22:29:53"
+            "time": "2015-08-11 09:23:29"
         },
         {
             "name": "aurora-framework/di",
@@ -182,20 +182,20 @@
         },
         {
             "name": "aurora-framework/helper",
-            "version": "v1.2.2",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Helper.git",
-                "reference": "34ff124fb09fd4ff24ce1669422f56fa95864f5f"
+                "reference": "676930c368820b22ae1cb169a52d8b2df552d517"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Helper/zipball/34ff124fb09fd4ff24ce1669422f56fa95864f5f",
-                "reference": "34ff124fb09fd4ff24ce1669422f56fa95864f5f",
+                "url": "https://api.github.com/repos/Aurora-Framework/Helper/zipball/676930c368820b22ae1cb169a52d8b2df552d517",
+                "reference": "676930c368820b22ae1cb169a52d8b2df552d517",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.8"
+                "php": ">=5.6"
             },
             "require-dev": {
                 "aurora-framework/router": "dev-master"
@@ -221,20 +221,20 @@
                 }
             ],
             "description": "Collection of Helpers",
-            "time": "2015-07-24 20:23:59"
+            "time": "2015-08-11 09:32:27"
         },
         {
             "name": "aurora-framework/http",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Http.git",
-                "reference": "07d8cf23f2012f0f7fed81e903262ba2ff4f00ed"
+                "reference": "fcb68eb917b77f918aa05e2b325c84ff934bc21d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Http/zipball/07d8cf23f2012f0f7fed81e903262ba2ff4f00ed",
-                "reference": "07d8cf23f2012f0f7fed81e903262ba2ff4f00ed",
+                "url": "https://api.github.com/repos/Aurora-Framework/Http/zipball/fcb68eb917b77f918aa05e2b325c84ff934bc21d",
+                "reference": "fcb68eb917b77f918aa05e2b325c84ff934bc21d",
                 "shasum": ""
             },
             "require": {
@@ -257,24 +257,24 @@
                 }
             ],
             "description": "Simple and easy abstraction over top an HTTP response.",
-            "time": "2015-07-25 21:34:21"
+            "time": "2015-08-11 09:21:08"
         },
         {
             "name": "aurora-framework/il8n",
-            "version": "v1.0.2",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/il8n.git",
-                "reference": "6c0911e16b64e31ef23d3643fcea5a518f7372b4"
+                "reference": "5c508479f972548b44efd7d37a58cb7df193f6f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/il8n/zipball/6c0911e16b64e31ef23d3643fcea5a518f7372b4",
-                "reference": "6c0911e16b64e31ef23d3643fcea5a518f7372b4",
+                "url": "https://api.github.com/repos/Aurora-Framework/il8n/zipball/5c508479f972548b44efd7d37a58cb7df193f6f5",
+                "reference": "5c508479f972548b44efd7d37a58cb7df193f6f5",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.8"
+                "php": ">=5.6"
             },
             "type": "library",
             "autoload": {
@@ -293,7 +293,7 @@
                 }
             ],
             "description": "Internalization library",
-            "time": "2015-07-06 21:17:29"
+            "time": "2015-08-11 09:21:52"
         },
         {
             "name": "aurora-framework/router",
@@ -337,16 +337,16 @@
         },
         {
             "name": "aurora-framework/service",
-            "version": "v1.2.0",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Service.git",
-                "reference": "7516db8692217fee133c1cf3e6726cc66077341b"
+                "reference": "6db75b330b00d65903287e8727b08cb18ecf6675"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Service/zipball/7516db8692217fee133c1cf3e6726cc66077341b",
-                "reference": "7516db8692217fee133c1cf3e6726cc66077341b",
+                "url": "https://api.github.com/repos/Aurora-Framework/Service/zipball/6db75b330b00d65903287e8727b08cb18ecf6675",
+                "reference": "6db75b330b00d65903287e8727b08cb18ecf6675",
                 "shasum": ""
             },
             "require": {
@@ -374,7 +374,7 @@
                 }
             ],
             "description": "Session",
-            "time": "2015-07-24 21:22:16"
+            "time": "2015-08-11 09:22:08"
         },
         {
             "name": "aurora-framework/session",
@@ -923,12 +923,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "6b24125f06d62ba9c719dca34256bad7ecb04db1"
+                "reference": "0e89e3714bda18973184d30646306bb0a482bd96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/6b24125f06d62ba9c719dca34256bad7ecb04db1",
-                "reference": "6b24125f06d62ba9c719dca34256bad7ecb04db1",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/0e89e3714bda18973184d30646306bb0a482bd96",
+                "reference": "0e89e3714bda18973184d30646306bb0a482bd96",
                 "shasum": ""
             },
             "type": "library",
@@ -954,7 +954,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2015-07-31 14:01:14"
+            "time": "2015-08-03 09:24:05"
         },
         {
             "name": "respect/validation",
@@ -962,12 +962,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Respect/Validation.git",
-                "reference": "743fafb31b44668f5db9a6e53ea925dc0b47a5c3"
+                "reference": "4329252709b276b0d16140dda95e7c42b67e3843"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Respect/Validation/zipball/743fafb31b44668f5db9a6e53ea925dc0b47a5c3",
-                "reference": "743fafb31b44668f5db9a6e53ea925dc0b47a5c3",
+                "url": "https://api.github.com/repos/Respect/Validation/zipball/4329252709b276b0d16140dda95e7c42b67e3843",
+                "reference": "4329252709b276b0d16140dda95e7c42b67e3843",
                 "shasum": ""
             },
             "require": {
@@ -985,6 +985,7 @@
                 "egulias/email-validator": "Strict (RFC compliant) email validation",
                 "ext-bcmath": "Arbitrary Precision Mathematics",
                 "ext-mbstring": "Multibyte String Functions",
+                "fabpot/php-cs-fixer": "Fix PSR2 and other coding style issues",
                 "malkusch/bav": "German bank account validation",
                 "symfony/validator": "Use Symfony validator through Respect\\Validation",
                 "zendframework/zend-validator": "Use Zend Framework validator through Respect\\Validation"
@@ -1017,7 +1018,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2015-07-29 20:08:06"
+            "time": "2015-08-10 18:22:04"
         },
         {
             "name": "sabre/event",

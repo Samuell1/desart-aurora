@@ -6,8 +6,6 @@ use Respect\Validation\Exceptions\NestedValidationExceptionInterface;
 
 class Comment extends BaseController
 {
-
-	protected $Spot;
 	protected $Encryption;
 	protected $Comment;
 
@@ -15,10 +13,9 @@ class Comment extends BaseController
 	private $return;
 
 
-	public function onConstruct()
+	public function before()
 	{
 		$this->userValidator = v::create();
-		$this->Spot          = $this->Model->getConnection();
 		$this->Encryption    = new \Aurora\Helper\Encryption("bVxPzeSMWd0AAJgyYDhoZG3Ui1ueEjWd0AAJgyYDho");
 		$this->Comment       = $this->Spot->mapper("App\Entity\Comment");
 	}
@@ -37,27 +34,21 @@ class Comment extends BaseController
 			$id = $this->Encryption->decrypt($explode[0]);
 			$type = $explode[1];
 
-			// $r = $this->Comment->insert([
-			// 	"subject_id"   => $id,
-			// 	"subject_type" => 1,
-			// 	"history_id"   => 0,
-			// 	"user_id"      => $this->User->id,
-			// 	"text"         => $this->Request->post("text")
-			// ]);
+			$this->Comment->insert([
+				"subject_id"   => $id,
+				"subject_type" => 1,
+				"history_id"   => 0,
+				"type"         => 1,
+				"hidden"       => 0,
+				"user_id"      => $this->User->id,
+				"text"         => $this->Request->post("text")
+			]);
 
-			// if($r) {
-			// 	$this->return["success"] = true;
-			// } else {
-			// 	$this->return = [
-			// 		"success" => false,
-			// 		"error"   => "Vyskytol sa problém pri pridávaní komentára."
-			// 	];
-			// }
-			var_dump($this->User);
-		} catch(NestedValidationExceptionInterface $e) {
+		} catch (NestedValidationExceptionInterface $e) {
 			$this->return["success"] = false;
 			$this->return["error"]   = implode("", array_values($e->findMessages(["text.length" => 'Text musí byť dlhší ako 3 znaky.'])));
 		}
+		
 	}
 
 }

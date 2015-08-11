@@ -12,24 +12,22 @@ class BasePresenter extends Presenter
     public function onConstruct()
     {
         $this->Spot = $this->Model->getConnection();
-
-        $User = null;
         $Notifications = [];
 
         if ($this->Auth->isLoggedIn()) {
             $email = $this->Session->get("auth");
-            $User = $this->Auth->getUser($email);
+            $this->User = $this->Auth->getUser($email);
 
             $Notifications = $this->Spot->mapper('App\Entity\Notification');
             $Notifications = $Notifications
             ->all()
             ->where([
                 "subject_type" => 1,
-                'subject' => $User->id,
+                'subject' => $this->User->id,
             ]);
         }
 
-        $this->View->User = $User;
+        $this->View->User = $this->User;
         $this->View->Notifications = $Notifications;
     }
 }
