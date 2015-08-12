@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aurora-framework/aurora",
-            "version": "v1.2.1",
+            "version": "v1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Aurora.git",
-                "reference": "f361c6b0bca769a79271d4f122b4922c16d0efa7"
+                "reference": "a90f71d4eafaeeb3d4fa189865d8f5eab4423dc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Aurora/zipball/f361c6b0bca769a79271d4f122b4922c16d0efa7",
-                "reference": "f361c6b0bca769a79271d4f122b4922c16d0efa7",
+                "url": "https://api.github.com/repos/Aurora-Framework/Aurora/zipball/a90f71d4eafaeeb3d4fa189865d8f5eab4423dc9",
+                "reference": "a90f71d4eafaeeb3d4fa189865d8f5eab4423dc9",
                 "shasum": ""
             },
             "require": {
@@ -58,7 +58,7 @@
                 }
             ],
             "description": "Simple and hackable framework",
-            "time": "2015-08-11 09:36:54"
+            "time": "2015-08-12 13:28:04"
         },
         {
             "name": "aurora-framework/config",
@@ -962,12 +962,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Respect/Validation.git",
-                "reference": "4329252709b276b0d16140dda95e7c42b67e3843"
+                "reference": "02a1923eb5c4cf4d0f48731ebe2de6ba3eb39960"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Respect/Validation/zipball/4329252709b276b0d16140dda95e7c42b67e3843",
-                "reference": "4329252709b276b0d16140dda95e7c42b67e3843",
+                "url": "https://api.github.com/repos/Respect/Validation/zipball/02a1923eb5c4cf4d0f48731ebe2de6ba3eb39960",
+                "reference": "02a1923eb5c4cf4d0f48731ebe2de6ba3eb39960",
                 "shasum": ""
             },
             "require": {
@@ -1018,7 +1018,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2015-08-10 18:22:04"
+            "time": "2015-08-11 16:36:25"
         },
         {
             "name": "sabre/event",

@@ -63,7 +63,8 @@ $Twig->addFunction(new \Twig_SimpleFunction('sklonuj', function ($intCount, $w1,
 
 /** View **/
 $Resolver->define("Aurora\\MVC\\View", [
-	":Engine" => $Twig
+	":Engine" => $Twig,
+	":extension" => ".twig"
 ]);
 
 /** Database **/
