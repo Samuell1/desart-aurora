@@ -1,4 +1,4 @@
-(function() {
+$(function() {
 
 	var path  = {"base" : "/desart"};
 	path.ajax = path.base + "/ajax/";

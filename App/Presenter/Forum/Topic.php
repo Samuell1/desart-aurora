@@ -27,9 +27,12 @@ class Topic extends BasePresenter
         ])
         ->first();
 
-        return $this->View->render("forum/topic/view.twig", [
+        return $this->View->render("forum/topic/view", [
             "Topic" => $Topic
         ]);
     }
-
+    public function render()
+  	{
+  		return $this->View->render();
+  	}
 }

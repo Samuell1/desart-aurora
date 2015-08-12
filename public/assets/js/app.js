@@ -77,7 +77,4 @@ if($(".show-usernotifications .label").length > 0)
   }, 2000);
 }
 
-
 });
-
-

@@ -18,9 +18,14 @@ class Category extends BasePresenter
         $Topic = $this->Topic
         ->all();
 
-        return $this->View->render("forum/index.twig", [
+        return $this->View->render("forum/index", [
             "Topic" => $Topic
         ]);
     }
+    
+    public function render()
+  	{
+  		return $this->View->render();
+  	}
 
 }
