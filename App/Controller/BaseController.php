@@ -13,7 +13,7 @@ class BaseController extends \Aurora\MVC\Controller
     {
         $this->Spot = $this->Model->getConnection();
 
-        if($this->Auth->isLoggedIn()) {
+        if ($this->Auth->isLoggedIn()) {
             $email = $this->Session->get("auth");
             $this->User  = $this->Auth->getUser($email);
         }

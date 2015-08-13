@@ -48,7 +48,11 @@ class Comment extends BaseController
 			$this->return["success"] = false;
 			$this->return["error"]   = implode("", array_values($e->findMessages(["text.length" => 'Text musí byť dlhší ako 3 znaky.'])));
 		}
-		
-	}
 
+	}
+	
+	public function render()
+	{
+		return json_encode($this->return);
+	}
 }
