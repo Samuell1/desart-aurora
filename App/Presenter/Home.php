@@ -15,12 +15,12 @@ class Home extends BasePresenter
 		$Article = $this->Spot
 			->mapper('App\Entity\Article');
 
-		$this->View->Articles = $Article
-			->all()
-			->with("User")
-			->where([
-				'status' => "published"
-			]);
+		$this->View->Articles = $this->Article
+		->all()
+		->with(["User", "Category"])
+		->where([
+			'status' => "published"
+		]);
 		// $Topic = $this->Spot
 		// 		->mapper('App\Entity\Topic');
 		//
