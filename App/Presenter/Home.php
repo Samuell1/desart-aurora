@@ -15,7 +15,7 @@ class Home extends BasePresenter
 		$Article = $this->Spot
 			->mapper('App\Entity\Article');
 
-		$this->View->Articles = $this->Article
+		$this->View->Articles = $Article
 		->all()
 		->with(["User", "Category"])
 		->where([
