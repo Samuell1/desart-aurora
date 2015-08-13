@@ -34,7 +34,7 @@ class Article extends BasePresenter
 
 	public function overview()
 	{
-		$Articles = $this->Article
+		$this->View->Articles = $this->Article
 		->all()
 		->with(["User", "Category"])
 		->where([

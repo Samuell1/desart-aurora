@@ -93,7 +93,7 @@ class Auth extends BaseController
 		$this->Response->redirect("/desart");
 	}
 
-	public function after()
+	public function render()
 	{
 		return json_encode($this->return);
 	}
