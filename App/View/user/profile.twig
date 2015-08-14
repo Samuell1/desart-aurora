@@ -4,7 +4,57 @@
 {% block title %}{{ Profile.username }}{% endblock %}
 
 {% block content %}
-	<h2>{{ Profile.username }}</h2>
+
+<div id="article-header" style="background:url(https://unsplash.it/800/400) center center;background-size:cover">
+
+	<div id="article-shadow"></div>
+
+	<div id="article-title">
+		<h2 class="ui center aligned header">
+			<img class="ui circular image" src="http://data.desart.sk/avatars/{{ Profile.id }}.png" alt="" /><br>
+		  {{ Profile.username }}
+		</h2>
+	</div>
+
+	<div id="article-info">
+
+		<div class="ui two column stackable grid">
+			<div class="column">
+
+				<div class="ui small inverted horizontal list">
+					<div class="item">
+						<i class="user icon"></i>
+						<a href="/@{{ Article.User.username }}" class="content">
+							fgdfgdf
+						</a>
+					</div>
+				</div>
+
+			</div>
+			<div class="column large screen only right aligned">
+
+				<div class="ui small inverted horizontal list">
+					<div class="item">
+						<i class="outline heart icon"></i>
+						<div class="content">
+							17x obľúbené
+						</div>
+					</div>
+					<div class="item">
+						<i class="marker icon"></i>
+						<div class="content">
+							54
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
     <div>{{ Profile.Meta.bio }}</div>
 	{% for Group in Profile.Groups %}
 	    <div><span text-color="{{ Group.color}}">{{ Group.name }}</span></div>
