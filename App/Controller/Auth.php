@@ -68,26 +68,26 @@ class Auth extends BaseController
 				$this->response["success"] = true;
 				$this->response["statusCode"] = 200;
 			} else {
+				$this->response["success"] = false;
 				$this->response["data"]["messages"] = [
 					"Zadaný email alebo heslo nie je správne."
 				];
 			}
 		} catch (NestedValidationExceptionInterface $e) {
+			$this->response["success"] = false;
 			$this->response["data"]["messages"] = [
 				"Zadaný email alebo heslo nie je správne."
 			];
 		}
 
-		$this->response["success"] = true;
-		$this->response["statusCode"] = 200;
 	}
 
 	public function logout()
 	{
 		$this->Auth->logout();
 
-		$this->response["success"] = true;
-		$this->response["statusCode"] = 200;
+		$this->Response->redirect("/desart");
+
 	}
 
 }
