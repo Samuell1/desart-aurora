@@ -23,9 +23,11 @@ $Router->mount("/ajax", function() use ($Router) {
     $Router->post("/login", ["App\\Controller\\Auth", "login"]);
     $Router->get("/search", ["App\\Controller\\Search", "search"]);
     $Router->post("/register", ["App\\Controller\\Auth", "register"]);
+    
     $Router->post("/topic/add/{num}", ["App\\Controller\\Forum\\Topic", "add"]);
     $Router->post("/post/add/{num}", ["App\\Controller\\Forum\\Post", "add"]);
-    $Router->post("/comment/add", ["App\\Controller\\Comment", "addComment"]);
+
+    $Router->post("/comment/add", ["App\\Controller\\Comment", "add"]);
 });
 
 try {

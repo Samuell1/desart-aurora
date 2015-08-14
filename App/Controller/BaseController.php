@@ -4,10 +4,17 @@ namespace App\Controller;
 
 use Aurora\MVC\Controller;
 
-class BaseController extends \Aurora\MVC\Controller
+class BaseController extends Controller
 {
     protected $Spot;
     protected $User;
+    public $Auth;
+
+    protected $response = [
+        "success" => false,
+        "statusCode" => 500,
+        "data" => []
+    ];
 
     public function onConstruct()
     {
@@ -17,5 +24,10 @@ class BaseController extends \Aurora\MVC\Controller
             $email = $this->Session->get("auth");
             $this->User  = $this->Auth->getUser($email);
         }
+    }
+
+    public function render()
+    {
+        return json_encode($this->response);
     }
 }

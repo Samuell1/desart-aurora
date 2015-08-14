@@ -116,4 +116,9 @@ class Auth
 
 		return $User;
 	}
+
+	public function getUserMapper()
+	{
+		return $this->User;
+	}
 }

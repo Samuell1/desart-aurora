@@ -30,4 +30,9 @@ class BasePresenter extends Presenter
         $this->View->User = $this->User;
         $this->View->Notifications = $Notifications;
     }
+    
+    public function render()
+    {
+        return $this->View->render();
+    }
 }

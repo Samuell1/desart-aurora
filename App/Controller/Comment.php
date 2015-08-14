@@ -3,34 +3,36 @@ namespace App\Controller;
 
 use Respect\Validation\Validator as v;
 use Respect\Validation\Exceptions\NestedValidationExceptionInterface;
+use App\Library\CommentParseDown;
+use Aurora\Helper\Url;
 
 class Comment extends BaseController
 {
 	protected $Encryption;
 	protected $Comment;
+	protected $Parsedown;
 
-	private $userValidator;
-	private $return;
+	private $commentValidator;
 
-
-	public function before()
+	public function before(Url $Url)
 	{
-		$this->userValidator = v::create();
-		$this->Encryption    = new \Aurora\Helper\Encryption("bVxPzeSMWd0AAJgyYDhoZG3Ui1ueEjWd0AAJgyYDho");
-		$this->Comment       = $this->Spot->mapper("App\Entity\Comment");
+		$this->commentValidator = v::create();
+		$this->Encryption       = new \Aurora\Helper\Encryption("bVxPzeSMWd0AAJgyYDhoZG3Ui1ueEjWd0AAJgyYDho");
+		$this->Comment          = $this->Spot->mapper("App\Entity\Comment");
+		$this->Parsedown        = new CommentParseDown($this->Auth->getUserMapper(), $Url); # enables automatic line breaks
 	}
 
-	public function addComment()
+	public function add()
 	{
-		$Data = $this->Request->getParameters();
+		$data = $this->Request->getParameters();
 
-		$this->userValidator->key("text", v::string()->notEmpty()->length(3, null)->setName("text"))
+		$this->commentValidator->key("text", v::string()->notEmpty()->length(3, null)->setName("text"))
 							->setName("Comment validation");
 
 		try {
-			$this->userValidator->assert($Data);
+			$this->commentValidator->assert($data);
 
-			$explode = explode(":", $this->Request->post("data"));
+			$explode = explode(":", $data["data"]);
 			$id = $this->Encryption->decrypt($explode[0]);
 			$type = $explode[1];
 
@@ -41,18 +43,17 @@ class Comment extends BaseController
 				"type"         => 1,
 				"hidden"       => 0,
 				"user_id"      => $this->User->id,
-				"text"         => $this->Request->post("text")
+				"text"         => $this->Parsedown->text($data["text"])
 			]);
 
 		} catch (NestedValidationExceptionInterface $e) {
-			$this->return["success"] = false;
-			$this->return["error"]   = implode("", array_values($e->findMessages(["text.length" => 'Text musí byť dlhší ako 3 znaky.'])));
+			$this->response["data"]["messsages"] = implode("", array_values($e->findMessages([
+				"text.length" => 'Text musí byť dlhší ako 3 znaky.',
+				"text.notEmpty" => 'Text musí byť dlhší ako 3 znaky.',#
+			])));
 		}
 
-	}
-	
-	public function render()
-	{
-		return json_encode($this->return);
+		$this->response["success"] = true;
+		$this->response["statusCode"] = 200;
 	}
 }

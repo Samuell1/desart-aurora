@@ -125,13 +125,14 @@
   		<div class="ui flowing userprofile popup transition">
   			<div class="ui grid" style="width:320px">
   				<div class="five wide column center aligned">
-  					<img class="ui small rounded image" src="http://data.desart.sk/avatars/{{ User.id }}.png">
+  					<img class="ui small rounded image" src="http://data.desart.sk/avatars/{{ User.username }}.png">
   				</div>
   				<div class="eleven wide column">
-  					<h4 class="ui header" style="margin:0;">{{ User.Meta.firstname }} {{ User.username }} {{ User.Meta.lastname }}</h4>
-            <small>{{ User.email }}</small><br>
-            <a class="ui mini basic button" style="margin-top:7px">Prejsť do manageru</a>
-
+  					<h4 class="ui header" style="margin:0;">{{ User.username }}</h4>
+                    {# Nech je to podsebou alebo tak nejako pre mna je dolezity nickname #}
+                    <small>{{ User.Meta.firstname }} {{ User.Meta.lastname }}</small>
+                    <small>{{ User.email }}</small><br>
+                    <a class="ui mini basic button" style="margin-top:7px">Prejsť do manageru</a>
   				</div>
   			</div>
 

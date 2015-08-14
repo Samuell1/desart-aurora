@@ -7,95 +7,87 @@ use Respect\Validation\Validator as v;
 
 class Auth extends BaseController
 {
-
-	public $Auth;
-
-	protected $Spot;
-
-	private $return;
 	private $userValidator;
 
-
-	public function onConstruct()
+	public function before()
 	{
 		$this->userValidator = v::create();
-		$this->Spot          = $this->Model->getConnection();
 	}
-
 
 	public function register()
 	{
-		$Data = $this->Request->getParameters();
+		$data = $this->Request->getParameters();
 
 		$this->userValidator->key("email", v::email()->notEmpty()->setName("email"))
 							->key("password", v::string()->notEmpty()->length(6, null)->setName("password"))
 							->setName("Register validation");
 
 		try {
-			$this->userValidator->assert($Data);
+			$this->userValidator->assert($data);
 
-			if($this->Auth->createUser(
-				$this->Request->post("email"),
-				$this->Request->post("password"),
-				$this->Request->post("email"),
+			if ($this->Auth->createUser(
+				$data["email"],
+				$data["password"],
+				$data["email"],
 				$this->Request->getIpAddress())
 			) {
-				$this->Auth->forceLogin($this->Request->post("email"));
-				$this->return["success"] = true;
+				$this->Auth->forceLogin($data["email"]);
+
+				$this->response["success"] = true;
+				$this->response["statusCode"] = 200;
 			} else {
-				$this->return = [
-					"success" => false,
+				$this->response["data"]["messages"] = [
 					"error"   => "Uživateľ s takýmto emailom už existuje."
 				];
 			}
 		} catch (NestedValidationExceptionInterface $e) {
-			$this->return = [
-				"success" => false,
+			$this->response["data"]["messages"] = [
 				"error"   => "Zadaný email alebo heslo nie je správne."
 			];
 		}
+
+		$this->response["success"] = true;
+		$this->response["statusCode"] = 200;
 	}
 
 	public function login()
 	{
-		$Data = $this->Request->getParameters();
+		$data = $this->Request->getParameters();
 
 		$this->userValidator->key("email", v::email()->notEmpty()->setName("email"))
 							->key("password", v::string()->notEmpty()->length(6, null)->setName("password"))
 							->setName("Login validation");
 
 		try {
-			$this->userValidator->assert($Data);
+			$this->userValidator->assert($data);
 
 			if ($this->Auth->login(
-				$this->Request->post("email"),
-				$this->Request->post("password"))
+				$data["email"],
+				$data["password"])
 			) {
-				$this->return["success"] = true;
+				$this->response["success"] = true;
+				$this->response["statusCode"] = 200;
 			} else {
-				$this->return = [
-					"success" => false,
-					"error"   => "Zadaný email alebo heslo nie je správne."
+				$this->response["data"]["messages"] = [
+					"Zadaný email alebo heslo nie je správne."
 				];
 			}
-		} catch(NestedValidationExceptionInterface $e) {
-			$this->return = [
-				"success" => false,
-				"error"   => "Zadaný email alebo heslo nie je správne."
+		} catch (NestedValidationExceptionInterface $e) {
+			$this->response["data"]["messages"] = [
+				"Zadaný email alebo heslo nie je správne."
 			];
 		}
+
+		$this->response["success"] = true;
+		$this->response["statusCode"] = 200;
 	}
 
 	public function logout()
 	{
 		$this->Auth->logout();
 
-		$this->Response->redirect("/desart");
-	}
-
-	public function render()
-	{
-		return json_encode($this->return);
+		$this->response["success"] = true;
+		$this->response["statusCode"] = 200;
 	}
 
 }

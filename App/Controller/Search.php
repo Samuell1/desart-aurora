@@ -8,6 +8,16 @@ class Search extends BaseController
 {
     protected $Url;
 
+    // @Overwriten
+    protected $response = [
+        "success" => true,
+        "action" => [
+            "url" => "/search/results",
+            "text" => "Zobraziť dalšie výsledky..."
+        ],
+        "results" => []
+    ];
+
     public function before(Url $Url)
     {
         $this->Url = $Url;
@@ -15,43 +25,31 @@ class Search extends BaseController
 
     public function search()
     {
-        $Article = $this->Spot->mapper('App\Entity\Article');
-        $ArticleSeries = $this->Spot->mapper('App\Entity\Article\Series');
+        $Article         = $this->Spot->mapper('App\Entity\Article');
+        $ArticleSeries   = $this->Spot->mapper('App\Entity\Article\Series');
         $ArticleCategory = $this->Spot->mapper('App\Entity\Article\Category');
 
         $Topic = $this->Spot->mapper('App\Entity\Forum\Topic');
-        $User = $this->Spot->mapper('App\Entity\User');
+        $User  = $this->Spot->mapper('App\Entity\User');
 
         $query = $this->Request->get("query");
+        $this->response["results"] = [
+            
+            "users" => [
+                "name" => "Používatelia",
+                "results" => $this->getUserResults($query, $User)
+            ],
 
-        $response = ["success" => true];
+            "articles" => [
+                "name" => "Články",
+                "results" => $this->getArticleResults($query, $Article)
+            ],
 
-
-          $response = [
-              "action" => [
-                  "url" => "/search/results",
-                  "text" => "Zobraziť dalšie výsledky..."
-              ],
-              "results" => []
-          ];
-
-          $response["results"] = [
-              "users" => [
-                  "name" => "Používatelia",
-                  "results" => $this->getUserResults($query, $User)
-              ],
-              "articles" => [
-                  "name" => "Články",
-                  "results" => $this->getArticleResults($query, $Article)
-              ],
-              "topics" => [
-                  "name" => "Témy",
-                  "results" => $this->getTopicResults($query, $Topic)
-              ]
-
-          ];
-
-        return json_encode($response);
+            "topics" => [
+                "name" => "Témy",
+                "results" => $this->getTopicResults($query, $Topic)
+            ]
+        ];
     }
 
     public function getUserResults($query, $User)
@@ -71,7 +69,6 @@ class Search extends BaseController
             ];
         }
         return $results;
-
     }
 
     public function getArticleResults($query, $Article)
@@ -111,4 +108,5 @@ class Search extends BaseController
         }
         return $results;
     }
+
 }

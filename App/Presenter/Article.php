@@ -28,7 +28,6 @@ class Article extends BasePresenter
 				'status' => "published"
 			])->first();
 		$this->View->encryptedId = $this->Encryption->encrypt($this->View->Article->id);
-
 		$this->View->setTemplate("article/view");
 	}
 
@@ -42,10 +41,5 @@ class Article extends BasePresenter
 		]);
 
 		$this->View->setTemplate("article/overview");
-	}
-
-	public function render()
-	{
-		return $this->View->render();
 	}
 }

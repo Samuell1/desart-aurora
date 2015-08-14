@@ -36,6 +36,7 @@ class User extends Entity
     {
         return [
             "Meta" => $mapper->hasOne($entity, "App\Entity\User\Meta", "user_id"),
+            "Image" => $mapper->belongsTo($entity, "App\Entity\File", "avatar")->where(["type" => "image"]),
             "Groups" => $mapper->hasManyThrough($entity, "App\Entity\Group", "App\Entity\User\Group", "group_id", "user_id"),
         ];
     }

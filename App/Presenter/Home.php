@@ -42,10 +42,4 @@ class Home extends BasePresenter
 		// $flash_news = $this->Model->Article->getFlashNews($page);
 		$this->View->setTemplate("home/index");
 	}
-
-	public function render()
-	{
-		return $this->View->render();
-	}
-
 }

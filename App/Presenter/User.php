@@ -9,10 +9,9 @@ class User extends BasePresenter
     public function view()
     {
         try {
-            $User = $this->Auth->getUser($this->Param->uid);
-            return $this->View->render('user/profile.twig', [
-                'Profile' => $User,
-            ]);
+            $this->View->Profile = $this->Auth->getUser($this->Param->uid);
+            $this->View->setTemplate("user/profile");
+
         } catch (UserNotFoundException $Exception) {
             echo "Pouzivatel neexistuje";
         }
