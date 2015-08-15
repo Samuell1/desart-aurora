@@ -12,34 +12,23 @@ class Home extends BasePresenter
 
 	public function index()
 	{
-		$Article = $this->Spot
-			->mapper('App\Entity\Article');
+		$Article = $this->Spot->mapper('App\Entity\Article');
+		$Topic   = $this->Spot->mapper('App\Entity\Forum\Topic');
 
-		$this->View->Articles = $Article
-		->all()
-		->with(["User", "Category"])
-		->where([
+		$this->View->Articles = $Article->all()->with(["User", "Category", "TagGroup"])->where([
+			'status' => "published",
+			"type"   => 0
+		])->limit(5);
+
+		$this->View->FlashNews = $Article->all()->with(["User", "Category", "TagGroup"])->where([
+			'status' => "published",
+			"type"   => 1
+		])->limit(5);
+
+		$this->View->Topics = $Topic->all()->with("User")->where([
 			'status' => "published"
-		]);
-		// $Topic = $this->Spot
-		// 		->mapper('App\Entity\Topic');
-		//
-		// $Topic = $Topic
-		// 	->all()
-		// 	->with("User")
-		// 	->first([
-		// 		'slug' => $this->Param->slug,
-		// 		'status' => "published"
-		// 	]);
+		])->limit(5);
 
-		// if ($topics = $this->Model->Topic->getLastTopics()) {
-		// 	foreach ($topics as &$topic) {
-		// 		$topic["posts_count"] = (int) $this->Model->Post->countPosts($topic["id"]);
-		// 	}
-		// }
-		//
-		// $articles = $this->Model->Article->getArticles($page);
-		// $flash_news = $this->Model->Article->getFlashNews($page);
 		$this->View->setTemplate("home/index");
 	}
 }

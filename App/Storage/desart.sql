@@ -59,8 +59,9 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_article` (
   `read_count` SMALLINT(5) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
   `custom_tags` VARCHAR(250) CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NULL COMMENT 'Custom tagy v serializovanom',
   `status` ENUM('published','draft','private') NOT NULL DEFAULT 'published' COMMENT '',
-  `type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Typ:\n0 - Clanok\n1 - Rychla novinka',
-  `attachments` TINYTEXT NULL COMMENT 'Pridavne subory a obrazky',
+  `type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '0 - Clanok\n1 - Rychla novinka',
+  `sources` TINYTEXT CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NULL DEFAULT NULL COMMENT 'Zdroje v ser. array',
+  `attachments` TINYTEXT CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NULL COMMENT 'Pridavne subory a obrazky v ser. array',
   `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
   `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
   `published_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
@@ -128,7 +129,8 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_comment` (
   `subject_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
   `subject_type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1 - Article\n2 - Topic\n3 - Question',
   `user_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
-  `reply_comment_id` SMALLINT(5) UNSIGNED NULL DEFAULT NULL COMMENT '',
+  `reply_comment_id` SMALLINT(5) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
+  `reply` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '',
   `history_id` MEDIUMINT(7) UNSIGNED NOT NULL COMMENT '',
   `type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1 - Velky Komment\n2 - Micro',
   `text` MEDIUMTEXT NOT NULL COMMENT '',
@@ -145,16 +147,18 @@ AUTO_INCREMENT = 0;
 
 
 -- -----------------------------------------------------
--- Table `Desart`.`da_favorite`
+-- Table `Desart`.`da_subscribe`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Desart`.`da_favorite` ;
+DROP TABLE IF EXISTS `Desart`.`da_subscribe` ;
 
-CREATE TABLE IF NOT EXISTS `Desart`.`da_favorite` (
+CREATE TABLE IF NOT EXISTS `Desart`.`da_subscribe` (
   `id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
   `user_id` SMALLINT(5) UNSIGNED NOT NULL COMMENT '',
-  `item_id` INT(11) UNSIGNED NOT NULL COMMENT '',
-  `type` TINYINT(2) UNSIGNED NOT NULL DEFAULT 1 COMMENT 'Article - 1\nTopic - 2 \nQuestion - 3',
-  PRIMARY KEY (`id`, `user_id`, `item_id`)  COMMENT '',
+  `subject_id` INT(11) UNSIGNED NOT NULL COMMENT '',
+  `subject_type` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT 'Article - 1\nTopic - 2 \nQuestion - 3',
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
+  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
+  PRIMARY KEY (`id`, `user_id`, `subject_id`)  COMMENT '',
   UNIQUE INDEX `fav_id_UNIQUE` (`id` ASC)  COMMENT '',
   INDEX `fk_favorite_user1_idx` (`user_id` ASC)  COMMENT '')
 ENGINE = InnoDB
@@ -334,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `Desart`.`da_user_metadata` (
   `deviantart` VARCHAR(225) NULL DEFAULT NULL COMMENT '',
   `skype` VARCHAR(32) NULL DEFAULT NULL COMMENT '',
   `bio` TINYTEXT NULL DEFAULT NULL COMMENT '',
-  `web` VARCHAR(225) NULL DEFAULT NULL COMMENT '',
+  `websites` TINYTEXT CHARACTER SET 'ascii' COLLATE 'ascii_general_ci' NULL DEFAULT NULL COMMENT 'Weby pouzivatela v ser. array',
   `birthday` TIMESTAMP NULL COMMENT '',
   `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '',
   PRIMARY KEY (`user_id`)  COMMENT '',
@@ -595,7 +599,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `Desart`;
-INSERT INTO `Desart`.`da_article` (`id`, `category_id`, `tag_group_id`, `image_id`, `user_id`, `series_id`, `history_id`, `slug`, `name`, `content`, `description`, `read_count`, `custom_tags`, `status`, `type`, `attachments`, `created_at`, `updated_at`, `published_at`) VALUES (1, 1, NULL, NULL, 1, NULL, NULL, 'banan', 'Banan je tooop', 'Najlepsi je v cokolade', 'HTTP/1.1 sa dočkalo zmeny. Čo pre nás táto zmena znamená?', 500, NULL, 'published', 0, NULL, NULL, NULL, NULL);
+INSERT INTO `Desart`.`da_article` (`id`, `category_id`, `tag_group_id`, `image_id`, `user_id`, `series_id`, `history_id`, `slug`, `name`, `content`, `description`, `read_count`, `custom_tags`, `status`, `type`, `sources`, `attachments`, `created_at`, `updated_at`, `published_at`) VALUES (1, 1, NULL, NULL, 1, 1, NULL, 'banan', 'Banan je tooop', 'Najlepsi je v cokolade', 'HTTP/1.1 sa dočkalo zmeny. Čo pre nás táto zmena znamená?', 500, NULL, 'published', 0, NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
@@ -617,8 +621,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `Desart`;
-INSERT INTO `Desart`.`da_comment` (`id`, `subject_id`, `subject_type`, `user_id`, `reply_comment_id`, `history_id`, `type`, `text`, `choosen`, `hidden`, `created_at`, `updated_at`) VALUES (1, 1, 1, 1, 0, 0, 1, 'Toto je komentár', DEFAULT, 0, NULL, NULL);
-INSERT INTO `Desart`.`da_comment` (`id`, `subject_id`, `subject_type`, `user_id`, `reply_comment_id`, `history_id`, `type`, `text`, `choosen`, `hidden`, `created_at`, `updated_at`) VALUES (2, 1, 1, 2, 1, 0, 1, 'Hej ten sa mi nepáči', DEFAULT, 0, NULL, NULL);
+INSERT INTO `Desart`.`da_comment` (`id`, `subject_id`, `subject_type`, `user_id`, `reply_comment_id`, `reply`, `history_id`, `type`, `text`, `choosen`, `hidden`, `created_at`, `updated_at`) VALUES (1, 1, 1, 1, 0, DEFAULT, 0, 1, 'Toto je komentár', DEFAULT, 0, NULL, NULL);
+INSERT INTO `Desart`.`da_comment` (`id`, `subject_id`, `subject_type`, `user_id`, `reply_comment_id`, `reply`, `history_id`, `type`, `text`, `choosen`, `hidden`, `created_at`, `updated_at`) VALUES (2, 1, 1, 2, 1, DEFAULT, 0, 1, 'Hej ten sa mi nepáči', DEFAULT, 0, NULL, NULL);
 
 COMMIT;
 
@@ -670,9 +674,45 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `Desart`;
-INSERT INTO `Desart`.`da_user_metadata` (`user_id`, `firstname`, `lastname`, `deviantart`, `skype`, `bio`, `web`, `birthday`, `updated_at`) VALUES (1, 'Samuel', 'Patro', NULL, 'samuell.patro', 'Som samko mam rad uhorky a kakac, som bomba :D Rad DEBUGUJEM', NULL, NULL, NULL);
-INSERT INTO `Desart`.`da_user_metadata` (`user_id`, `firstname`, `lastname`, `deviantart`, `skype`, `bio`, `web`, `birthday`, `updated_at`) VALUES (2, 'VeeeneX', NULL, NULL, 'veeenex', 'To som ja :D', NULL, NULL, NULL);
-INSERT INTO `Desart`.`da_user_metadata` (`user_id`, `firstname`, `lastname`, `deviantart`, `skype`, `bio`, `web`, `birthday`, `updated_at`) VALUES (3, 'KotassMan', NULL, NULL, 'kotassman', 'I like dogs', NULL, NULL, NULL);
+INSERT INTO `Desart`.`da_user_metadata` (`user_id`, `firstname`, `lastname`, `deviantart`, `skype`, `bio`, `websites`, `birthday`, `updated_at`) VALUES (1, 'Samuel', 'Patro', NULL, 'samuell.patro', 'Som samko mam rad uhorky a kakac, som bomba :D Rad DEBUGUJEM', 'a:2:{s:6:\"DesArt\";s:17:\"http://desart.sk/\";s:6:\"Github\";s:28:\"https://github.com/Samuell95\";}', NULL, NULL);
+INSERT INTO `Desart`.`da_user_metadata` (`user_id`, `firstname`, `lastname`, `deviantart`, `skype`, `bio`, `websites`, `birthday`, `updated_at`) VALUES (2, 'VeeeneX', NULL, NULL, 'veeenex', 'To som ja :D', NULL, NULL, NULL);
+INSERT INTO `Desart`.`da_user_metadata` (`user_id`, `firstname`, `lastname`, `deviantart`, `skype`, `bio`, `websites`, `birthday`, `updated_at`) VALUES (3, 'KotassMan', NULL, NULL, 'kotassman', 'I like dogs', NULL, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Desart`.`da_tag`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `Desart`;
+INSERT INTO `Desart`.`da_tag` (`id`, `tag`, `hidden`, `created_at`, `updated_at`) VALUES (1, 'php', DEFAULT, NULL, NULL);
+INSERT INTO `Desart`.`da_tag` (`id`, `tag`, `hidden`, `created_at`, `updated_at`) VALUES (2, 'http', DEFAULT, NULL, NULL);
+INSERT INTO `Desart`.`da_tag` (`id`, `tag`, `hidden`, `created_at`, `updated_at`) VALUES (3, 'server', DEFAULT, NULL, NULL);
+INSERT INTO `Desart`.`da_tag` (`id`, `tag`, `hidden`, `created_at`, `updated_at`) VALUES (4, 'php7', DEFAULT, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Desart`.`da_tag_group`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `Desart`;
+INSERT INTO `Desart`.`da_tag_group` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES (1, 'PHP', 'php', NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Desart`.`da_tag_group_map`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `Desart`;
+INSERT INTO `Desart`.`da_tag_group_map` (`tag_id`, `tag_group_id`) VALUES (1, 1);
+INSERT INTO `Desart`.`da_tag_group_map` (`tag_id`, `tag_group_id`) VALUES (2, 1);
+INSERT INTO `Desart`.`da_tag_group_map` (`tag_id`, `tag_group_id`) VALUES (3, 1);
+INSERT INTO `Desart`.`da_tag_group_map` (`tag_id`, `tag_group_id`) VALUES (4, 1);
 
 COMMIT;
 
@@ -693,6 +733,16 @@ COMMIT;
 START TRANSACTION;
 USE `Desart`;
 INSERT INTO `Desart`.`da_comment_vote` (`id`, `user_id`, `comment_id`, `vote`, `created_at`, `updated_at`) VALUES (1, 1, 1, 0, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `Desart`.`da_article_tag_map`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `Desart`;
+INSERT INTO `Desart`.`da_article_tag_map` (`article_id`, `tag_group_id`) VALUES (1, 1);
 
 COMMIT;
 

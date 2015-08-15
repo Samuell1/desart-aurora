@@ -9,7 +9,7 @@ use Spot\EntityInterface;
 
 class Series extends Entity
 {
-    protected static $table = "da_article_series";
+    protected static $table = "da_series";
 
     public static function fields()
     {

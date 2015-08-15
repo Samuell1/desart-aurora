@@ -23,7 +23,10 @@ $Router->mount("/ajax", function() use ($Router) {
     $Router->post("/login", ["App\\Controller\\Auth", "login"]);
     $Router->get("/search", ["App\\Controller\\Search", "search"]);
     $Router->post("/register", ["App\\Controller\\Auth", "register"]);
-    
+
+    $Router->get("/subscribe/{type}/{id}", ["App\\Controller\\Subscribe", "subscribe"]);
+    $Router->get("/unsubscribe/{type}/{id}", ["App\\Controller\\Subscribe", "unsubscribe"]);
+
     $Router->post("/topic/add/{num}", ["App\\Controller\\Forum\\Topic", "add"]);
     $Router->post("/post/add/{num}", ["App\\Controller\\Forum\\Post", "add"]);
 

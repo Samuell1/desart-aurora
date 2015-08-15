@@ -19,7 +19,7 @@ class Meta extends Entity
             "devianart"  => ["type" => "string"],
             "skype"      => ["type" => "string", "unique" => true],
             "bio"        => ["type" => "text"],
-            "web"        => ["type" => "string"],
+            "websites"   => ["type" => "array"],
             "birthday"   => ["type" => "datetime"],
             "updated_at" => ["type" => "datetime"]
         ];

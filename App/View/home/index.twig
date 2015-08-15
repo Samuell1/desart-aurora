@@ -26,12 +26,12 @@
               <article>
                 <div class="info">
                   <span class="userinfo">
-                    <img class="ui avatar image" src="http://data.desart.sk/avatars/5.png">
-                    <a href="#">Samuell</a>
+                    <img class="ui avatar image" src="http://data.desart.sk/avatars/{{ Article.user.username }}.png">
+                    <a href="#">{{ Article.user.username }}</a>
                   </span>
 
                   <a href="#" class="ui tiny basic green button right floated">
-                    Webdesign
+                    {{ Article.Series.name }}
                   </a>
 
                   <div class="clearfix"></div>

@@ -3,167 +3,189 @@
 {% block title %}{{ Article.name }}{% endblock %}
 
 {% block content %}
+    <div id="article-header" style="background:url(https://unsplash.it/800/400) center center;background-size:cover">
+        <div id="article-shadow"></div>
 
-  <div id="article-header" style="background:url(https://unsplash.it/800/400) center center;background-size:cover">
+        <div id="article-title">
+          <h1>{{ Article.name }}</h3>
+          <small>{{ Article.description }}</small>
+        </div>
 
-    <div id="article-shadow"></div>
+        <div id="article-info">
+          <div class="ui two column stackable grid">
 
-    <div id="article-title">
-      <h1>{{ Article.name }}</h3>
-      <small>HTTP/1.1 sa dočkalo zmeny. Čo pre nás táto zmena znamená?</small>
-    </div>
-
-    <div id="article-info">
-
-      <div class="ui two column stackable grid">
-        <div class="column">
-
-          <div class="ui small inverted horizontal list">
-            <div class="item">
-              <i class="user icon"></i>
-              <a href="/@{{ Article.User.username }}" class="content">
-                {{ Article.User.username }}
-              </a>
-            </div>
-            <div class="item">
-              <i class="calendar icon"></i>
-              <div class="content popup-active" {% if Article.updated_at|date('U') > Article.published_at|date('U') %}data-content="Naposledy upravené {{ Article.updated_at|date }}" data-variation="mini inverted" data-position="top center"{% endif %}>publikované {{ Article.published_at|date }}
+            <div class="column">
+              <div class="ui small inverted horizontal list">
+                <div class="item">
+                  <i class="user icon"></i>
+                  <a href="{{ Url.get("profile", {"uid": Article.User.username}) }}" class="content">{{ Article.User.username }}</a>
+                </div>
+                <div class="item">
+                  <i class="calendar icon"></i>
+                  <div class="content popup-active" {% if Article.updated_at|date('U') > Article.published_at|date('U') %}data-content="Naposledy upravené {{ Article.updated_at|date }}" data-variation="mini inverted" data-position="top center"{% endif %}>publikované {{ Article.published_at|date }}
+                  </div>
+                </div>
               </div>
             </div>
+
+            <div class="column large screen only right aligned">
+              <div class="ui small inverted horizontal list">
+                <div class="item">
+                  <i class="outline heart icon"></i>
+                  <div class="content">
+                    17x obľúbené
+                  </div>
+                </div>
+                <div class="item">
+                  <i class="marker icon"></i>
+                  <div class="content">
+                    {{ Article.read_count }}x prečítané
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
-
         </div>
-        <div class="column large screen only right aligned">
-
-          <div class="ui small inverted horizontal list">
-            <div class="item">
-              <i class="outline heart icon"></i>
-              <div class="content">
-                17x obľúbené
-              </div>
-            </div>
-            <div class="item">
-              <i class="marker icon"></i>
-              <div class="content">
-                {{ Article.read_count }}x prečítané
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
     </div>
 
-  </div>
+    <div class="container-article">
 
+        <article id="article-view">{{ Article.content|raw }}</article>
 
-  <div class="container-article">
+        <div class="ui card fluid">
+            <div class="content">
+                <img class="right floated mini ui image" src="http://data.desart.sk/avatars/{{ Article.User.id }}.png">
+                <div class="header">{{ Article.User.username }}</div>
+                <div class="meta">{{ attribute(Article.User.Groups, 0).name }}</div>
+                <div class="description">{{ Article.User.Meta.bio }}</div>
+            </div>
+            <div class="extra content">
+                {% if Subscribe %}
+                    <a class="ui basic mini green button subscribe active" data-id="{{ Article.User.id }}" data-type="4">Nasleduješ užívateľa</a>
+                    {% else %}
+                    <a class="ui basic mini green button subscribe" data-id="{{ Article.User.id }}" data-type="4">Nasledovať užívateľa</a>
+                {% endif %}
 
-    <article id="article-view">{{ Article.content|raw }}</article>
-
-    <div class="ui card fluid">
-      <div class="content">
-        <img class="right floated mini ui image" src="http://data.desart.sk/avatars/{{ Article.User.id }}.png">
-        <div class="header">
-          {{ Article.User.username }}
-        </div>
-        <div class="meta">
-          Užívateľ
-        </div>
-        <div class="description">
-          {{ Article.User.Meta.bio }}
-        </div>
-      </div>
-      <div class="extra content">
-          <a class="ui basic mini green button">Odoberať články od užívateľa</a>
-          <a href="" class="ui basic mini green button right floated">desart.sk</a>
-          <a href="" class="ui basic mini green button right floated">Github</a>
-      </div>
-    </div>
-
-    <a href="search/salama" class="ui tiny basic button">salama</a>
-
-
-    <h4 class="ui horizontal divider header">
-      <i class="comments outline icon"></i>
-      Komentáre k článku
-    </h4>
-    <div class="ui fluid comments">
-        {% for Comment in Article.Comments %}
-            <div class="comment">
-                <a class="avatar">
-                    <img src="http://data.desart.sk/avatars/{{ Comment.user_id }}.png" alt="avatar">
-                </a>
-
-                <div class="content">
-                    <a class="author">{{ Comment.User.username }}</a>
-                    <div class="metadata">
-                        <span class="date">{{ Comment.created_at.date|timeago }}</span>
-                    </div>
-
-                    <div class="text">
-                        {{ Comment.text|raw }}
-                    </div>
-
-                    <div class="actions">
-                        <a class="reply">Odpovedať</a>
-                        <a class="reply">Zobraziť skryté</a>
-                    </div>
-                </div> <!-- ./content -->
-
-                {% for Comment in Comment.ParentComment %}
-
-                    <div class="comments">
-                        <div class="comment">
-                            <a class="avatar">
-                                <img src="http://data.desart.sk/avatars/{{ Comment.user_id }}.png" alt="avatar">
-                            </a>
-
-                            <div class="content">
-                                <a class="author">{{ Comment.User.username }}</a>
-                                <div class="metadata">
-                                    <span class="date">{{ Comment.created_at.date|timeago }}</span>
-                                </div>
-
-                                <div class="text">
-                                    {{ Comment.text|raw }}
-                                </div>
-
-                                <div class="actions">
-                                    <a class="reply">Reply</a>
-                                </div>
-                            </div> <!-- ./content -->
-                        </div> <!-- ./comment -->
-                    </div> <!-- ./comments -->
-
+                {% for website, url in Article.User.Meta.websites %}
+                    <a href="{{ url }}" class="ui basic mini green button right floated">{{ website }}</a>
                 {% endfor %}
-            </div> <!-- ./comment -->
-        {% else %}
-
-            <div style="margin:20px 0;color:#888">
-              Žiadny komentár ešte nebol pridaný. Buďte prvý kto pridá komentár.
             </div>
-
+        </div>
+        {% for Tag in Article.TagGroup.Tags %}
+            <a href="tag/{{ Article.TagGroup.Group.slug }}" class="ui tiny basic button">{{ Tag.tag }}</a>
         {% endfor %}
 
-        {% if User %}
-        <form id="ajax-comment" class="ui small reply form">
-            <input name="data" type="hidden" value="{{ encryptedId }}:{{ Article.type }}">
+        <h4 class="ui horizontal divider header">
+          <i class="comments outline icon"></i> Komentáre k článku
+        </h4>
+        <div class="ui fluid comments article" id="comment-area">
+            {% for Comment in Article.Comments %}
+                {% if Comment.reply == 0 %}
+                <div class="comment unreplied" id="c-{{ Comment.id }}" data-id="{{ Comment.id }}" data-author="{{ Comment.User.username}}" data-authorId="{{ Comment.User.id }}">
+                    <a class="avatar">
+                        <img src="http://data.desart.sk/avatars/{{ Comment.user_id }}.png" alt="avatar">
+                    </a>
 
-            <div class="field">
-                <!-- TODO: Fluid pre textareu -->
-                <textarea name="text"></textarea>
-            </div>
+                    <div class="content">
+                        <a class="author">{{ Comment.User.username }}</a>
+                        <div class="metadata">
+                            <span class="date">{{ Comment.created_at.date|timeago }}</span>
+                            {% set UpVoteCount = Comment.UpVoteCount %}
+                            {% if UpVoteCount > 0 %}
+                                <div class="rating">
+                                    <i class="thumbs outline up icon"></i>{{ Comment.UpVoteCount }}
+                                </div>
+                            {% endif %}
+                        </div>
 
-            <button type="submit" class="ui small blue labeled submit icon button">
-                <i class="icon edit"></i> Komentovať
-            </button>
-        </form>
-        {% endif %}
+                        <div class="text">
+                            {{ Comment.text|raw }}
+                        </div>
+
+                        <div class="actions">
+                            <a class="reply">Odpovedať</a>
+                            {% set replyCount = Comment.ParentComment|length %}
+                            {% if replyCount > 0 %}
+                                <a class="un-collapse">Zobraziť skryté ({{ replyCount }}) <i class="comment icon"></i></a>
+                            {% endif %}
+                        </div>
+                    </div> <!-- ./content -->
+
+                    {% for Comment in Comment.ParentComment %}
+
+                        <div class="collapsed comments">
+                            <div class="comment replied" data-id="{{ Comment.id }}" data-author="{{ Comment.User.username}}" data-authorId="{{ Comment.User.id }}">
+                                <a class="avatar">
+                                    <img src="http://data.desart.sk/avatars/{{ Comment.user_id }}.png" alt="avatar">
+                                </a>
+
+                                <div class="content">
+                                    <a class="author">{{ Comment.User.username }}</a>
+                                    <div class="metadata">
+                                        <span class="date">{{ Comment.created_at.date|timeago }}</span>
+                                        {% set UpVoteCount = Comment.UpVoteCount %}
+                                        {% if UpVoteCount > 0 %}
+                                            <div class="rating">
+                                                <i class="thumbs outline up icon"></i>{{ Comment.UpVoteCount }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="text">
+                                        {{ Comment.text|raw }}
+                                    </div>
+
+                                    <div class="actions">
+                                        <a class="reply">Odpovedať</a>
+                                    </div>
+                                </div> <!-- ./content -->
+                            </div> <!-- ./comment -->
+                        </div> <!-- ./comments -->
+                    {% endfor %}
+                </div> <!-- ./comment -->
+                {% endif %}
+            {% else %}
+                <div style="margin:20px 0;color:#888">Žiadny komentár ešte nebol pridaný. Buďte prvý kto pridá komentár.</div>
+            {% endfor %}
+
+            {% if User %}
+                <form id="ajax-comment" class="ui small reply form main">
+                    <input name="data" type="hidden" value="{{ encryptedId }}:1">
+                    <input name="reply" type="hidden" value="0">
+
+                    <div class="field">
+                        <!-- TODO: Fluid pre textareu -->
+                        <textarea name="text"></textarea>
+                    </div>
+
+                    <button type="submit" class="ui small blue labeled submit icon button">
+                        <i class="icon edit"></i> Komentovať
+                    </button>
+                </form>
+                <script type="text/html" id="comment-template">
+                    <div class="comment <#=commentType #>">
+                        <a class="avatar">
+                            <img src="http://data.desart.sk/avatars/<#=userId #>.png" alt="avatar">
+                        </a>
+
+                        <div class="content">
+                            <a class="author"><#=userName #></a>
+                            <div class="metadata">
+                                <span class="date"><#=time #></span>
+                            </div>
+
+                            <div class="text">
+                                <#=content #>
+                            </div>
+
+                            <div class="actions">
+                                <a class="reply">Odpovedať</a>
+                            </div>
+                        </div> <!-- ./content -->
+                    </div> <!-- ./comment -->
+                </script>
+            {% endif %}
+        </div>
     </div>
-
-
-
-  </div>
 {% endblock %}

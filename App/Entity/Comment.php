@@ -18,6 +18,7 @@ class Comment extends Entity
                 "subject_type"     => ["type" => "smallint"],
                 "subject_id"       => ["type" => "smallint"],
                 "reply_comment_id" => ["type" => "smallint"],
+                "reply"            => ["type" => "boolean"],
                 "user_id"          => ["type" => "smallint"],
                 "type"             => ["type" => "smallint"],
                 "history_id"       => ["type" => "smallint"],
@@ -33,6 +34,8 @@ class Comment extends Entity
         return [
             'User'          => $Mapper->belongsTo($Entity, 'App\Entity\User', 'user_id')->select(["id", "username"]),
             "ParentComment" => $Mapper->hasMany($Entity, 'App\Entity\Comment', 'reply_comment_id'),
+            "UpVoteCount"   => $Mapper->hasMany($Entity, 'App\Entity\Comment\Vote', 'id')->where(['vote' => '0'])->count(),
+            "DownVoteCount" => $Mapper->hasMany($Entity, 'App\Entity\Comment\Vote', 'id')->where(['vote' => '1'])->count(),
         ];
     }
 

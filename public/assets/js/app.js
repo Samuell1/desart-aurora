@@ -1,3 +1,42 @@
+var _tmplCache = {}
+
+function parseTemplate(str, data) {
+    /// <summary>
+    /// Client side template parser that uses &lt;#= #&gt; and &lt;# code #&gt; expressions.
+    /// and # # code blocks for template expansion.
+    /// NOTE: chokes on single quotes in the document in some situations
+    ///       use &amp;rsquo; for literals in text and avoid any single quote
+    ///       attribute delimiters.
+    /// </summary>
+    /// <param name="str" type="string">The text of the template to expand</param>
+    /// <param name="data" type="var">
+    /// Any data that is to be merged. Pass an object and
+    /// that object's properties are visible as variables.
+    /// </param>
+    /// <returns type="string" />
+    var err = "";
+    try {
+	       var func = _tmplCache[str];
+	          if (!func) {
+				var strFunc =
+				"var p=[],print=function(){p.push.apply(p,arguments);}; with(obj){p.push('" +
+				str.replace(/[\r\t\n]/g, " ")
+					.replace(/'(?=[^#]*#>)/g, "\t")
+					.split("'").join("\\'")
+					.split("\t").join("'")
+					.replace(/<#=(.+?)#>/g, "',$1,'")
+					.split("<#").join("');")
+					.split("#>").join("p.push('") + "');}return p.join('');";
+				func = new Function("obj", strFunc);
+				_tmplCache[str] = func;
+	           }
+	              return func(data);
+              } catch (e) {
+		err = e.message;
+	}
+	return err;
+}
+
 /* Treba prepisat a dat do samostatneho js file */
 /*!
  * jQuery Mentionable
@@ -377,80 +416,103 @@
     return userList.find("li.active").index();
   }
 
-})( jQuery );
+})(jQuery);
 
 $(function() {
+    $('pre code').each(function(i, block) {
+       hljs.highlightBlock(block);
+    });
+    $('.popup-active').popup();
 
-$('.popup-active').popup();
+    $('.usernotifications .feed').perfectScrollbar();
+    $('.ui.sidebar').sidebar('attach events', '.togglesidebar');
 
-$('.usernotifications .feed').perfectScrollbar();
-$('.ui.sidebar').sidebar('attach events', '.togglesidebar');
+    $('.modal.login')
+    .modal({blurring: true})
+    .modal('attach events', '.show-login', 'show');
 
-$('.modal.login').modal({blurring: true}).modal('attach events', '.show-login', 'show');
-$('.modal.register').modal({blurring: true}).modal('attach events', '.show-register', 'show');
-$('.modal.resetpass').modal({blurring: true}).modal('attach events', '.show-resetpass', 'show');
+    $('.modal.register')
+    .modal({blurring: true})
+    .modal('attach events', '.show-register', 'show');
 
-$('.show-userprofile')
-  .popup({
-    on: 'click',
-    popup : $('.userprofile'),
-    hoverable: true,
-    position : 'bottom right',
-    offset: -14,
-    delay: {
-      show: 300,
-      hide: 500
-    }
-});
+    $('.modal.resetpass')
+    .modal({blurring: true})
+    .modal('attach events', '.show-resetpass', 'show');
 
-$('.show-usernotifications')
-  .popup({
-    on: 'click',
-    popup : $('.usernotifications'),
-    hoverable: true,
-    position : 'bottom right',
-    offset: -14,
-    delay: {
-      show: 300,
-      hide: 500
-    },
-    onVisible: function() {
-      $('.show-usernotifications .label').remove();
-    }
-});
+    $('.show-userprofile')
+      .popup({
+        on: 'click',
+        popup : $('.userprofile'),
+        hoverable: true,
+        position : 'bottom right',
+        offset: -14,
+        delay: {
+          show: 300,
+          hide: 500
+        }
+    });
+
+    $('.show-usernotifications')
+    .popup({
+        on: 'click',
+        popup : $('.usernotifications'),
+        hoverable: true,
+        position : 'bottom right',
+        offset: -14,
+        delay: {
+          show: 300,
+          hide: 500
+        },
+        onVisible: function() {
+          $('.show-usernotifications .label').remove();
+        }
+    });
 
     $('.ui.search input').keypress(function() {
-      if(!$('.ui.search').hasClass("loading")) {
-        $('.ui.search').addClass("loading");
-      }
+        if (!$('.ui.search').hasClass("loading")) {
+            $('.ui.search').addClass("loading");
+        }
     });
 
     $('.ui.search')
     .search({
-      apiSettings: {
-        url: path.ajax + "search/?query={query}",
-      },
-      type: 'category',
-      searchDelay: 500,
-      error : {
-        noResults   : 'Žiadne výsledky.'
-      },
+        apiSettings: {
+            url: path.ajax + "search/?query={query}",
+        },
+        type: 'category',
+        searchDelay: 300,
+        error : {
+              noResults   : 'Žiadne výsledky.'
+        },
     });
 
-    if ($(".show-usernotifications .label").length > 0)
-    {
+    if ($(".show-usernotifications .label").length > 0) {
+        var timer = setInterval(function() {
+            $('.show-usernotifications .label')
+            .transition({
+                animation : 'pulse',
+                duration  : 300,
+            });
 
-      var timer = setInterval(function() {
-
-        $('.show-usernotifications .label')
-          .transition({
-            animation : 'pulse',
-            duration  : 300,
-          })
-        ;
-
-      }, 2000);
+        }, 2000);
     }
 
     $("#ajax-comment").mentionable(path.ajax + "users");
+
+    /* Collapsovanie Comentov */
+    $("#comment-area .comment:not(.replied)").each(function(index, comment) {
+        $(this).find(".actions .un-collapse").on("click", function(){
+            $(comment).find(".comments").toggleClass("collapsed");
+        });
+    });
+
+    $("#comment-area .actions .reply").on("click", function() {
+        var $comment = $(this).closest(".unreplied.comment");
+        $ajaxComment = $("#comment-area #ajax-comment").clone(true);
+        $("#comment-area #ajax-comment").remove();
+        $ajaxComment.appendTo($comment);
+        if ($comment.data("id")) {
+            $ajaxComment.find("input[name=reply]").val($comment.data("id"));
+        }
+    });
 });

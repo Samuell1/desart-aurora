@@ -98,7 +98,7 @@
 
                                 {% elseif Notification.type == 2 %}
 
-                                    Užívateľ {{ Notification.by_subject }} vás označil v komentáry / príspevku XXX.
+                                    Užívateľ {{ Auth.getUser(Notification.by_subject).username }} vás označil v komentári v článku.
 
                                 {% elseif Notification.type == 3 %}
 
@@ -249,6 +249,7 @@
     <script type="text/javascript" src="{{ Url.asset("js/ajax.js") }}"></script>
     <script type="text/javascript" src="{{ Url.asset("js/app.js") }}"></script>
   	<link rel="stylesheet" href="{{ Url.asset("css/perfect-scrollbar.min.css") }}">
-
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/monokai_sublime.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
     </body>
 </html>

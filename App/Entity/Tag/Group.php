@@ -23,7 +23,7 @@ class Group extends Entity
     public static function relations(MapperInterface $Mapper, EntityInterface $Entity)
     {
         return [
-            'Tags' => $Mapper->hasMany($Entity, 'App\Entity\Tag', 'id'),
+            'Tags' => $Mapper->hasManyThrough($Entity, 'App\Entity\Tag', 'App\Entity\Tag\Map', 'tag_id', "tag_group_id"),
         ];
     }
 }

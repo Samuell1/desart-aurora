@@ -40,10 +40,8 @@ class Article extends Entity
             "Series"   => $Mapper->belongsTo($Entity, "App\Entity\Article\Series", "series_id"),
             "Image"    => $Mapper->belongsTo($Entity, "App\Entity\File", "image_id"),
             "Category" => $Mapper->belongsTo($Entity, "App\Entity\Article\Category", "category_id"),
-
             "Comments" => $Mapper->hasMany($Entity, "App\Entity\Comment", "subject_id")->where(["type" => 1, "subject_type" => 1, "hidden" => 0]),
-
-            "TagGroup" => $Mapper->hasManyThrough($Entity, "App\Entity\Tag\Group", "App\Entity\Article\Tag", "tag_group_id", "article_id"),
+            "TagGroup" => $Mapper->hasOne($Entity, "App\Entity\Article\TagGroup", "article_id"),
         ];
     }
 

@@ -15,10 +15,11 @@ class Tag extends Entity
     {
         return [
             "id"         => ["type" => "integer", "primary" => true, "autoincrement" => true],
-            "type"       => ["type" => "string"],
+            "name"       => ["type" => "string"],
             "hidden"     => ["type" => "boolean"],
             "created_at" => ["type" => "datetime"],
             "updated_at" => ["type" => "datetime"],
         ];
     }
+
 }

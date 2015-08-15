@@ -108,6 +108,7 @@ class Auth
 		$User = $this->User
 			->where(["email" => $uid])
 			->orWhere(["username" => $uid])
+			->orWhere(["id" => $uid])
 			->first();
 
 		if (!$User) {
