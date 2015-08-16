@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aurora-framework/aurora",
-            "version": "v1.2.4",
+            "version": "v1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Aurora.git",
-                "reference": "a90f71d4eafaeeb3d4fa189865d8f5eab4423dc9"
+                "reference": "6c142b3472d23033482c4022989a9ba502dabc00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Aurora/zipball/a90f71d4eafaeeb3d4fa189865d8f5eab4423dc9",
-                "reference": "a90f71d4eafaeeb3d4fa189865d8f5eab4423dc9",
+                "url": "https://api.github.com/repos/Aurora-Framework/Aurora/zipball/6c142b3472d23033482c4022989a9ba502dabc00",
+                "reference": "6c142b3472d23033482c4022989a9ba502dabc00",
                 "shasum": ""
             },
             "require": {
@@ -58,20 +58,20 @@
                 }
             ],
             "description": "Simple and hackable framework",
-            "time": "2015-08-12 13:28:04"
+            "time": "2015-08-16 13:26:26"
         },
         {
             "name": "aurora-framework/config",
-            "version": "v1.2.1",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Config.git",
-                "reference": "2ccf2d7af00e72ddaf06b5ec84a50a54a9f15a46"
+                "reference": "ec4eec1e065ca8f06146ac6ce9d45e601ee5a13a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Config/zipball/2ccf2d7af00e72ddaf06b5ec84a50a54a9f15a46",
-                "reference": "2ccf2d7af00e72ddaf06b5ec84a50a54a9f15a46",
+                "url": "https://api.github.com/repos/Aurora-Framework/Config/zipball/ec4eec1e065ca8f06146ac6ce9d45e601ee5a13a",
+                "reference": "ec4eec1e065ca8f06146ac6ce9d45e601ee5a13a",
                 "shasum": ""
             },
             "require": {
@@ -99,7 +99,7 @@
                 }
             ],
             "description": "Config management",
-            "time": "2015-08-11 09:23:29"
+            "time": "2015-08-16 12:50:31"
         },
         {
             "name": "aurora-framework/di",
@@ -182,16 +182,16 @@
         },
         {
             "name": "aurora-framework/helper",
-            "version": "v1.3.1",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Helper.git",
-                "reference": "676930c368820b22ae1cb169a52d8b2df552d517"
+                "reference": "e9e50314bd349d94e761c10ac82573c9e9a17be5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Helper/zipball/676930c368820b22ae1cb169a52d8b2df552d517",
-                "reference": "676930c368820b22ae1cb169a52d8b2df552d517",
+                "url": "https://api.github.com/repos/Aurora-Framework/Helper/zipball/e9e50314bd349d94e761c10ac82573c9e9a17be5",
+                "reference": "e9e50314bd349d94e761c10ac82573c9e9a17be5",
                 "shasum": ""
             },
             "require": {
@@ -221,7 +221,7 @@
                 }
             ],
             "description": "Collection of Helpers",
-            "time": "2015-08-11 09:32:27"
+            "time": "2015-08-16 13:27:19"
         },
         {
             "name": "aurora-framework/http",

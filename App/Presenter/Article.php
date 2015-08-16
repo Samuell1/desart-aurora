@@ -30,8 +30,6 @@ class Article extends BasePresenter
 		])->first();
 		$this->View->Subscribe = (bool) $this->Subscribe->select("id")->where(["subject_type" => 4, "subject_id" => $this->View->Article->User->id])->count();
 		$this->View->encryptedId = $this->Encryption->encrypt($this->View->Article->id);
-
-		$this->View->setTemplate("article/view");
 	}
 
 	public function overview()
@@ -42,7 +40,5 @@ class Article extends BasePresenter
 		->where([
 			'status' => "published"
 		]);
-
-		$this->View->setTemplate("article/overview");
 	}
 }

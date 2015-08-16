@@ -35,4 +35,5 @@ $found = include APP . "Config/routes.php";
 $Resolver = include APP . "Config/services.php";
 
 $Application = new Aurora\Application($Config, $Resolver);
-$Application->run($found["action"], $found["params"]);
+$Application->autoTemplate()
+            ->run($found["action"], $found["params"]);
