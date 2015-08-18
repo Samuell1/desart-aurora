@@ -1,37 +1,44 @@
 <?php
+use Aurora\Router;
+use Aurora\Router\Route;
 
-$Router = new Aurora\Router();
+$Route = new Route($baseUri);
+$Route->setNamespace("App\\Presenter\\");
+$Router = new Router("/desart", $Route);
 
-$Router->setBaseUri("/desart");
+$Router->get("/", ["Home", "index"]);
+$Router->get("/user/{uid}", ["User", "view"], [
+    "name" => "profile"
+]);
+$Router->get("/clanok/{slug}", ["Article", "view"], [
+    "name" => "article"
+]);
+$Router->get("/clanky", ["Article", "overview"]);
 
-$Router->get("/", ["App\\Presenter\\Home", "index"]);
-$Router->get("/user/{uid}", ["App\\Presenter\\User", "view"], "profile");
+$Router->get("/tema/{slug}", ["Forum\\Topic", "view"], ["name" => "topic"]);
+$Router->get("/tema/?{slug}/strana/?{page}", ["Forum\\Topic", "view"]);
+$Router->get("/forum/kategoria/?{slug}/strana/?{page}", ["Forum\\Topic", "overviewCategory"]);
+$Router->get("/forum/kategoria/?{category}", ["Forum\\Topic", "overviewCategory"]);
+$Router->get("/forum", ["Forum\\Category", "overview"]);
 
-$Router->get("/clanok/{slug}", ["App\\Presenter\\Article", "view"], "article");
-$Router->get("/clanky", ["App\\Presenter\\Article", "overview"]);
+$Router->get("/logout",  ["App\\Controller\\Auth", "logout"], ["name" => "logout"]);
+$Router->get("/settings",  ["User", "settings"], ["name" => "settings"]);
 
-$Router->get("/tema/{slug}", ["App\\Presenter\\Forum\\Topic", "view"], "topic");
-$Router->get("/tema/?{slug}/strana/?{page}", ["App\\Presenter\\Forum\\Topic", "view"]);
-$Router->get("/forum/kategoria/?{slug}/strana/?{page}", ["App\\Presenter\\Forum\\Topic", "overviewCategory"]);
-$Router->get("/forum/kategoria/?{category}", ["App\\Presenter\\Forum\\Topic", "overviewCategory"]);
-$Router->get("/forum", ["App\\Presenter\\Forum\\Category", "overview"]);
+$Router->mount("/ajax", function($Router) {
+    $Router->post("/login", ["Auth", "login"]);
+    $Router->get("/search", ["Search", "search"]);
+    $Router->post("/register", ["Auth", "register"]);
 
-$Router->get("/logout",  ["App\\Controller\\Auth", "logout"], "logout");
-$Router->get("/settings",  ["App\\Presenter\\User", "settings"], "settings");
+    $Router->get("/subscribe/{type}/{id}", ["Subscribe", "subscribe"]);
+    $Router->get("/unsubscribe/{type}/{id}", ["Subscribe", "unsubscribe"]);
 
-$Router->mount("/ajax", function() use ($Router) {
-    $Router->post("/login", ["App\\Controller\\Auth", "login"]);
-    $Router->get("/search", ["App\\Controller\\Search", "search"]);
-    $Router->post("/register", ["App\\Controller\\Auth", "register"]);
+    $Router->post("/topic/add/{num}", ["Forum\\Topic", "add"]);
+    $Router->post("/post/add/{num}", ["Forum\\Post", "add"]);
 
-    $Router->get("/subscribe/{type}/{id}", ["App\\Controller\\Subscribe", "subscribe"]);
-    $Router->get("/unsubscribe/{type}/{id}", ["App\\Controller\\Subscribe", "unsubscribe"]);
-
-    $Router->post("/topic/add/{num}", ["App\\Controller\\Forum\\Topic", "add"]);
-    $Router->post("/post/add/{num}", ["App\\Controller\\Forum\\Post", "add"]);
-
-    $Router->post("/comment/add", ["App\\Controller\\Comment", "add"]);
-});
+    $Router->post("/comment/add", ["Comment", "add"]);
+}, [
+    "namespace" => "App\\Controller\\"
+]);
 
 try {
    $found = $Router->findRoute($Router->findRequestMethod(), $Router->findUri());

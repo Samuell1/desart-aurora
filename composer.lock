@@ -182,16 +182,16 @@
         },
         {
             "name": "aurora-framework/helper",
-            "version": "v1.4.1",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Helper.git",
-                "reference": "e9e50314bd349d94e761c10ac82573c9e9a17be5"
+                "reference": "d2a27cf24b57afcffce2fcf795214cf4cd2d65f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Helper/zipball/e9e50314bd349d94e761c10ac82573c9e9a17be5",
-                "reference": "e9e50314bd349d94e761c10ac82573c9e9a17be5",
+                "url": "https://api.github.com/repos/Aurora-Framework/Helper/zipball/d2a27cf24b57afcffce2fcf795214cf4cd2d65f3",
+                "reference": "d2a27cf24b57afcffce2fcf795214cf4cd2d65f3",
                 "shasum": ""
             },
             "require": {
@@ -221,7 +221,7 @@
                 }
             ],
             "description": "Collection of Helpers",
-            "time": "2015-08-16 13:27:19"
+            "time": "2015-08-18 15:17:41"
         },
         {
             "name": "aurora-framework/http",
@@ -297,19 +297,24 @@
         },
         {
             "name": "aurora-framework/router",
-            "version": "v1.3.2",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Router.git",
-                "reference": "6cbce4bc862b2eaae4579960c4372ddf2aaa3998"
+                "reference": "5f0ba5480d29d3b619daa4910f2d37d79b30121c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Router/zipball/6cbce4bc862b2eaae4579960c4372ddf2aaa3998",
-                "reference": "6cbce4bc862b2eaae4579960c4372ddf2aaa3998",
+                "url": "https://api.github.com/repos/Aurora-Framework/Router/zipball/5f0ba5480d29d3b619daa4910f2d37d79b30121c",
+                "reference": "5f0ba5480d29d3b619daa4910f2d37d79b30121c",
                 "shasum": ""
             },
             "require": {
+                "aurora-framework/helper": "~1.0",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "aurora-framework/helper": "dev-master",
                 "php": ">=5.6"
             },
             "type": "library",
@@ -333,7 +338,7 @@
                 }
             ],
             "description": "Minimal Router",
-            "time": "2015-08-01 22:16:00"
+            "time": "2015-08-18 15:24:32"
         },
         {
             "name": "aurora-framework/service",
@@ -962,12 +967,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Respect/Validation.git",
-                "reference": "007e37b57067341c33cb9697887af21f833f9189"
+                "reference": "75b406c2408e23000fd56366f271877ab2d5dfba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Respect/Validation/zipball/007e37b57067341c33cb9697887af21f833f9189",
-                "reference": "007e37b57067341c33cb9697887af21f833f9189",
+                "url": "https://api.github.com/repos/Respect/Validation/zipball/75b406c2408e23000fd56366f271877ab2d5dfba",
+                "reference": "75b406c2408e23000fd56366f271877ab2d5dfba",
                 "shasum": ""
             },
             "require": {
@@ -1018,7 +1023,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2015-08-13 07:40:17"
+            "time": "2015-08-16 18:07:15"
         },
         {
             "name": "sabre/event",

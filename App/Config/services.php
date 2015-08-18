@@ -24,6 +24,9 @@ $Twig = new Twig_Environment($Loader
 // 	'cache' => APP."Storage/Cache/",
 // ]
 );
+$Resolver->define("Aurora\\Helper\\Url", [
+	"Router" => $Router
+]);
 $Twig->addExtension(new Aurora\Twig\Extension($Resolver));
 
 function inflect($intCount, $w1, $w2, $w3) {

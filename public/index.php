@@ -26,7 +26,7 @@ $Config = include APP . "Config/config.php";
 /**
  * Routes
  */
-$found = include APP . "Config/routes.php";
+include APP . "Config/routes.php";
 
 
 /**
