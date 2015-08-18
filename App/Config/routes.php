@@ -5,19 +5,23 @@ $Router = new Aurora\Router();
 $Router->setBaseUri("/desart");
 
 $Router->get("/", ["App\\Presenter\\Home", "index"]);
-$Router->get("/user/{uid}", ["App\\Presenter\\User", "view"], "profile");
 
+// articles
 $Router->get("/clanok/{slug}", ["App\\Presenter\\Article", "view"], "article");
 $Router->get("/clanky", ["App\\Presenter\\Article", "overview"]);
 
+// forum
 $Router->get("/tema/{slug}", ["App\\Presenter\\Forum\\Topic", "view"], "topic");
 $Router->get("/tema/?{slug}/strana/?{page}", ["App\\Presenter\\Forum\\Topic", "view"]);
 $Router->get("/forum/kategoria/?{slug}/strana/?{page}", ["App\\Presenter\\Forum\\Topic", "overviewCategory"]);
 $Router->get("/forum/kategoria/?{category}", ["App\\Presenter\\Forum\\Topic", "overviewCategory"]);
 $Router->get("/forum", ["App\\Presenter\\Forum\\Category", "overview"]);
 
-$Router->get("/logout",  ["App\\Controller\\Auth", "logout"], "logout");
-$Router->get("/settings",  ["App\\Presenter\\User", "settings"], "settings");
+// user
+$Router->get("/user/{uid}", ["App\\Presenter\\User", "view"], "profile");
+$Router->get("/@{uid}", ["App\\Presenter\\User", "view"], "profile");
+$Router->get("/account/logout",  ["App\\Controller\\Auth", "logout"], "logout");
+$Router->get("/account/settings",  ["App\\Presenter\\User", "settings"], "settings");
 
 $Router->mount("/ajax", function() use ($Router) {
     $Router->post("/login", ["App\\Controller\\Auth", "login"]);

@@ -123,7 +123,7 @@
   		</div> <!-- ./user notifications -->
 
   		<div class="ui flowing userprofile popup transition">
-  			<div class="ui grid" style="width:320px">
+  			<div class="ui grid">
   				<div class="five wide column center aligned">
   					<img class="ui small rounded image" src="http://data.desart.sk/avatars/{{ User.username }}.png">
   				</div>
@@ -148,8 +148,8 @@
   			</div>
 
   			<div class="ui two tiny bottom attached buttons" style="margin:0 -14px -12px -14px;">
-  				<a class="ui teal button fluid"><i class="setting icon"></i> Nastavenia</a>
-  				<a class="ui button fluid" href="{{ Url.base("logout") }}"><i class="sign out icon"></i> Odhlásiť sa</a>
+  				<a href="{{ Url.base("account/settings") }}" class="ui teal button fluid"><i class="setting icon"></i> Nastavenia</a>
+  				<a class="ui button fluid" href="{{ Url.base("account/logout") }}"><i class="sign out icon"></i> Odhlásiť sa</a>
   			</div>
 
 
