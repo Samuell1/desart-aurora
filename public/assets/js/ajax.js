@@ -52,7 +52,7 @@ $(function() {
 					$(".login .dimmer .text").text("Prihlasovanie...");
 					$(".login .dimmer").addClass("active");
 					setTimeout(function(){
-						window.location.href = "/desart";
+						window.location.href = window.location;
 					}, 2000);
 				} else {
 					$(".login .dimmer .text").text("Overovanie...");

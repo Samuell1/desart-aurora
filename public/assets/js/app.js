@@ -502,7 +502,7 @@ $(function() {
     /* Collapsovanie Comentov */
     $("#comment-area .comment:not(.replied)").each(function(index, comment) {
         $(this).find(".actions .un-collapse").on("click", function(){
-            $(comment).find(".comments").toggleClass("collapsed");
+            $(comment).find(".comments").slideToggle("collapsed");
         });
     });
 

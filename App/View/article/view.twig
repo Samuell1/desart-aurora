@@ -94,7 +94,7 @@
                             {% set UpVoteCount = Comment.UpVoteCount %}
                             {% if UpVoteCount > 0 %}
                                 <div class="rating">
-                                    <i class="thumbs outline up icon"></i>{{ Comment.UpVoteCount }}
+                                    <i class="teal thumbs outline up icon"></i>{{ Comment.UpVoteCount }}
                                 </div>
                             {% endif %}
                         </div>
@@ -107,14 +107,15 @@
                             <a class="reply">Odpovedať</a>
                             {% set replyCount = Comment.ParentComment|length %}
                             {% if replyCount > 0 %}
-                                <a class="un-collapse">Zobraziť skryté ({{ replyCount }}) <i class="comment icon"></i></a>
+                                <a class="un-collapse">Zobraziť skryté ({{ replyCount }})</a>
                             {% endif %}
+                            <a class="reply">Odstrániť</a>
+                            <a class="reply">Upraviť</a>
                         </div>
                     </div> <!-- ./content -->
 
+                    <div class="collapsed comments">
                     {% for Comment in Comment.ParentComment %}
-
-                        <div class="collapsed comments">
                             <div class="comment replied" data-id="{{ Comment.id }}" data-author="{{ Comment.User.username}}" data-authorId="{{ Comment.User.id }}">
                                 <a class="avatar">
                                     <img src="http://data.desart.sk/avatars/{{ Comment.user_id }}.png" alt="avatar">
@@ -127,7 +128,7 @@
                                         {% set UpVoteCount = Comment.UpVoteCount %}
                                         {% if UpVoteCount > 0 %}
                                             <div class="rating">
-                                                <i class="thumbs outline up icon"></i>{{ Comment.UpVoteCount }}
+                                                <i class="teal thumbs outline up icon"></i> {{ Comment.UpVoteCount }}
                                             </div>
                                         {% endif %}
                                     </div>
@@ -141,8 +142,9 @@
                                     </div>
                                 </div> <!-- ./content -->
                             </div> <!-- ./comment -->
-                        </div> <!-- ./comments -->
                     {% endfor %}
+                    </div> <!-- ./comments -->
+
                 </div> <!-- ./comment -->
                 {% endif %}
             {% else %}
@@ -154,8 +156,7 @@
                     <input name="data" type="hidden" value="{{ encryptedId }}:1">
                     <input name="reply" type="hidden" value="0">
 
-                    <div class="field">
-                        <!-- TODO: Fluid pre textareu -->
+                    <div class="field" class="fluid">
                         <textarea name="text"></textarea>
                     </div>
 
