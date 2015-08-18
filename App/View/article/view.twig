@@ -60,17 +60,19 @@
                 <div class="meta">{{ attribute(Article.User.Groups, 0).name }}</div>
                 <div class="description">{{ Article.User.Meta.bio }}</div>
             </div>
-            <div class="extra content">
+
+              <div class="ui tiny bottom attached buttons">
                 {% if Subscribe %}
-                    <a class="ui basic mini green button subscribe active" data-id="{{ Article.User.id }}" data-type="4">Nasleduješ užívateľa</a>
+                    <a class="ui mini teal button subscribe active" data-id="{{ Article.User.id }}" data-type="4">Už sledujem</a>
                     {% else %}
-                    <a class="ui basic mini green button subscribe" data-id="{{ Article.User.id }}" data-type="4">Nasledovať užívateľa</a>
+                    <a class="ui mini teal button subscribe" data-id="{{ Article.User.id }}" data-type="4">Sledovať</a>
                 {% endif %}
 
                 {% for website, url in Article.User.Meta.websites %}
-                    <a href="{{ url }}" class="ui basic mini green button right floated">{{ website }}</a>
+                    <a href="{{ url }}" class="ui button right floated">{{ website }}</a>
                 {% endfor %}
-            </div>
+
+              </div>
         </div>
         {% for Tag in Article.TagGroup.Tags %}
             <a href="tag/{{ Article.TagGroup.Group.slug }}" class="ui tiny basic button">{{ Tag.tag }}</a>
@@ -94,7 +96,7 @@
                             {% set UpVoteCount = Comment.UpVoteCount %}
                             {% if UpVoteCount > 0 %}
                                 <div class="rating">
-                                    <i class="thumbs outline up icon"></i>{{ Comment.UpVoteCount }}
+                                    <i class="teal thumbs outline up icon"></i>{{ Comment.UpVoteCount }}
                                 </div>
                             {% endif %}
                         </div>
@@ -104,20 +106,23 @@
                         </div>
 
                         <div class="actions">
+
                             <a class="reply">Odpovedať</a>
                             {% set replyCount = Comment.ParentComment|length %}
                             {% if replyCount > 0 %}
-                                <a class="un-collapse">Zobraziť skryté ({{ replyCount }}) <i class="comment icon"></i></a>
+                                <a class="un-collapse">Zobraziť skryté ({{ replyCount }})</a>
+                            {% endif %}
+                            {% if User.id == Comment.User.id %}
+                            <a href="">Upraviť</a>
                             {% endif %}
                         </div>
                     </div> <!-- ./content -->
 
+                    <div class="collapsed comments">
                     {% for Comment in Comment.ParentComment %}
-
-                        <div class="collapsed comments">
                             <div class="comment replied" data-id="{{ Comment.id }}" data-author="{{ Comment.User.username}}" data-authorId="{{ Comment.User.id }}">
                                 <a class="avatar">
-                                    <img src="http://data.desart.sk/avatars/{{ Comment.user_id }}.png" alt="avatar">
+                                    <img src="http://data.desart.sk/avatars/{{ Comment.user_id }}.png" alt="{{ Comment.User.username}}">
                                 </a>
 
                                 <div class="content">
@@ -127,13 +132,13 @@
                                         {% set UpVoteCount = Comment.UpVoteCount %}
                                         {% if UpVoteCount > 0 %}
                                             <div class="rating">
-                                                <i class="thumbs outline up icon"></i>{{ Comment.UpVoteCount }}
+                                                <i class="teal thumbs outline up icon"></i> {{ Comment.UpVoteCount }}
                                             </div>
                                         {% endif %}
                                     </div>
 
                                     <div class="text">
-                                        {{ Comment.text|raw }}
+                                        {{ Comment.text }}
                                     </div>
 
                                     <div class="actions">
@@ -141,8 +146,9 @@
                                     </div>
                                 </div> <!-- ./content -->
                             </div> <!-- ./comment -->
-                        </div> <!-- ./comments -->
                     {% endfor %}
+                    </div> <!-- ./comments -->
+
                 </div> <!-- ./comment -->
                 {% endif %}
             {% else %}
@@ -155,8 +161,7 @@
                     <input name="reply" type="hidden" value="0">
 
                     <div class="field">
-                        <!-- TODO: Fluid pre textareu -->
-                        <textarea name="text"></textarea>
+                        <textarea name="text" rows="2"></textarea>
                     </div>
 
                     <button type="submit" class="ui small blue labeled submit icon button">

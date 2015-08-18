@@ -22,21 +22,6 @@ $(function() {
         }
     });
 
-	$('.button.subscribe')
-	.api({
-	    action: 'subscribe'
-	})
-	.state({
-    onActivate: function() {
-		$(this).removeClass("subscribe").addClass("unsubscribe")
-    },
-    text: {
-		active     : 'Nasleduješ užívateľa',
-		deactivate : 'Odsledovať užívateľa',
-		flash      : 'Pridaný užívateľa'
-    }});
-
-    // ......
 	/*
 	TODO: reload location nie na main page, po success
 	*/
@@ -52,7 +37,7 @@ $(function() {
 					$(".login .dimmer .text").text("Prihlasovanie...");
 					$(".login .dimmer").addClass("active");
 					setTimeout(function(){
-						window.location.href = "/desart";
+						window.location.href = window.location;
 					}, 2000);
 				} else {
 					$(".login .dimmer .text").text("Overovanie...");

@@ -123,16 +123,25 @@
   		</div> <!-- ./user notifications -->
 
   		<div class="ui flowing userprofile popup transition">
-  			<div class="ui grid" style="width:320px">
+  			<div class="ui grid">
   				<div class="five wide column center aligned">
-  					<img class="ui small rounded image" src="http://data.desart.sk/avatars/{{ User.username }}.png">
+
+            <div class="ui blurring small image rounded bordered">
+              <div class="ui dimmer">
+                <div class="content">
+                  <div class="center">
+                      <a href="{{ Url.base("account/settings") }}" class="circular tiny ui teal inverted icon button" title="Nastavenia"><i class="settings icon"></i></a>
+                  </div>
+                </div>
+              </div>
+              <img class="ui image" src="http://data.desart.sk/avatars/{{ User.id }}.png">
+            </div>
+
   				</div>
   				<div class="eleven wide column">
   					<h4 class="ui header" style="margin:0;">{{ User.username }}</h4>
-                    {# Nech je to podsebou alebo tak nejako pre mna je dolezity nickname #}
-                    <small>{{ User.Meta.firstname }} {{ User.Meta.lastname }}</small>
-                    <small>{{ User.email }}</small><br>
-                    <a class="ui mini basic button" style="margin-top:7px">Prejsť do manageru</a>
+            <small style="color:#888">{{ User.email }}</small><br>
+            <a class="ui mini basic button" style="margin-top:7px">Prejsť do manageru</a>
   				</div>
   			</div>
 
@@ -150,8 +159,8 @@
   			</div>
 
   			<div class="ui two tiny bottom attached buttons" style="margin:0 -14px -12px -14px;">
-  				<a class="ui teal button fluid"><i class="setting icon"></i> Nastavenia</a>
-  				<a class="ui button fluid" href="{{ Url.base("logout") }}"><i class="sign out icon"></i> Odhlásiť sa</a>
+  				<a href="{{ Url.base("account/settings") }}" class="ui teal button fluid"><i class="setting icon"></i> Nastavenia</a>
+  				<a class="ui button fluid" href="{{ Url.base("account/logout") }}"><i class="sign out icon"></i> Odhlásiť sa</a>
   			</div>
 
 
