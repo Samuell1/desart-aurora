@@ -17,9 +17,9 @@ class User extends BasePresenter
         }
 
     }
+
     public function settings()
     {
-
-      $this->View->setTemplate("user/settings");
+        $this->View->setTemplate("user/settings");
     }
 }
