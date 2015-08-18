@@ -26,7 +26,7 @@ $Router->get("/user/{uid}", ["User", "view"], [
     "name" => "profile"
 ]);
 $Router->get("/{uid}", ["User", "view"], [
-    "name" => "profile"
+    "name" => "profile-at"
 ])->where(["uid" => "(@[A-z0-9]++)"]);
 
 $Router->mount("/ajax", function($Router) {
