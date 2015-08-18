@@ -77,8 +77,8 @@ article .ribbon{font-weight:100!important}
 article .info .userinfo{padding: 1px 0;display:inline-block}
 article .info a{font-size:11px}
 
-.footer {border-top:1px solid #eee!important;margin-top:60px!important;background:#fff!important;}
-.footer.segment {padding: 5em 0}
+.footer {margin-top:60px!important}
+.footer.segment {padding: 4em 0}
 .footer .ui.header{font-size:17px; font-weight: normal;}
 .footer .ui.link.list .item{padding:4px 0px;font-size:13px}
 

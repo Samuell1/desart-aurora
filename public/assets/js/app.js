@@ -439,6 +439,27 @@ $(function() {
     .modal({blurring: true})
     .modal('attach events', '.show-resetpass', 'show');
 
+    $('.userprofile .image')
+    .dimmer({
+      on: 'hover'
+    });
+
+
+  	$('.button.subscribe')
+  	.api({
+  	    action: 'subscribe'
+  	})
+  	.state({
+      onActivate: function() {
+  		$(this).removeClass("subscribe").addClass("unsubscribe")
+      },
+      text: {
+  		active     : 'Už sledujem',
+  		deactivate : 'Zrušiť sledovanie',
+  		flash      : 'OK'
+    }});
+
+
     $('.show-userprofile')
       .popup({
         on: 'click',
@@ -467,6 +488,17 @@ $(function() {
           $('.show-usernotifications .label').remove();
         }
     });
+
+
+
+    $('.usernotifications .event').click(function() {
+
+        // TODO: ajax ulozeni notifikacie + redirect na stránku
+        window.location.href = '/some/new/page';
+        return false;
+    });
+
+
 
     $('.ui.search input').keypress(function() {
         if (!$('.ui.search').hasClass("loading")) {

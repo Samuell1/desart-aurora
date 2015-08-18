@@ -22,21 +22,6 @@ $(function() {
         }
     });
 
-	$('.button.subscribe')
-	.api({
-	    action: 'subscribe'
-	})
-	.state({
-    onActivate: function() {
-		$(this).removeClass("subscribe").addClass("unsubscribe")
-    },
-    text: {
-		active     : 'Nasleduješ užívateľa',
-		deactivate : 'Odsledovať užívateľa',
-		flash      : 'Pridaný užívateľa'
-    }});
-
-    // ......
 	/*
 	TODO: reload location nie na main page, po success
 	*/
