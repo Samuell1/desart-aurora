@@ -29,8 +29,6 @@ $Router->get("/{uid}", ["User", "view"], [
     "name" => "profile"
 ])->where(["uid" => "(@[A-z0-9]++)"]);
 
-=======
-
 try {
    $found = $Router->findRoute($Router->findRequestMethod(), $Router->findUri());
 } catch (RouteNotFoundException $Exception) {
