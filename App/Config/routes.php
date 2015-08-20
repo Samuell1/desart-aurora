@@ -44,6 +44,7 @@ $Router->mount("/ajax", function($Router) {
 }, [
     "namespace" => "App\\Controller\\"
 ]);
+
 try {
    $found = $Router->findRoute($Router->findRequestMethod(), $Router->findUri());
 } catch (RouteNotFoundException $Exception) {
