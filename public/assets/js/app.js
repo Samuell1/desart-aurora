@@ -427,6 +427,10 @@ $(function() {
     $('.usernotifications .feed').perfectScrollbar();
     $('.ui.sidebar').sidebar('attach events', '.togglesidebar');
 
+    $('.modal.markdownsupport')
+    .modal({blurring: true})
+    .modal('attach events', '.show-markdownsupport', 'show');
+
     $('.modal.login')
     .modal({blurring: true})
     .modal('attach events', '.show-login', 'show');

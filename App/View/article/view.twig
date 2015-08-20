@@ -160,14 +160,20 @@
                     <input name="data" type="hidden" value="{{ encryptedId }}:1">
                     <input name="reply" type="hidden" value="0">
 
-                    <div class="field">
-                        <textarea name="text" rows="2"></textarea>
+                    <textarea name="text" rows="2" class="ui attached segment"></textarea>
+                    <div class="ui four bottom attached buttons">
+                        <button class="ui button labeled icon show-markdownsupport">
+                            <i class="icon font"></i>
+                            Podpora markdownu!
+                        </button>
+                        <button class="ui button"></button>
+                        <button type="submit" class="ui small teal labeled icon button">
+                            <i class="icon edit"></i> Komentovať
+                        </button>
                     </div>
 
-                    <button type="submit" class="ui small blue labeled submit icon button">
-                        <i class="icon edit"></i> Komentovať
-                    </button>
                 </form>
+
                 <script type="text/html" id="comment-template">
                     <div class="comment <#=commentType #>">
                         <a class="avatar">

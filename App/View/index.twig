@@ -240,16 +240,12 @@
       <a class="item show-login"><i class="user icon"></i> Registrácia / Prihlásanie</a>
     </div> <!-- ./mobile menu -->
 
-    {# notication email not activated #}
-    {% if not User.account_activated %}
-
-    {% endif %}
-
     {# Modals #}
+    {% include 'modal/markdownsupport.twig' %}
     {% if not User %}
-      {% include 'modal/login.twig' %}
-      {% include 'modal/register.twig' %}
-      {% include 'modal/resetpass.twig' %}
+    {% include 'modal/login.twig' %}
+    {% include 'modal/register.twig' %}
+    {% include 'modal/resetpass.twig' %}
     {% endif %}
 
     {# Javascript +CSS #}
