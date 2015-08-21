@@ -45,10 +45,16 @@ body.pushable > .pusher {background:#f9f9f9 !important;}
 .ui.menu a.item:hover,.ui.menu a.item:focus,.ui.menu a.item:active{background:transparent}
 .ui.menu .logo{padding:30px}
 
-/* login */
-.modal.register .header,.modal.login .header,.modal.resetpass .header{padding:10px 0;font-size:17px}
-.modal.register .description,.modal.login .description,.modal.resetpass .description{padding:5px 0;font-size:12px;color:#888}
+/* login+resetpass modal */
+.modal.login .header,.modal.resetpass .header{padding:10px 0;font-size:17px}
+.modal.login .description,.modal.resetpass .description{padding:5px 0;font-size:12px;color:#888}
 .modal.login .content{border-radius:0.285714rem;}
+
+/* register modal */
+.modal.register .header{padding:10px 0;font-size:17px;color:#fff}
+.modal.register .description{padding:5px 0;font-size:12px;color:#eee}
+.modal.register .backgroundside{background:url(../img/registerbg.jpg);background-size:cover;margin:-7px 7px -7px -7px;border-top-left-radius:0.285714rem;border-bottom-left-radius:0.285714rem}
+
 
 /* user ui */
 .usernotifications .ui.feed{overflow-y:scroll;max-height:220px;width: 280px;margin:-11.5px -14px;font-size:12px;position: relative;z-index:100;border-radius: 0.285714rem;}
