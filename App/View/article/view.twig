@@ -85,12 +85,12 @@
             {% for Comment in Article.Comments %}
                 {% if Comment.reply == 0 %}
                 <div class="comment unreplied" id="c-{{ Comment.id }}" data-id="{{ Comment.id }}" data-author="{{ Comment.User.username}}" data-authorId="{{ Comment.User.id }}">
-                    <a class="avatar">
+                    <a href="{{ Url.get("profile", {"uid": Comment.User.username}) }}" class="avatar">
                         <img src="http://data.desart.sk/avatars/{{ Comment.user_id }}.png" alt="avatar">
                     </a>
 
                     <div class="content">
-                        <a class="author">{{ Comment.User.username }}</a>
+                        <a href="{{ Url.get("profile", {"uid": Comment.User.username}) }}" class="author">{{ Comment.User.username }}</a>
                         <div class="metadata">
                             <span class="date">{{ Comment.created_at.date|timeago }}</span>
                             {% set UpVoteCount = Comment.UpVoteCount %}
@@ -121,12 +121,12 @@
                     <div class="collapsed comments">
                     {% for Comment in Comment.ParentComment %}
                             <div class="comment replied" data-id="{{ Comment.id }}" data-author="{{ Comment.User.username}}" data-authorId="{{ Comment.User.id }}">
-                                <a class="avatar">
-                                    <img src="http://data.desart.sk/avatars/{{ Comment.user_id }}.png" alt="{{ Comment.User.username}}">
+                                <a href="{{ Url.get("profile", {"uid": Comment.User.username}) }}" class="avatar">
+                                    <img src="http://data.desart.sk/avatars/{{ Comment.user_id }}.png" alt="{{ Comment.User.username }}">
                                 </a>
 
                                 <div class="content">
-                                    <a class="author">{{ Comment.User.username }}</a>
+                                    <a href="{{ Url.get("profile", {"uid": Comment.User.username}) }}" class="author">{{ Comment.User.username }}</a>
                                     <div class="metadata">
                                         <span class="date">{{ Comment.created_at.date|timeago }}</span>
                                         {% set UpVoteCount = Comment.UpVoteCount %}
