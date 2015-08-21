@@ -77,6 +77,5 @@ class Comment extends BaseController
 		}
 
 		$this->response["success"] = true;
-		$this->response["statusCode"] = 200;
 	}
 }

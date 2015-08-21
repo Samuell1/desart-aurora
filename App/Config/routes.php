@@ -22,13 +22,14 @@ $Router->get("/forum", ["Forum\\Category", "overview"]);
 // user
 $Router->get("/account/logout",  ["Auth", "logout"], ["name" => "logout", "namespace" => "App\\Controller\\"]);
 $Router->get("/account/settings",  ["User", "settings"], ["name" => "settings"]);
-$Router->get("/user/{uid}", ["User", "view"], [
+$Router->get("/profile/{uid}", ["User", "view"], [
     "name" => "profile"
 ]);
 $Router->get("/{uid}", ["User", "view"], [
     "name" => "profile-at"
 ])->where(["uid" => "(@[A-z0-9]++)"]);
 
+// ajax requests
 $Router->mount("/ajax", function($Router) {
     $Router->post("/login", ["Auth", "login"]);
     $Router->get("/search", ["Search", "search"]);

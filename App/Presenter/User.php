@@ -20,6 +20,7 @@ class User extends BasePresenter
 
     public function settings()
     {
+        // TODO: vypis useroveho infa
         $this->View->setTemplate("user/settings");
     }
 }
