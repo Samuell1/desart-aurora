@@ -63,13 +63,13 @@
 
               <div class="ui tiny bottom attached buttons">
                 {% if Subscribe %}
-                    <a class="ui mini teal button subscribe active" data-id="{{ Article.User.id }}" data-type="4">Už sledujem</a>
+                    <a class="ui teal button subscribe active" data-id="{{ Article.User.id }}" data-type="4">Už sledujem</a>
                     {% else %}
-                    <a class="ui mini teal button subscribe" data-id="{{ Article.User.id }}" data-type="4">Sledovať</a>
+                    <a class="ui teal button subscribe" data-id="{{ Article.User.id }}" data-type="4">Sledovať</a>
                 {% endif %}
 
                 {% for website, url in Article.User.Meta.websites %}
-                    <a href="{{ url }}" target="_blank" class="ui button right floated">{{ website }}</a>
+                    <a href="{{ url }}" target="_blank" class="ui button">{{ website }}</a>
                 {% endfor %}
 
               </div>
