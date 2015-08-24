@@ -423,6 +423,7 @@ $(function() {
        hljs.highlightBlock(block);
     });
     $('.popup-active').popup();
+    $('.tabs-menu .item').tab({history : true});
 
     $('.usernotifications .feed').perfectScrollbar();
     $('.ui.sidebar').sidebar('attach events', '.togglesidebar');

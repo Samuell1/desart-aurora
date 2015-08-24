@@ -1,7 +1,7 @@
 {% extends "index.twig" %}
 
 
-{% block title %}Nastavenia: {{ Profile.username }}{% endblock %}
+{% block title %}Nastavenia: {{ User.username }}{% endblock %}
 
 {% block content %}
 
@@ -12,15 +12,12 @@
   <div class="ui grid stackable">
     <div class="four wide column">
 
-      <div class="ui fluid teal secondary vertical menu">
-        <a class="item active">
+      <div class="ui fluid teal vertical menu tabs-menu">
+        <a class="item active" data-tab="tab-settings">
           Nastavenia
         </a>
-        <a class="item">
+        <a class="item" data-tab="tab-contactinfo">
           Kontaktné informácie
-        </a>
-        <a class="item">
-          Nastavenia profilu
         </a>
         <a class="item">
           Notifikácie
@@ -35,28 +32,35 @@
     </div>
     <div class="twelve wide column">
 
-      <h4 class="ui dividing header" style="padding:15px 0">Základné informácie</h4>
-      <div class="field">
-        <div class="two fields">
-          <div class="field">
-            <input name="firstname" placeholder="Meno" type="text">
-          </div>
-          <div class="field">
-            <input name="lastname" placeholder="Priezvisko" type="text">
-          </div>
+        <div class="ui tab active" data-tab="tab-settings">
+
+            <h4 class="ui dividing header" style="padding:15px 0">Základné informácie</h4>
+            <div class="field">
+              <div class="two fields">
+                <div class="field">
+                  <input name="firstname" placeholder="Meno" type="text">
+                </div>
+                <div class="field">
+                  <input name="lastname" placeholder="Priezvisko" type="text">
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label>Billing Address</label>
+              <div class="fields">
+                <div class="twelve wide field">
+                  <input name="shipping[address]" placeholder="Street Address" type="text">
+                </div>
+                <div class="four wide field">
+                  <input name="shipping[address-2]" placeholder="Apt #" type="text">
+                </div>
+              </div>
+            </div>
+
         </div>
-      </div>
-      <div class="field">
-        <label>Billing Address</label>
-        <div class="fields">
-          <div class="twelve wide field">
-            <input name="shipping[address]" placeholder="Street Address" type="text">
-          </div>
-          <div class="four wide field">
-            <input name="shipping[address-2]" placeholder="Apt #" type="text">
-          </div>
+        <div class="ui tab" data-tab="tab-contactinfo">
+            2
         </div>
-      </div>
 
     </div>
 
