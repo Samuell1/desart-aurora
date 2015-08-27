@@ -41,4 +41,9 @@ class Article extends BasePresenter
 			'status' => "published"
 		]);
 	}
+
+// 	public function searhc()
+// 	{
+// 		echo $type," ",$value;
+// 	}
 }

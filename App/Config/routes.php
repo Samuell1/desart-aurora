@@ -11,6 +11,7 @@ $Router->get("/", ["Home", "index"]);
 // articles
 $Router->get("/clanok/{slug}", ["Article", "view"], ["name" => "article"]);
 $Router->get("/clanky", ["Article", "overview"]);
+$Router->get("/clanok/{type}/{value}", ["Article", "search"]);
 
 // forum
 $Router->get("/tema/{slug}", ["Forum\\Topic", "view"], ["name" => "topic"]);

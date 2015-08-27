@@ -297,16 +297,16 @@
         },
         {
             "name": "aurora-framework/router",
-            "version": "v1.4.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Aurora-Framework/Router.git",
-                "reference": "5f0ba5480d29d3b619daa4910f2d37d79b30121c"
+                "reference": "bbdfb4b41468e0333e12d33473c33f3663c755ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Aurora-Framework/Router/zipball/5f0ba5480d29d3b619daa4910f2d37d79b30121c",
-                "reference": "5f0ba5480d29d3b619daa4910f2d37d79b30121c",
+                "url": "https://api.github.com/repos/Aurora-Framework/Router/zipball/bbdfb4b41468e0333e12d33473c33f3663c755ff",
+                "reference": "bbdfb4b41468e0333e12d33473c33f3663c755ff",
                 "shasum": ""
             },
             "require": {
@@ -338,7 +338,7 @@
                 }
             ],
             "description": "Minimal Router",
-            "time": "2015-08-18 15:24:32"
+            "time": "2015-08-18 15:43:16"
         },
         {
             "name": "aurora-framework/service",
@@ -967,12 +967,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Respect/Validation.git",
-                "reference": "75b406c2408e23000fd56366f271877ab2d5dfba"
+                "reference": "8faed71a054ba10ebfa6c7e435648c41bfd5a351"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Respect/Validation/zipball/75b406c2408e23000fd56366f271877ab2d5dfba",
-                "reference": "75b406c2408e23000fd56366f271877ab2d5dfba",
+                "url": "https://api.github.com/repos/Respect/Validation/zipball/8faed71a054ba10ebfa6c7e435648c41bfd5a351",
+                "reference": "8faed71a054ba10ebfa6c7e435648c41bfd5a351",
                 "shasum": ""
             },
             "require": {
@@ -1023,7 +1023,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2015-08-16 18:07:15"
+            "time": "2015-08-26 22:46:51"
         },
         {
             "name": "sabre/event",
@@ -1078,25 +1078,29 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.20.0",
+            "version": "v1.21.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "1ea4e5f81c6d005fe84d0b38e1c4f1955eb86844"
+                "reference": "ca8d3aa90b6a01c82e07909fe815d6b443e75a23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/1ea4e5f81c6d005fe84d0b38e1c4f1955eb86844",
-                "reference": "1ea4e5f81c6d005fe84d0b38e1c4f1955eb86844",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ca8d3aa90b6a01c82e07909fe815d6b443e75a23",
+                "reference": "ca8d3aa90b6a01c82e07909fe815d6b443e75a23",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.7"
             },
+            "require-dev": {
+                "symfony/debug": "~2.7",
+                "symfony/phpunit-bridge": "~2.7"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.20-dev"
+                    "dev-master": "1.21-dev"
                 }
             },
             "autoload": {
@@ -1131,7 +1135,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-08-12 15:56:39"
+            "time": "2015-08-26 08:58:31"
         },
         {
             "name": "veeenex/perzeus",
