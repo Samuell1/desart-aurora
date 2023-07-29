@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "64881c4b4bb28dcd6c094e5905292ba8",
+    "content-hash": "9454bf54722b8386758076e2176be679",
     "packages": [
         {
             "name": "aurora-framework/aurora",
@@ -58,7 +58,7 @@
                 }
             ],
             "description": "Simple and hackable framework",
-            "time": "2015-08-16 13:26:26"
+            "time": "2015-08-16T13:26:26+00:00"
         },
         {
             "name": "aurora-framework/config",
@@ -99,7 +99,7 @@
                 }
             ],
             "description": "Config management",
-            "time": "2015-08-16 12:50:31"
+            "time": "2015-08-16T12:50:31+00:00"
         },
         {
             "name": "aurora-framework/di",
@@ -142,7 +142,7 @@
                 }
             ],
             "description": "Dependency resolver",
-            "time": "2015-07-25 22:31:58"
+            "time": "2015-07-25T22:31:58+00:00"
         },
         {
             "name": "aurora-framework/filesystem",
@@ -178,7 +178,7 @@
                 }
             ],
             "description": "Useful filesystem helper",
-            "time": "2015-07-24 20:22:33"
+            "time": "2015-07-24T20:22:33+00:00"
         },
         {
             "name": "aurora-framework/helper",
@@ -221,7 +221,7 @@
                 }
             ],
             "description": "Collection of Helpers",
-            "time": "2015-08-18 15:17:41"
+            "time": "2015-08-18T15:17:41+00:00"
         },
         {
             "name": "aurora-framework/http",
@@ -257,7 +257,7 @@
                 }
             ],
             "description": "Simple and easy abstraction over top an HTTP response.",
-            "time": "2015-08-11 09:21:08"
+            "time": "2015-08-11T09:21:08+00:00"
         },
         {
             "name": "aurora-framework/il8n",
@@ -293,7 +293,7 @@
                 }
             ],
             "description": "Internalization library",
-            "time": "2015-08-11 09:21:52"
+            "time": "2015-08-11T09:21:52+00:00"
         },
         {
             "name": "aurora-framework/router",
@@ -338,7 +338,7 @@
                 }
             ],
             "description": "Minimal Router",
-            "time": "2015-08-18 15:43:16"
+            "time": "2015-08-18T15:43:16+00:00"
         },
         {
             "name": "aurora-framework/service",
@@ -379,7 +379,7 @@
                 }
             ],
             "description": "Session",
-            "time": "2015-08-11 09:22:08"
+            "time": "2015-08-11T09:22:08+00:00"
         },
         {
             "name": "aurora-framework/session",
@@ -415,7 +415,7 @@
                 }
             ],
             "description": "Session",
-            "time": "2015-07-27 20:03:49"
+            "time": "2015-07-27T20:03:49+00:00"
         },
         {
             "name": "aurora-framework/twig",
@@ -451,7 +451,7 @@
                 }
             ],
             "description": "Twig Extension for Aurora",
-            "time": "2015-07-28 12:25:09"
+            "time": "2015-07-28T12:25:09+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -519,7 +519,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2015-06-17 12:21:22"
+            "time": "2015-06-17T12:21:22+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -589,7 +589,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2015-04-15 00:11:59"
+            "time": "2015-04-15T00:11:59+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -655,7 +655,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2015-04-14 22:21:58"
+            "time": "2015-04-14T22:21:58+00:00"
         },
         {
             "name": "doctrine/common",
@@ -728,7 +728,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2015-04-02 19:55:44"
+            "time": "2015-04-02T19:55:44+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -799,7 +799,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2015-01-12 21:52:47"
+            "time": "2015-01-12T21:52:47+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -866,7 +866,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2014-12-20 21:24:13"
+            "time": "2014-12-20T21:24:13+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -920,21 +920,28 @@
                 "lexer",
                 "parser"
             ],
-            "time": "2014-09-09 13:34:57"
+            "time": "2014-09-09T13:34:57+00:00"
         },
         {
             "name": "erusev/parsedown",
-            "version": "1.5.4",
+            "version": "v1.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "0e89e3714bda18973184d30646306bb0a482bd96"
+                "reference": "d60bcdc46978357759ecb13cb4b078da783f8faf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/0e89e3714bda18973184d30646306bb0a482bd96",
-                "reference": "0e89e3714bda18973184d30646306bb0a482bd96",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/d60bcdc46978357759ecb13cb4b078da783f8faf",
+                "reference": "d60bcdc46978357759ecb13cb4b078da783f8faf",
                 "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35"
             },
             "type": "library",
             "autoload": {
@@ -959,7 +966,11 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2015-08-03 09:24:05"
+            "support": {
+                "issues": "https://github.com/erusev/parsedown/issues",
+                "source": "https://github.com/erusev/parsedown/tree/1.7.x"
+            },
+            "time": "2019-03-17T17:19:46+00:00"
         },
         {
             "name": "respect/validation",
@@ -1023,7 +1034,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2015-08-26 22:46:51"
+            "time": "2015-08-26T22:46:51+00:00"
         },
         {
             "name": "sabre/event",
@@ -1074,7 +1085,7 @@
                 "promise",
                 "signal"
             ],
-            "time": "2015-05-19 10:24:22"
+            "time": "2015-05-19T10:24:22+00:00"
         },
         {
             "name": "twig/twig",
@@ -1135,7 +1146,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-08-26 08:58:31"
+            "time": "2015-08-26T08:58:31+00:00"
         },
         {
             "name": "veeenex/perzeus",
@@ -1177,7 +1188,7 @@
                 }
             ],
             "description": "Hashing library",
-            "time": "2015-07-31 12:58:21"
+            "time": "2015-07-31T12:58:21+00:00"
         },
         {
             "name": "vlucas/spot2",
@@ -1232,7 +1243,7 @@
                 "model",
                 "orm"
             ],
-            "time": "2015-07-10 16:11:40"
+            "time": "2015-07-10T16:11:40+00:00"
         },
         {
             "name": "vlucas/valitron",
@@ -1278,7 +1289,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2014-11-20 15:24:40"
+            "time": "2014-11-20T15:24:40+00:00"
         }
     ],
     "packages-dev": [],
@@ -1292,5 +1303,6 @@
     "platform": {
         "php": ">=5.6"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
